@@ -423,10 +423,6 @@ ul.menuList {
 
 .makeCategory {
     background: #66cc99;
-    color: white;
-    margin-left: 3vw;
-    padding: 2vh 1vw;
-    border-radius: 1vh;
 }
 
 .makeCategory:hover {
