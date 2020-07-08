@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
+    "express-handlebars": "^5.0.0",
     "moment": "^2.27.0",
     "nodemon": "^2.0.4"
   },
