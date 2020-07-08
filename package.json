@@ -1,0 +1,25 @@
+{
+  "name": "utp2020-8-forum",
+  "version": "1.0.0",
+  "description": "Форум (капитан Данила Азметов)",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmstu-iu9/utp2020-8-forum.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bmstu-iu9/utp2020-8-forum/issues"
+  },
+  "homepage": "https://github.com/bmstu-iu9/utp2020-8-forum#readme"
+}
