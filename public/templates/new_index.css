@@ -1,0 +1,134 @@
+body {
+    margin: 0 auto;
+    max-width: 1600px;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    background: #e0dbd7;
+    color: #333333;
+}
+
+.header {
+    margin: 0 auto;
+    padding: 15px 25px 0 15px;
+    width: 100%;
+    height: 5vh;
+    max-width: 1600px;
+    background: #333333;
+    background-size: cover;
+    color: antiquewhite;
+    font-family: 'Cinzel', serif;
+    display: flex;
+    justify-content: space-between;
+
+    border-radius: 0 0 25px 25px;
+}
+
+.header_color {
+    color: antiquewhite;
+}
+
+.link {
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #a3c6c0;
+}
+
+
+.themes {
+    width: 50%;
+    max-width: 500px;
+    height: 80vh;
+    padding: 0 10px 0 10px;
+    margin: 20px 0 0 0;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #333333;
+    border-radius: 10px;
+}
+
+.theme {
+    margin-bottom: 10px;
+    padding: 5px 0 10px 5px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #333333;
+    border-radius: 10px;
+    height:10vh;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.selected_theme {
+    margin: 20px -40px 0 10px;
+    padding: 0 10px 0 20px;
+    width: 100%;
+    border-style: solid;
+    border-left-style: none;
+    border-width: 4px;
+    border-color: #333333;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.answer {
+    display: flex;
+    justify-content: left;
+
+    max-width: 1050px;
+    min-height: 150px;
+    margin-bottom: 10px;
+    padding: 15px 15px 15px 15px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #333333;
+    border-radius: 10px;
+    background: #b3a69b;
+}
+
+.avatar {
+    height: 100px;
+    width: 100px;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Medved_mzoo.jpg/275px-Medved_mzoo.jpg");
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.nickname {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    background: #e0dbd7;
+    padding: 5px 5px 5px 5px;
+    margin-top: 110px;
+    justify-self: center;
+    font-family: DM Sans, bold, serif;
+    font-size: 17px;
+}
+
+.vote {
+    margin-top: 110px;
+    height: 25px;
+    width: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
