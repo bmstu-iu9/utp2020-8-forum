@@ -1,6 +1,6 @@
 body {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1600px;
     width: 150vw;
     font-family: 'DM Sans', sans-serif;
     font-size: 20px;
@@ -68,7 +68,6 @@ ul {
     border-width: 4px;
     border-color: #333333;
     border-radius: 1vh;
-    overflow-y: auto;
 }
 
 .theme {
@@ -77,10 +76,9 @@ ul {
     margin-left: 0.5vw;
     padding: 2vh 1vw 2vh 1vw;
     background: rgb(191, 181, 163);
-    border-width: 2vh;
+    border-width: 2px;
     border-color: #333333;
     border-radius: 1vh;
-    height:5vh;
 }
 
 themes:hover {
@@ -123,6 +121,17 @@ themes:hover {
     max-width: 44vw;
 }
 
+.themeText {
+    margin-left: 1.5vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    max-width: 50vw;
+    max-height: 13vh;
+
+    overflow-y: auto;
+    float:left;
+}
+
 .avatar {
     float: left;
     height: 100px;
@@ -132,7 +141,7 @@ themes:hover {
     border-width: 2px;
     border-radius: 5px;
     margin-bottom: 5px;
-    margin-right: 10px;
+    margin-right: 0.9vw;
 }
 
 .nickname {
@@ -165,9 +174,6 @@ themes:hover {
     padding: 0.5vh 0.5vw 0.5vh 0.5vw;
 }
 
-.like {
-    margin-top: 2vh;
-}
 
 .my_answer {
     width: 65ch;
@@ -194,8 +200,11 @@ a:hover {
     color: white;
 }
 
-.previous {
-    margin: 0;
+.backButton {
+    float: left;
+    margin-left: 0.5vw;
+    margin-top: 2.5vh;
+    border-right-style: solid;
     background-color:rgb(220, 209, 192);
     color: black;
 }
