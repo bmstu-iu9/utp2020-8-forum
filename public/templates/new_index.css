@@ -82,16 +82,6 @@ ul {
     border-radius: 1vh;
 }
 
-themes:hover {
-    background-color: rgb(87, 78, 63);
-    color: black;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-}
-
 .selected_theme {
     float: right;
     width: 57vw;
@@ -110,7 +100,7 @@ themes:hover {
     min-height: 11vh;
     margin-bottom: 1vh;
     padding: 1.5vh 0 6vh 1vw;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
     border-color: #333333;
     border-radius: 10px;
