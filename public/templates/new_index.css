@@ -1,20 +1,25 @@
 body {
     margin: 0 auto;
     max-width: 1600px;
-    width: 100%;
+    width: 150vw;
     font-family: 'DM Sans', sans-serif;
     font-size: 20px;
     background: rgb(245, 242, 235  );
     color: #333333;
 }
 
+li {
+    list-style-type: none; /* Убираем маркеры */
+}
+
+ul {
+    margin-left: 0;
+    padding-left: 1vw;
+}
+
 .header {
-    margin-left: 5vh;
-    margin-right: 20%;
     padding: 1vh 5vh 0 5vh;
-    width: 100%;
     height: 5vh;
-    max-width: 152vh;
     background: rgb(41, 42, 40);
     background-size: cover;
     color: antiquewhite;
@@ -46,11 +51,11 @@ body {
 }
 
 .themes {
-    width: 30%;
-    max-width: 50vh;
+    float: left;
+    width: 21vw;
     height: 90vh;
-    padding: 0 10px 0 10px;
-    margin: 20px 2vh 0 5vh;
+    padding: 0 1vw 0 1vw;
+    margin: 3vh 0 0 0;
     background: rgb(220, 209, 192);
     border-width: 4px;
     border-color: #333333;
@@ -59,27 +64,23 @@ body {
 }
 
 .theme {
+    float: right;
     margin-bottom: 1vh;
-    margin-left: 0.01vh;
-    margin-right: 4vh;
-    padding: 2vh 1vh 1vh 0.5vh;
+    margin-left: 0.5vw;
+    padding: 2vh 1vw 2vh 1vw;
     background: rgb(191, 181, 163);
-    border-width: 2vh;
+    border-width: 2px;
     border-color: #333333;
     border-radius: 1vh;
-    height:5vh;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
 }
 
 .selected_theme {
-    margin: 20px 5% 0 2vh;
+    float: right;
+    width: 57vw;
+    height: 90vh;
+    margin: 3vh 0 0 0;
     overflow-y: auto;
-    padding: 0 2vh 0 2vh;
-    width: 80vw;
+    padding: 0 2vh 0 1vw;
     background: rgb(220, 209, 192);
     border-left-style: none;
     border-width: 4px;
@@ -88,13 +89,10 @@ body {
 }
 
 .answer {
-    display: flex;
-    justify-content: left;
-
-    max-width: 1050px;
-    min-height: 150px;
-    margin-bottom: 10px;
-    padding: 15px 15px 15px 15px;
+    max-width: 90vw;
+    min-height: 15vh;
+    margin-bottom: 2.5vh;
+    padding: 1.5vh 0 6vh 1vw;
     border-width: 2px;
     border-style: solid;
     border-color: #333333;
@@ -103,10 +101,12 @@ body {
 }
 
 .answer_text {
-    max-width: 42vw;
+    float: left;
+    max-width: 44vw;
 }
 
 .avatar {
+    float: left;
     height: 100px;
     width: 100px;
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Medved_mzoo.jpg/275px-Medved_mzoo.jpg");
@@ -130,19 +130,22 @@ body {
 }
 
 .vote {
-    display: flex;
-    position: absolute;
-    margin: 2vh 2vw 0.5vh 49vw;
+    margin-right: 0.5vw;
     height: 5vh;
+    float: right;
 }
 
-.dislike {
-    margin-top: 7vh;
+.vote_counter {
+    float: right;
+    margin-right: 0.7vw;
+    margin-bottom: 1vh;
+    border-radius: 1vh;
+    border-style: solid;
+    border-width: 2px;
+    background: rgb(220, 209, 192);
+    padding: 0.5vh 0.5vw 0.5vh 0.5vw;
 }
 
-.like {
-    margin-top: 2vh;
-}
 
 .my_answer {
     width: 65ch;
