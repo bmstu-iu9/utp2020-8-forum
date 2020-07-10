@@ -1,6 +1,6 @@
 body {
     margin: 0 auto;
-    max-width: 1600px;
+    max-width: 1200px;
     width: 150vw;
     font-family: 'DM Sans', sans-serif;
     font-size: 20px;
@@ -49,7 +49,13 @@ ul {
 }
 
 .link:hover {
-    color: rgb(229, 151, 21  );
+    background-color: rgb(87, 78, 63);
+    color: black;
+}
+
+.link2:hover {
+    background-color: rgb(87, 78, 63);
+    color: black;
 }
 
 .themes {
@@ -66,14 +72,25 @@ ul {
 }
 
 .theme {
-    float: right;
+    text-decoration: none;
     margin-bottom: 1vh;
     margin-left: 0.5vw;
     padding: 2vh 1vw 2vh 1vw;
     background: rgb(191, 181, 163);
-    border-width: 2px;
+    border-width: 2vh;
     border-color: #333333;
     border-radius: 1vh;
+    height:5vh;
+}
+
+themes:hover {
+    background-color: rgb(87, 78, 63);
+    color: black;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
 }
 
 .selected_theme {
@@ -148,6 +165,9 @@ ul {
     padding: 0.5vh 0.5vw 0.5vh 0.5vw;
 }
 
+.like {
+    margin-top: 2vh;
+}
 
 .my_answer {
     width: 65ch;
@@ -163,6 +183,22 @@ ul {
     display: flex;
 }
 
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+a:hover {
+    background-color: rgb(87, 78, 63);
+    color: white;
+}
+
+.previous {
+    margin: 0;
+    background-color:rgb(220, 209, 192);
+    color: black;
+}
 
 
 
