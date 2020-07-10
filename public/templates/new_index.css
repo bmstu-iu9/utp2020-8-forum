@@ -13,9 +13,10 @@ li {
 }
 
 ul {
-    max-height: 65vh;
+    max-height: 61vh;
     overflow-y: auto;
     margin-left: 0;
+    margin-bottom: 0.5vh;
     padding-left: 0.3vw;
 }
 
@@ -106,8 +107,8 @@ themes:hover {
 
 .answer {
     max-width: 90vw;
-    min-height: 15vh;
-    margin-bottom: 2.5vh;
+    min-height: 11vh;
+    margin-bottom: 1vh;
     padding: 1.5vh 0 6vh 1vw;
     border-width: 2px;
     border-style: solid;
@@ -118,7 +119,13 @@ themes:hover {
 
 .answer_text {
     float: left;
-    max-width: 44vw;
+
+    margin-top: -1vh;
+    margin-left: 0.5vw;
+    max-height: 17.5vh;
+    min-height: 10vh;
+    overflow-y: auto;
+    max-width: 45vw;
 }
 
 .themeText {
@@ -141,7 +148,6 @@ themes:hover {
     border-width: 2px;
     border-radius: 5px;
     margin-bottom: 5px;
-    margin-right: 0.9vw;
 }
 
 .nickname {
@@ -184,8 +190,7 @@ themes:hover {
 }
 
 .new_answer {
-    border-top-style: solid;
-    padding: 20px 10px 10px 18px;
+    padding: 1vh 10px 10px 18px;
     display: flex;
 }
 
