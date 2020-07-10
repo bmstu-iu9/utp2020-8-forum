@@ -119,11 +119,17 @@ ul {
 }
 
 .themeText {
-    margin-left: 1.5vw;
+    margin-left: 0.8vw;
     margin-top: 1vh;
     margin-bottom: 1vh;
     max-width: 50vw;
     max-height: 13vh;
+    min-height: 13vh;
+
+    padding-left: 0.8vw;
+    border-left-style: solid;
+    border-width: 2.5px;
+    border-radius: 0.5vh 0 0 0.5vh;
 
     overflow-y: auto;
     float:left;
@@ -160,12 +166,12 @@ ul {
 
 .vote_counter {
     float: right;
-    margin-right: 0.7vw;
+    margin-right: 0.2vw;
     margin-bottom: 1vh;
-    margin-top: 0.9vh;
+    margin-top: 1.5vh;
     border-radius: 1vh;
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
     background: rgb(220, 209, 192);
     padding: 0.5vh 0.5vw 0.5vh 0.5vw;
 }
@@ -202,6 +208,18 @@ a:hover {
     border-right-style: solid;
     background-color:rgb(220, 209, 192);
     color: black;
+}
+
+.myAnswer {
+    padding: 2px 0 0 2px;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    min-width:45vw;
+    max-width: 45vw;
+    max-height: 10.4vh;
+    min-height: 10.4vh;
+    font-size: 20px;
+    border-radius: 1vh;
 }
 
 
