@@ -9,31 +9,42 @@
     <title>IU9-Forum</title>
 </head>
 <body>
+    <div id="makeDark">
+        <div id="SignUpWindow">
+            Your account
+            <textarea placeholder="Your Login" name="myAnswer" class="textSignUp"></textarea>
+            <textarea placeholder="Your password" name="myAnswer" class="textSignUp"></textarea>
+            <br>
+            <a href="#" class="close">Log in</a>
+        </div>
+    </div>
+
     <div class="header">
         <a class="header_color link" href="#">IU9-Forum</a>
-        <a class="header_color link2" href="#">profile_name</a>
+        <a class="header_color link2" href="#makeDark">Sign Up</a>
     </div>
+
     <div class="container">
         <div class="themes">
             <h2 style="border-bottom-style:solid">Categories</h2>
-            <ul style="list-style-type:none; max-height: 80vh">
+            <ul style="list-style-type:none; max-height: 77vh">
                 <li class="theme link"> SPORT</li>
                 <li class="theme link"> MUSIC </li>
                 <li class="theme link"> FILMS </li>
                 <li class="theme link"> SERIALS </li>
                 <li class="theme link"> SPORT</li>
                 <li class="theme link"> VIDEOGAMES </li>
-                <li class="theme link"> PROGRAMMING </li>
-                <li class="theme link"> PROGRAMMING </li>
-                <li class="theme link"> PROGRAMMING </li>
-                <li class="theme link"> PROGRAMMING </li>
-                <li class="theme link"> PROGRAMMING </li>
-                <li class="theme link"> PROGRAMMING </li>
+                <li class="theme link"> COOKING </li>
+                <li class="theme link"> IT-TECHNOLOGIES </li>
+                <li class="theme link"> STUDYING </li>
+                <li class="theme link"> VIDEOS </li>
+                <li class="theme link"> YOUTUBE </li>
+                <li class="theme link"> DRIVING </li>
             </ul>
         </div>
 
         <div class="selected_theme">
-            <input type="image" src="back.png" height="60" style="float: left; margin-top: 4.4vh">
+            <input class="backButtonColor" type="image" src="back.png" height="60" style="float: left; margin-top: 4.4vh" onclick="history.back();">
             <div class="themeText">Text nkevbhebhewbhvibewibe ibnvnweovnjnw vjnej  v w v j e n e j v n w e j n
                 d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
                 d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
@@ -48,7 +59,7 @@
                 d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
 <!--                d d d d d d d d d  d d d d d d d d d d d-->
                 vownovnwjjvnewnjewnvjenwjof selected theme</div>
-            <ul style="margin-top: 15vh">
+            <ul style="margin-top: 15vh; max-height: 60vh">
                 <li class="answer">
                     <div class="avatar">
                         <div class="nickname link" href="#">Nickname</div>
@@ -93,7 +104,7 @@
             <div class="new_answer">
                 <div class="avatar" style="margin-left: 0.4vw"></div>
                 <textarea placeholder="Type your opinion!" name="myAnswer" class="myAnswer"></textarea>
-                <p><input type="image" src="send.png" height="60"></p>
+                <p><input class="backButtonColor" type="image" src="send.png" height="60"></p>
             </div>
         </div>
     </div>
