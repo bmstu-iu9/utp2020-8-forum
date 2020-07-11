@@ -1,5 +1,10 @@
 <p>this is a posts panel :)</p>
-<p>Тут мы итерируемся по нашему массиву постов </p>
+<p>Это список постов из базы данных </p>
 {{#each posts}}
-  <div style="border: 2px solid black"> {{this}} </div> <br>
+
+  <div style="border: 2px solid black">
+      Автор: {{this.author_name}}
+      Категория: {{this.category_name}}
+      Заголовок: {{this.title}}
+  </div> <br>
 {{/each}}

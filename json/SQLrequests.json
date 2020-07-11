@@ -1,0 +1,3 @@
+{
+  "getPosts": "SELECT posts.id,  posts.author_id,  posts.title,  posts.category_id, users.username as author_name, categories.name as category_name FROM posts INNER JOIN users ON users.id=posts.author_id INNER JOIN categories on posts.category_id=categories.id"
+}
