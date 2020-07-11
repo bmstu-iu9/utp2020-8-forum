@@ -1,7 +1,7 @@
 body {
     margin: 0 auto;
-    max-width: 160vh;
-    width: 150vw;
+    width: 80vw;
+    height: 99vh;
     font-family: 'DM Sans', sans-serif;
     font-size: 20px;
     background: rgb(245, 242, 235  );
@@ -17,11 +17,12 @@ body {
     left: 0;
     display: none;
 }
+
 #SignUpWindow {
-    width: 30vh;
-    height: 30vh;
+    max-width: 15%;
+    max-height: 20%;
     text-align: center;
-    padding: 15px;
+    padding: 1% 1% 1% 1%;
     border-radius: 1vh;
     color: #333333;
     position: absolute;
@@ -30,33 +31,29 @@ body {
     bottom: 0;
     left: 0;
     margin: auto;
-    background:  rgb(245, 242, 235  );
+    background: rgb(245, 242, 235);
 }
+
 #makeDark:target {display: block;}
 .close {
     display: inline-block;
     color: #333333;
-    padding: 0 12px;
-    margin: 10px;
+    padding: 2% 2% 2% 2%;
+    margin: 5%;
     text-decoration: none;
     background: rgb(191, 181, 163);
     border-radius: 1vh;
     font-size: 14pt;
-    cursor:pointer;
+    cursor: pointer;
 }
-.close:hover {background: rgb(87, 78, 63);}
 
-.textSignUp{
-    padding: 0.1vh 0 0 2px;
-    margin-top: 3vh;
-    margin-left: 1vw;
-    margin-right: 1vw;
-    min-width: 15vw;
-    max-width: 15vw;
-    max-height: 5vh;
-    min-height: 5vh;
-    font-size: 20px;
-    border-radius: 1vh;
+.close:hover {
+    background: rgb(87, 78, 63);
+}
+
+.container {
+    width: 100%;
+    height: 100%;
 }
 
 li {
@@ -64,23 +61,16 @@ li {
 }
 
 ul {
-    max-height: 61vh;
     overflow-y: auto;
-    margin-left: 0;
-    margin-bottom: 0.5vh;
-    padding-left: 0.3vw;
+    margin-bottom: 1%;
+    padding-left: 1%;
 }
 
 .header {
-    padding: 1vh 5vh 0 5vh;
-    height: 5vh;
+    height: 7%;
     background: rgb(41, 42, 40);
-    background-size: cover;
     color: antiquewhite;
     font-family: 'Cinzel', sans-serif;
-    display: flex;
-    justify-content: space-between;
-
     border-radius: 0 0 1vh 1vh;
 }
 
@@ -112,12 +102,12 @@ ul {
 
 .themes {
     float: left;
-    width: 21vw;
-    height: 90vh;
-    padding: 0 1vw 10px 1vw;
-    margin: 3vh 0 0 0;
+    width: 25%;
+    height: 90%;
+    max-height: 90%;
+    padding: 0 1% 0.5% 1%;
+    margin: 1% 0 0 0;
     background: rgb(220, 209, 192);
-    border-width: 4px;
     border-color: #333333;
     border-radius: 1vh;
 }
@@ -135,36 +125,32 @@ ul {
 
 .selected_theme {
     float: right;
-    width: 62vw;
-    height: 90vh;
-    margin: 3vh 0 0 0;
-    padding: 0 1vw 0 1vw;
+    width: 69%;
+    height: 90%;
+    margin: 1% 0 0 0;
+    padding: 0 1% 0.5% 1%;
     background: rgb(220, 209, 192);
-    border-left-style: none;
-    border-width: 4px;
     border-color: #333333;
     border-radius: 1vh;
 }
 
 .answer {
-    max-width: 90vw;
-    min-height: 11vh;
-    margin-bottom: 1vh;
-    padding: 1.5vh 0 6vh 1vw;
-    border-width: 1px;
+    display: flex;
+    width: 98%;
+    height: 50%;
+    margin-bottom: 1%;
+    padding: 1% 1% 1% 1%;
     border-color: #333333;
-    border-radius: 10px;
+    border-radius: 1vh;
     background: #b3a69b;
 }
 
 .answer_text {
     float: left;
-    margin-top: -1vh;
-    margin-left: 0.5vw;
-    max-height: 17.5vh;
-    min-height: 10vh;
+    width: 80%;
+    margin-left: 1%;
+    max-height: 1%;
     overflow-y: auto;
-    max-width: 48vw;
 }
 
 .themeText {
@@ -186,24 +172,22 @@ ul {
 
 .avatar {
     float: left;
+    width: 10%;
     height: 100px;
-    width: 100px;
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Medved_mzoo.jpg/275px-Medved_mzoo.jpg");
     border-style: solid;
-    border-width: 2px;
-    border-radius: 5px;
-    margin-bottom: 5px;
+    border-width: 1px;
+    border-radius: 1vh;
 }
 
 .nickname {
-    border-width: 1px;
     border-radius: 5px;
     background: #e0dbd7;
-    padding: 5px 5px 5px 5px;
-    margin-top: 105px;
-    justify-self: center;
+    padding: 1% 2% 1% 2%;
+    margin-top: 115%;
+    text-align: center;
     font-family: DM Sans, bold, serif;
-    font-size: 17px;
+    font-size: 13pt;
 }
 
 .vote {
@@ -272,10 +256,3 @@ ul {
     background-color: rgb(87, 78, 63);
     color: white;
 }
-
-
-
-
-
-
-
