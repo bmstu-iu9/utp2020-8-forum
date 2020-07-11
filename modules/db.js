@@ -11,7 +11,8 @@ const init = () => {
 
 /*Использует файл models.json для генерации базы данных с таблицами, соответсвующими описанным моделям.
 * При выполнении БД форматируется*/
-const migrate = (db) => {
+const migrate = () => {
+    let db = new Database('app.db', {verbose: console.log});
     for (let i = 0; i < models.length; ++i) {
         let req = 'DROP TABLE IF EXISTS ' + models[i].tablename;
         db.prepare(req).run();
