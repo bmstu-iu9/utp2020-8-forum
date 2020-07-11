@@ -1,0 +1,8 @@
+<h1 style="background: lemonchiffon">Пост: {{post.title}}</h1>
+{{#each replies}}
+    <div>
+        {{this.author_name}}
+        {{this.text}}
+    </div>
+    <br>
+{{/each}}

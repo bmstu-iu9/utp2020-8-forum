@@ -30,11 +30,21 @@ const migrate = () => {
 }
 
 const getPosts = (db) => {
-    let req = SQLrequests.getPosts;
-    return db.prepare(req).all();
+    return db.prepare(SQLrequests.getPosts).all();
 }
+
+const getPost = (db, postId) => {
+    return db.prepare(SQLrequests.getPost.replace("{id}", postId)).get();
+}
+
+const getReplies = (db, postId) => {
+    return db.prepare(SQLrequests.getReplies.replace("{id}", postId)).all();
+}
+
 
 
 exports.init = init;
 exports.migrate = migrate;
 exports.getPosts = getPosts;
+exports.getPost = getPost;
+exports.getReplies = getReplies;

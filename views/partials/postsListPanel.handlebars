@@ -2,9 +2,9 @@
 <p>Это список постов из базы данных </p>
 {{#each posts}}
 
-  <div style="border: 2px solid black">
+  <a href="/post/{{this.id}}" style="border: 2px solid black">
       Автор: {{this.author_name}}
       Категория: {{this.category_name}}
       Заголовок: {{this.title}}
-  </div> <br>
+  </a> <br>
 {{/each}}
