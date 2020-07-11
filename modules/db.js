@@ -29,8 +29,15 @@ const migrate = () => {
     }
 }
 
-const getPosts = (db) => {
-    return db.prepare(SQLrequests.getPosts).all();
+const getCategories = (db) => {
+    return db.prepare(SQLrequests.getCategories).all();
+}
+
+const getAllPosts = (db) => {
+    return db.prepare(SQLrequests.getAllPosts).all();
+}
+const getPostsByCategory = (db, categoryId) => {
+    return db.prepare(SQLrequests.getPostsByCategory.replace("{id}", categoryId)).all();
 }
 
 const getPost = (db, postId) => {
@@ -42,9 +49,10 @@ const getReplies = (db, postId) => {
 }
 
 
-
 exports.init = init;
 exports.migrate = migrate;
-exports.getPosts = getPosts;
+exports.getAllPosts = getAllPosts;
 exports.getPost = getPost;
 exports.getReplies = getReplies;
+exports.getPostsByCategory = getPostsByCategory;
+exports.getCategories = getCategories;

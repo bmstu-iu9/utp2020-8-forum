@@ -15,16 +15,24 @@ app.set('view engine', 'handlebars');
 const db = dbManager.init();
 
 app.get('/', function (req, res) {
-    let posts = dbManager.getPosts(db)
-    res.render('home', {layout: 'postsListViewLayout', posts: posts});
+    let categories = dbManager.getCategories(db);
+    let posts = dbManager.getAllPosts(db)
+    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories});
 });
 
 app.get('/post/:postId', function (req, res) {
     let id = req.params.postId;
     let post = dbManager.getPost(db, id)
-    console.log(post)
     let replies = dbManager.getReplies(db, id)
     res.render('home', {layout: 'postViewLayout', post: post, replies: replies});
 })
+
+app.get('/category/:categoryId', function (req, res) {
+    let categories = dbManager.getCategories(db);
+    let id = req.params.categoryId;
+    let posts = dbManager.getPostsByCategory(db, id)
+    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories});
+})
+
 
 app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));

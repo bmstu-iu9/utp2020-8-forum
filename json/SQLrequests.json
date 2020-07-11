@@ -1,5 +1,7 @@
 {
-  "getPosts": "SELECT posts.id,  posts.author_id,  posts.title,  posts.category_id, users.username as author_name, categories.name as category_name FROM posts INNER JOIN users ON users.id=posts.author_id INNER JOIN categories on posts.category_id=categories.id",
-  "getReplies": "SELECT replies.id, replies.post_id, replies.author_id, replies.text, users.username as author_name FROM replies INNER JOIN posts ON posts.id={id} INNER JOIN users ON replies.author_id=users.id",
-  "getPost": "SELECT * FROM posts WHERE id={id}"
+  "getAllPosts": "SELECT posts.id,  posts.author_id,  posts.title,  posts.category_id, users.username as author_name, categories.name as category_name FROM posts INNER JOIN users ON users.id=posts.author_id INNER JOIN categories on posts.category_id=categories.id",
+  "getPostsByCategory": "SELECT posts.id,  posts.author_id,  posts.title,  posts.category_id, users.username as author_name, categories.name as category_name FROM posts INNER JOIN users ON users.id=posts.author_id INNER JOIN categories on posts.category_id=categories.id WHERE category_id={id}",
+  "getReplies": "SELECT replies.id, replies.post_id, replies.author_id, replies.text, users.username as author_name FROM replies   INNER JOIN posts ON posts.id=post_id INNER JOIN users ON replies.author_id=users.id WHERE post_id={id}",
+  "getPost": "SELECT * FROM posts WHERE id={id}",
+  "getCategories": "SELECT * FROM categories"
 }
