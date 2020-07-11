@@ -1,0 +1,232 @@
+body {
+    margin: 0 auto;
+    max-width: 1600px;
+    width: 150vw;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    background: rgb(245, 242, 235  );
+    color: #333333;
+}
+
+li {
+    list-style-type: none; /* Убираем маркеры */
+}
+
+ul {
+    max-height: 61vh;
+    overflow-y: auto;
+    margin-left: 0;
+    margin-bottom: 0.5vh;
+    padding-left: 0.3vw;
+}
+
+.header {
+    padding: 1vh 5vh 0 5vh;
+    height: 5vh;
+    background: rgb(41, 42, 40);
+    background-size: cover;
+    color: antiquewhite;
+    font-family: 'Cinzel', sans-serif;
+    display: flex;
+    justify-content: space-between;
+
+    border-radius: 0 0 1vh 1vh;
+}
+
+.header_color {
+    color: rgb(220, 209, 192);
+}
+
+.link {
+    font-family: 'Cinzel', sans-serif;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+.link2 {
+    font-family: Georgia, serif;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+.link:hover {
+    background-color: rgb(87, 78, 63);
+    color: black;
+}
+
+.link2:hover {
+    background-color: rgb(87, 78, 63);
+    color: black;
+}
+
+.themes {
+    float: left;
+    width: 21vw;
+    height: 90vh;
+    padding: 0 1vw 0 1vw;
+    margin: 3vh 0 0 0;
+    background: rgb(220, 209, 192);
+    border-width: 4px;
+    border-color: #333333;
+    border-radius: 1vh;
+}
+
+.theme {
+    text-decoration: none;
+    margin-bottom: 1vh;
+    margin-left: 0.5vw;
+    padding: 2vh 1vw 2vh 1vw;
+    background: rgb(191, 181, 163);
+    border-width: 2px;
+    border-color: #333333;
+    border-radius: 1vh;
+}
+
+.selected_theme {
+    float: right;
+    width: 57vw;
+    height: 90vh;
+    margin: 3vh 0 0 0;
+    padding: 0 1vw 0 1vw;
+    background: rgb(220, 209, 192);
+    border-left-style: none;
+    border-width: 4px;
+    border-color: #333333;
+    border-radius: 1vh;
+}
+
+.answer {
+    max-width: 90vw;
+    min-height: 11vh;
+    margin-bottom: 1vh;
+    padding: 1.5vh 0 6vh 1vw;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #333333;
+    border-radius: 10px;
+    background: #b3a69b;
+}
+
+.answer_text {
+    float: left;
+
+    margin-top: -1vh;
+    margin-left: 0.5vw;
+    max-height: 17.5vh;
+    min-height: 10vh;
+    overflow-y: auto;
+    max-width: 45vw;
+}
+
+.themeText {
+    margin-left: 0.8vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    max-width: 50vw;
+    max-height: 13vh;
+    min-height: 13vh;
+
+    padding-left: 0.8vw;
+    border-left-style: solid;
+    border-width: 2.5px;
+    border-radius: 0.5vh 0 0 0.5vh;
+
+    overflow-y: auto;
+    float:left;
+}
+
+.avatar {
+    float: left;
+    height: 100px;
+    width: 100px;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Medved_mzoo.jpg/275px-Medved_mzoo.jpg");
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.nickname {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    background: #e0dbd7;
+    padding: 5px 5px 5px 5px;
+    margin-top: 110px;
+    justify-self: center;
+    font-family: DM Sans, bold, serif;
+    font-size: 17px;
+}
+
+.vote {
+    margin-right: 0.5vw;
+    height: 5vh;
+    float: right;
+}
+
+.vote_counter {
+    float: right;
+    margin-right: 0.2vw;
+    margin-bottom: 1vh;
+    margin-top: 1.5vh;
+    border-radius: 1vh;
+    border-style: solid;
+    border-width: 1px;
+    background: rgb(220, 209, 192);
+    padding: 0.5vh 0.5vw 0.5vh 0.5vw;
+}
+
+
+.my_answer {
+    width: 65ch;
+    background: white;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.new_answer {
+    padding: 1vh 10px 10px 18px;
+    display: flex;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+a:hover {
+    background-color: rgb(87, 78, 63);
+    color: white;
+}
+
+.backButton {
+    float: left;
+    margin-left: 0.5vw;
+    margin-top: 2.5vh;
+    border-right-style: solid;
+    background-color:rgb(220, 209, 192);
+    color: black;
+}
+
+.myAnswer {
+    padding: 2px 0 0 2px;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    min-width:45vw;
+    max-width: 45vw;
+    max-height: 10.4vh;
+    min-height: 10.4vh;
+    font-size: 20px;
+    border-radius: 1vh;
+}
+
+
+
+
+
+
+
+
+
