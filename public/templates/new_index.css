@@ -1,11 +1,38 @@
+.colorText {
+    color: #333333;
+}
+
+.colorBackground {
+    background: rgb(245, 242, 235);
+}
+
+.colorMain {
+    background: rgb(191, 181, 163);
+}
+
+.colorSection {
+    background: rgb(175, 157, 121);
+}
+
+.colorDarkLink:hover {
+    background: rgb(87, 78, 63);
+}
+
+.colorHeader {
+    color: antiquewhite;
+    background: rgb(41, 42, 40);
+}
+
+.backButton {
+    border-radius: 1vh;
+}
+
 body {
     margin: 0 auto;
-    width: 80vw;
+    width: 80%;
     height: 99vh;
     font-family: 'DM Sans', sans-serif;
-    font-size: 20px;
-    background: rgb(245, 242, 235  );
-    color: #333333;
+    font-size: 14pt;
 }
 
 #makeDark {
@@ -24,31 +51,27 @@ body {
     text-align: center;
     padding: 1% 1% 1% 1%;
     border-radius: 1vh;
-    color: #333333;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     margin: auto;
-    background: rgb(245, 242, 235);
 }
 
-#makeDark:target {display: block;}
+#makeDark:target {
+    display: block;
+}
+
 .close {
     display: inline-block;
     color: #333333;
     padding: 2% 2% 2% 2%;
     margin: 5%;
     text-decoration: none;
-    background: rgb(191, 181, 163);
     border-radius: 1vh;
     font-size: 14pt;
     cursor: pointer;
-}
-
-.close:hover {
-    background: rgb(87, 78, 63);
 }
 
 .container {
@@ -74,31 +97,12 @@ ul {
     border-radius: 0 0 1vh 1vh;
 }
 
-.header_color {
-    color: rgb(220, 209, 192);
-}
-
 .link {
     font-family: 'Cinzel', sans-serif;
     text-decoration: none;
     transition-duration: 0.2s;
 }
 
-.link2 {
-    font-family: Georgia, serif;
-    text-decoration: none;
-    transition-duration: 0.2s;
-}
-
-.link:hover {
-    background-color: rgb(87, 78, 63);
-    color: black;
-}
-
-.link2:hover {
-    background-color: rgb(87, 78, 63);
-    color: black;
-}
 
 .themes {
     float: left;
@@ -107,8 +111,6 @@ ul {
     max-height: 90%;
     padding: 0 1% 0.5% 1%;
     margin: 1% 0 0 0;
-    background: rgb(220, 209, 192);
-    border-color: #333333;
     border-radius: 1vh;
 }
 
@@ -117,9 +119,7 @@ ul {
     margin-bottom: 1vh;
     margin-left: 0.5vw;
     padding: 2vh 1vw 2vh 1vw;
-    background: rgb(191, 181, 163);
     border-width: 2px;
-    border-color: #333333;
     border-radius: 1vh;
 }
 
@@ -129,8 +129,6 @@ ul {
     height: 90%;
     margin: 1% 0 0 0;
     padding: 0 1% 0.5% 1%;
-    background: rgb(220, 209, 192);
-    border-color: #333333;
     border-radius: 1vh;
 }
 
@@ -140,9 +138,7 @@ ul {
     height: 50%;
     margin-bottom: 1%;
     padding: 1% 1% 1% 1%;
-    border-color: #333333;
     border-radius: 1vh;
-    background: #b3a69b;
 }
 
 .answer_text {
@@ -174,7 +170,7 @@ ul {
     float: left;
     width: 10%;
     height: 100px;
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Medved_mzoo.jpg/275px-Medved_mzoo.jpg");
+    background-image: url("http://avatar0v.narod.ru/znamenitosti_100x100/1.jpg");
     border-style: solid;
     border-width: 1px;
     border-radius: 1vh;
@@ -202,19 +198,12 @@ ul {
     margin-bottom: 1vh;
     margin-top: 1.5vh;
     border-radius: 1vh;
-    background: rgb(220, 209, 192);
     padding: 0.5vh 0.5vw 0.5vh 0.5vw;
-}
-
-.vote_counter:hover {
-    background-color: rgb(87, 78, 63);
-    color: white;
 }
 
 
 .my_answer {
     width: 65ch;
-    background: white;
     margin-left: 20px;
     margin-bottom: 10px;
     margin-right: 20px;
@@ -231,11 +220,6 @@ ul {
     padding: 8px 16px;
 }
 
-.a:hover {
-    background-color: rgb(87, 78, 63);
-    color: white;
-}
-
 .myAnswer {
     padding: 2px 0 0 2px;
     margin-left: 0.5vw;
@@ -246,13 +230,4 @@ ul {
     min-height: 10.4vh;
     font-size: 20px;
     border-radius: 1vh;
-}
-
-.backButtonColor {
-    border-radius: 1vh;
-}
-
-.backButtonColor:hover {
-    background-color: rgb(87, 78, 63);
-    color: white;
 }
