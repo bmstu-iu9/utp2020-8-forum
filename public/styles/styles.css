@@ -45,7 +45,9 @@ ul {
 .colorHeader {
     background: #343338;
 }
-
+h1 {
+    color: red !important;
+}
 .myButton {
     margin-left: 1%;
     margin-right: 1%;
