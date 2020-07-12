@@ -4,17 +4,17 @@
       "tablename": "posts",
       "columns": [
         "id",
-        "author_id",
+        "author_name",
         "title",
-        "category_id",
+        "category_name",
         "FOREIGN KEY(author_id)",
         "FOREIGN KEY(category_id)"
       ],
       "tags": [
         "INTEGER PRIMARY KEY",
-        "INTEGER",
         "TEXT",
-        "INTEGER",
+        "TEXT",
+        "TEXT",
         "REFERENCES users(id)",
         "REFERENCES categories(id)"
       ]
@@ -34,7 +34,7 @@
       "tablename": "replies",
       "columns": [
         "id",
-        "author_id",
+        "author_name",
         "post_id",
         "text",
         "FOREIGN KEY(author_id)",
@@ -42,7 +42,7 @@
       ],
       "tags": [
         "INTEGER PRIMARY KEY",
-        "INTEGER",
+        "TEXT",
         "INTEGER",
         "TEXT NOT NULL",
         "REFERENCES users(id)",
@@ -56,7 +56,7 @@
         "name"
       ],
       "tags": [
-        "INTEGER PRIMARY KEY",
+        "INTEGER PRIMARY KEY AUTOINCREMENT",
         "TEXT"
       ]
     }
