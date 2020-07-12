@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <title>IU9-Forum</title>
 </head>
-<body class="colorBackground colorText">
+<body class="colorBackground colorTextDark">
     <div id="makeDark">
         <div id="SignUpWindow" class="colorMain">
-            <div style="margin-bottom: 1%; margin-top: 1%">Your account</div>
+            <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
             <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login"><br>
             <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Password">
             <a href="#" type="button" class="close colorDarkLink colorBackground">Sign up</a>
@@ -17,13 +17,13 @@
     </div>
 
     <div class="header colorHeader">
-        <a style="float: left; margin: 1% 0 0 2%" class="colorHeader link colorDarkLink" href="#">IU9-Forum</a>
-        <a style="float: right; margin: 1% 2% 0 0" class="colorHeader link colorDarkLink" href="#makeDark">Sign Up</a>
+        <a style="float: left; margin: 1% 0 0 2%" class="link colorDarkLink colorTextLight" href="#">IU9-Forum</a>
+        <a style="float: right; margin: 1% 2% 0 0" class="link colorDarkLink colorTextLight" href="#makeDark">Sign Up</a>
     </div>
 
     <div class="container">
         <div class="themes colorMain">
-            <h2 style="border-bottom-style:solid;">Categories</h2>
+            <h2 style="border-bottom-style:solid;" class="colorTextLight";>Categories</h2>
             <ul style="list-style-type:none; max-height: 90%">
                 <li class="theme link colorSection colorDarkLink"> SPORT</li>
                 <li class="theme link colorSection colorDarkLink"> MUSIC </li>
@@ -40,9 +40,9 @@
             </ul>
         </div>
 
-        <div class="selected_theme colorMain">
-            <input class="backButton colorDarkLink" type="image" src="back.png" height="60" style="float: left; margin-top: 4.4vh" onclick="history.back();">
-            <div class="themeText">Text nkevbhebhewbhvibewibe ibnvnweovnjnw vjnej  v w v j e n e j v n w e j n
+        <div class="selectedTheme colorMain">
+            <input class="myButton colorDarkLink colorSection" type="image" src="back.png" height="60" style="float: left; margin-top: 4.4vh" onclick="history.back();">
+            <div class="themeText colorTextLight">Text nkevbhebhewbhvibewibe ibnvnweovnjnw vjnej  v w v j e n e j v n w e j n
                 d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
                 d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
                 d d d d d d d d  d d d d d d d dd d
@@ -58,10 +58,11 @@
                 vownovnwjjvnewnjewnvjenwjof selected theme</div>
             <ul style="max-height: 67%;">
                 <li class="answer colorSection">
-                    <div class="avatar">
-                        <div class="nickname link colorDarkLink" href="#">Nickname</div>
+                    <div class="profile">
+                        <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
+                        <div class="link colorDarkLink" href="#">Nickname</div>
                     </div>
-                    <div class="answer_text">answer 1\nDSASDASDADA\nsadsvdsvsvnndjvnjvjvnjweve w v e w v w e v e w e e e e
+                    <div class="answerText">answer 1\nDSASDASDADA\nsadsvdsvsvnndjvnjvjvnjweve w v e w v w e v e w e e e e
 
                         d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
                         d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
@@ -74,43 +75,118 @@
                         vfdfefevvefnajfnjkbd csaacascasccassacsacsacascascsacascascascas ca csaacscaca
                         cascascsacsacsacascascsa cascsacsacsacsa cacscsaacacscsacsacsaasccsacsacascsa
                         csacascascascsacsacasaccacasscasacca vbsjbvjbbvjernjnvnjvvveefsjnhesbwvevsvwn</div>
-                    <input type="image" class="vote" src="like.png" alt="#"/>
-                    <input type="image" class="vote" src="dislike.png" alt="#"/>
-                    <div class="vote_counter colorMain">156</div>
+                    <div class="voteField">
+                        <input type="image" class="vote" src="like.png" alt="#"/>
+                        <input type="image" class="vote" src="dislike.png" alt="#"/>
+                        <div class="voteCounter colorMain colorTextLight">156</div>
+                    </div>
                 </li>
                 <li class="answer colorSection">
-                    <div class="avatar">
-                        <div class="nickname link colorDarkLink" href="#">Nickname</div>
+                    <div class="profile">
+                        <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
+                        <div class="link colorDarkLink" href="#">Nickname</div>
                     </div>
-                    <div class="answer_text">answer 1\nDSASDASDADA\nsadsvdsvsvnndjvnjvjvnjweve w v e w v w e v e w e e e e e e e vwveweevwvewvewwvvewvewvewvw vewvwevvwvwvwevewvewvwv wevwevweveadaddsvsvvfdfefevvefnajfnjkbd csaacascasccassacsacsacascascsacascascascas ca csaacscacacascascsacsacsacascascsa cascsacsacsacsa cacscsaacacscsacsacsaasccsacsacascsa csacascascascsacsacasaccacasscasacca vbsjbvjbbvjernjnvnjvvveefsjnhesbwvevsvwn</div>
-                    <input type="image" class="vote" src="like.png" alt="#"/>
-                    <input type="image" class="vote" src="dislike.png" alt="#"/>
-                    <div class="vote_counter">156</div>
+                    <div class="answerText">answer 1\nDSASDASDADA\nsadsvdsvsvnndjvnjvjvnjweve w v e w v w e v e w e e e e
+
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        e e e vwveweevwvewvewwvvewvewvewvw vewvwevvwvwvwevewvewvwv wevwevweveadaddsvsv
+                        vfdfefevvefnajfnjkbd csaacascasccassacsacsacascascsacascascascas ca csaacscaca
+                        cascascsacsacsacascascsa cascsacsacsacsa cacscsaacacscsacsacsaasccsacsacascsa
+                        csacascascascsacsacasaccacasscasacca vbsjbvjbbvjernjnvnjvvveefsjnhesbwvevsvwn</div>
+                    <div class="voteField">
+                        <input type="image" class="vote" src="like.png" alt="#"/>
+                        <input type="image" class="vote" src="dislike.png" alt="#"/>
+                        <div class="voteCounter colorMain colorTextLight">156</div>
+                    </div>
                 </li>
                 <li class="answer colorSection">
-                    <div class="avatar">
-                        <div class="nickname link colorDarkLink" href="#">Nickname</div>
+                    <div class="profile">
+                        <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
+                        <div class="link colorDarkLink" href="#">Nickname</div>
                     </div>
-                    <div class="answer_text">answer 1\nDSASDASDADA\nsadsvdsvsvnndjvnjvjvnjweve w v e w v w e v e w e e e e e e e vwveweevwvewvewwvvewvewvewvw vewvwevvwvwvwevewvewvwv wevwevweveadaddsvsvvfdfefevvefnajfnjkbd csaacascasccassacsacsacascascsacascascascas ca csaacscacacascascsacsacsacascascsa cascsacsacsacsa cacscsaacacscsacsacsaasccsacsacascsa csacascascascsacsacasaccacasscasacca vbsjbvjbbvjernjnvnjvvveefsjnhesbwvevsvwn</div>
-                    <input type="image" class="vote" src="like.png" alt="#"/>
-                    <input type="image" class="vote" src="dislike.png" alt="#"/>
-                    <div class="vote_counter">156</div>
+                    <div class="answerText">answer 1\nDSASDASDADA\nsadsvdsvsvnndjvnjvjvnjweve w v e w v w e v e w e e e e
+
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        e e e vwveweevwvewvewwvvewvewvewvw vewvwevvwvwvwevewvewvwv wevwevweveadaddsvsv
+                        vfdfefevvefnajfnjkbd csaacascasccassacsacsacascascsacascascascas ca csaacscaca
+                        cascascsacsacsacascascsa cascsacsacsacsa cacscsaacacscsacsacsaasccsacsacascsa
+                        csacascascascsacsacasaccacasscasacca vbsjbvjbbvjernjnvnjvvveefsjnhesbwvevsvwn</div>
+                    <div class="voteField">
+                        <input type="image" class="vote" src="like.png" alt="#"/>
+                        <input type="image" class="vote" src="dislike.png" alt="#"/>
+                        <div class="voteCounter colorMain colorTextLight">156</div>
+                    </div>
                 </li>
                 <li class="answer colorSection">
-                    <div class="avatar">
-                        <div class="nickname link colorDarkLink" href="#">Nickname</div>
+                    <div class="profile">
+                        <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
+                        <div class="link colorDarkLink" href="#">Nickname</div>
                     </div>
-                    <div class="answer_text">answer 1\nDSASDASDADA\nsadsvdsvsvnndjvnjvjvnjweve w v e w v w e v e w e e e e e e e vwveweevwvewvewwvvewvewvewvw vewvwevvwvwvwevewvewvwv wevwevweveadaddsvsvvfdfefevvefnajfnjkbd csaacascasccassacsacsacascascsacascascascas ca csaacscacacascascsacsacsacascascsa cascsacsacsacsa cacscsaacacscsacsacsaasccsacsacascsa csacascascascsacsacasaccacasscasacca vbsjbvjbbvjernjnvnjvvveefsjnhesbwvevsvwn</div>
-                    <input type="image" class="vote" src="like.png" alt="#"/>
-                    <input type="image" class="vote" src="dislike.png" alt="#"/>
-                    <div class="vote_counter">156</div>
+                    <div class="answerText">answer 1\nDSASDASDADA\nsadsvdsvsvnndjvnjvjvnjweve w v e w v w e v e w e e e e
+
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        e e e vwveweevwvewvewwvvewvewvewvw vewvwevvwvwvwevewvewvwv wevwevweveadaddsvsv
+                        vfdfefevvefnajfnjkbd csaacascasccassacsacsacascascsacascascascas ca csaacscaca
+                        cascascsacsacsacascascsa cascsacsacsacsa cacscsaacacscsacsacsaasccsacsacascsa
+                        csacascascascsacsacasaccacasscasacca vbsjbvjbbvjernjnvnjvvveefsjnhesbwvevsvwn</div>
+                    <div class="voteField">
+                        <input type="image" class="vote" src="like.png" alt="#"/>
+                        <input type="image" class="vote" src="dislike.png" alt="#"/>
+                        <div class="voteCounter colorMain colorTextLight">156</div>
+                    </div>
                 </li>
+                <li class="answer colorSection">
+                    <div class="profile">
+                        <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
+                        <div class="link colorDarkLink" href="#">Nickname</div>
+                    </div>
+                    <div class="answerText">answer 1\nDSASDASDADA\nsadsvdsvsvnndjvnjvjvnjweve w v e w v w e v e w e e e e
+
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        d d d d d d d d  d d d d d d d dd d  d d d d d d d d d  d d d d d d d d d d d
+                        e e e vwveweevwvewvewwvvewvewvewvw vewvwevvwvwvwevewvewvwv wevwevweveadaddsvsv
+                        vfdfefevvefnajfnjkbd csaacascasccassacsacsacascascsacascascascas ca csaacscaca
+                        cascascsacsacsacascascsa cascsacsacsacsa cacscsaacacscsacsacsaasccsacsacascsa
+                        csacascascascsacsacasaccacasscasacca vbsjbvjbbvjernjnvnjvvveefsjnhesbwvevsvwn</div>
+                    <div class="voteField">
+                        <input type="image" class="vote" src="like.png" alt="#"/>
+                        <input type="image" class="vote" src="dislike.png" alt="#"/>
+                        <div class="voteCounter colorMain colorTextLight">156</div>
+                    </div>
+                </li>
+
             </ul>
 
-            <div class="new_answer">
-                <div class="avatar" style="margin-left: 0.4vw"></div>
-                <textarea placeholder="Type your opinion!" name="myAnswer" class="myAnswer"></textarea>
-                <p><input class="backButton colorDarkLink" type="image" src="send.png" height="60"></p>
+            <div class="newAnswer">
+                <div class="profile" style="margin-top: -2%; margin-left: 0%;">
+                    <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
+                    <div class="link colorDarkLink colorTextLight" href="#">Nickname</div>
+                </div>
+                <textarea placeholder="Type here" name="myAnswer" class="myAnswer"></textarea>
+                <p><input class="myButton colorDarkLink colorSection" type="image" src="send.png" height="60"></p>
             </div>
         </div>
     </div>

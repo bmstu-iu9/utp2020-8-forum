@@ -1,39 +1,190 @@
-.colorText {
-    color: #333333;
-}
-
-.colorBackground {
-    background: rgb(245, 242, 235);
-}
-
-.colorMain {
-    background: rgb(191, 181, 163);
-}
-
-.colorSection {
-    background: rgb(175, 157, 121);
-}
-
-.colorDarkLink:hover {
-    background: rgb(87, 78, 63);
-}
-
-.colorHeader {
-    color: antiquewhite;
-    background: rgb(41, 42, 40);
-}
-
-.backButton {
-    border-radius: 1vh;
-}
-
 body {
     margin: 0 auto;
     width: 80%;
-    height: 99vh;
+    height: 100vh;
     font-family: 'DM Sans', sans-serif;
     font-size: 14pt;
 }
+
+li {
+    margin-right: 1.5%;
+    list-style-type: none; /* Убираем маркеры */
+}
+
+ul {
+    overflow-y: auto;
+    margin-bottom: 1%;
+    padding-left: 0.5%;
+}
+
+.colorTextDark {
+    color: #333333;
+}
+
+.colorTextLight {
+    color: #ffffff;
+}
+
+.colorBackground {
+    background: #ffffff;
+}
+
+.colorMain {
+    background: #343338;
+}
+
+.colorSection {
+    background: #CBC9D0;
+}
+
+.colorDarkLink:hover {
+    background: #E1A487;
+    cursor: pointer;
+}
+
+.colorHeader {
+    background: #343338;
+}
+
+.myButton {
+    margin-left: 1%;
+    margin-right: 1%;
+    border-radius: 1vh;
+}
+
+.close {
+    display: inline-block;
+    color: #333333;
+    padding: 2% 2% 2% 2%;
+    margin: 5%;
+    text-decoration: none;
+    border-radius: 1vh;
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    height: 7%;
+    font-family: 'Cinzel', sans-serif;
+    border-radius: 0 0 1vh 1vh;
+}
+
+.link {
+    font-family: 'Cinzel', sans-serif;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+
+.themes {
+    width: 25%;
+    height: 90%;
+    max-height: 90%;
+    padding: 0 1% 0.5% 1%;
+    margin: 1% 0 0 0;
+    border-radius: 1vh;
+}
+
+.theme {
+    text-decoration: none;
+    margin-bottom: 1vh;
+    margin-left: 0.5vw;
+    padding: 2vh 1vw 2vh 1vw;
+    border-width: 2px;
+    border-radius: 1vh;
+}
+
+.selectedTheme {
+    width: 69%;
+    height: 90%;
+    margin: 1% 0 0 2%;
+    padding: 0 1% 0.5% 1%;
+    border-radius: 1vh;
+    flex-direction: column;
+}
+
+.answer {
+    display: flex;
+    width: 98%;
+    height: 50%;
+    margin-bottom: 1%;
+    padding: 1% 1% 1% 1%;
+    border-radius: 1vh;
+}
+
+.voteField {
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.answerText {
+    width: 80%;
+    min-width: 80%;
+    margin-left: 1%;
+    max-height: 1%;
+    overflow-y: auto;
+}
+
+.themeText {
+    margin-top: 1%;
+    max-width: 93%;
+    max-height: 15%;
+    min-height: 15%;
+
+    padding-left: 1%;
+    border-left-style: solid;
+    border-width: 1px;
+    border-radius: 0.5vh 0 0 0.5vh;
+
+    overflow-y: auto;
+}
+
+.profile {
+    margin: 1% 1% 1% 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.vote {
+    margin-right: 1%;
+    width: 100%;
+}
+
+.voteCounter {
+    margin: 15% 1% 1% 1%;
+    border-radius: 1vh;
+    padding: 5% 15% 5% 15%;
+    text-align: center;
+}
+
+
+.newAnswer {
+    height: 12%;
+    padding: 0.2% 1% 1% 2%;
+    display: flex;
+    flex-direction: row;
+}
+
+.myAnswer {
+    padding: 2px 0 0 2px;
+    resize: none;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    width: 81%;
+    height: 97%;
+    font-size: 14pt;
+    border-radius: 1vh;
+}
+
 
 #makeDark {
     background: rgba(87, 78, 63, 0.5);
@@ -61,173 +212,4 @@ body {
 
 #makeDark:target {
     display: block;
-}
-
-.close {
-    display: inline-block;
-    color: #333333;
-    padding: 2% 2% 2% 2%;
-    margin: 5%;
-    text-decoration: none;
-    border-radius: 1vh;
-    font-size: 14pt;
-    cursor: pointer;
-}
-
-.container {
-    width: 100%;
-    height: 100%;
-}
-
-li {
-    list-style-type: none; /* Убираем маркеры */
-}
-
-ul {
-    overflow-y: auto;
-    margin-bottom: 1%;
-    padding-left: 1%;
-}
-
-.header {
-    height: 7%;
-    background: rgb(41, 42, 40);
-    color: antiquewhite;
-    font-family: 'Cinzel', sans-serif;
-    border-radius: 0 0 1vh 1vh;
-}
-
-.link {
-    font-family: 'Cinzel', sans-serif;
-    text-decoration: none;
-    transition-duration: 0.2s;
-}
-
-
-.themes {
-    float: left;
-    width: 25%;
-    height: 90%;
-    max-height: 90%;
-    padding: 0 1% 0.5% 1%;
-    margin: 1% 0 0 0;
-    border-radius: 1vh;
-}
-
-.theme {
-    text-decoration: none;
-    margin-bottom: 1vh;
-    margin-left: 0.5vw;
-    padding: 2vh 1vw 2vh 1vw;
-    border-width: 2px;
-    border-radius: 1vh;
-}
-
-.selected_theme {
-    float: right;
-    width: 69%;
-    height: 90%;
-    margin: 1% 0 0 0;
-    padding: 0 1% 0.5% 1%;
-    border-radius: 1vh;
-}
-
-.answer {
-    display: flex;
-    width: 98%;
-    height: 50%;
-    margin-bottom: 1%;
-    padding: 1% 1% 1% 1%;
-    border-radius: 1vh;
-}
-
-.answer_text {
-    float: left;
-    width: 80%;
-    margin-left: 1%;
-    max-height: 1%;
-    overflow-y: auto;
-}
-
-.themeText {
-    margin-left: 0.8vw;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    max-width: 50vw;
-    max-height: 13vh;
-    min-height: 13vh;
-
-    padding-left: 0.8vw;
-    border-left-style: solid;
-    border-width: 2.5px;
-    border-radius: 0.5vh 0 0 0.5vh;
-
-    overflow-y: auto;
-    float:left;
-}
-
-.avatar {
-    float: left;
-    width: 10%;
-    height: 100px;
-    background-image: url("http://avatar0v.narod.ru/znamenitosti_100x100/1.jpg");
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 1vh;
-}
-
-.nickname {
-    border-radius: 5px;
-    background: #e0dbd7;
-    padding: 1% 2% 1% 2%;
-    margin-top: 115%;
-    text-align: center;
-    font-family: DM Sans, bold, serif;
-    font-size: 13pt;
-}
-
-.vote {
-    margin-right: 0.5vw;
-    height: 5vh;
-    float: right;
-}
-
-.vote_counter {
-    float: right;
-    margin-right: 0.2vw;
-    margin-bottom: 1vh;
-    margin-top: 1.5vh;
-    border-radius: 1vh;
-    padding: 0.5vh 0.5vw 0.5vh 0.5vw;
-}
-
-
-.my_answer {
-    width: 65ch;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    margin-right: 20px;
-}
-
-.new_answer {
-    padding: 1vh 10px 10px 18px;
-    display: flex;
-}
-
-.a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 8px 16px;
-}
-
-.myAnswer {
-    padding: 2px 0 0 2px;
-    margin-left: 0.5vw;
-    margin-right: 0.5vw;
-    min-width:45vw;
-    max-width: 45vw;
-    max-height: 10.4vh;
-    min-height: 10.4vh;
-    font-size: 20px;
-    border-radius: 1vh;
 }
