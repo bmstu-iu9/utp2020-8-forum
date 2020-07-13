@@ -1,7 +1,5 @@
 'use strict'
 
-console.log('It works!');
-
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -49,7 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/signup', (req, res) => {
+app.get('/signup', authModule.checkAuth, (req, res) => {
   res.render('signup');
   console.log("User is at signup page");
 });
@@ -60,8 +58,7 @@ app.post('/signup', (req, res) => {
       let users = JSON.parse(fs.readFileSync('./UsersDataBase/users.json', 'utf-8'));
       if (users[login] !== undefined) {
         res.render('signup', {
-                message: 'User exists.',
-                messageClass: 'alert-danger'
+                message: 'User exists.'
             });
       } else {
         const hashedPassword = authModule.getHashedPassword(psw);
@@ -74,35 +71,31 @@ app.post('/signup', (req, res) => {
       }
     } else {
       res.render('signup', {
-          message: 'Password does not match.',
-          messageClass: 'alert-danger'
+          message: 'Password does not match.'
       });
     }
 });
 
-app.get('/login', (req, res) => {
+app.get('/login', authModule.checkAuth, (req, res) => {
   res.render('login');
 });
 
-app.post('/login', (req, res) => {
-  passport.authenticate('local', function(err, user) {
-  if (err) {
-    return next(err);
-  }
-  if (!user) {
-    return res.send('Укажите правильный email или пароль!');
-  }
-  req.logIn(user, function(err) {
-    if (err) {
-      return next(err);
-    }
-    return res.redirect('/signup');
-  });
-})(req, res);
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login'
+}));
+
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 app.get('/', (req, res) => {
-  res.redirect('/signup');
+  if (req.isAuthenticated()) {
+    res.send('you are logged in');
+  } else {
+    res.send('you are not log in');
+  }
 });
 
 app.listen(8080, () => console.log('Server running at http://localhost:8080'));

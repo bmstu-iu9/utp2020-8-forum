@@ -7,9 +7,9 @@ exports.getHashedPassword = function(password) {
 }
 
 exports.checkAuth = (req, res, next) => {
-  if (req.isAuthenticated()) {
+  if (!req.isAuthenticated()) {
     next();
   } else {
-    return res.redirect('/');
+    res.redirect('/');
   }
 }
