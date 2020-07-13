@@ -1,0 +1,262 @@
+body {
+    margin: 0 auto;
+    width: 80%;
+    height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14pt;
+}
+
+li {
+    margin-right: 1.5%;
+    list-style-type: none; /* Убираем маркеры */
+}
+
+ul {
+    overflow-y: auto;
+    margin-bottom: 1%;
+    padding-left: 0.5%;
+}
+
+.ulPosts {
+    max-height: 73%;
+    min-height: 73%;
+}
+
+.ulCategories {
+    max-height: 80%;
+    list-style-type: none;
+}
+
+.headerText:first-child {
+    float: left;
+    margin: 1% 0 0 2%;
+}
+
+.headerText:last-child {
+    float: right;
+    margin: 1% 2% 0 0;
+}
+.replyImage {
+    width: 90%;
+    margin-left: 4%;
+    border-top-left-radius: 0;
+}
+
+.categoryHeader {
+    margin-left: 1%;
+}
+
+.myAvatar {
+    margin-left: 1%;
+}
+
+.category {
+    width: 84%;
+    margin-bottom: 10%;
+}
+
+.colorTextDark {
+    color: #333333;
+}
+
+.colorTextLight {
+    color: #ffffff;
+}
+
+.colorBackground {
+    background: #ffffff;
+}
+
+.colorMain {
+    background: #343338;
+}
+
+.colorSection {
+    background: #CBC9D0;
+}
+
+.colorDarkLink:hover {
+    background: #E1A487;
+    cursor: pointer;
+}
+
+.colorHeader {
+    background: #343338;
+}
+
+.myButton {
+    margin-left: 1%;
+    margin-right: 1%;
+    border-bottom-left-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    margin-top: 15%;
+}
+
+.borderTop {
+    border-top-left-radius: 1vh;
+    border-top-right-radius: 1vh;
+}
+
+.close {
+    display: inline-block;
+    color: #333333;
+    padding: 2% 2% 2% 2%;
+    margin: 5%;
+    text-decoration: none;
+    border-radius: 1vh;
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    height: 7%;
+    font-family: 'Cinzel', sans-serif;
+    border-radius: 0 0 1vh 1vh;
+}
+
+.link {
+    font-family: 'Cinzel', sans-serif;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+
+.themes {
+    width: 25%;
+    height: 90%;
+    max-height: 90%;
+    padding: 0 1% 0.5% 1%;
+    margin: 1% 0 0 0;
+    border-radius: 1vh;
+}
+
+.theme {
+    text-decoration: none;
+    margin-bottom: 1vh;
+    margin-left: 0.5vw;
+    padding: 2vh 1vw 2vh 1vw;
+    border-width: 2px;
+    border-radius: 1vh;
+}
+
+.selectedTheme {
+    width: 69%;
+    height: 90%;
+    margin: 1% 0 0 2%;
+    padding: 0 1% 0.5% 1%;
+    border-radius: 1vh;
+    flex-direction: column;
+}
+
+.answer {
+    display: flex;
+    width: 98%;
+    margin-bottom: 1%;
+    padding: 1% 1% 1% 1%;
+    border-radius: 1vh;
+}
+
+.voteField {
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.answerText {
+    width: 80%;
+    min-width: 80%;
+    margin-left: 1%;
+    margin-top: 1%;
+    overflow-y: auto;
+}
+
+.themeText {
+    margin-top: 1%;
+    max-width: 93%;
+    max-height: 15%;
+    min-height: 15%;
+
+    padding-left: 1%;
+    border-left-style: solid;
+    border-width: 1px;
+    border-radius: 0.5vh 0 0 0.5vh;
+
+    overflow-y: auto;
+}
+
+.profile {
+    margin: 0% 1% 1% 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileName {
+    margin: 0 auto;
+}
+
+.vote {
+    margin-right: 1%;
+    width: 100%;
+}
+
+.voteCounter {
+    margin: 15% 1% 1% 1%;
+    border-radius: 1vh;
+    padding: 5% 15% 5% 15%;
+    text-align: center;
+}
+
+.newAnswer {
+    height: 14%;
+    padding: 0.2% 1% 1% 2%;
+    display: flex;
+    flex-direction: row;
+}
+
+.myAnswer {
+    padding: 2px 0 0 2px;
+    resize: none;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 0;
+    width: 81%;
+    height: 100%;
+    font-size: 14pt;
+    border-radius: 1vh;
+}
+
+
+#makeDark {
+    background: rgba(87, 78, 63, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#SignUpWindow {
+    max-width: 15%;
+    max-height: 20%;
+    text-align: center;
+    padding: 1% 1% 1% 1%;
+    border-radius: 1vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+#makeDark:target {
+    display: block;
+}
