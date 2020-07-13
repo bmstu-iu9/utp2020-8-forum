@@ -18,21 +18,22 @@ const db = dbManager.init();
 app.get('/', function (req, res) {
     let categories = dbManager.getCategories(db);
     let posts = dbManager.getAllPosts(db)
-    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories});
+    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories, postsListTitle: 'Все посты'});
 });
 
 app.get('/post/:postId', function (req, res) {
-    let id = req.params.postId;
-    let post = dbManager.getPost(db, id)
-    let replies = dbManager.getReplies(db, id)
-    res.render('home', {layout: 'postViewLayout', post: post, replies: replies});
+    let categories = dbManager.getCategories(db);
+    let postId = req.params.postId;
+    let post = dbManager.getPost(db, postId)
+    let replies = dbManager.getReplies(db, postId)
+    res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
 })
 
 app.get('/category/:categoryId', function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.categoryId;
     let posts = dbManager.getPostsByCategory(db, id)
-    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories});
+    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories, postsListTitle: categories[id-1].name});
 })
 
 

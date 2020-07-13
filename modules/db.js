@@ -5,7 +5,7 @@ const SQLrequests = require('../json/SQLrequests.json')
 const models = modelsJSON.models;
 
 const init = () => {
-    return new Database('app.db', {verbose: console.log});
+    return new Database('app.db');
 }
 
 
