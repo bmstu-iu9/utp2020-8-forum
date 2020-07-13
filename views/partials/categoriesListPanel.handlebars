@@ -1,5 +1,6 @@
+<h2>Категории</h2>
 {{#each categories}}
     <li style="width: 84%; margin-bottom: 10%">
-        <a class="theme link colorDarkLink colorTextDark colorSection" href="http://www.yandex.ru">Sport</a>
+        <a class="theme link colorDarkLink colorTextDark colorSection" href="/category/{{this.id}}">{{this.name}}</a>
     </li>
 {{/each}}
