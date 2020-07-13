@@ -15,7 +15,11 @@
   "devDependencies": {},
   "scripts": {
     "start": "node app.js",
+<<<<<<< HEAD
     "srart": "nodemon app.js"
+=======
+    "serve": "nodemon app.js"
+>>>>>>> origin/db_sqlite
   },
   "repository": {
     "type": "git",

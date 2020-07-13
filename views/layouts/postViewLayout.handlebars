@@ -1,6 +1,11 @@
 {{>head}}
 {{>topbar}}
-<h2>Просмотр поста</h2>
+<div class="container">
 
-{{>categoriesListPanel}}
-{{>postPanel}}
+    <div class="themes colorMain">
+        <h2 style="border-bottom-style:solid;" class="colorTextLight";>Categories</h2>
+        {{>categoriesListPanel}}
+    </div>
+
+    {{>postPanel}}
+</div>

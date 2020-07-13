@@ -1,8 +1,29 @@
-<h1 style="background: lemonchiffon">Пост: {{post.title}}</h1>
-{{#each replies}}
-    <div>
-        {{this.author_name}}:
-        {{this.text}}
+<div class="selectedTheme colorMain">
+    <input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/back.png" height="60" style="float: left; margin-top: 4.4vh" onclick="history.back();">
+    <div class="themeText colorTextLight">{{post.title}}</div>
+    <ul style="max-height: 67%;">
+        {{#each replies}}
+        <li class="answer colorSection">
+            <div class="profile">
+                <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
+                <div class="link colorDarkLink" href="#">{{this.author_name}}</div>
+            </div>
+            <div class="answerText">{{this.text}}</div>
+            <div class="voteField">
+                <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
+                <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
+                <div class="voteCounter colorMain colorTextLight">156</div>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+
+    <div class="newAnswer">
+        <div class="profile" style="margin-top: -2%; margin-left: 0%;">
+            <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
+            <div class="link colorDarkLink colorTextLight" href="#">Nickname</div>
+        </div>
+        <textarea placeholder="Type here" name="myAnswer" class="myAnswer"></textarea>
+        <p><input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/send.png" height="60"></p>
     </div>
-    <br>
-{{/each}}
+</div>
