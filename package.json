@@ -5,7 +5,6 @@
   "main": "app.js",
   "dependencies": {
     "better-sqlite3": "^7.1.0",
-    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.0.0",
     "moment": "^2.27.0",
@@ -15,11 +14,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "node app.js",
-<<<<<<< HEAD
-    "srart": "nodemon app.js"
-=======
     "serve": "nodemon app.js"
->>>>>>> origin/db_sqlite
   },
   "repository": {
     "type": "git",
