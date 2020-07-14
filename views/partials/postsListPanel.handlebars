@@ -1,6 +1,6 @@
 <!--href="/post/{{this.id}}"-->
 <div class="selectedTheme colorMain">
-    <h2 class="categoryHeader colorTextLight">Category: {{this.category_name}}</h2>
+    <h2 class="categoryHeader colorTextLight">Category: {{postsListTitle}}</h2>
     <ul class="ulPosts">
     {{#each posts}}
         <li class="answer colorSection">
@@ -16,13 +16,5 @@
         </li>
     {{/each}}
     </ul>
-
-    <div class="newAnswer">
-        <div class="myAvatar profile">
-            <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
-            <div class="profileName link colorDarkLink colorTextLight" href="#">My_nickname</div>
-        </div>
-        <textarea placeholder="Add new theme" name="myAnswer" class="myAnswer"></textarea>
-        <p><input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/send.png" height="60"></p>
-    </div>
+    {{>newPost}}
 </div>

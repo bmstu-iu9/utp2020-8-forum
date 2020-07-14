@@ -220,18 +220,23 @@ ul {
     flex-direction: row;
 }
 
-.myAnswer {
-    padding: 2px 0 0 2px;
-    resize: none;
-    margin-left: 1%;
-    margin-right: 1%;
-    margin-bottom: 0;
+#answerForm {
+    width: 50%;
+}
+
+#myAnswer {
+    display: inline-block;
+    padding: 12px;
     width: 81%;
     height: 100%;
     font-size: 14pt;
     border-radius: 1vh;
 }
 
+#postAnswerButton {
+    display: inline-block;
+    height: 60px;
+}
 
 #makeDark {
     background: rgba(87, 78, 63, 0.5);

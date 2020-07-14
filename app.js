@@ -4,8 +4,9 @@ const logger = require('./modules/logger');
 const dbManager = require('./modules/db');
 const path = require('path');
 const app = express();
+const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
-
+const urlencoded = bodyParser.urlencoded({extended: false});
 app.use(logger); // Показывает в консоли запросы к серверу и время запроса
 app.use('/static', express.static(path.join(__dirname, '/public')))
 
@@ -34,6 +35,23 @@ app.get('/category/:categoryId', function (req, res) {
     let id = req.params.categoryId;
     let posts = dbManager.getPostsByCategory(db, id)
     res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories, postsListTitle: categories[id-1].name});
+})
+
+app.post('/post/:postId', urlencoded, function (req, res){
+    let categories = dbManager.getCategories(db);
+    let id = req.params.postId;
+    let post = dbManager.getPost(db, id)
+    dbManager.addNewReply(db, 1, req.body.myAnswer, id);
+    let replies = dbManager.getReplies(db, id);
+    res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
+})
+
+app.post('/category/:categoryId', urlencoded, function (req, res){
+    let categories = dbManager.getCategories(db);
+    let id = req.params.categoryId;
+    let postSuccess = dbManager.addNewPost(db, 1, req.body.myPost, id);
+    let posts = dbManager.getPostsByCategory(db, id)
+    res.render('home', {layout: 'postsListViewLayout', categories: categories, posts: posts, postsListTitle: categories[id - 1].name, postSuccess: postSuccess})
 })
 
 

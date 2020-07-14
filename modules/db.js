@@ -12,7 +12,7 @@ const init = () => {
 /*Использует файл models.json для генерации базы данных с таблицами, соответсвующими описанным моделям.
 * При выполнении БД форматируется*/
 const migrate = () => {
-    let db = new Database('app.db', {verbose: console.log});
+    let db = new Database('app.db');
     for (let i = 0; i < models.length; ++i) {
         let req = 'DROP TABLE IF EXISTS ' + models[i].tablename;
         db.prepare(req).run();
@@ -48,6 +48,25 @@ const getReplies = (db, postId) => {
     return db.prepare(SQLrequests.getReplies.replace("{id}", postId)).all();
 }
 
+const checkPostExists = (db, title, category_id) => {
+    let post = db.prepare('SELECT * FROM posts WHERE trim(title)=? AND trim(category_id)=?').get(title, category_id);
+    return post !== undefined
+}
+
+const addNewPost = (db, author_id, title, category_id) => {
+    if (checkPostExists(db, title, category_id)){
+        return false;
+    } else{
+        db.prepare('INSERT INTO posts (author_id, title, category_id) VALUES (?, ?, ?)').run(author_id, title, category_id);
+        return true
+    }
+    return true
+}
+
+const addNewReply = (db, author_id, reply, post_id) => {
+    db.prepare('INSERT INTO replies (author_id, text, post_id) VALUES (?, ?, ?)').run(author_id, reply, post_id);
+}
+
 
 exports.init = init;
 exports.migrate = migrate;
@@ -56,3 +75,6 @@ exports.getPost = getPost;
 exports.getReplies = getReplies;
 exports.getPostsByCategory = getPostsByCategory;
 exports.getCategories = getCategories;
+exports.addNewPost = addNewPost;
+exports.checkPostExists = checkPostExists;
+exports.addNewReply = addNewReply;
