@@ -19,7 +19,7 @@ const db = dbManager.init();
 app.get('/', function (req, res) {
     let categories = dbManager.getCategories(db);
     let posts = dbManager.getAllPosts(db)
-    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories, postsListTitle: 'Все посты', ind: 0});
+    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories, postsListTitle: 'Все посты'});
 });
 
 app.get('/post/:postId', function (req, res) {
@@ -34,7 +34,7 @@ app.get('/category/:categoryId', function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.categoryId;
     let posts = dbManager.getPostsByCategory(db, id)
-    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories, postsListTitle: categories[id-1].name, ind: 0});
+    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories, postsListTitle: categories[id-1].name});
 })
 
 app.post('/post/:postId', urlencoded, function (req, res){
@@ -49,12 +49,9 @@ app.post('/post/:postId', urlencoded, function (req, res){
 app.post('/category/:categoryId', urlencoded, function (req, res){
     let categories = dbManager.getCategories(db);
     let id = req.params.categoryId;
-    let ind = 0
-    if(!dbManager.addNewPost(db, 1, req.body.myPost, id)){
-        ind = 1
-    }
+    let postSuccess = dbManager.addNewPost(db, 1, req.body.myPost, id);
     let posts = dbManager.getPostsByCategory(db, id)
-    res.render('home', {layout: 'postsListViewLayout', categories: categories, posts: posts, postsListTitle: categories[id - 1].name, ind: ind})
+    res.render('home', {layout: 'postsListViewLayout', categories: categories, posts: posts, postsListTitle: categories[id - 1].name, postSuccess: postSuccess})
 })
 
 
