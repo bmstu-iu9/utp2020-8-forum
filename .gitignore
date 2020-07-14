@@ -4,6 +4,7 @@
 
 
 *.db
+.DS_Store
 ### Node ###
 # Logs
 logs
