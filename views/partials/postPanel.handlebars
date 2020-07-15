@@ -1,20 +1,22 @@
 <div class="selectedTheme colorMain">
-    <input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/back.png" height="60" style="float: left; margin-top: 4.4vh" onclick="history.back();">
-    <div class="themeText colorTextLight">{{post.title}}</div>
-    <ul style="max-height: 67%;">
+    <input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/back.png" height="40"
+           style="float: left; margin-top: 4.4vh" onclick="history.back();">
+    <h3 class="postTitle colorTextLight">{{post.title}}</h3>
+    <ul id="ulReplies" style="max-height: 67%;">
         {{#each replies}}
-        <li class="answer colorSection">
-            <div class="profile">
-                <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
-                <div class="link colorDarkLink" href="#">{{this.author_name}}</div>
-            </div>
-            <div class="answerText link ColorTextDark">{{this.text}}</div>
-            <div class="voteField">
-                <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
-                <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
-                <div class="voteCounter colorMain colorTextLight">156</div>
-            </div>
-        </li>
+            <li class="answer colorSection">
+                <div class="profile">
+                    <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                         alt="No avatar" height="100" width="100">
+                    <div class="profileName link colorDarkLink" href="#">{{this.author_name}}</div>
+                </div>
+                <div class="answerText link ColorTextDark">{{this.text}}</div>
+                <div class="voteField">
+                    <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
+                    <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
+                    <div class="voteCounter">156</div>
+                </div>
+            </li>
         {{/each}}
     </ul>
 

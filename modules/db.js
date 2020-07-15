@@ -49,22 +49,20 @@ const getReplies = (db, postId) => {
 }
 
 const checkPostExists = (db, title, category_id) => {
-    let post = db.prepare('SELECT * FROM posts WHERE trim(title)=? AND trim(category_id)=?').get(title, category_id);
+    let post = db.prepare(SQLrequests.checkPostExists).get(title, category_id);
     return post !== undefined
 }
 
 const addNewPost = (db, author_id, title, category_id) => {
-    if (checkPostExists(db, title, category_id)){
-        return false;
-    } else{
-        db.prepare('INSERT INTO posts (author_id, title, category_id) VALUES (?, ?, ?)').run(author_id, title, category_id);
+    if (!checkPostExists(db, title, category_id)) {
+        db.prepare(SQLrequests.addPost).run(author_id, title, category_id);
         return true
     }
-    return true
+    return false
 }
 
 const addNewReply = (db, author_id, reply, post_id) => {
-    db.prepare('INSERT INTO replies (author_id, text, post_id) VALUES (?, ?, ?)').run(author_id, reply, post_id);
+    db.prepare(SQLrequests.addReply).run(author_id, reply, post_id);
 }
 
 
@@ -75,6 +73,6 @@ exports.getPost = getPost;
 exports.getReplies = getReplies;
 exports.getPostsByCategory = getPostsByCategory;
 exports.getCategories = getCategories;
-exports.addNewPost = addNewPost;
+exports.addPost = addNewPost;
 exports.checkPostExists = checkPostExists;
-exports.addNewReply = addNewReply;
+exports.addReply = addNewReply;

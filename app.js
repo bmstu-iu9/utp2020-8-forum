@@ -19,7 +19,12 @@ const db = dbManager.init();
 app.get('/', function (req, res) {
     let categories = dbManager.getCategories(db);
     let posts = dbManager.getAllPosts(db)
-    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories, postsListTitle: 'Все посты'});
+    res.render('home', {
+        layout: 'postsListViewLayout',
+        posts: posts,
+        categories: categories,
+        postsListTitle: 'Все посты'
+    });
 });
 
 app.get('/post/:postId', function (req, res) {
@@ -34,24 +39,35 @@ app.get('/category/:categoryId', function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.categoryId;
     let posts = dbManager.getPostsByCategory(db, id)
-    res.render('home', {layout: 'postsListViewLayout', posts: posts, categories: categories, postsListTitle: categories[id-1].name});
+    res.render('home', {
+        layout: 'postsListViewLayout',
+        posts: posts,
+        categories: categories,
+        postsListTitle: categories[id - 1].name
+    });
 })
 
-app.post('/post/:postId', urlencoded, function (req, res){
+app.post('/post/:postId', urlencoded, function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.postId;
     let post = dbManager.getPost(db, id)
-    dbManager.addNewReply(db, 1, req.body.myAnswer, id);
+    dbManager.addReply(db, 1, req.body.myAnswer, id);
     let replies = dbManager.getReplies(db, id);
     res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
 })
 
-app.post('/category/:categoryId', urlencoded, function (req, res){
+app.post('/category/:categoryId', urlencoded, function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.categoryId;
-    let postSuccess = dbManager.addNewPost(db, 1, req.body.myPost, id);
+    let postSuccess = dbManager.addPost(db, 1, req.body.myPost, id);
     let posts = dbManager.getPostsByCategory(db, id)
-    res.render('home', {layout: 'postsListViewLayout', categories: categories, posts: posts, postsListTitle: categories[id - 1].name, postSuccess: postSuccess})
+    res.render('home', {
+        layout: 'postsListViewLayout',
+        categories: categories,
+        posts: posts,
+        postsListTitle: categories[id - 1].name,
+        postSuccess: postSuccess
+    })
 })
 
 

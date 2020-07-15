@@ -1,14 +1,13 @@
 <script>
-    if(!{{postSuccess}})
+    if (!{{postSuccess}})
         alert('Already exist!')
 
 </script>
 {{>head}}
 {{>topbar}}
 <div class="container">
-
-    <div class="themes colorMain">
-        <h2 style="border-bottom-style:solid;" class="colorTextLight";>Categories</h2>
+    <div id="categories" class="colorMain">
+        <h2 style="border-bottom-style:solid;" class="colorTextLight">Категории</h2>
         {{>categoriesListPanel}}
     </div>
 
