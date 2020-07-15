@@ -2,7 +2,6 @@
 
 const express = require('express');
 const exphbs = require('express-handlebars');
-const bodyParser = require('body-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const passport = require('passport');
@@ -23,9 +22,7 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/public'));
-
 app.use('/styles', express.static(__dirname + '/styles'));
-
 app.use('/scripts', express.static(__dirname + '/scripts'));
 
 app.use(
@@ -42,31 +39,36 @@ app.use(
   })
 );
 
+const sqlite = require('./UsersDataBase/users.js');
+const db = sqlite.init();
+
 require('./UsersDataBase/passport-config.js');
 app.use(passport.initialize());
 app.use(passport.session());
 
 
+app.get("/users", (req, res, next) => {
+  let rows = db.prepare('SELECT * FROM users').all();
+  res.json({
+      "data":rows
+  });
+});
+
+
 app.get('/signup', authModule.checkAuth, (req, res) => {
   res.render('signup');
-  console.log("User is at signup page");
 });
 
 app.post('/signup', (req, res) => {
   const { login, psw, pswConf } = req.body;
     if (psw === pswConf) {
-      let users = JSON.parse(fs.readFileSync('./UsersDataBase/users.json', 'utf-8'));
-      if (users[login] !== undefined) {
+      if (sqlite.checkUserExists(db, login)) {
         res.render('signup', {
                 message: 'User exists.'
             });
       } else {
         const hashedPassword = authModule.getHashedPassword(psw);
-        users[login] = {
-          "login": login,
-          "psw": hashedPassword
-        }
-        fs.writeFileSync('./UsersDataBase/users.json', JSON.stringify(users));
+        sqlite.createUser(db, login, hashedPassword);
         res.redirect('/login');
       }
     } else {

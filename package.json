@@ -9,7 +9,7 @@
   "author": "Kuzovchikov",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "better-sqlite3": "^7.1.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.0.0",
     "express-session": "^1.17.1",
