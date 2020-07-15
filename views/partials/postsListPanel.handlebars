@@ -2,19 +2,22 @@
 <div class="selectedTheme colorMain">
     <h2 class="categoryHeader colorTextLight">Category: {{postsListTitle}}</h2>
     <ul class="ulPosts">
-    {{#each posts}}
-        <li class="answer colorSection">
-            <div class="profile">
-                <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
-                <div class="profileName link colorDarkLink" href="#">{{this.author_name}}</div>
-            </div>
-            <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-            <div class="voteField">
-                <a href="/post/{{this.id}}"><input type="image" class="replyImage vote colorDarkLink myButton colorSection" src="/static/images/reply.png" alt="#"/></a>
-                <div class="voteCounter colorMain colorTextLight">156</div>
-            </div>
-        </li>
-    {{/each}}
+        {{#each posts}}
+            <li class="answer colorSection">
+                <div class="profile">
+                    <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                         alt="No avatar" height="100" width="100">
+                    <div class="profileName link colorDarkLink" href="#">{{this.author_name}}</div>
+                </div>
+                <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                <div class="voteField">
+                    <a href="/post/{{this.id}}"><input type="image"
+                                                       class="replyImage vote colorDarkLink myButton colorSection"
+                                                       src="/static/images/reply.png" alt="#"/></a>
+                    <div class="voteCounter colorMain colorTextLight">156</div>
+                </div>
+            </li>
+        {{/each}}
     </ul>
     {{>newPost}}
 </div>
