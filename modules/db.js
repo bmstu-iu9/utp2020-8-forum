@@ -61,10 +61,14 @@ const addNewPost = (db, author_id, title, category_id) => {
     return false
 }
 
-const addNewReply = (db, author_id, reply, post_id) => {
+const addReply = (db, author_id, reply, post_id) => {
     db.prepare(SQLrequests.addReply).run(author_id, reply, post_id);
 }
 
+
+const getRepliesCount = (db) => {
+    return db.prepare(SQLrequests.getRepliesCount).all();
+}
 
 exports.init = init;
 exports.migrate = migrate;
@@ -75,4 +79,5 @@ exports.getPostsByCategory = getPostsByCategory;
 exports.getCategories = getCategories;
 exports.addPost = addNewPost;
 exports.checkPostExists = checkPostExists;
-exports.addReply = addNewReply;
+exports.addReply = addReply;
+exports.getRepliesCount = getRepliesCount;

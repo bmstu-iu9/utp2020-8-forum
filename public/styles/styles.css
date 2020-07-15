@@ -23,11 +23,13 @@ li {
     max-height: 73%;
     min-height: 73%;
 }
+
 #ulReplies, #ulPosts {
     overflow-y: auto;
     max-height: 73%;
     padding-left: 0;
 }
+
 .ulCategories {
     max-height: 90%;
     overflow-y: auto;
@@ -87,6 +89,7 @@ li {
     transition-property: background-color;
     transition: .1s;
 }
+
 .colorDarkLink:hover {
     background-color: #E1A487;
     cursor: pointer;
@@ -173,17 +176,16 @@ li {
 
 .voteField {
     text-align: center;
-    justify-self:  end;
+    justify-self: end;
     align-self: end;
 
 }
 
 .vote {
     display: block;
-    width: 30%;
+    width: 100px;
     margin: 0 auto;
 }
-
 
 
 .answerText {
@@ -216,7 +218,6 @@ li {
     text-align: center;
 
 }
-
 
 
 .newAnswer {
@@ -271,4 +272,16 @@ li {
 
 #makeDark:target {
     display: block;
+}
+
+.sortLink:visited {
+    color: white;
+}
+
+.sortLink:hover {
+    color: #E1A487;
+}
+
+.sortLink {
+    text-decoration: none;
 }

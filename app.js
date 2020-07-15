@@ -7,18 +7,24 @@ const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
 const urlencoded = bodyParser.urlencoded({extended: false});
-app.use(logger); // Показывает в консоли запросы к серверу и время запроса
-app.use('/static', express.static(path.join(__dirname, '/public')))
 
+app.use(logger);
+app.use('/static', express.static(path.join(__dirname, '/public')))
+app.use(express.json())
+app.use(express.urlencoded({extended: false}));
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
-
 
 const db = dbManager.init();
 
 app.get('/', function (req, res) {
     let categories = dbManager.getCategories(db);
     let posts = dbManager.getAllPosts(db)
+    let sortTag = req.query.sortTag;
+    if (sortTag === 'byReplies')
+        posts.sort((a, b) => {
+            return b.reply_count - a.reply_count;
+        })
     res.render('home', {
         layout: 'postsListViewLayout',
         posts: posts,
@@ -38,7 +44,13 @@ app.get('/post/:postId', function (req, res) {
 app.get('/category/:categoryId', function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.categoryId;
-    let posts = dbManager.getPostsByCategory(db, id)
+    let sortTag = req.query.sortTag;
+
+    let posts = dbManager.getPostsByCategory(db, id).reverse();
+    if (sortTag === 'byReplies')
+        posts.sort((a, b) => {
+            return b.reply_count - a.reply_count;
+        })
     res.render('home', {
         layout: 'postsListViewLayout',
         posts: posts,
@@ -47,7 +59,7 @@ app.get('/category/:categoryId', function (req, res) {
     });
 })
 
-app.post('/post/:postId', urlencoded, function (req, res) {
+app.post('/post/:postId', function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.postId;
     let post = dbManager.getPost(db, id)
@@ -56,11 +68,11 @@ app.post('/post/:postId', urlencoded, function (req, res) {
     res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
 })
 
-app.post('/category/:categoryId', urlencoded, function (req, res) {
+app.post('/category/:categoryId', function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.categoryId;
     let postSuccess = dbManager.addPost(db, 1, req.body.myPost, id);
-    let posts = dbManager.getPostsByCategory(db, id)
+    let posts = dbManager.getPostsByCategory(db, id).reverse()
     res.render('home', {
         layout: 'postsListViewLayout',
         categories: categories,
@@ -69,6 +81,4 @@ app.post('/category/:categoryId', urlencoded, function (req, res) {
         postSuccess: postSuccess
     })
 })
-
-
 app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
