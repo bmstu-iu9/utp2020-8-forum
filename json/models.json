@@ -1,0 +1,66 @@
+{
+  "models": [
+    {
+      "tablename": "posts",
+      "columns": [
+        "id",
+        "author_id",
+        "title",
+        "category_id",
+        "FOREIGN KEY(author_id)",
+        "FOREIGN KEY(category_id)"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "INTEGER",
+        "TEXT",
+        "INTEGER",
+        "REFERENCES users(id)",
+        "REFERENCES categories(id)"
+      ]
+    },
+    {
+      "tablename": "users",
+      "columns": [
+        "id",
+        "username",
+        "password"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "TEXT NOT NULL UNIQUE",
+        "TEXT"
+      ]
+    },
+    {
+      "tablename": "replies",
+      "columns": [
+        "id",
+        "author_id",
+        "post_id",
+        "text",
+        "FOREIGN KEY(author_id)",
+        "FOREIGN KEY(post_id)"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "INTEGER",
+        "INTEGER",
+        "TEXT NOT NULL",
+        "REFERENCES users(id)",
+        "REFERENCES posts(id)"
+      ]
+    },
+    {
+      "tablename": "categories",
+      "columns": [
+        "id",
+        "name"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "TEXT"
+      ]
+    }
+  ]
+}

@@ -4,20 +4,20 @@ const passport = require('passport');
 const session = require('express-session');
 const authModule = require('./auth.js');
 const LocalStrategy = require('passport-local').Strategy;
-const sqlite = require('./users.js');
-const db = new require('better-sqlite3')('./UsersDataBase/users.db');
+const dbManager = require('./db.js');
+const db = new require('better-sqlite3')('./app.db');
 
-passport.serializeUser(function(user, done) {
-  done(null, user.login);
+passport.serializeUser((user, done) => {
+  done(null, user.username);
 });
 
-passport.deserializeUser(function(login, done) {
-	done(null, sqlite.findUser(db, login));
+passport.deserializeUser((login, done) => {
+	done(null, dbManager.findUser(db, login));
 });
 
 passport.use(
   new LocalStrategy({ usernameField: 'login', passwordField: 'psw' }, (login, password, done) => {
-    let user = sqlite.findUser(db, login);
+    let user = dbManager.findUser(db, login);
     if (user !== undefined && user.password === authModule.getHashedPassword(password)) {
 			return done(null, user);
 		} else {
