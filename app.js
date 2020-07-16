@@ -101,7 +101,7 @@ app.get('/category/:categoryId', function (req, res) {
     });
 })
 
-app.post('/post/:postId', urlencoded, function (req, res) {
+app.post('/post/:postId', function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.postId;
     let post = dbManager.getPost(db, id)
@@ -110,7 +110,7 @@ app.post('/post/:postId', urlencoded, function (req, res) {
     res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
 })
 
-app.post('/category/:categoryId', urlencoded, function (req, res) {
+app.post('/category/:categoryId', function (req, res) {
     let categories = dbManager.getCategories(db);
     let id = req.params.categoryId;
     let postSuccess = dbManager.addPost(db, 1, req.body.myPost, id);
