@@ -1,13 +1,8 @@
 {
   "name": "utp2020-8-forum",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "author": "Kuzovchikov",
-  "license": "ISC",
+  "description": "Форум (капитан Данила Азметов)",
+  "main": "app.js",
   "dependencies": {
     "better-sqlite3": "^7.1.0",
     "express": "^4.17.1",
@@ -15,9 +10,24 @@
     "express-session": "^1.17.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "session-file-store": "^1.4.0"
+    "session-file-store": "^1.4.0",
+    "moment": "^2.27.0",
+    "nodemon": "^2.0.4",
+    "sqlite3": "^5.0.0"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.4"
-  }
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "serve": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmstu-iu9/utp2020-8-forum.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bmstu-iu9/utp2020-8-forum/issues"
+  },
+  "homepage": "https://github.com/bmstu-iu9/utp2020-8-forum#readme"
 }

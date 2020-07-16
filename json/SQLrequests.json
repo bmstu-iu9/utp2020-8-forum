@@ -4,6 +4,9 @@
   "getReplies": "SELECT replies.id, replies.post_id, replies.author_id, replies.text, users.username as author_name FROM replies   INNER JOIN posts ON posts.id=post_id INNER JOIN users ON replies.author_id=users.id WHERE post_id={id}",
   "getPost": "SELECT * FROM posts WHERE id={id}",
   "getCategories": "SELECT * FROM categories",
+  "checkPostExists": "SELECT * FROM posts WHERE trim(title)=? AND trim(category_id)=?",
+  "addPost": "INSERT INTO posts (author_id, title, category_id) VALUES (?, ?, ?)",
+  "addReply": "INSERT INTO replies (author_id, text, post_id) VALUES (?, ?, ?)",
   "findUser": "SELECT * FROM users WHERE trim(username) = ?",
   "createUser": "INSERT INTO users (username, password) VALUES (?,?)"
 }

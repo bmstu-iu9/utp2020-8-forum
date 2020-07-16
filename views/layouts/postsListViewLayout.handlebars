@@ -1,0 +1,16 @@
+<script>
+    if (!{{postSuccess}})
+        alert('Already exist!')
+
+</script>
+{{>head}}
+{{>topbar}}
+<div class="container">
+    <div id="categories" class="colorMain">
+        <h2 style="border-bottom-style:solid;" class="colorTextLight">Категории</h2>
+        {{>categoriesListPanel}}
+    </div>
+
+    {{>postsListPanel}}
+
+</div>
