@@ -4,9 +4,7 @@ const logger = require('./modules/logger');
 const dbManager = require('./modules/db');
 const path = require('path');
 const app = express();
-const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
-const urlencoded = bodyParser.urlencoded({extended: false});
 
 app.use(logger);
 app.use('/static', express.static(path.join(__dirname, '/public')))
@@ -19,66 +17,68 @@ const db = dbManager.init();
 
 app.get('/', function (req, res) {
     let categories = dbManager.getCategories(db);
-    let posts = dbManager.getAllPosts(db)
+    let posts = dbManager.getAllPosts(db);
     let sortTag = req.query.sortTag;
     if (sortTag === 'byReplies')
-        posts.sort((a, b) => {
-            return b.reply_count - a.reply_count;
-        })
+        posts.sort((a, b) => b.reply_count - a.reply_count)
     res.render('home', {
         layout: 'postsListViewLayout',
         posts: posts,
         categories: categories,
-        postsListTitle: 'Все посты'
+        postsListTitle: "Все посты",
+        categoryChosen: false,
     });
 });
 
-app.get('/post/:postId', function (req, res) {
+app.get('/category/:categoryId(\\d+)', function (req, res) {
     let categories = dbManager.getCategories(db);
+    let categoryId = req.params.categoryId;
+    let sortTag = req.query.sortTag;
+    if (categories.length >= categoryId) {
+        let posts = dbManager.getPostsByCategory(db, categoryId).reverse()
+        if (sortTag === 'byReplies')
+            posts.sort((a, b) => b.reply_count - a.reply_count)
+        res.render('home', {
+            layout: 'postsListViewLayout',
+            posts: posts,
+            categories: categories,
+            postsListTitle: categories[categoryId - 1].name,
+            postFail: req.query.postFail,
+            categoryChosen: true
+        });
+    } else
+        res.status(404).send('Нет такой категории')
+})
+
+app.get('/post/:postId(\\d+)', function (req, res) {
     let postId = req.params.postId;
     let post = dbManager.getPost(db, postId)
-    let replies = dbManager.getReplies(db, postId)
-    res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
+    if (post) {
+        let categories = dbManager.getCategories(db);
+
+        let replies = dbManager.getReplies(db, postId)
+        res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
+    } else res.status(404).send('Нет такого поста')
+
 })
 
-app.get('/category/:categoryId', function (req, res) {
+app.post('/category/:categoryId(\\d+)', function (req, res) {
+    let categoryId = req.params.categoryId;
     let categories = dbManager.getCategories(db);
-    let id = req.params.categoryId;
-    let sortTag = req.query.sortTag;
+    if (categories.length >= categoryId) {
+        let postSuccess = dbManager.addPost(db, 1, req.body.myPost, categoryId);
+        if (postSuccess)
+            res.redirect(`/category/${categoryId}`)
+        else res.redirect(`/category/${categoryId}?postFail=true`)
 
-    let posts = dbManager.getPostsByCategory(db, id).reverse();
-    if (sortTag === 'byReplies')
-        posts.sort((a, b) => {
-            return b.reply_count - a.reply_count;
-        })
-    res.render('home', {
-        layout: 'postsListViewLayout',
-        posts: posts,
-        categories: categories,
-        postsListTitle: categories[id - 1].name
-    });
+    } else res.redirect(`/category/${categoryId}?postFail=true`)
 })
 
-app.post('/post/:postId', function (req, res) {
-    let categories = dbManager.getCategories(db);
+app.post('/post/:postId(\\d+)', function (req, res) {
     let id = req.params.postId;
-    let post = dbManager.getPost(db, id)
     dbManager.addReply(db, 1, req.body.myAnswer, id);
-    let replies = dbManager.getReplies(db, id);
-    res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
+    res.redirect(`/post/${id}`)
 })
 
-app.post('/category/:categoryId', function (req, res) {
-    let categories = dbManager.getCategories(db);
-    let id = req.params.categoryId;
-    let postSuccess = dbManager.addPost(db, 1, req.body.myPost, id);
-    let posts = dbManager.getPostsByCategory(db, id).reverse()
-    res.render('home', {
-        layout: 'postsListViewLayout',
-        categories: categories,
-        posts: posts,
-        postsListTitle: categories[id - 1].name,
-        postSuccess: postSuccess
-    })
-})
+
 app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));

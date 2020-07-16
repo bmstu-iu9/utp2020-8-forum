@@ -24,5 +24,8 @@
             </li>
         {{/each}}
     </ul>
-    {{>newPost}}
+
+    {{#if categoryChosen}}
+        {{>newPost}}
+    {{/if}}
 </div>

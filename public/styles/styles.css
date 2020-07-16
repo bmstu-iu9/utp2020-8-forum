@@ -285,3 +285,14 @@ li {
 .sortLink {
     text-decoration: none;
 }
+
+#message {
+    position: absolute;
+    width: 500px;
+    line-height: 100px;
+    background: hotpink;
+    text-align: center;
+
+    right: 0;
+    bottom: 0;
+}
