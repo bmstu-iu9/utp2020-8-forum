@@ -19,5 +19,9 @@
             </li>
         {{/each}}
     </ul>
-    {{>newPost}}
+    {{#if user}}
+        {{>newAnswer}}
+    {{else}}
+        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+    {{/if}}
 </div>

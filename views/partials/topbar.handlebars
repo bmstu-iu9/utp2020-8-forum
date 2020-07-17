@@ -21,8 +21,15 @@
 
 <header id="topBar" class="colorHeader">
     <a class="headerLogo headerText link colorDarkLink colorTextLight" href="/">IU9-Forum</a>
-    <a id="signUp" class="headerUser link colorDarkLink colorTextLight" onclick="document.getElementById('window').style.display='block'">Sign Up</a>
-    <a id="logIn" class="headerUser link colorDarkLink colorTextLight" onclick="document.getElementById('entry').style.display='block'">Log In</a>
+
+    {{#if user}}
+        <a href="/logout" class="headerUser link colorDarkLink colorTextLight">logout</a>
+        <a class="headerUser link colorDarkLink colorTextLight">{{user.username}}</a>
+    {{else}}
+        <a id="signUp" class="headerUser link colorDarkLink colorTextLight" onclick="document.getElementById('window').style.display='block'">Sign Up</a>
+        <a id="logIn" class="headerUser link colorDarkLink colorTextLight" onclick="document.getElementById('entry').style.display='block'">Log In</a>
+    {{/if}}
+
     <script>
       {{#if message}}
         if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {

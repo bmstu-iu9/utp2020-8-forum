@@ -47,7 +47,8 @@ app.get('/', function (req, res) {
         posts: posts,
         categories: categories,
         postsListTitle: 'Все посты',
-        message: req.flash('error')
+        message: req.flash('error'),
+		user: req.user
     });
 });
 
@@ -97,7 +98,7 @@ app.get('/post/:postId', function (req, res) {
 	let postId = req.params.postId;
 	let post = dbManager.getPost(db, postId);
 	let replies = dbManager.getReplies(db, postId);
-	res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
+	res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies, user: req.user});
 });
 
 app.get('/category/:categoryId', function (req, res) {
@@ -108,7 +109,8 @@ app.get('/category/:categoryId', function (req, res) {
 			layout: 'postsListViewLayout',
 			posts: posts,
 			categories: categories,
-			postsListTitle: categories[id - 1].name
+			postsListTitle: categories[id - 1].name,
+		user: req.user
 	});
 });
 
@@ -116,7 +118,7 @@ app.post('/post/:postId', function (req, res) {
 	let categories = dbManager.getCategories(db);
 	let id = req.params.postId;
 	let post = dbManager.getPost(db, id);
-	dbManager.addReply(db, 1, req.body.myAnswer, id);
+	dbManager.addReply(db, req.user.id, req.body.myAnswer, id);
 	let replies = dbManager.getReplies(db, id);
 	res.render('home', {
 		layout: 'postViewLayout',
@@ -129,7 +131,7 @@ app.post('/post/:postId', function (req, res) {
 app.post('/category/:categoryId', function (req, res) {
 	let categories = dbManager.getCategories(db);
 	let id = req.params.categoryId;
-	let postSuccess = dbManager.addPost(db, 1, req.body.myPost, id);
+	let postSuccess = dbManager.addPost(db, req.user.id, req.body.myPost, id);
 	let posts = dbManager.getPostsByCategory(db, id);
 	res.render('home', {
 			layout: 'postsListViewLayout',
