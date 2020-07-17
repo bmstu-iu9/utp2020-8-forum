@@ -16,14 +16,12 @@ passport.deserializeUser((login, done) => {
 });
 
 passport.use(
-  new LocalStrategy({ usernameField: 'login', passwordField: 'psw' }, (login, password, done) => {
+  new LocalStrategy({ usernameField: 'login', passwordField: 'psw', passReqToCallback: true }, (req, login, password, done) => {
     let user = dbManager.findUser(db, login);
     if (user !== undefined && user.password === authModule.getHashedPassword(password)) {
 			return done(null, user);
 		} else {
-			return done(null, false, {
-				message: "Email или пароль введены некорректно."
-			});
+			return done(null, false, req.flash('error', 'Wrong login or password'));
 		}
   })
 );
