@@ -65,17 +65,17 @@ const addNewReply = (db, author_id, reply, post_id) => {
 }
 
 const findUser = (data, login) => {
-  return data.prepare(SQLrequests.findUser).get(login);
+    return data.prepare(SQLrequests.findUser).get(login);
 }
 
 exports.checkUserExists = (data, login) => {
-  let usr = findUser(data, login);
-  return usr !== undefined;
+    let usr = findUser(data, login);
+    return usr !== undefined;
 }
 
 
 exports.createUser = (data, login, psswrd) => {
-  data.prepare(SQLrequests.createUser).run(login, psswrd);
+    data.prepare(SQLrequests.createUser).run(login, psswrd);
 }
 
 

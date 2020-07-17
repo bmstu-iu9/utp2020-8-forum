@@ -24,11 +24,13 @@ li {
     max-height: 73%;
     min-height: 73%;
 }
+
 #ulReplies, #ulPosts {
     overflow-y: auto;
     max-height: 73%;
     padding-left: 0;
 }
+
 .ulCategories {
     max-height: 90%;
     overflow-y: auto;
@@ -88,6 +90,7 @@ li {
     transition-property: background-color;
     transition: .1s;
 }
+
 .colorDarkLink:hover {
     background-color: #E1A487;
     cursor: pointer;
@@ -174,7 +177,7 @@ li {
 
 .voteField {
     text-align: center;
-    justify-self:  end;
+    justify-self: end;
     align-self: end;
 
 }
@@ -184,7 +187,6 @@ li {
     width: 30%;
     margin: 0 auto;
 }
-
 
 
 .answerText {
@@ -273,25 +275,25 @@ li {
 }
 
 .window {
-  background: rgba(87, 78, 63, 0.5);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: none;
+    background: rgba(87, 78, 63, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
 }
 
 .windowContent {
-  max-width: 15%;
-  max-height: 25%;
-  text-align: center;
-  padding: 1% 1% 1% 1%;
-  border-radius: 1vh;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
+    max-width: 15%;
+    max-height: 25%;
+    text-align: center;
+    padding: 1% 1% 1% 1%;
+    border-radius: 1vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
 }
