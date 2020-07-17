@@ -12,6 +12,10 @@ const sortPosts = (posts, sortTag) => {
             return posts.sort((a, b) => b.reply_count - a.reply_count);
         case 'byRepliesAsc':
             return posts.sort((a, b) => a.reply_count - b.reply_count);
+        case 'byLastReply':
+            return posts.sort((a, b) => b.last_reply.id - a.last_reply.id);
+        case 'byLastReplyAsc':
+            return posts.sort((a, b) => a.last_reply.id - b.last_reply.id);
         default:
             return posts;
     }

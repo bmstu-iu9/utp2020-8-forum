@@ -20,7 +20,13 @@
             href="?sortTag=byReplies"
             {{/is}}
             class="sortLink">По ответам</a></span>
-        <span>По последнему овтету</span></div>
+        <span><a
+            {{#is sortTag 'byLastReply' }}
+            href="?sortTag=byLastReplyAsc"
+            {{else}}
+            href="?sortTag=byLastReply"
+            {{/is}}
+            class="sortLink">По последнему ответу</a></span></div>
 
     <ul id="ulPosts">
         {{#each posts}}

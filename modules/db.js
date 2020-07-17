@@ -33,18 +33,34 @@ const getCategories = (db) => {
 }
 
 const getAllPosts = (db) => {
-    return db.prepare(SQLrequests.getAllPosts).all();
+    let posts = db.prepare(SQLrequests.getAllPosts).all();
+    posts.forEach(p => {
+        let lastReply = getLastReply(db, p.id);
+        p.last_reply = (lastReply ? lastReply : {"id": 0})
+    })
+    return posts;
 }
 const getPostsByCategory = (db, categoryId) => {
-    return db.prepare(SQLrequests.getPostsByCategory.replace("{id}", categoryId)).all();
+
+    let posts = db.prepare(SQLrequests.getPostsByCategory.replace("{id}", categoryId)).all();
+    posts.forEach(p => {
+        let lastReply = getLastReply(db, p.id);
+        p.last_reply = (lastReply ? lastReply : {"id": 0})
+    })
+    return posts;
 }
 
 const getPost = (db, postId) => {
+
     return db.prepare(SQLrequests.getPost.replace("{id}", postId)).get();
 }
 
 const getReplies = (db, postId) => {
     return db.prepare(SQLrequests.getReplies.replace("{id}", postId)).all();
+}
+
+const getLastReply = (db, postId) => {
+    return db.prepare(SQLrequests.getLastReply.replace("{id}", postId)).get();
 }
 
 const checkPostExists = (db, title, category_id) => {
@@ -88,6 +104,7 @@ exports.migrate = migrate;
 exports.getAllPosts = getAllPosts;
 exports.getPost = getPost;
 exports.getReplies = getReplies;
+exports.getLastReply = getLastReply;
 exports.getPostsByCategory = getPostsByCategory;
 exports.getCategories = getCategories;
 exports.addPost = addNewPost;

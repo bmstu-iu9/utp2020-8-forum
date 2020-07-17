@@ -10,7 +10,13 @@ router.get('/:postId(\\d+)', function (req, res) {
     if (post) {
         let categories = dbManager.getCategories(db);
         let replies = dbManager.getReplies(db, postId)
-        res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies, user: req.user});
+        res.render('home', {
+            layout: 'postViewLayout',
+            categories: categories,
+            post: post,
+            replies: replies,
+            user: req.user
+        });
     } else res.status(404).send('Нет такого поста')
 
 })

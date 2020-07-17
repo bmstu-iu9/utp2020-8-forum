@@ -2,6 +2,7 @@
   "getAllPosts": "SELECT posts.id,  posts.author_id, x.reply_count, posts.title,  posts.category_id, users.username as author_name, categories.name as category_name FROM posts INNER JOIN users ON users.id=posts.author_id INNER JOIN categories on posts.category_id=categories.id LEFT JOIN (SELECT replies.post_id, COUNT(*) as reply_count FROM replies GROUP BY replies.post_id) x ON x.post_id=posts.id",
   "getPostsByCategory": "SELECT posts.id,  posts.author_id, x.reply_count,  posts.title,  posts.category_id, users.username as author_name, categories.name as category_name FROM posts INNER JOIN users ON users.id=posts.author_id INNER JOIN categories on posts.category_id=categories.id LEFT JOIN (SELECT replies.post_id, COUNT(*) as reply_count FROM replies GROUP BY replies.post_id) x ON x.post_id=posts.id",
   "getReplies": "SELECT replies.id, replies.post_id, replies.author_id, replies.text, users.username as author_name FROM replies LEFT JOIN posts ON posts.id=post_id INNER JOIN users ON replies.author_id=users.id WHERE post_id={id}",
+  "getLastReply": "SELECT * FROM replies where post_id={id} ORDER BY id DESC LIMIT 1;",
   "getPost": "SELECT * FROM posts WHERE id={id}",
   "getCategories": "SELECT * FROM categories",
   "checkPostExists": "SELECT * FROM posts WHERE trim(title)=? AND trim(category_id)=?",
