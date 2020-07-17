@@ -8,7 +8,6 @@ const init = () => {
     return new Database('app.db');
 }
 
-
 /*Использует файл models.json для генерации базы данных с таблицами, соответсвующими описанным моделям.
 * При выполнении БД форматируется*/
 const migrate = () => {
@@ -65,6 +64,20 @@ const addReply = (db, author_id, reply, post_id) => {
     db.prepare(SQLrequests.addReply).run(author_id, reply, post_id);
 }
 
+const findUser = (data, login) => {
+    return data.prepare(SQLrequests.findUser).get(login);
+}
+
+exports.checkUserExists = (data, login) => {
+    let usr = findUser(data, login);
+    return usr !== undefined;
+}
+
+
+exports.createUser = (data, login, psswrd) => {
+    data.prepare(SQLrequests.createUser).run(login, psswrd);
+}
+
 
 const getRepliesCount = (db) => {
     return db.prepare(SQLrequests.getRepliesCount).all();
@@ -81,3 +94,4 @@ exports.addPost = addNewPost;
 exports.checkPostExists = checkPostExists;
 exports.addReply = addReply;
 exports.getRepliesCount = getRepliesCount;
+exports.findUser = findUser;

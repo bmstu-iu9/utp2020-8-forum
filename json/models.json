@@ -23,11 +23,13 @@
       "tablename": "users",
       "columns": [
         "id",
-        "username"
+        "username",
+        "password"
       ],
       "tags": [
         "INTEGER PRIMARY KEY",
-        "TEXT NOT NULL UNIQUE"
+        "TEXT NOT NULL UNIQUE",
+        "TEXT"
       ]
     },
     {

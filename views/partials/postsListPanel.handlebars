@@ -41,7 +41,9 @@
         {{/each}}
     </ul>
 
-    {{#if categoryChosen}}
+    {{#if user}}
         {{>newPost}}
+    {{else}}
+        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}
 </div>

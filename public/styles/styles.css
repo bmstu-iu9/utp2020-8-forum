@@ -11,12 +11,13 @@ li {
 }
 
 
-#headerLogo {
+.headerLogo {
     float: left;
 }
 
-#headerUser {
+.headerUser {
     float: right;
+    margin-right: 15px;
 }
 
 .ulPosts {
@@ -219,7 +220,6 @@ li {
 
 }
 
-
 .newAnswer {
     display: flex;
     flex-direction: row;
@@ -295,4 +295,28 @@ li {
 
     right: 0;
     bottom: 0;
+}
+
+.window {
+    background: rgba(87, 78, 63, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.windowContent {
+    max-width: 15%;
+    max-height: 25%;
+    text-align: center;
+    padding: 1% 1% 1% 1%;
+    border-radius: 1vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
 }

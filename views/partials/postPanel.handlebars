@@ -19,6 +19,10 @@
             </li>
         {{/each}}
     </ul>
+    {{#if user}}
+        {{>newAnswer}}
+    {{else}}
+        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы ответить</p>
+    {{/if}}
 
-    {{>newAnswer}}
 </div>

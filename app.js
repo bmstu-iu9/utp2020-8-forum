@@ -2,101 +2,54 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const hbshelpers = require('handlebars-helpers');
 const multihelpers = hbshelpers();
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
+const passport = require('passport');
+
 const logger = require('./modules/logger');
-const dbManager = require('./modules/db');
 const path = require('path');
+const flash = require('connect-flash');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(logger);
-app.use('/static', express.static(path.join(__dirname, '/public')))
-app.use(express.json())
+app.use(logger); // Показывает в консоли запросы к серверу и время запроса
+app.use('/static', express.static(path.join(__dirname, '/public')));
+app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.engine('handlebars', hbs({
-    helpers: multihelpers
-}));
+app.use(flash());
+app.use(
+    session({
+        secret: 'thatisasecret',
+        store: new FileStore(),
+        cookie: {
+            path: '/',
+            httpOnly: true,
+            maxAge: 60 * 60 * 1000,
+        },
+        resave: false,
+        saveUninitialized: false,
+    })
+);
+require('./modules/passport-config.js');
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+let categoryRoutes = require('./routes/category')
+let postRoutes = require('./routes/post')
+let authRoutes = require('./routes/auth')
+app.use('/category', categoryRoutes);
+app.use('/post', postRoutes);
+app.use('/', authRoutes);
+
+app.engine('handlebars', hbs());
 app.set('view engine', 'handlebars');
 
-const db = dbManager.init();
-
-const sortPosts = (posts, sortTag) => {
-    switch (sortTag) {
-        case 'byTimeAsc':
-            return posts = posts.reverse();
-        case 'byReplies':
-            return posts.sort((a, b) => b.reply_count - a.reply_count);
-        case 'byRepliesAsc':
-            return posts.sort((a, b) => a.reply_count - b.reply_count);
-        default:
-            return posts;
-    }
-}
 
 app.get('/', function (req, res) {
-    let categories = dbManager.getCategories(db);
-    let posts = dbManager.getAllPosts(db);
-    let sortTag = req.query.sortTag;
-    posts = sortPosts(posts, sortTag);
-    res.render('home', {
-        layout: 'postsListViewLayout',
-        posts: posts,
-        categories: categories,
-        postsListTitle: "Все посты",
-        categoryChosen: false,
-        sortTag: sortTag
-    });
+    res.redirect('/category/all')
 });
-
-app.get('/category/:categoryId(\\d+)', function (req, res) {
-    let categories = dbManager.getCategories(db);
-    let categoryId = req.params.categoryId;
-    let sortTag = req.query.sortTag;
-    if (categories.length >= categoryId) {
-        let posts = dbManager.getPostsByCategory(db, categoryId).reverse()
-        posts = sortPosts(posts, sortTag);
-        res.render('home', {
-            layout: 'postsListViewLayout',
-            posts: posts,
-            categories: categories,
-            postsListTitle: categories[categoryId - 1].name,
-            postFail: req.query.postFail,
-            categoryChosen: true,
-            sortTag: sortTag
-        });
-    } else
-        res.status(404).send('Нет такой категории')
-})
-
-app.get('/post/:postId(\\d+)', function (req, res) {
-    let postId = req.params.postId;
-    let post = dbManager.getPost(db, postId)
-    if (post) {
-        let categories = dbManager.getCategories(db);
-
-        let replies = dbManager.getReplies(db, postId)
-        res.render('home', {layout: 'postViewLayout', categories: categories, post: post, replies: replies});
-    } else res.status(404).send('Нет такого поста')
-
-})
-
-app.post('/category/:categoryId(\\d+)', function (req, res) {
-    let categoryId = req.params.categoryId;
-    let categories = dbManager.getCategories(db);
-    if (categories.length >= categoryId) {
-        let postSuccess = dbManager.addPost(db, 1, req.body.myPost, categoryId);
-        if (postSuccess)
-            res.redirect(`/category/${categoryId}`)
-        else res.redirect(`/category/${categoryId}?postFail=true`)
-
-    } else res.redirect(`/category/${categoryId}?postFail=true`)
-})
-
-app.post('/post/:postId(\\d+)', function (req, res) {
-    let id = req.params.postId;
-    dbManager.addReply(db, 1, req.body.myAnswer, id);
-    res.redirect(`/post/${id}`)
-})
 
 
 app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
