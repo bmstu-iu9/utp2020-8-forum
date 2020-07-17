@@ -1,13 +1,55 @@
-<div id="makeDark" xmlns="http://www.w3.org/1999/html">
-    <div id="SignUpWindow" class="colorMain">
+<div id="window" class="window">
+    <form class="windowContent colorMain" method="post" action="/signup">
         <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
-        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login"><br>
-        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Password">
-        <a href="#" type="button" class="close colorDarkLink colorBackground">Sign up</a>
-    </div>
+        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
+        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Enter password" name="psw" required>
+        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Confirm password" name="pswConf"
+               required>
+        <button type="submit" class="close colorDarkLink colorBackground">Sign up</button>
+        <div id="signUpError" class="colorTextLight"></div>
+    </form>
+</div>
+
+<div id="entry" class="window">
+    <form class="windowContent colorMain" method="post" action="/login">
+        <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
+        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
+        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Enter password" name="psw" required>
+        <button type="submit" class="close colorDarkLink colorBackground">Log in</button>
+        <div id="logInError" class="colorTextLight"></div>
+    </form>
 </div>
 
 <header id="topBar" class="colorHeader">
-    <a id="headerLogo" class="link colorDarkLink colorTextLight" href="/">IU9-Forum</a>
-    <a id="headerUser" class=" link colorDarkLink colorTextLight" href="#makeDark">Sign Up</a>
+    <a class="headerLogo headerText link colorDarkLink colorTextLight" href="/">IU9-Forum</a>
+
+    {{#if user}}
+        <a href="/logout" class="headerUser link colorDarkLink colorTextLight">logout</a>
+        <a class="headerUser link colorDarkLink colorTextLight">{{user.username}}</a>
+    {{else}}
+        <a id="signUp" class="headerUser link colorDarkLink colorTextLight"
+           onclick="document.getElementById('window').style.display='block'">Sign Up</a>
+        <a id="logIn" class="headerUser link colorDarkLink colorTextLight"
+           onclick="document.getElementById('entry').style.display='block'">Log In</a>
+    {{/if}}
+
+    <script>
+            {{#if message}}
+            if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
+                document.getElementById('signUp').click();
+                document.getElementById('signUpError').innerHTML = '{{message}}';
+            } else {
+                document.getElementById('logIn').click();
+                document.getElementById('logInError').innerHTML = '{{message}}';
+            }
+            {{/if}}
+        let box1 = document.getElementById('window'), box2 = document.getElementById('entry');
+        window.onclick = function (event) {
+            if (event.target == box1) {
+                box1.style.display = 'none';
+            } else if (event.target == box2) {
+                box2.style.display = 'none';
+            }
+        }
+    </script>
 </header>

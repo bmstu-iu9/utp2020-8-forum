@@ -6,5 +6,7 @@
   "getCategories": "SELECT * FROM categories",
   "checkPostExists": "SELECT * FROM posts WHERE trim(title)=? AND trim(category_id)=?",
   "addPost": "INSERT INTO posts (author_id, title, category_id) VALUES (?, ?, ?)",
-  "addReply": "INSERT INTO replies (author_id, text, post_id) VALUES (?, ?, ?)"
+  "addReply": "INSERT INTO replies (author_id, text, post_id) VALUES (?, ?, ?)",
+  "findUser": "SELECT * FROM users WHERE trim(username) = ?",
+  "createUser": "INSERT INTO users (username, password) VALUES (?,?)"
 }
