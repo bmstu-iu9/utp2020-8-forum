@@ -33,7 +33,8 @@ router.get('/all', function (req, res) {
         postsListTitle: "Все посты",
         categoryChosen: false,
         sortTag: sortTag,
-        user: req.user
+        user: req.user,
+        message: req.flash('error')
     });
 });
 

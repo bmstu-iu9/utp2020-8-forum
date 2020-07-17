@@ -22,7 +22,6 @@ router.post('/signup', (req, res) => {
     } else {
         req.flash('error', 'Passwords do not match');
         res.redirect('/');
-        console.log('Passwords do not match');
     }
 });
 
