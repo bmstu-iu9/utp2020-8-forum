@@ -1,5 +1,7 @@
 const express = require('express');
-const exphbs = require('express-handlebars');
+const hbs = require('express-handlebars');
+const hbshelpers = require('handlebars-helpers');
+const multihelpers = hbshelpers();
 const logger = require('./modules/logger');
 const dbManager = require('./modules/db');
 const path = require('path');
@@ -10,23 +12,39 @@ app.use(logger);
 app.use('/static', express.static(path.join(__dirname, '/public')))
 app.use(express.json())
 app.use(express.urlencoded({extended: false}));
-app.engine('handlebars', exphbs());
+app.engine('handlebars', hbs({
+    helpers: multihelpers
+}));
+
 app.set('view engine', 'handlebars');
 
 const db = dbManager.init();
+
+const sortPosts = (posts, sortTag) => {
+    switch (sortTag) {
+        case 'byTimeAsc':
+            return posts = posts.reverse();
+        case 'byReplies':
+            return posts.sort((a, b) => b.reply_count - a.reply_count);
+        case 'byRepliesAsc':
+            return posts.sort((a, b) => a.reply_count - b.reply_count);
+        default:
+            return posts;
+    }
+}
 
 app.get('/', function (req, res) {
     let categories = dbManager.getCategories(db);
     let posts = dbManager.getAllPosts(db);
     let sortTag = req.query.sortTag;
-    if (sortTag === 'byReplies')
-        posts.sort((a, b) => b.reply_count - a.reply_count)
+    posts = sortPosts(posts, sortTag);
     res.render('home', {
         layout: 'postsListViewLayout',
         posts: posts,
         categories: categories,
         postsListTitle: "Все посты",
         categoryChosen: false,
+        sortTag: sortTag
     });
 });
 
@@ -36,15 +54,15 @@ app.get('/category/:categoryId(\\d+)', function (req, res) {
     let sortTag = req.query.sortTag;
     if (categories.length >= categoryId) {
         let posts = dbManager.getPostsByCategory(db, categoryId).reverse()
-        if (sortTag === 'byReplies')
-            posts.sort((a, b) => b.reply_count - a.reply_count)
+        posts = sortPosts(posts, sortTag);
         res.render('home', {
             layout: 'postsListViewLayout',
             posts: posts,
             categories: categories,
             postsListTitle: categories[categoryId - 1].name,
             postFail: req.query.postFail,
-            categoryChosen: true
+            categoryChosen: true,
+            sortTag: sortTag
         });
     } else
         res.status(404).send('Нет такой категории')

@@ -2,8 +2,24 @@
 <div class="selectedTheme colorMain">
     <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
     <div class="colorTextLight">
-        <span><a href="?sortTag=byTime" class="sortLink">По времени</a></span>
-        <span><a href="?sortTag=byReplies" class="sortLink">По ответам</a></span>
+        <span><a
+            {{#is sortTag 'byTime' }}
+            href="?sortTag=byTimeAsc"
+            {{else}}
+                {{#if sortTag }}
+            href="?sortTag=byTime"
+                {{else}}
+            href="?sortTag=byTimeAsc"
+                {{/if}}
+            {{/is}}
+            class="sortLink">По времени</a></span>
+        <span><a
+            {{#is sortTag 'byReplies' }}
+            href="?sortTag=byRepliesAsc"
+            {{else}}
+            href="?sortTag=byReplies"
+            {{/is}}
+            class="sortLink">По ответам</a></span>
         <span>По последнему овтету</span></div>
 
     <ul id="ulPosts">
