@@ -184,7 +184,7 @@ li {
 
 .vote {
     display: block;
-    width: 30%;
+    width: 100px;
     margin: 0 auto;
 }
 
@@ -272,6 +272,29 @@ li {
 
 #makeDark:target {
     display: block;
+}
+
+.sortLink:visited {
+    color: white;
+}
+
+.sortLink:hover {
+    color: #E1A487;
+}
+
+.sortLink {
+    text-decoration: none;
+}
+
+#message {
+    position: absolute;
+    width: 500px;
+    line-height: 100px;
+    background: hotpink;
+    text-align: center;
+
+    right: 0;
+    bottom: 0;
 }
 
 .window {

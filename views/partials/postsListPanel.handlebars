@@ -1,6 +1,33 @@
 <!--href="/post/{{this.id}}"-->
 <div class="selectedTheme colorMain">
     <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
+    <div class="colorTextLight">
+        <span><a
+            {{#is sortTag 'byTime' }}
+            href="?sortTag=byTimeAsc"
+            {{else}}
+                {{#if sortTag }}
+            href="?sortTag=byTime"
+                {{else}}
+            href="?sortTag=byTimeAsc"
+                {{/if}}
+            {{/is}}
+            class="sortLink">По времени</a></span>
+        <span><a
+            {{#is sortTag 'byReplies' }}
+            href="?sortTag=byRepliesAsc"
+            {{else}}
+            href="?sortTag=byReplies"
+            {{/is}}
+            class="sortLink">По ответам</a></span>
+        <span><a
+            {{#is sortTag 'byLastReply' }}
+            href="?sortTag=byLastReplyAsc"
+            {{else}}
+            href="?sortTag=byLastReply"
+            {{/is}}
+            class="sortLink">По последнему ответу</a></span></div>
+
     <ul id="ulPosts">
         {{#each posts}}
             <li class="answer colorSection">
@@ -14,13 +41,16 @@
                     <a href="/post/{{this.id}}"><input type="image"
                                                        class="replyImage vote colorDarkLink myButton colorSection"
                                                        src="/static/images/reply.png" alt="#"/></a>
-                    <div class="voteCounter colorMain colorTextLight">+3</div>
+                    <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
                 </div>
             </li>
         {{/each}}
     </ul>
+
     {{#if user}}
-        {{>newAnswer}}
+        {{#if categoryChosen}}
+            {{>newPost}}
+        {{/if}}
     {{else}}
         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}

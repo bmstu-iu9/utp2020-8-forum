@@ -13,7 +13,7 @@
       "tags": [
         "INTEGER PRIMARY KEY",
         "INTEGER",
-        "TEXT",
+        "TEXT DEFAULT \"NO TITLE\" NOT NULL",
         "INTEGER",
         "REFERENCES users(id)",
         "REFERENCES categories(id)"

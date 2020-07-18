@@ -21,6 +21,12 @@
 </div>
 
 <header id="topBar" class="colorHeader">
+
+    {{#if postFail}}
+        <div id="message">
+            <p>Не удалось создать пост</p>
+        </div>
+    {{/if}}
     <a class="headerLogo headerText link colorDarkLink colorTextLight" href="/">IU9-Forum</a>
 
     {{#if user}}
