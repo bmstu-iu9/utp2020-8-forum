@@ -20,7 +20,9 @@
   "devDependencies": {},
   "scripts": {
     "start": "node app.js",
-    "serve": "nodemon app.js"
+    "serve": "nodemon --ignore sessions app.js",
+    "migrate": "node -e \"require('./modules/db.js').migrate()\""
+
   },
   "repository": {
     "type": "git",
