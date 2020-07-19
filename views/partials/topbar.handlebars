@@ -31,7 +31,8 @@
 
     {{#if user}}
         <div id="profileTopBar" class="headerUser">
-            <a class="link colorDarkLink colorTextLight"  id="showMenu" onclick="showProfileOptionsList()">{{user.username}}</a>
+            <a class="link colorDarkLink colorTextLight" id="showMenu"
+               onclick="showProfileOptionsList()">{{user.username}}</a>
             {{>profileOptionsList}}
         </div>
     {{else}}

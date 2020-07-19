@@ -1,6 +1,27 @@
 {
   "models": [
     {
+      "tablename": "replies",
+      "columns": [
+        "id",
+        "author_id",
+        "post_id",
+        "text",
+        "rating",
+        "FOREIGN KEY(author_id)",
+        "FOREIGN KEY(post_id)"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "INTEGER",
+        "INTEGER",
+        "TEXT NOT NULL",
+        "INTEGER",
+        "REFERENCES users(id)",
+        "REFERENCES posts(id)"
+      ]
+    },
+    {
       "tablename": "posts",
       "columns": [
         "id",
@@ -30,25 +51,6 @@
         "INTEGER PRIMARY KEY",
         "TEXT NOT NULL UNIQUE",
         "TEXT"
-      ]
-    },
-    {
-      "tablename": "replies",
-      "columns": [
-        "id",
-        "author_id",
-        "post_id",
-        "text",
-        "FOREIGN KEY(author_id)",
-        "FOREIGN KEY(post_id)"
-      ],
-      "tags": [
-        "INTEGER PRIMARY KEY",
-        "INTEGER",
-        "INTEGER",
-        "TEXT NOT NULL",
-        "REFERENCES users(id)",
-        "REFERENCES posts(id)"
       ]
     },
     {
