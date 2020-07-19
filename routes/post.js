@@ -26,4 +26,6 @@ router.post('/:postId(\\d+)', function (req, res) {
     dbManager.addReply(db, req.user.id, req.body.myAnswer, id);
     res.redirect(`/post/${id}`)
 })
+
+
 module.exports = router;

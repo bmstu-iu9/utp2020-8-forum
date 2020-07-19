@@ -51,8 +51,10 @@ const getPostsByCategory = (db, categoryId) => {
 }
 
 const getPost = (db, postId) => {
-
     return db.prepare(SQLrequests.getPost.replace("{id}", postId)).get();
+}
+const getReply = (db, replyId) => {
+    return db.prepare(SQLrequests.getReply.replace("{id}", replyId)).get();
 }
 
 const getReplies = (db, postId) => {
@@ -80,6 +82,19 @@ const addReply = (db, author_id, reply, post_id) => {
     db.prepare(SQLrequests.addReply).run(author_id, reply, post_id);
 }
 
+
+const addVoteEntry = (db, user_id, reply_id, amount) => {
+    db.prepare(SQLrequests.addVoteEntry).run(user_id, reply_id, amount)
+}
+const inverseVoteAmount = (db, id) => {
+    db.prepare(SQLrequests.inverseVoteAmount).run(id);
+}
+
+
+const checkUserVoted = (db, user_id, reply_id) => {
+    return db.prepare(SQLrequests.checkUserVoted).get(user_id, reply_id)
+}
+
 const findUser = (data, login) => {
     return data.prepare(SQLrequests.findUser).get(login);
 }
@@ -96,13 +111,14 @@ exports.createUser = (data, login, psswrd) => {
 
 
 const getRepliesCount = (db) => {
-    return db.prepare(SQLrequests.getRepliesCount).all();
+    return db.prepare(SQLrequests.getReplyCount).all();
 }
 
 exports.init = init;
 exports.migrate = migrate;
 exports.getAllPosts = getAllPosts;
 exports.getPost = getPost;
+exports.getReply = getReply;
 exports.getReplies = getReplies;
 exports.getLastReply = getLastReply;
 exports.getPostsByCategory = getPostsByCategory;
@@ -112,3 +128,6 @@ exports.checkPostExists = checkPostExists;
 exports.addReply = addReply;
 exports.getRepliesCount = getRepliesCount;
 exports.findUser = findUser;
+exports.checkUserVoted = checkUserVoted;
+exports.addVoteEntry = addVoteEntry;
+exports.inverseVoteAmount = inverseVoteAmount;

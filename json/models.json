@@ -7,7 +7,6 @@
         "author_id",
         "post_id",
         "text",
-        "rating",
         "FOREIGN KEY(author_id)",
         "FOREIGN KEY(post_id)"
       ],
@@ -16,9 +15,27 @@
         "INTEGER",
         "INTEGER",
         "TEXT NOT NULL",
-        "INTEGER",
         "REFERENCES users(id)",
         "REFERENCES posts(id)"
+      ]
+    },
+    {
+      "tablename": "votes",
+      "columns": [
+        "id",
+        "user_id",
+        "reply_id",
+        "amount",
+        "FOREIGN KEY(user_id)",
+        "FOREIGN KEY(reply_id)"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "INTEGER",
+        "INTEGER",
+        "INTEGER",
+        "REFERENCES users(id)",
+        "REFERENCES replies(id)"
       ]
     },
     {

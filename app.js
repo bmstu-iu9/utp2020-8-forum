@@ -1,22 +1,22 @@
-const express = require('express');
-const hbs = require('express-handlebars');
-const hbshelpers = require('handlebars-helpers');
-const multihelpers = hbshelpers();
-const session = require('express-session');
-const FileStore = require('session-file-store')(session);
-const passport = require('passport');
+const express = require('express')
+const hbs = require('express-handlebars')
+const hbshelpers = require('handlebars-helpers')
+const multihelpers = hbshelpers()
+const session = require('express-session')
+const FileStore = require('session-file-store')(session)
+const passport = require('passport')
 
-const logger = require('./modules/logger');
-const path = require('path');
-const flash = require('connect-flash');
-const app = express();
-const PORT = process.env.PORT || 8080;
+const logger = require('./modules/logger')
+const path = require('path')
+const flash = require('connect-flash')
+const app = express()
+const PORT = process.env.PORT || 8080
 
 app.use(logger); // Показывает в консоли запросы к серверу и время запроса
-app.use('/static', express.static(path.join(__dirname, '/public')));
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(flash());
+app.use('/static', express.static(path.join(__dirname, '/public')))
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+app.use(flash())
 app.use(
     session({
         secret: 'thatisasecret',
@@ -32,19 +32,21 @@ app.use(
 );
 require('./modules/passport-config.js');
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 let categoryRoutes = require('./routes/category')
 let postRoutes = require('./routes/post')
 let authRoutes = require('./routes/auth')
-app.use('/category', categoryRoutes);
-app.use('/post', postRoutes);
-app.use('/', authRoutes);
+let replyRoutes = require('./routes/reply')
+app.use('/category', categoryRoutes)
+app.use('/post', postRoutes)
+app.use('/', authRoutes)
+app.use('/', replyRoutes)
 
-app.engine('handlebars', hbs());
-app.set('view engine', 'handlebars');
+app.engine('handlebars', hbs())
+app.set('view engine', 'handlebars')
 
 
 app.get('/', function (req, res) {
@@ -52,4 +54,4 @@ app.get('/', function (req, res) {
 });
 
 
-app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`))
