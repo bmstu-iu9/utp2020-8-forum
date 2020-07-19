@@ -30,8 +30,10 @@
     <a class="headerLogo headerText link colorDarkLink colorTextLight" href="/">IU9-Forum</a>
 
     {{#if user}}
-        <a href="/logout" class="headerUser link colorDarkLink colorTextLight">logout</a>
-        <a class="headerUser link colorDarkLink colorTextLight">{{user.username}}</a>
+        <div id="profileTopBar" class="headerUser">
+            <a class="link colorDarkLink colorTextLight"  id="showMenu" onclick="showProfileOptionsList()">{{user.username}}</a>
+            {{>profileOptionsList}}
+        </div>
     {{else}}
         <a id="signUp" class="headerUser link colorDarkLink colorTextLight"
            onclick="document.getElementById('window').style.display='block'">Sign Up</a>
@@ -57,5 +59,15 @@
                 box2.style.display = 'none';
             }
         }
+        const list = document.getElementById('profileOptionsList');
+
+        const showProfileOptionsList = function () {
+            list.classList.toggle('hidden');
+        };
+        document.addEventListener("click", function (e) {
+            if (e.target.closest("#showMenu"))
+                return
+            list.classList.add('hidden');
+        });
     </script>
 </header>
