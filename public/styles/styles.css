@@ -69,6 +69,7 @@ li {
 .colorTextDanger {
     color: darkred !important;
 }
+
 .colorTextDark {
     color: #333333;
 }
@@ -323,9 +324,11 @@ li {
     left: 0;
     margin: auto;
 }
+
 #profileTopBar {
     position: relative;
 }
+
 #profileOptionsList {
     display: block;
     position: absolute;
@@ -350,18 +353,19 @@ li {
     transition: .2s;
     transition-property: background-color, color;
 }
+
 #profileOptionsList > li {
     font-size: 1rem;
     line-height: 2;
-
 
 
 }
 
 #profileOptionsList a:hover {
     background-color: dodgerblue;
-    color:white !important;
+    color: white !important;
 }
+
 #profileOptionsList a:active {
     background-color: lightcoral;
 }
