@@ -41,7 +41,6 @@ const getAllPosts = (db) => {
     return posts;
 }
 const getPostsByCategory = (db, categoryId) => {
-
     let posts = db.prepare(SQLrequests.getPostsByCategory).all(categoryId);
     posts.forEach(p => {
         let lastReply = getLastReply(db, p.id);
@@ -114,6 +113,10 @@ const getRepliesCount = (db) => {
     return db.prepare(SQLrequests.getReplyCount).all();
 }
 
+const deleteUser = (db, user_id) => {
+    db.prepare(SQLrequests.deleteUser).run(user_id)
+}
+
 exports.init = init;
 exports.migrate = migrate;
 exports.getAllPosts = getAllPosts;
@@ -131,3 +134,4 @@ exports.findUser = findUser;
 exports.checkUserVoted = checkUserVoted;
 exports.addVoteEntry = addVoteEntry;
 exports.inverseVoteAmount = inverseVoteAmount;
+exports.deleteUser = deleteUser;

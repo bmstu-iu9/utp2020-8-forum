@@ -41,7 +41,14 @@ router.get('/status', (req, res) => {
         res.send('you are logged in');
     else
         res.send('you are not log in');
-
 });
+
+
+router.get('/deleteProfile', (req, res) => {
+    let id = req.user.id;
+    req.logout()
+    dbManager.deleteUser(db, id)
+    res.redirect('/')
+})
 
 module.exports = router;
