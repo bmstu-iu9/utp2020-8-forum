@@ -42,7 +42,7 @@ const getAllPosts = (db) => {
 }
 const getPostsByCategory = (db, categoryId) => {
 
-    let posts = db.prepare(SQLrequests.getPostsByCategory.replace("{id}", categoryId)).all();
+    let posts = db.prepare(SQLrequests.getPostsByCategory).all(categoryId);
     posts.forEach(p => {
         let lastReply = getLastReply(db, p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
