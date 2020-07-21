@@ -1,17 +1,16 @@
 const Database = require('better-sqlite3')
 const modelsJSON = require('../json/models.json')
 const SQLrequests = require('../json/SQLrequests.json')
-
 const models = modelsJSON.models;
 
-const init = () => {
-    return new Database('app.db');
-}
+const init = new Database('app.db');
+
+const db = init;
+
 
 /*Использует файл models.json для генерации базы данных с таблицами, соответсвующими описанным моделям.
 * При выполнении БД форматируется*/
 const migrate = () => {
-    let db = new Database('app.db');
     for (let i = 0; i < models.length; ++i) {
         let req = 'DROP TABLE IF EXISTS ' + models[i].tablename;
         db.prepare(req).run();
@@ -28,93 +27,96 @@ const migrate = () => {
     }
 }
 
-const getCategories = (db) => {
-    return db.prepare(SQLrequests.getCategories).all();
+
+const query = (queryName) => {
+    return db.prepare(SQLrequests[queryName].join(""));
+
 }
 
-const getAllPosts = (db) => {
-    let posts = db.prepare(SQLrequests.getAllPosts).all();
+const getCategories = () => {
+    return query("getCategories").all();
+}
+
+const getAllPosts = () => {
+    let posts = query("getAllPosts").all();
     posts.forEach(p => {
-        let lastReply = getLastReply(db, p.id);
+        let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
     })
     return posts;
 }
-const getPostsByCategory = (db, categoryId) => {
-    let posts = db.prepare(SQLrequests.getPostsByCategory).all(categoryId);
+const getPostsByCategory = (categoryId) => {
+    let posts = query("getPostsByCategory").all(categoryId);
     posts.forEach(p => {
-        let lastReply = getLastReply(db, p.id);
+        let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
     })
     return posts;
 }
 
-const getPost = (db, postId) => {
-    return db.prepare(SQLrequests.getPost.replace("{id}", postId)).get();
+const getPost = (postId) => {
+    return query("getPost").get(postId);
 }
-const getReply = (db, replyId) => {
-    return db.prepare(SQLrequests.getReply.replace("{id}", replyId)).get();
-}
-
-const getReplies = (db, postId) => {
-    return db.prepare(SQLrequests.getReplies.replace("{id}", postId)).all();
+const getReply = (replyId) => {
+    return query("getReply").get(replyId);
 }
 
-const getLastReply = (db, postId) => {
-    return db.prepare(SQLrequests.getLastReply.replace("{id}", postId)).get();
+const getReplies = (postId) => {
+    return query("getReplies").all(postId);
 }
 
-const checkPostExists = (db, title, category_id) => {
-    let post = db.prepare(SQLrequests.checkPostExists).get(title, category_id);
-    return post !== undefined
+const getLastReply = (postId) => {
+    return query("getLastReply").get(postId);
 }
 
-const addNewPost = (db, author_id, title, category_id) => {
-    if (!checkPostExists(db, title, category_id)) {
-        db.prepare(SQLrequests.addPost).run(author_id, title, category_id);
+const checkPostExists = (title, category_id) => {
+    return query("checkPostExists").get(title, category_id) !== undefined
+}
+
+const addNewPost = (author_id, title, category_id) => {
+    if (!checkPostExists(title, category_id)) {
+        query("addPost").run(author_id, title, category_id);
         return true
     }
     return false
 }
 
-const addReply = (db, author_id, reply, post_id) => {
-    db.prepare(SQLrequests.addReply).run(author_id, reply, post_id);
+const addReply = (author_id, reply, post_id) => {
+    query("addReply").run(author_id, reply, post_id);
 }
 
 
-const addVoteEntry = (db, user_id, reply_id, amount) => {
-    db.prepare(SQLrequests.addVoteEntry).run(user_id, reply_id, amount)
+const addVoteEntry = (user_id, reply_id, amount) => {
+    query("addVoteEntry").run(user_id, reply_id, amount)
 }
-const inverseVoteAmount = (db, id) => {
-    db.prepare(SQLrequests.inverseVoteAmount).run(id);
-}
-
-
-const checkUserVoted = (db, user_id, reply_id) => {
-    return db.prepare(SQLrequests.checkUserVoted).get(user_id, reply_id)
-}
-
-const findUser = (data, login) => {
-    return data.prepare(SQLrequests.findUser).get(login);
-}
-
-exports.checkUserExists = (data, login) => {
-    let usr = findUser(data, login);
-    return usr !== undefined;
+const inverseVoteAmount = (id) => {
+    query("inverseVoteAmount").run(id);
 }
 
 
-exports.createUser = (data, login, psswrd) => {
-    data.prepare(SQLrequests.createUser).run(login, psswrd);
+const checkUserVoted = (user_id, reply_id) => {
+    return query("checkUserVoted").get(user_id, reply_id)
+}
+
+const findUser = (login) => {
+    return query("findUser").get(login);
+}
+
+exports.checkUserExists = (login) => {
+    return findUser(login) !== undefined;
 }
 
 
-const getRepliesCount = (db) => {
-    return db.prepare(SQLrequests.getReplyCount).all();
+exports.createUser = (login, psswrd) => {
+    query("createUser").run(login, psswrd);
 }
 
-const deleteUser = (db, user_id) => {
-    db.prepare(SQLrequests.deleteUser).run(user_id)
+
+const getRepliesCount = query("getReplyCount").all();
+
+
+const deleteUser = (user_id) => {
+    query("deleteUser").run(user_id)
 }
 
 exports.init = init;
