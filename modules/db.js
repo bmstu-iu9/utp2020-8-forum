@@ -2,11 +2,8 @@ const Database = require('better-sqlite3')
 const modelsJSON = require('../json/models.json')
 const SQLrequests = require('../json/SQLrequests.json')
 const models = modelsJSON.models;
-
-const init = new Database('app.db');
-
-const db = init;
-
+const init = () => new Database('app.db');
+const db = init();
 
 /*Использует файл models.json для генерации базы данных с таблицами, соответсвующими описанным моделям.
 * При выполнении БД форматируется*/
@@ -27,15 +24,9 @@ const migrate = () => {
     }
 }
 
+const query = queryName => db.prepare(SQLrequests[queryName].join(""))
 
-const query = (queryName) => {
-    return db.prepare(SQLrequests[queryName].join(""));
-
-}
-
-const getCategories = () => {
-    return query("getCategories").all();
-}
+const getCategories = () => query("getCategories").all();
 
 const getAllPosts = () => {
     let posts = query("getAllPosts").all();
@@ -45,7 +36,7 @@ const getAllPosts = () => {
     })
     return posts;
 }
-const getPostsByCategory = (categoryId) => {
+const getPostsByCategory = categoryId => {
     let posts = query("getPostsByCategory").all(categoryId);
     posts.forEach(p => {
         let lastReply = getLastReply(p.id);
@@ -54,72 +45,41 @@ const getPostsByCategory = (categoryId) => {
     return posts;
 }
 
-const getPost = (postId) => {
-    return query("getPost").get(postId);
-}
-const getReply = (replyId) => {
-    return query("getReply").get(replyId);
-}
+const getPost = postId => query("getPost").get(postId)
 
-const getReplies = (postId) => {
-    return query("getReplies").all(postId);
-}
+const getReply = replyId => query("getReply").get(replyId)
 
-const getLastReply = (postId) => {
-    return query("getLastReply").get(postId);
-}
+const getReplies = postId => query("getReplies").all(postId)
 
-const checkPostExists = (title, category_id) => {
-    return query("checkPostExists").get(title, category_id) !== undefined
-}
+const getLastReply = postId => query("getLastReply").get(postId);
+
+const checkPostExists = (title, category_id) => query("checkPostExists").get(title, category_id) !== undefined
 
 const addNewPost = (author_id, title, category_id) => {
-    if (!checkPostExists(title, category_id)) {
-        query("addPost").run(author_id, title, category_id);
-        return true
-    }
-    return false
+    if (checkPostExists(title, category_id))
+        return false
+    query("addPost").run(author_id, title, category_id);
+    return true
 }
 
-const addReply = (author_id, reply, post_id) => {
-    query("addReply").run(author_id, reply, post_id);
-}
+const addReply = (author_id, reply, post_id) => query("addReply").run(author_id, reply, post_id);
 
+const addVoteEntry = (user_id, reply_id, amount) => query("addVoteEntry").run(user_id, reply_id, amount)
 
-const addVoteEntry = (user_id, reply_id, amount) => {
-    query("addVoteEntry").run(user_id, reply_id, amount)
-}
-const inverseVoteAmount = (id) => {
-    query("inverseVoteAmount").run(id);
-}
+const inverseVoteAmount = id => query("inverseVoteAmount").run(id);
 
+const checkUserVoted = (user_id, reply_id) => query("checkUserVoted").get(user_id, reply_id)
 
-const checkUserVoted = (user_id, reply_id) => {
-    return query("checkUserVoted").get(user_id, reply_id)
-}
+const findUser = login => query("findUser").get(login);
 
-const findUser = (login) => {
-    return query("findUser").get(login);
-}
+const checkUserExists = login => findUser(login) !== undefined
 
-exports.checkUserExists = (login) => {
-    return findUser(login) !== undefined;
-}
+const createUser = (login, psswrd) => query("createUser").run(login, psswrd);
 
+const getRepliesCount = () => query("getReplyCount").all()
 
-exports.createUser = (login, psswrd) => {
-    query("createUser").run(login, psswrd);
-}
+const deleteUser = user_id => query("deleteUser").run(user_id)
 
-
-const getRepliesCount = query("getReplyCount").all();
-
-
-const deleteUser = (user_id) => {
-    query("deleteUser").run(user_id)
-}
-
-exports.init = init;
 exports.migrate = migrate;
 exports.getAllPosts = getAllPosts;
 exports.getPost = getPost;
@@ -137,3 +97,5 @@ exports.checkUserVoted = checkUserVoted;
 exports.addVoteEntry = addVoteEntry;
 exports.inverseVoteAmount = inverseVoteAmount;
 exports.deleteUser = deleteUser;
+exports.checkUserExists = checkUserExists;
+exports.createUser = createUser;
