@@ -5,11 +5,3 @@ exports.getHashedPassword = function (password) {
     const hash = sha256.update(password).digest('base64');
     return hash;
 }
-
-exports.checkAuth = (req, res, next) => {
-    if (!req.isAuthenticated()) {
-        next();
-    } else {
-        res.redirect('/');
-    }
-}

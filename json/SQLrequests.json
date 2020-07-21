@@ -6,7 +6,7 @@
   "getPost": "SELECT * FROM posts WHERE id={id}",
   "getReply": "SELECT * FROM replies WHERE id={id}",
   "getCategories": "SELECT * FROM categories",
-  "checkPostExists": "SELECT * FROM posts WHERE trim(title)=? AND trim(category_id)=?",
+  "checkPostExists": "SELECT * FROM posts WHERE trim(title)=? AND category_id=?",
   "addPost": "INSERT INTO posts (author_id, title, category_id) VALUES (?, ?, ?)",
   "addReply": "INSERT INTO replies (author_id, text, post_id) VALUES (?, ?, ?)",
   "addVoteEntry": "INSERT INTO votes (user_id, reply_id, amount) VALUES (?, ?, ?)",
@@ -14,6 +14,13 @@
   "checkUserVoted": "SELECT * FROM votes WHERE user_id=? AND reply_id=?",
   "getReplyCount": "SELECT post_id, COUNT(*) FROM replies GROUP BY post_id",
   "findUser": "SELECT * FROM users WHERE trim(username) = ?",
-  "createUser": "INSERT INTO users (username, password) VALUES (?,?)"
+  "createUser": "INSERT INTO users (username, password) VALUES (?,?)",
+  "checkCategoryExists": "SELECT * from categories WHERE trim(name) = ?",
+  "createCategory": "INSERT INTO categories (name) VALUES (?)",
+  "getPostsByUser": "SELECT posts.id,  posts.author_id, x.reply_count,  posts.title,  posts.category_id, users.username as author_name, categories.name as category_name FROM posts INNER JOIN users ON users.id=posts.author_id INNER JOIN categories on posts.category_id=categories.id LEFT JOIN (SELECT replies.post_id, COUNT(*) as reply_count FROM replies GROUP BY replies.post_id) x ON x.post_id=posts.id WHERE author_id=?",
+  "deletePost": "DELETE FROM posts WHERE id = ?",
+  "deleteRepliesToPost": "DELETE FROM replies WHERE post_id = ?",
+  "deleteVotesToReply": "DELETE FROM votes WHERE reply_id = ?",
+  "deleteCategory": "DELETE FROM categories WHERE id = ?",
+  "updatePost": "UPDATE posts SET title = ? WHERE id = ?"
 }
-

@@ -95,23 +95,65 @@ const checkUserVoted = (db, user_id, reply_id) => {
     return db.prepare(SQLrequests.checkUserVoted).get(user_id, reply_id)
 }
 
-const findUser = (data, login) => {
-    return data.prepare(SQLrequests.findUser).get(login);
+const findUser = (db, login) => {
+    return db.prepare(SQLrequests.findUser).get(login);
 }
 
-exports.checkUserExists = (data, login) => {
-    let usr = findUser(data, login);
+const checkUserExists = (db, login) => {
+    let usr = findUser(db, login);
     return usr !== undefined;
 }
 
 
-exports.createUser = (data, login, psswrd) => {
-    data.prepare(SQLrequests.createUser).run(login, psswrd);
+const createUser = (db, login, psswrd) => {
+    db.prepare(SQLrequests.createUser).run(login, psswrd);
 }
 
 
 const getRepliesCount = (db) => {
     return db.prepare(SQLrequests.getReplyCount).all();
+}
+
+const checkCategoryExists = (db, category) => {
+    return db.prepare(SQLrequests.checkCategoryExists).get(category);
+}
+
+const createCategory = (db, category) => {
+    db.prepare(SQLrequests.createCategory).run(category);
+}
+
+const getPostsByUser = (db, id) => {
+    let posts = db.prepare(SQLrequests.getPostsByUser).all(id);
+    posts.forEach(p => {
+        let lastReply = getLastReply(db, p.id);
+        p.last_reply = (lastReply ? lastReply : {"id": 0})
+    })
+    return posts;
+}
+
+const deleteVotesToReply = (db, replyId) => {
+    db.prepare(SQLrequests.deleteRepliesToPost).run(replyId);
+}
+
+const deleteRepliesToPost = (db, postId) => {
+    let replies = getReplies(db, postId);
+    for (let value of replies) {
+        deleteVotesToReply(db, value.id);
+    }
+    db.prepare(SQLrequests.deleteRepliesToPost).run(postId);
+}
+
+const deletePost = (db, postId) => {
+    deleteRepliesToPost(db, postId);
+    db.prepare(SQLrequests.deletePost).run(postId);
+}
+
+const deleteCategory = (db, categoryId) => {
+    db.prepare(SQLrequests.deleteCategory).run(categoryId);
+}
+
+const updatePost = (db, text, postId) => {
+    db.prepare(SQLrequests.updatePost).run(text, postId);
 }
 
 exports.init = init;
@@ -131,3 +173,13 @@ exports.findUser = findUser;
 exports.checkUserVoted = checkUserVoted;
 exports.addVoteEntry = addVoteEntry;
 exports.inverseVoteAmount = inverseVoteAmount;
+exports.checkCategoryExists = checkCategoryExists;
+exports.createCategory = createCategory;
+exports.checkUserExists = checkUserExists;
+exports.createUser = createUser;
+exports.getPostsByUser = getPostsByUser;
+exports.deleteVotesToReply = deleteVotesToReply;
+exports.deleteRepliesToPost = deleteRepliesToPost;
+exports.deletePost = deletePost;
+exports.deleteCategory = deleteCategory;
+exports.updatePost = updatePost;

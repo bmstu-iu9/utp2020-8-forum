@@ -36,12 +36,4 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-router.get('/status', (req, res) => {
-    if (req.isAuthenticated())
-        res.send('you are logged in');
-    else
-        res.send('you are not log in');
-
-});
-
 module.exports = router;
