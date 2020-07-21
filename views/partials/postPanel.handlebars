@@ -1,22 +1,41 @@
 <div class="selectedTheme colorMain">
-    <input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/back.png" height="60" style="float: left; margin-top: 4.4vh" onclick="history.back();">
-    <div class="themeText colorTextLight">{{post.title}}</div>
-    <ul style="max-height: 67%;">
+    <input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/back.png" height="40"
+           style="float: left; margin-top: 4.4vh" onclick="history.back();">
+    <h3 class="postTitle colorTextLight">{{post.title}}</h3>
+    <ul id="ulReplies" style="max-height: 67%;">
         {{#each replies}}
-        <li class="answer colorSection">
-            <div class="profile">
-                <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png" alt="No avatar" height="100" width="100">
-                <div class="link colorDarkLink" href="#">{{this.author_name}}</div>
-            </div>
-            <div class="answerText">{{this.text}}</div>
-            <div class="voteField">
-                <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
-                <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
-                <div class="voteCounter colorMain colorTextLight">156</div>
-            </div>
-        </li>
+            <li class="answer colorSection" id="reply_{{this.id}}">
+                <div class="profile">
+                    <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                         alt="No avatar" height="100" width="100">
+                    <div class="profileName link colorDarkLink" href="#">{{this.author_name}}</div>
+                </div>
+                <div class="answerText link ColorTextDark">{{this.text}}</div>
+
+                <div class="voteField">
+                    <form action="/vote/{{this.id}}/1" method="post">
+                        <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
+                    </form>
+                    <form action="/vote/{{this.id}}/-1" method="post">
+                        <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
+                    </form>
+                    <div class="voteCounter">{{#if this.rating }}
+                        {{#gt this.rating 0 }}
+                            <span style="color: darkgreen">{{this.rating}}</span>
+                        {{else}}
+                            <span style="color: darkred">{{this.rating}}</span>
+                        {{/gt}}
+                    {{else}}
+                        0
+                    {{/if}}</div>
+                </div>
+            </li>
         {{/each}}
     </ul>
+    {{#if user}}
+        {{>newAnswer}}
+    {{else}}
+        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы ответить</p>
+    {{/if}}
 
-    {{>newAnswer}}
 </div>

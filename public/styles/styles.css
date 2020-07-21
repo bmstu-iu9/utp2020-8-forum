@@ -1,20 +1,23 @@
 body {
     margin: 0 auto;
-    width: 80%;
-    height: 100vh;
+    width: 80vw;
+    max-height: 100vh;
     font-family: 'DM Sans', sans-serif;
     font-size: 14pt;
 }
 
 li {
-    margin-right: 1.5%;
     list-style-type: none; /* Убираем маркеры */
 }
 
-ul {
-    overflow-y: auto;
-    margin-bottom: 1%;
-    padding-left: 0.5%;
+
+.headerLogo {
+    float: left;
+}
+
+.headerUser {
+    float: right;
+    margin-right: 15px;
 }
 
 .ulPosts {
@@ -22,20 +25,28 @@ ul {
     min-height: 73%;
 }
 
+#ulReplies, #ulPosts {
+    overflow-y: auto;
+    max-height: 73%;
+    padding-left: 0;
+}
+
 .ulCategories {
-    max-height: 80%;
-    list-style-type: none;
+    max-height: 90%;
+    overflow-y: auto;
+    padding-left: 0;
+    padding-right: 20px;
 }
 
-.headerText:first-child {
-    float: left;
-    margin: 1% 0 0 2%;
+#topBar {
+    line-height: 100px;
+    height: 100px;
+    padding: 0 30px 0 30px;
+    background: #343338;
+    border-radius: 5px;
 }
 
-.headerText:last-child {
-    float: right;
-    margin: 1% 2% 0 0;
-}
+
 .replyImage {
     width: 90%;
     margin-left: 4%;
@@ -53,6 +64,10 @@ ul {
 .category {
     width: 84%;
     margin-bottom: 10%;
+}
+
+.colorTextDanger {
+    color: darkred !important;
 }
 
 .colorTextDark {
@@ -75,14 +90,16 @@ ul {
     background: #CBC9D0;
 }
 
+.colorDarkLink {
+    transition-property: background-color;
+    transition: .1s;
+}
+
 .colorDarkLink:hover {
-    background: #E1A487;
+    background-color: #E1A487;
     cursor: pointer;
 }
 
-.colorHeader {
-    background: #343338;
-}
 
 .myButton {
     margin-left: 1%;
@@ -111,14 +128,9 @@ ul {
 .container {
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 95%;
 }
 
-.header {
-    height: 7%;
-    font-family: 'Cinzel', sans-serif;
-    border-radius: 0 0 1vh 1vh;
-}
 
 .link {
     font-family: 'Cinzel', sans-serif;
@@ -127,23 +139,27 @@ ul {
 }
 
 
-.themes {
+#categories {
     width: 25%;
     height: 90%;
-    max-height: 90%;
-    padding: 0 1% 0.5% 1%;
+    padding: 0 1% 0 1%;
     margin: 1% 0 0 0;
     border-radius: 1vh;
 }
 
-.theme {
-    text-decoration: none;
-    margin-bottom: 1vh;
-    margin-left: 0.5vw;
-    padding: 2vh 1vw 2vh 1vw;
-    border-width: 2px;
+.category {
+    margin-bottom: 10px;
     border-radius: 1vh;
+    padding: 10px 10px 10px 30px;
+    line-height: 50px;
+    width: auto;
 }
+
+.category-link {
+    display: block;
+    font-size: 1.2rem;
+}
+
 
 .selectedTheme {
     width: 69%;
@@ -156,18 +172,26 @@ ul {
 
 .answer {
     display: flex;
-    width: 98%;
+    width: auto;
     margin-bottom: 1%;
     padding: 1% 1% 1% 1%;
     border-radius: 1vh;
+
 }
 
 .voteField {
-    margin-left: 2%;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
+    text-align: center;
+    justify-self: end;
+    align-self: end;
+
 }
+
+.vote {
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+}
+
 
 .answerText {
     width: 80%;
@@ -177,11 +201,10 @@ ul {
     overflow-y: auto;
 }
 
-.themeText {
-    margin-top: 1%;
-    max-width: 93%;
-    max-height: 15%;
-    min-height: 15%;
+.postTitle {
+    margin-top: 5%;
+    max-width: 80%;
+    max-height: 10%;
 
     padding-left: 1%;
     border-left-style: solid;
@@ -192,32 +215,20 @@ ul {
 }
 
 .profile {
-    margin: 0% 1% 1% 1%;
     display: flex;
     flex-direction: column;
 }
 
 .profileName {
-    margin: 0 auto;
-}
-
-.vote {
-    margin-right: 1%;
-    width: 100%;
-}
-
-.voteCounter {
-    margin: 15% 1% 1% 1%;
-    border-radius: 1vh;
-    padding: 5% 15% 5% 15%;
     text-align: center;
+
 }
 
 .newAnswer {
-    height: 14%;
-    padding: 0.2% 1% 1% 2%;
     display: flex;
     flex-direction: row;
+    position: relative;
+    bottom: 0;
 }
 
 #answerForm {
@@ -237,6 +248,7 @@ ul {
     display: inline-block;
     height: 60px;
 }
+
 
 #makeDark {
     background: rgba(87, 78, 63, 0.5);
@@ -264,4 +276,100 @@ ul {
 
 #makeDark:target {
     display: block;
+}
+
+.sortLink:visited {
+    color: white;
+}
+
+.sortLink:hover {
+    color: #E1A487;
+}
+
+.sortLink {
+    text-decoration: none;
+}
+
+#message {
+    position: absolute;
+    width: 500px;
+    line-height: 100px;
+    background: hotpink;
+    text-align: center;
+
+    right: 0;
+    bottom: 0;
+}
+
+.window {
+    background: rgba(87, 78, 63, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.windowContent {
+    max-width: 15%;
+    max-height: 25%;
+    text-align: center;
+    padding: 1% 1% 1% 1%;
+    border-radius: 1vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+#profileTopBar {
+    position: relative;
+}
+
+#profileOptionsList {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 200%;
+    padding: 10px 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+
+}
+
+#profileOptionsList a {
+    color: black;
+    text-decoration: none;
+    max-width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    display: block;
+    transition: .2s;
+    transition-property: background-color, color;
+}
+
+#profileOptionsList > li {
+    font-size: 1rem;
+    line-height: 2;
+
+
+}
+
+#profileOptionsList a:hover {
+    background-color: dodgerblue;
+    color: white !important;
+}
+
+#profileOptionsList a:active {
+    background-color: lightcoral;
+}
+
+.hidden {
+    display: none !important;
 }

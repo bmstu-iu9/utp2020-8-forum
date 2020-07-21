@@ -1,36 +1,6 @@
 {
   "models": [
     {
-      "tablename": "posts",
-      "columns": [
-        "id",
-        "author_id",
-        "title",
-        "category_id",
-        "FOREIGN KEY(author_id)",
-        "FOREIGN KEY(category_id)"
-      ],
-      "tags": [
-        "INTEGER PRIMARY KEY",
-        "INTEGER",
-        "TEXT",
-        "INTEGER",
-        "REFERENCES users(id)",
-        "REFERENCES categories(id)"
-      ]
-    },
-    {
-      "tablename": "users",
-      "columns": [
-        "id",
-        "username"
-      ],
-      "tags": [
-        "INTEGER PRIMARY KEY",
-        "TEXT NOT NULL UNIQUE"
-      ]
-    },
-    {
       "tablename": "replies",
       "columns": [
         "id",
@@ -47,6 +17,57 @@
         "TEXT NOT NULL",
         "REFERENCES users(id)",
         "REFERENCES posts(id)"
+      ]
+    },
+    {
+      "tablename": "votes",
+      "columns": [
+        "id",
+        "user_id",
+        "reply_id",
+        "amount",
+        "FOREIGN KEY(user_id)",
+        "FOREIGN KEY(reply_id)"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "INTEGER",
+        "INTEGER",
+        "INTEGER",
+        "REFERENCES users(id)",
+        "REFERENCES replies(id)"
+      ]
+    },
+    {
+      "tablename": "posts",
+      "columns": [
+        "id",
+        "author_id",
+        "title",
+        "category_id",
+        "FOREIGN KEY(author_id)",
+        "FOREIGN KEY(category_id)"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "INTEGER",
+        "TEXT DEFAULT \"NO TITLE\" NOT NULL",
+        "INTEGER",
+        "REFERENCES users(id)",
+        "REFERENCES categories(id)"
+      ]
+    },
+    {
+      "tablename": "users",
+      "columns": [
+        "id",
+        "username",
+        "password"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "TEXT NOT NULL UNIQUE",
+        "TEXT"
       ]
     },
     {

@@ -5,8 +5,14 @@
   "main": "app.js",
   "dependencies": {
     "better-sqlite3": "^7.1.0",
+    "connect-flash": "^0.1.1",
     "express": "^4.17.1",
     "express-handlebars": "^5.0.0",
+    "handlebars-helpers": "^0.10.0",
+    "express-session": "^1.17.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "session-file-store": "^1.4.0",
     "moment": "^2.27.0",
     "nodemon": "^2.0.4",
     "sqlite3": "^5.0.0"
@@ -14,7 +20,8 @@
   "devDependencies": {},
   "scripts": {
     "start": "node app.js",
-    "serve": "nodemon app.js"
+    "serve": "nodemon --ignore sessions app.js",
+    "migrate": "node -e \"require('./modules/db.js').migrate()\""
   },
   "repository": {
     "type": "git",
