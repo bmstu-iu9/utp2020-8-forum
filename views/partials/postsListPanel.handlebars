@@ -146,7 +146,7 @@
         });
     }
     const editPost = (id, category, text) => {
-        document.getElementById('postChange').style.display='block';
+        document.getElementById('postChange').style.display = 'block';
         document.getElementById('editPost').value = text;
         document.getElementById('sendEdition').onsubmit = async (e) => {
             e.preventDefault();
@@ -161,7 +161,7 @@
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 body: JSON.stringify(post)
-            }).then( (res) => {
+            }).then((res) => {
                 if (res.ok) {
                     location.reload();
                 } else {
