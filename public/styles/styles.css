@@ -425,3 +425,18 @@ a {
     left: 0;
     margin: auto;
 }
+
+.timeLast {
+    text-align: center;
+    font-size: 10pt;
+    max-width: 100%;
+    width: 100%;
+    color: #474747;
+}
+
+.textAndTime {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+}

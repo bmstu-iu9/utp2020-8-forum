@@ -46,6 +46,9 @@
                         <a class="profileName link colorDarkLink" onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
                         <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
                     </div>
+                    <div class="timeLast">
+                        10 minutes ago
+                    </div>
                     <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
                     <div class="voteField">
                         <a href="/post/{{this.id}}"><input type="image"
@@ -66,6 +69,9 @@
                                  alt="No avatar" height="100" width="100">
                             <div class="profileName link colorDarkLink">{{this.author_name}}</div>
                         </div>
+                        <div class="timeLast">
+                            10 minutes ago
+                        </div>
                         <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
                         <div class="voteField">
                             <a href="/post/{{this.id}}"><input type="image"
@@ -85,7 +91,12 @@
                                  alt="No avatar" height="100" width="100">
                             <div class="profileName link colorDarkLink">{{this.author_name}}</div>
                         </div>
-                        <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                        <div class="textAndTime">
+                            <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                            <div class="timeLast">
+                                10 minutes ago
+                            </div>
+                        </div>
                         <div class="voteField">
                             <a href="/post/{{this.id}}"><input type="image"
                                                                class="replyImage vote colorDarkLink myButton colorSection"
