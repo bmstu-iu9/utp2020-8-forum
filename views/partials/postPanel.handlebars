@@ -14,21 +14,23 @@
                 <div class="answerText link ColorTextDark">{{this.text}}</div>
 
                 <div class="voteField">
-                    <form action="/vote/{{this.id}}/1" method="post">
+                    <form action="/vote/{{this.id}}/1" method="post" style="width: 100%;">
                         <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
                     </form>
                     <form action="/vote/{{this.id}}/-1" method="post">
                         <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
                     </form>
-                    <div class="voteCounter">{{#if this.rating }}
-                        {{#gt this.rating 0 }}
-                            <span style="color: darkgreen">{{this.rating}}</span>
+                    <div class="voteCounter">
+                        {{#if this.rating }}
+                            {{#gt this.rating 0 }}
+                                <span style="color: darkgreen">{{this.rating}}</span>
+                            {{else}}
+                                <span style="color: darkred">{{this.rating}}</span>
+                            {{/gt}}
                         {{else}}
-                            <span style="color: darkred">{{this.rating}}</span>
-                        {{/gt}}
-                    {{else}}
-                        0
-                    {{/if}}</div>
+                            0
+                        {{/if}}
+                    </div>
                 </div>
             </li>
         {{/each}}

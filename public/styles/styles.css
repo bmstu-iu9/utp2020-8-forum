@@ -61,7 +61,7 @@ a {
 
 
 .replyImage {
-    width: 90%;
+    max-width: 70%;
     margin-left: 4%;
     border-top-left-radius: 0;
 }
@@ -187,7 +187,9 @@ a {
 
 .answer {
     display: flex;
-    width: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 98%;
     margin-bottom: 1%;
     padding: 1% 1% 1% 1%;
     border-radius: 1vh;
@@ -202,23 +204,20 @@ a {
 .voteCounter {
     margin-top: 3%;
     border-radius: 1vh;
-    padding-left: 10%;
-    text-align: left;
+    text-align: center;
 }
 
 .voteField {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
     text-align: center;
-    justify-self: end;
-    align-self: end;
-
+    width: 5%;
 }
 
 .vote {
-    display: block;
-    width: 100px;
-    margin: 0 auto;
+    width: 75%;
 }
-
 
 .answerText {
     width: 80%;
