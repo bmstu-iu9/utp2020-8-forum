@@ -57,24 +57,45 @@
             {{/each}}
         </ul>
     {{else}}
-        <ul id="ulPosts">
-            {{#each posts}}
-                <li class="answer colorSection">
-                    <div class="profile">
-                        <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                             alt="No avatar" height="100" width="100">
-                        <div class="profileName link colorDarkLink">{{this.author_name}}</div>
-                    </div>
-                    <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                    <div class="voteField">
-                        <a href="/post/{{this.id}}"><input type="image"
-                                                           class="replyImage vote colorDarkLink myButton colorSection"
-                                                           src="/static/images/reply.png" alt="#"/></a>
-                        <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
+        {{#if categoryChosen}}
+            <ul id="ulPosts">
+                {{#each posts}}
+                    <li class="answer colorSection">
+                        <div class="profile">
+                            <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                                 alt="No avatar" height="100" width="100">
+                            <div class="profileName link colorDarkLink">{{this.author_name}}</div>
+                        </div>
+                        <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                        <div class="voteField">
+                            <a href="/post/{{this.id}}"><input type="image"
+                                                               class="replyImage vote colorDarkLink myButton colorSection"
+                                                               src="/static/images/reply.png" alt="#"/></a>
+                            <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        {{else}}
+            <ul style="max-height: 100px;" class="categoryNotChosen" id="ulPosts">
+                {{#each posts}}
+                    <li class="answer colorSection">
+                        <div class="profile">
+                            <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                                 alt="No avatar" height="100" width="100">
+                            <div class="profileName link colorDarkLink">{{this.author_name}}</div>
+                        </div>
+                        <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                        <div class="voteField">
+                            <a href="/post/{{this.id}}"><input type="image"
+                                                               class="replyImage vote colorDarkLink myButton colorSection"
+                                                               src="/static/images/reply.png" alt="#"/></a>
+                            <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        {{/if}}
     {{/if}}
 
     {{#if user}}
@@ -85,6 +106,7 @@
         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}
 </div>
+
 <script>
     let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'), box3 = document.getElementById('postCreation'), box4 = document.getElementById('postChange');
     window.onclick = function (event) {
