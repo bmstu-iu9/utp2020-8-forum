@@ -213,7 +213,7 @@ a {
 }
 
 .answerText {
-    max-width: 100%;
+    width: 90%;
     overflow-x: auto;
     min-width: 80%;
     margin-left: 1%;

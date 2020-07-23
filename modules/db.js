@@ -70,22 +70,22 @@ const checkPostExists = (db, title, category_id) => {
     return post !== undefined
 }
 
-const addNewPost = (db, author_id, title, category_id) => {
+const addNewPost = (db, author_id, title, category_id, creation_time) => {
     if (!checkPostExists(db, title, category_id)) {
-        db.prepare(SQLrequests.addPost).run(author_id, title, category_id);
+        db.prepare(SQLrequests.addPost).run(author_id, title, category_id, creation_time);
         return true
     }
     return false
 }
 
-const addReply = (db, author_id, reply, post_id) => {
-    db.prepare(SQLrequests.addReply).run(author_id, reply, post_id);
+const addReply = (db, author_id, reply, post_id, creation_time) => {
+    db.prepare(SQLrequests.addReply).run(author_id, reply, post_id, creation_time);
 }
-
 
 const addVoteEntry = (db, user_id, reply_id, amount) => {
     db.prepare(SQLrequests.addVoteEntry).run(user_id, reply_id, amount)
 }
+
 const inverseVoteAmount = (db, id) => {
     db.prepare(SQLrequests.inverseVoteAmount).run(id);
 }
@@ -156,6 +156,12 @@ const updatePost = (db, text, postId) => {
     db.prepare(SQLrequests.updatePost).run(text, postId);
 }
 
+const modifiedTimes = (moment, postsOrReplies) => {
+    for(let i = 0; i < postsOrReplies.length; ++i)
+        postsOrReplies[i].time_since_creation = moment(postsOrReplies[i].creation_time).fromNow();
+    return postsOrReplies;
+}
+
 exports.init = init;
 exports.migrate = migrate;
 exports.getAllPosts = getAllPosts;
@@ -183,3 +189,4 @@ exports.deleteRepliesToPost = deleteRepliesToPost;
 exports.deletePost = deletePost;
 exports.deleteCategory = deleteCategory;
 exports.updatePost = updatePost;
+exports.modifiedTimes = modifiedTimes;

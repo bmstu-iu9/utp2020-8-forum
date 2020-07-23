@@ -2,7 +2,7 @@ const dbManager = require('../modules/db');
 const db = dbManager.init();
 const express = require('express'),
     router = express.Router();
-
+const moment = require('moment');
 
 router.get('/:postId(\\d+)', function (req, res) {
     let postId = req.params.postId;
@@ -10,6 +10,7 @@ router.get('/:postId(\\d+)', function (req, res) {
     if (post) {
         let categories = dbManager.getCategories(db);
         let replies = dbManager.getReplies(db, postId)
+        replies = dbManager.modifiedTimes(moment, replies);
         res.render('home', {
             layout: 'postViewLayout',
             categories: categories,
@@ -23,7 +24,9 @@ router.get('/:postId(\\d+)', function (req, res) {
 
 router.post('/:postId(\\d+)', function (req, res) {
     let id = req.params.postId;
-    dbManager.addReply(db, req.user.id, req.body.myAnswer, id);
+    let date = new Date();
+    let creation_time = date.toDateString() + " " + date.toTimeString();
+    dbManager.addReply(db, req.user.id, req.body.myAnswer, id, creation_time);
     res.redirect(`/post/${id}`)
 })
 

@@ -37,7 +37,7 @@
             class="sortLink">По последнему ответу</a></span></div>
 
     {{#if userPostsChosen}}
-        <ul id="ulPosts">
+        <ul id="ulPosts" class="categoryNotChosen">
             {{#each posts}}
                 <li class="answer colorSection">
                     <div class="profile">
@@ -49,8 +49,7 @@
                     <div class="textAndTime">
                         <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
                         <div class="timeLast">
-                            10 minutes ago
-                            {{this.timeSinceCreation}}
+                            {{this.time_since_creation}}
                         </div>
                     </div>
                     <div class="voteField">
@@ -75,7 +74,7 @@
                         <div class="textAndTime">
                             <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
                             <div class="timeLast">
-                                10 minutes ago
+                                {{this.time_since_creation}}
                             </div>
                         </div>
                         <div class="voteField">
@@ -99,7 +98,7 @@
                         <div class="textAndTime">
                             <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
                             <div class="timeLast">
-                                10 minutes ago
+                                {{this.time_since_creation}}
                             </div>
                         </div>
                         <div class="voteField">

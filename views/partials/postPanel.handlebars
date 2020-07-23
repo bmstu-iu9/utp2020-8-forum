@@ -11,7 +11,12 @@
                     <div class="profileName link colorDarkLink" href="#">{{this.author_name}}</div>
                 </div>
 
-                <div class="answerText link ColorTextDark">{{this.text}}</div>
+                <div class="textAndTime">
+                    <div class="answerText link ColorTextDark">{{this.text}}</div>
+                    <div class="timeLast">
+                        {{this.time_since_creation}}
+                    </div>
+                </div>
 
                 <div class="voteField">
                     <form action="/vote/{{this.id}}/1" method="post" style="width: 100%;">

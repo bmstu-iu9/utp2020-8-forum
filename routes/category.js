@@ -2,6 +2,7 @@ const dbManager = require('../modules/db');
 const db = dbManager.init();
 const express = require('express'),
     router = express.Router();
+const moment = require('moment');
 
 
 const sortPosts = (posts, sortTag) => {
@@ -26,6 +27,7 @@ router.get('/all', (req, res) => {
     let posts = dbManager.getAllPosts(db);
     let sortTag = req.query.sortTag;
     posts = sortPosts(posts, sortTag);
+    posts = dbManager.modifiedTimes(moment, posts);
     res.render('home', {
         layout: 'postsListViewLayout',
         posts: posts,
@@ -46,6 +48,7 @@ router.get('/:categoryId(\\d+)', (req, res) => {
     if (categories.length >= categoryId) {
         let posts = dbManager.getPostsByCategory(db, categoryId).reverse();
         posts = sortPosts(posts, sortTag);
+        posts = dbManager.modifiedTimes(moment, posts);
         res.render('home', {
             layout: 'postsListViewLayout',
             posts: posts,
@@ -64,8 +67,10 @@ router.get('/:categoryId(\\d+)', (req, res) => {
 router.post('/:categoryId(\\d+)', function (req, res) {
     let categoryId = req.params.categoryId;
     let categories = dbManager.getCategories(db);
+    let date = new Date();
+    let creation_time = date.toDateString() + " " + date.toTimeString();
     if (categories.length >= categoryId) {
-        let postSuccess = dbManager.addPost(db, req.user.id, req.body.myPost.trim(), categoryId);
+        let postSuccess = dbManager.addPost(db, req.user.id, req.body.myPost.trim(), categoryId, creation_time);
         if (postSuccess)
             res.redirect(`/category/${categoryId}`)
         else res.redirect(`/category/${categoryId}?postFail=true`)

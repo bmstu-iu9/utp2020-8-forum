@@ -7,6 +7,7 @@
         "author_id",
         "post_id",
         "text",
+        "creation_time",
         "FOREIGN KEY(author_id)",
         "FOREIGN KEY(post_id)"
       ],
@@ -15,6 +16,7 @@
         "INTEGER",
         "INTEGER",
         "TEXT NOT NULL",
+        "TEXT",
         "REFERENCES users(id)",
         "REFERENCES posts(id)"
       ]
@@ -45,6 +47,7 @@
         "author_id",
         "title",
         "category_id",
+        "creation_time",
         "FOREIGN KEY(author_id)",
         "FOREIGN KEY(category_id)"
       ],
@@ -53,6 +56,7 @@
         "INTEGER",
         "TEXT DEFAULT \"NO TITLE\" NOT NULL",
         "INTEGER",
+        "TEXT",
         "REFERENCES users(id)",
         "REFERENCES categories(id)"
       ]
