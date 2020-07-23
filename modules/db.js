@@ -37,7 +37,7 @@ const getAllPosts = () => {
     return posts;
 }
 const getPostsByCategory = categoryId => {
-    let posts = query("getPostsByCategory").all(categoryId);
+    let posts = query("getPostsByCategory").all(categoryId, categoryId);
     posts.forEach(p => {
         let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
@@ -49,7 +49,7 @@ const getPost = postId => query("getPost").get(postId)
 
 const getReply = replyId => query("getReply").get(replyId)
 
-const getReplies = postId => query("getReplies").all(postId)
+const getReplies = postId => query("getReplies").all(postId, postId)
 
 const getLastReply = postId => query("getLastReply").get(postId);
 
