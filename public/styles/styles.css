@@ -290,6 +290,18 @@ li {
     text-decoration: none;
 }
 
+.sortLinkArrow {
+    display: inline-block;
+}
+
+.chosenSortLinkAsc {
+    color: coral !important;
+}
+
+.chosenSortLink {
+    color: paleturquoise !important;
+}
+
 #message {
     position: absolute;
     width: 500px;
