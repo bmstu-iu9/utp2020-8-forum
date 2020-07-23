@@ -48,13 +48,13 @@
     "SELECT * FROM categories"
   ],
   "checkPostExists": [
-    "SELECT * FROM posts WHERE trim(title)=? AND trim(category_id)=?"
+    "SELECT * FROM posts WHERE title=? AND category_id=?"
   ],
   "addPost": [
-    "INSERT INTO posts (author_id, title, category_id) VALUES (?, ?, ?)"
+    "INSERT INTO posts (author_id, title, category_id) VALUES (?, trim(?), ?)"
   ],
   "addReply": [
-    "INSERT INTO replies (author_id, text, post_id) VALUES (?, ?, ?)"
+    "INSERT INTO replies (author_id, text, post_id) VALUES (?, trim(?), ?)"
   ],
   "addVoteEntry": [
     "INSERT INTO votes (user_id, reply_id, amount) VALUES (?, ?, ?)"
@@ -69,10 +69,10 @@
     "SELECT post_id, COUNT(*) FROM replies GROUP BY post_id"
   ],
   "findUser": [
-    "SELECT * FROM users WHERE trim(username) = ?"
+    "SELECT * FROM users WHERE username = ?"
   ],
   "createUser": [
-    "INSERT INTO users (username, password) VALUES (?,?)"
+    "INSERT INTO users (username, password) VALUES (trim(?),?)"
   ],
   "deleteUser": [
     "DELETE FROM users WHERE id=?"
