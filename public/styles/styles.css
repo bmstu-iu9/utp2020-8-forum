@@ -199,6 +199,7 @@ li {
     margin-left: 1%;
     margin-top: 1%;
     overflow-y: auto;
+    white-space: pre-line;
 }
 
 .postTitle {
