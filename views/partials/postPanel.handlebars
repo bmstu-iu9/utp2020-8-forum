@@ -6,18 +6,27 @@
         {{#each replies}}
             <li class="answer colorSection" id="reply_{{this.id}}">
                 <div class="profile">
-                    <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                         alt="No avatar" height="100" width="100">
-                    <div class="profileName link colorDarkLink" href="#">{{this.author_name}}</div>
+                    <img
+                        {{#if this.author_name}}
+                        src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                        {{else}}
+                        src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
+                        {{/if}}
+                        alt="No avatar" height="100" width="100">
+                    <div class="profileName link colorDarkLink" href="#">
+                        {{#if this.author_name}}
+                            {{this.author_name}}
+                        {{else}}
+                            Удален
+                        {{/if}}
+                    </div>
                 </div>
-
                 <div class="textAndTime">
                     <div class="answerText link ColorTextDark">{{this.text}}</div>
                     <div class="timeLast">
                         {{this.time_since_creation}}
                     </div>
                 </div>
-
                 <div class="voteField">
                     <form action="/vote/{{this.id}}/1" method="post" style="width: 100%;">
                         <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
@@ -25,17 +34,15 @@
                     <form action="/vote/{{this.id}}/-1" method="post">
                         <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
                     </form>
-                    <div class="voteCounter">
-                        {{#if this.rating }}
-                            {{#gt this.rating 0 }}
-                                <span style="color: darkgreen">{{this.rating}}</span>
-                            {{else}}
-                                <span style="color: darkred">{{this.rating}}</span>
-                            {{/gt}}
+                    <div class="voteCounter">{{#if this.rating }}
+                        {{#gt this.rating 0 }}
+                            <span style="color: darkgreen   ">{{this.rating}}</span>
                         {{else}}
-                            0
-                        {{/if}}
-                    </div>
+                            <span style="color: darkred">{{this.rating}}</span>
+                        {{/gt}}
+                    {{else}}
+                        0
+                    {{/if}}</div>
                 </div>
             </li>
         {{/each}}

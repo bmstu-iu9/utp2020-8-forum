@@ -17,8 +17,8 @@
         "INTEGER",
         "TEXT NOT NULL",
         "TEXT",
-        "REFERENCES users(id)",
-        "REFERENCES posts(id)"
+        "REFERENCES users(id) ON DELETE SET DEFAULT ",
+        "REFERENCES posts(id) ON DELETE CASCADE"
       ]
     },
     {
@@ -33,11 +33,11 @@
       ],
       "tags": [
         "INTEGER PRIMARY KEY",
+        "INTEGER DEFAULT NULL",
         "INTEGER",
         "INTEGER",
-        "INTEGER",
-        "REFERENCES users(id)",
-        "REFERENCES replies(id)"
+        "REFERENCES users(id) ON DELETE SET DEFAULT",
+        "REFERENCES replies(id) ON DELETE CASCADE"
       ]
     },
     {
@@ -53,12 +53,12 @@
       ],
       "tags": [
         "INTEGER PRIMARY KEY",
-        "INTEGER",
+        "INTEGER DEFAULT NULL",
         "TEXT DEFAULT \"NO TITLE\" NOT NULL",
         "INTEGER",
         "TEXT",
-        "REFERENCES users(id)",
-        "REFERENCES categories(id)"
+        "REFERENCES users(id) ON DELETE SET DEFAULT",
+        "REFERENCES categories(id) ON DELETE CASCADE"
       ]
     },
     {
