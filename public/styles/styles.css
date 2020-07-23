@@ -12,6 +12,7 @@ li {
 
 .liCategories {
     margin-left: -10%;
+    margin-top: 1%;
 }
 
 .headerUser {
@@ -44,10 +45,8 @@ a {
 }
 
 .ulCategories {
-    max-height: 90%;
+    max-height:90%;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
 }
 
@@ -63,6 +62,7 @@ a {
 .replyImage {
     max-width: 70%;
     margin-left: 4%;
+    margin-bottom: 10%;
     border-top-left-radius: 0;
 }
 
@@ -72,11 +72,6 @@ a {
 
 .myAvatar {
     margin-left: 1%;
-}
-
-.category {
-    width: 95%;
-    margin-bottom: 10%;
 }
 
 .colorTextDanger {
@@ -144,7 +139,6 @@ a {
     height: 101%;
 }
 
-
 .link {
     font-family: 'Cinzel', sans-serif;
     text-decoration: none;
@@ -161,9 +155,9 @@ a {
 }
 
 .category {
-    width: 105%;
+    width: 110%;
     text-align: center;
-    margin-bottom: 4%;
+    margin-bottom: 3%;
     border-radius: 0.5vh;
 
 }
@@ -171,10 +165,9 @@ a {
 .category-link {
     line-height: 350%;
     display: block;
-    font-size: 1.2rem;
+    font-size: 15pt;
     text-decoration: none;
 }
-
 
 .selectedTheme {
     width: 69%;
@@ -220,11 +213,11 @@ a {
 }
 
 .answerText {
-    width: 80%;
+    max-width: 100%;
+    overflow-x: auto;
     min-width: 80%;
     margin-left: 1%;
     margin-top: 1%;
-    overflow-y: auto;
 }
 
 .postTitle {
@@ -247,7 +240,6 @@ a {
 
 .profileName {
     text-align: center;
-
 }
 
 .newAnswer {
