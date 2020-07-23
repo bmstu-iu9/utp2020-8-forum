@@ -199,6 +199,7 @@ li {
     margin-left: 1%;
     margin-top: 1%;
     overflow-y: auto;
+    white-space: pre-line;
 }
 
 .postTitle {
@@ -288,6 +289,18 @@ li {
 
 .sortLink {
     text-decoration: none;
+}
+
+.sortLinkArrow {
+    display: inline-block;
+}
+
+.chosenSortLinkAsc {
+    color: coral !important;
+}
+
+.chosenSortLink {
+    color: paleturquoise !important;
 }
 
 #message {

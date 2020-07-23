@@ -2,32 +2,32 @@
 <div class="selectedTheme colorMain">
     <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
     <div class="colorTextLight">
-        <span><a
+        <span><a id='byTime'
             {{#is sortTag 'byTime' }}
-            href="?sortTag=byTimeAsc"
+                 href="?sortTag=byTimeAsc"
             {{else}}
                 {{#if sortTag }}
-            href="?sortTag=byTime"
+                 href="?sortTag=byTime"
                 {{else}}
-            href="?sortTag=byTimeAsc"
+                 href="?sortTag=byTimeAsc"
                 {{/if}}
             {{/is}}
-            class="sortLink">По времени</a></span>
-        <span><a
+                 class="sortLink">По времени <span class="sortLinkArrow" id="byTimeSortLink">&nbsp;</span></a></span>
+        <span><a id='byReplies'
             {{#is sortTag 'byReplies' }}
-            href="?sortTag=byRepliesAsc"
+                 href="?sortTag=byRepliesAsc"
             {{else}}
-            href="?sortTag=byReplies"
+                 href="?sortTag=byReplies"
             {{/is}}
-            class="sortLink">По ответам</a></span>
-        <span><a
+                 class="sortLink">По ответам <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
+        <span><a id="byLastReply"
             {{#is sortTag 'byLastReply' }}
-            href="?sortTag=byLastReplyAsc"
+                 href="?sortTag=byLastReplyAsc"
             {{else}}
-            href="?sortTag=byLastReply"
+                 href="?sortTag=byLastReply"
             {{/is}}
-            class="sortLink">По последнему ответу</a></span></div>
-
+                 class="sortLink">По последнему ответу <span class="sortLinkArrow"
+                                                             id="byLastReplySortLink">&nbsp;</span></a></span></div>
     <ul id="ulPosts">
         {{#each posts}}
             <li class="answer colorSection">
@@ -46,11 +46,12 @@
                         {{/if}}
                     </div>
                 </div>
-                <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                <a class="answerText link ColorTextDark" href="/post/{{this.id}}?from={{../currentPath}}
+                ">{{this.title}}</a>
                 <div class="voteField">
-                    <a href="/post/{{this.id}}"><input type="image"
-                                                       class="replyImage vote colorDarkLink myButton colorSection"
-                                                       src="/static/images/reply.png" alt="#"/></a>
+                    <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
+                                                                       class="replyImage vote colorDarkLink myButton colorSection"
+                                                                       src="/static/images/reply.png" alt="#"/></a>
                     <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
                 </div>
             </li>
@@ -65,3 +66,14 @@
         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}
 </div>
+<script>
+    if ('{{sortTag}}'.endsWith('Asc')) {
+        const sortLinkId = '{{sortTag}}'.replace('Asc', '')
+        document.getElementById(sortLinkId).classList.add('chosenSortLinkAsc');
+        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↑";
+    } else {
+        const sortLinkId = '{{sortTag}}';
+        document.getElementById(sortLinkId).classList.add('chosenSortLink');
+        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
+    }
+</script>

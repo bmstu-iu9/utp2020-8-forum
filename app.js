@@ -50,7 +50,7 @@ app.set('view engine', 'handlebars')
 
 
 app.get('/', function (req, res) {
-    res.redirect('/category/all')
+    res.redirect('/category/all?sortTag=byTime')
 });
 
 
