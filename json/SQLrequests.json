@@ -1,6 +1,6 @@
 {
   "getAllPosts": [
-    "SELECT posts.id,  posts.author_id, x.reply_count,  posts.title,  posts.category_id, posts.creation_time",
+    "SELECT posts.id,  posts.author_id, x.reply_count,  posts.title,  posts.category_id, posts.creation_time ",
     "users.username as author_name, categories.name as category_name FROM posts ",
     "INNER JOIN users ON users.id=posts.author_id ",
     "INNER JOIN categories on posts.category_id=categories.id ",
@@ -12,7 +12,7 @@
     "WHERE posts.author_id IS NULL"
   ],
   "getPostsByCategory": [
-    "SELECT posts.id,  posts.author_id, x.reply_count,  posts.title,  posts.category_id, posts.creation_time",
+    "SELECT posts.id,  posts.author_id, x.reply_count, posts.title, posts.category_id, posts.creation_time ",
     "users.username as author_name, categories.name as category_name FROM posts ",
     "INNER JOIN users ON users.id=posts.author_id ",
     "INNER JOIN categories on posts.category_id=categories.id ",
@@ -49,10 +49,10 @@
     "SELECT * FROM posts WHERE trim(title)=? AND trim(category_id)=?"
   ],
   "addPost": [
-    "INSERT INTO posts (author_id, title, category_id) VALUES (?, ?, ?)"
+    "INSERT INTO posts (author_id, title, category_id, creation_time) VALUES (?, ?, ?, ?)"
   ],
   "addReply": [
-    "INSERT INTO replies (author_id, text, post_id) VALUES (?, ?, ?)"
+    "INSERT INTO replies (author_id, text, post_id, creation_time) VALUES (?, ?, ?, ?)"
   ],
   "addVoteEntry": [
     "INSERT INTO votes (user_id, reply_id, amount) VALUES (?, ?, ?)"
@@ -76,25 +76,25 @@
     "DELETE FROM users WHERE id=?"
   ],
   "checkCategoryExists": [
-    "SELECT * from categories WHERE trim(name) = ?",
+    "SELECT * from categories WHERE trim(name) = ?"
   ],
   "createCategory": [
-    "INSERT INTO categories (name) VALUES (?)",
+    "INSERT INTO categories (name) VALUES (?)"
   ],
   "getPostsByUser": [
-    "SELECT posts.id,  posts.author_id, x.reply_count,  posts.title,  posts.category_id, users.username as author_name, categories.name as category_name FROM posts INNER JOIN users ON users.id=posts.author_id INNER JOIN categories on posts.category_id=categories.id LEFT JOIN (SELECT replies.post_id, COUNT(*) as reply_count FROM replies GROUP BY replies.post_id) x ON x.post_id=posts.id WHERE author_id=?",
+    "SELECT posts.id,  posts.author_id, x.reply_count,  posts.title,  posts.category_id, users.username as author_name, categories.name as category_name FROM posts INNER JOIN users ON users.id=posts.author_id INNER JOIN categories on posts.category_id=categories.id LEFT JOIN (SELECT replies.post_id, COUNT(*) as reply_count FROM replies GROUP BY replies.post_id) x ON x.post_id=posts.id WHERE author_id=?"
   ],
   "deletePost": [
-    "DELETE FROM posts WHERE id = ?",
+    "DELETE FROM posts WHERE id = ?"
   ],
   "deleteRepliesToPost": [
-    "DELETE FROM replies WHERE post_id = ?",
+    "DELETE FROM replies WHERE post_id = ?"
   ],
   "deleteVotesToReply": [
-    "DELETE FROM votes WHERE reply_id = ?",
+    "DELETE FROM votes WHERE reply_id = ?"
   ],
   "deleteCategory": [
-    "DELETE FROM categories WHERE id = ?",
+    "DELETE FROM categories WHERE id = ?"
   ],
   "updatePost": [
     "UPDATE posts SET title = ? WHERE id = ?"
