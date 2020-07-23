@@ -46,9 +46,9 @@
                         {{/if}}
                     </div>
                 </div>
-                <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                <a class="answerText link ColorTextDark" href="/post/{{this.id}}?from={{../currentPath}}">{{this.title}}</a>
                 <div class="voteField">
-                    <a href="/post/{{this.id}}"><input type="image"
+                    <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
                                                        class="replyImage vote colorDarkLink myButton colorSection"
                                                        src="/static/images/reply.png" alt="#"/></a>
                     <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
