@@ -4,8 +4,10 @@ const express = require('express'),
 
 const sortPosts = (posts, sortTag) => {
     switch (sortTag) {
+        case 'byTime':
+            return posts.sort((a, b) => b.id - a.id);
         case 'byTimeAsc':
-            return posts = posts.reverse();
+            return posts.sort((a, b) => a.id - b.id);
         case 'byReplies':
             return posts.sort((a, b) => b.reply_count - a.reply_count);
         case 'byRepliesAsc':
