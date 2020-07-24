@@ -1,25 +1,6 @@
 {
   "models": [
     {
-      "tablename": "replies",
-      "columns": [
-        "id",
-        "author_id",
-        "post_id",
-        "text",
-        "FOREIGN KEY(author_id)",
-        "FOREIGN KEY(post_id)"
-      ],
-      "tags": [
-        "INTEGER PRIMARY KEY",
-        "INTEGER",
-        "INTEGER",
-        "TEXT NOT NULL",
-        "REFERENCES users(id)",
-        "REFERENCES posts(id)"
-      ]
-    },
-    {
       "tablename": "votes",
       "columns": [
         "id",
@@ -31,11 +12,30 @@
       ],
       "tags": [
         "INTEGER PRIMARY KEY",
+        "INTEGER DEFAULT NULL",
         "INTEGER",
         "INTEGER",
+        "REFERENCES users(id) ON DELETE SET DEFAULT",
+        "REFERENCES replies(id) ON DELETE CASCADE"
+      ]
+    },
+    {
+      "tablename": "replies",
+      "columns": [
+        "id",
+        "author_id",
+        "post_id",
+        "text",
+        "FOREIGN KEY(author_id)",
+        "FOREIGN KEY(post_id)"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "INTEGER DEFAULT NULL",
         "INTEGER",
-        "REFERENCES users(id)",
-        "REFERENCES replies(id)"
+        "TEXT NOT NULL",
+        "REFERENCES users(id) ON DELETE SET DEFAULT ",
+        "REFERENCES posts(id) ON DELETE CASCADE"
       ]
     },
     {
@@ -50,11 +50,11 @@
       ],
       "tags": [
         "INTEGER PRIMARY KEY",
-        "INTEGER",
+        "INTEGER DEFAULT NULL",
         "TEXT DEFAULT \"NO TITLE\" NOT NULL",
         "INTEGER",
-        "REFERENCES users(id)",
-        "REFERENCES categories(id)"
+        "REFERENCES users(id) ON DELETE SET DEFAULT",
+        "REFERENCES categories(id) ON DELETE CASCADE"
       ]
     },
     {

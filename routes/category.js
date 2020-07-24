@@ -1,8 +1,6 @@
 const dbManager = require('../modules/db');
-const db = dbManager.init();
 const express = require('express'),
     router = express.Router();
-
 
 const sortPosts = (posts, sortTag) => {
     switch (sortTag) {
@@ -22,8 +20,8 @@ const sortPosts = (posts, sortTag) => {
 }
 
 router.get('/all', function (req, res) {
-    let categories = dbManager.getCategories(db);
-    let posts = dbManager.getAllPosts(db);
+    let categories = dbManager.getCategories();
+    let posts = dbManager.getAllPosts();
     let sortTag = req.query.sortTag;
     posts = sortPosts(posts, sortTag);
     res.render('home', {
@@ -34,16 +32,18 @@ router.get('/all', function (req, res) {
         categoryChosen: false,
         sortTag: sortTag,
         user: req.user,
-        message: req.flash('error')
+        message: req.flash('error'),
+        currentPath: req.originalUrl
     });
 });
 
 router.get('/:categoryId(\\d+)', function (req, res) {
-    let categories = dbManager.getCategories(db);
+    let categories = dbManager.getCategories();
     let categoryId = req.params.categoryId;
     let sortTag = req.query.sortTag;
+    console.log(req.originalUrl)
     if (categories.length >= categoryId) {
-        let posts = dbManager.getPostsByCategory(db, categoryId).reverse()
+        let posts = dbManager.getPostsByCategory(categoryId).reverse()
         posts = sortPosts(posts, sortTag);
         res.render('home', {
             layout: 'postsListViewLayout',
@@ -53,7 +53,8 @@ router.get('/:categoryId(\\d+)', function (req, res) {
             postFail: req.query.postFail,
             categoryChosen: true,
             sortTag: sortTag,
-            user: req.user
+            user: req.user,
+            currentPath: req.originalUrl
         });
     } else
         res.status(404).send('Нет такой категории')
@@ -61,14 +62,15 @@ router.get('/:categoryId(\\d+)', function (req, res) {
 
 router.post('/:categoryId(\\d+)', function (req, res) {
     let categoryId = req.params.categoryId;
-    let categories = dbManager.getCategories(db);
+    let categories = dbManager.getCategories();
+    let originalUrl = req.originalUrl
     if (categories.length >= categoryId) {
-        let postSuccess = dbManager.addPost(db, req.user.id, req.body.myPost, categoryId);
+        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost, categoryId);
         if (postSuccess)
-            res.redirect(`/category/${categoryId}`)
-        else res.redirect(`/category/${categoryId}?postFail=true`)
+            res.redirect(originalUrl)
+        else res.redirect(`${originalUrl}?postFail=true`)
 
-    } else res.redirect(`/category/${categoryId}?postFail=true`)
+    } else res.redirect(`${originalUrl}?postFail=true`)
 })
 
 module.exports = router;
