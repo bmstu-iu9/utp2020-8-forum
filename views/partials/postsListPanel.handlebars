@@ -36,46 +36,29 @@
             {{/is}}
             class="sortLink">По последнему ответу</a></span></div>
 
-    {{#if userPostsChosen}}
-        <ul id="ulPosts">
-            {{#each posts}}
-                <li class="answer colorSection">
-                    <div class="profile">
-                        <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                             alt="No avatar" height="100" width="100">
+    <ul id="ulPosts">
+        {{#each posts}}
+            <li class="answer colorSection">
+                <div class="profile">
+                    <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                         alt="No avatar" height="100" width="100">
+                    {{#if ../userPostsChosen}}
                         <a class="profileName link colorDarkLink" onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
                         <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
-                    </div>
-                    <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                    <div class="voteField">
-                        <a href="/post/{{this.id}}"><input type="image"
-                                                           class="replyImage vote colorDarkLink myButton colorSection"
-                                                           src="/static/images/reply.png" alt="#"/></a>
-                        <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
-    {{else}}
-        <ul id="ulPosts">
-            {{#each posts}}
-                <li class="answer colorSection">
-                    <div class="profile">
-                        <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                             alt="No avatar" height="100" width="100">
-                        <div class="profileName link colorDarkLink">{{this.author_name}}</div>
-                    </div>
-                    <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                    <div class="voteField">
-                        <a href="/post/{{this.id}}"><input type="image"
-                                                           class="replyImage vote colorDarkLink myButton colorSection"
-                                                           src="/static/images/reply.png" alt="#"/></a>
-                        <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
-    {{/if}}
+                    {{else}}
+                            <div class="profileName link colorDarkLink">{{this.author_name}}</div>
+                    {{/if}}
+                </div>
+                <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                <div class="voteField">
+                    <a href="/post/{{this.id}}"><input type="image"
+                                                       class="replyImage vote colorDarkLink myButton colorSection"
+                                                       src="/static/images/reply.png" alt="#"/></a>
+                    <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
 
     {{#if user}}
         {{#if categoryChosen}}
