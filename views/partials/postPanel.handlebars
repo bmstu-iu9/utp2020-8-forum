@@ -8,8 +8,12 @@
 </div>
 
 <div class="selectedTheme colorMain">
-    <input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/back.png" height="40"
-           style="float: left; margin-top: 4.4vh" onclick="history.back();">
+
+    <a class="borderTop myButton colorDarkLink colorSection"
+       style="float: left; margin-top: 4.4vh" href="{{from}}"><img src="/static/images/back.png" height="40"
+                                                                   alt="Назад"></a>
+<!--    <input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/back.png" height="40"-->
+<!--           style="float: left; margin-top: 4.4vh" onclick="history.back();">-->
     <h3 class="postTitle colorTextLight">{{post.title}}</h3>
     <ul id="ulReplies" style="max-height: 67%;">
         {{#each replies}}
