@@ -1,17 +1,13 @@
 const Database = require('better-sqlite3')
 const modelsJSON = require('../json/models.json')
 const SQLrequests = require('../json/SQLrequests.json')
-
 const models = modelsJSON.models;
-
-const init = () => {
-    return new Database('app.db');
-}
+const init = () => new Database('app.db');
+const db = init();
 
 /*Использует файл models.json для генерации базы данных с таблицами, соответсвующими описанным моделям.
 * При выполнении БД форматируется*/
 const migrate = () => {
-    let db = new Database('app.db');
     for (let i = 0; i < models.length; ++i) {
         let req = 'DROP TABLE IF EXISTS ' + models[i].tablename;
         db.prepare(req).run();
@@ -28,133 +24,80 @@ const migrate = () => {
     }
 }
 
-const getCategories = (db) => {
-    return db.prepare(SQLrequests.getCategories).all();
-}
+const query = queryName => db.prepare(SQLrequests[queryName].join(""));
 
-const getAllPosts = (db) => {
-    let posts = db.prepare(SQLrequests.getAllPosts).all();
+const getCategories = () => query("getCategories").all();
+
+const getAllPosts = () => {
+    let posts = query("getAllPosts").all();
     posts.forEach(p => {
-        let lastReply = getLastReply(db, p.id);
+        let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
     })
     return posts;
 }
-const getPostsByCategory = (db, categoryId) => {
-
-    let posts = db.prepare(SQLrequests.getPostsByCategory).all(categoryId);
+const getPostsByCategory = categoryId => {
+    let posts = query("getPostsByCategory").all(categoryId, categoryId);
     posts.forEach(p => {
-        let lastReply = getLastReply(db, p.id);
-        p.last_reply = (lastReply ? lastReply : {"id": 0})
-    })
-    return posts;
-}
-
-const getPost = (db, postId) => {
-    return db.prepare(SQLrequests.getPost.replace("{id}", postId)).get();
-}
-const getReply = (db, replyId) => {
-    return db.prepare(SQLrequests.getReply.replace("{id}", replyId)).get();
-}
-
-const getReplies = (db, postId) => {
-    return db.prepare(SQLrequests.getReplies.replace("{id}", postId)).all();
-}
-
-const getLastReply = (db, postId) => {
-    return db.prepare(SQLrequests.getLastReply.replace("{id}", postId)).get();
-}
-
-const checkPostExists = (db, title, category_id) => {
-    let post = db.prepare(SQLrequests.checkPostExists).get(title, category_id);
-    return post !== undefined
-}
-
-const addNewPost = (db, author_id, title, category_id) => {
-    if (!checkPostExists(db, title, category_id)) {
-        db.prepare(SQLrequests.addPost).run(author_id, title, category_id);
-        return true
-    }
-    return false
-}
-
-const addReply = (db, author_id, reply, post_id) => {
-    db.prepare(SQLrequests.addReply).run(author_id, reply, post_id);
-}
-
-
-const addVoteEntry = (db, user_id, reply_id, amount) => {
-    db.prepare(SQLrequests.addVoteEntry).run(user_id, reply_id, amount)
-}
-const inverseVoteAmount = (db, id) => {
-    db.prepare(SQLrequests.inverseVoteAmount).run(id);
-}
-
-
-const checkUserVoted = (db, user_id, reply_id) => {
-    return db.prepare(SQLrequests.checkUserVoted).get(user_id, reply_id)
-}
-
-const findUser = (db, login) => {
-    return db.prepare(SQLrequests.findUser).get(login);
-}
-
-const checkUserExists = (db, login) => {
-    let usr = findUser(db, login);
-    return usr !== undefined;
-}
-
-
-const createUser = (db, login, psswrd) => {
-    db.prepare(SQLrequests.createUser).run(login, psswrd);
-}
-
-
-const getRepliesCount = (db) => {
-    return db.prepare(SQLrequests.getReplyCount).all();
-}
-
-const checkCategoryExists = (db, category) => {
-    return db.prepare(SQLrequests.checkCategoryExists).get(category);
-}
-
-const createCategory = (db, category) => {
-    db.prepare(SQLrequests.createCategory).run(category);
-}
-
-const getPostsByUser = (db, id) => {
-    let posts = db.prepare(SQLrequests.getPostsByUser).all(id);
-    posts.forEach(p => {
-        let lastReply = getLastReply(db, p.id);
+        let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
     })
     return posts;
 }
 
-const deleteVotesToReply = (db, replyId) => {
-    db.prepare(SQLrequests.deleteRepliesToPost).run(replyId);
+const getPost = postId => query("getPost").get(postId)
+
+const getReply = replyId => query("getReply").get(replyId)
+
+const getReplies = postId => query("getReplies").all(postId, postId)
+
+const getLastReply = postId => query("getLastReply").get(postId);
+
+const checkPostExists = (title, category_id) => query("checkPostExists").get(title, category_id) !== undefined
+
+const addNewPost = (author_id, title, category_id) => {
+    if (checkPostExists(title, category_id))
+        return false
+    query("addPost").run(author_id, title, category_id);
+    return true
 }
 
-const deleteRepliesToPost = (db, postId) => {
-    let replies = getReplies(db, postId);
-    for (let value of replies) {
-        deleteVotesToReply(db, value.id);
-    }
-    db.prepare(SQLrequests.deleteRepliesToPost).run(postId);
+const addReply = (author_id, reply, post_id) => query("addReply").run(author_id, reply, post_id);
+
+const addVoteEntry = (user_id, reply_id, amount) => query("addVoteEntry").run(user_id, reply_id, amount)
+
+const inverseVoteAmount = id => query("inverseVoteAmount").run(id);
+
+const checkUserVoted = (user_id, reply_id) => query("checkUserVoted").get(user_id, reply_id)
+
+const findUser = login => query("findUser").get(login);
+
+const checkUserExists = login => findUser(login) !== undefined
+
+const createUser = (login, psswrd) => query("createUser").run(login, psswrd);
+
+const getRepliesCount = () => query("getReplyCount").all()
+
+const deleteUser = user_id => query("deleteUser").run(user_id)
+
+const checkCategoryExists = category =>  query("checkCategoryExists").get(category);
+
+const createCategory = category => query("createCategory").run(category);
+
+const getPostsByUser = userId => {
+    let posts = query("getPostsByUser").all(userId, userId);
+    posts.forEach(p => {
+        let lastReply = getLastReply(p.id);
+        p.last_reply = (lastReply ? lastReply : {"id": 0})
+    })
+    return posts;
 }
 
-const deletePost = (db, postId) => {
-    deleteRepliesToPost(db, postId);
-    db.prepare(SQLrequests.deletePost).run(postId);
-}
+const deletePost = postId => query("deletePost").run(postId);
 
-const deleteCategory = (db, categoryId) => {
-    db.prepare(SQLrequests.deleteCategory).run(categoryId);
-}
+const deleteCategory = categoryId => query("deleteCategory").run(categoryId);
 
-const updatePost = (db, text, postId) => {
-    db.prepare(SQLrequests.updatePost).run(text, postId);
-}
+const updatePost = (text, postId) => query("updatePost").run(text, postId);
 
 exports.init = init;
 exports.migrate = migrate;
@@ -173,13 +116,12 @@ exports.findUser = findUser;
 exports.checkUserVoted = checkUserVoted;
 exports.addVoteEntry = addVoteEntry;
 exports.inverseVoteAmount = inverseVoteAmount;
+exports.deleteUser = deleteUser;
 exports.checkCategoryExists = checkCategoryExists;
 exports.createCategory = createCategory;
 exports.checkUserExists = checkUserExists;
 exports.createUser = createUser;
 exports.getPostsByUser = getPostsByUser;
-exports.deleteVotesToReply = deleteVotesToReply;
-exports.deleteRepliesToPost = deleteRepliesToPost;
 exports.deletePost = deletePost;
 exports.deleteCategory = deleteCategory;
 exports.updatePost = updatePost;
