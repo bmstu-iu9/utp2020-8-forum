@@ -105,6 +105,12 @@ const deleteReply = replyId => query("deleteReply").run(replyId);
 
 const updateReply = (text, replyId) => query("updateReply").run(text, replyId);
 
+const modifiedTimes = (moment, postsOrReplies) => {
+    for(let i = 0; i < postsOrReplies.length; ++i)
+        postsOrReplies[i].time_since_creation = moment(postsOrReplies[i].creation_time).fromNow();
+    return postsOrReplies;
+}
+
 exports.init = init;
 exports.migrate = migrate;
 exports.getAllPosts = getAllPosts;
@@ -132,5 +138,4 @@ exports.getPostsByUser = getPostsByUser;
 exports.deletePost = deletePost;
 exports.deleteCategory = deleteCategory;
 exports.updatePost = updatePost;
-exports.deleteReply = deleteReply;
-exports.updateReply = updateReply;
+exports.modifiedTimes = modifiedTimes;

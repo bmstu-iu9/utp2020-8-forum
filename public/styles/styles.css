@@ -221,15 +221,13 @@ a {
 }
 
 .postTitle {
-    margin-top: 5%;
-    max-width: 80%;
-    max-height: 10%;
+    margin-top: 2%;
+    max-width: 90%;
+    max-height: 20%;
 
     padding-left: 1%;
     border-left-style: solid;
     border-width: 1px;
-    border-radius: 0.5vh 0 0 0.5vh;
-
     overflow-y: auto;
 }
 

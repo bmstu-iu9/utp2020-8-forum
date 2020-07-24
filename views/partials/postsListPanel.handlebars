@@ -54,8 +54,12 @@
                         {{/if}}
                     </div>
                 </div>
-                <a class="answerText link ColorTextDark" href="/post/{{this.id}}?from={{../currentPath}}
-                ">{{this.title}}</a>
+                <div class="textAndTime">
+                    <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                    <div class="timeLast">
+                        {{this.time_since_creation}}
+                    </div>
+                </div>
                 <div class="voteField">
                     <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
                                                                        class="replyImage vote colorDarkLink myButton colorSection"
