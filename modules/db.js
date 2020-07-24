@@ -138,4 +138,6 @@ exports.getPostsByUser = getPostsByUser;
 exports.deletePost = deletePost;
 exports.deleteCategory = deleteCategory;
 exports.updatePost = updatePost;
+exports.deleteReply = deleteReply;
+exports.updateReply = updateReply;
 exports.modifiedTimes = modifiedTimes;

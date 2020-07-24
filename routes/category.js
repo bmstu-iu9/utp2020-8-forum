@@ -5,8 +5,10 @@ const moment = require('moment');
 
 const sortPosts = (posts, sortTag) => {
     switch (sortTag) {
+        case 'byTime':
+            return posts.sort((a, b) => b.id - a.id);
         case 'byTimeAsc':
-            return posts = posts.reverse();
+            return posts.sort((a, b) => a.id - b.id);
         case 'byReplies':
             return posts.sort((a, b) => b.reply_count - a.reply_count);
         case 'byRepliesAsc':
@@ -25,27 +27,26 @@ router.get('/all', function (req, res) {
     let posts = dbManager.getAllPosts();
     let sortTag = req.query.sortTag;
     posts = sortPosts(posts, sortTag);
-    posts = dbManager.modifiedTimes(moment, posts);
-    res.render('home', {
-        layout: 'postsListViewLayout',
-        posts: posts,
-        categories: categories,
-        postsListTitle: "Все посты",
-        categoryChosen: false,
-        userPostsChosen: false,
-        sortTag: sortTag,
-        user: req.user,
-        message: req.flash('error'),
-        currentPath: req.originalUrl
-    });
-})
+    posts = dbManageer.modifiedTimes(moment, posts);
+        res.render('home', {
+            layout: 'postsListViewLayout',
+            posts: posts,
+            categories: categories,
+            postsListTitle: "Все посты",
+            categoryChosen: false,
+            sortTag: sortTag,
+            user: req.user,
+            message: req.flash('error'),
+            currentPath: req.originalUrl
+        });
+    })
 
 router.get('/:categoryId(\\d+)', (req, res) => {
     let categories = dbManager.getCategories();
     let categoryId = req.params.categoryId.trim();
     let category = dbManager.getCategoryById(categoryId);
     if (category !== undefined) {
-        let sortTag = req.query.sortTag;
+        let sortTag = req.query.sortTag || "byTime";
         let posts = dbManager.getPostsByCategory(categoryId).reverse();
         posts = sortPosts(posts, sortTag);
         posts = dbManager.modifiedTimes(moment, posts);
@@ -56,7 +57,6 @@ router.get('/:categoryId(\\d+)', (req, res) => {
             postsListTitle: category.name,
             postFail: req.query.postFail,
             categoryChosen: true,
-            userPostsChosen: false,
             sortTag: sortTag,
             user: req.user,
             currentPath: req.originalUrl
@@ -74,7 +74,7 @@ router.post('/:categoryId(\\d+)', function (req, res) {
     let date = new Date();
     let creation_time = date.toDateString() + " " + date.toTimeString();
     if (category !== undefined) {
-        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost, categoryId, creation_time);
+        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost, categoryId);
         if (postSuccess)
             res.redirect(originalUrl)
         else res.redirect(`${originalUrl}?postFail=true`)
@@ -90,11 +90,11 @@ router.post('/create', (req, res) => {
     if (!category) {
         dbManager.createCategory(req.body.category.trim());
         categoryId = dbManager.checkCategoryExists(req.body.category.trim()).id;
-        dbManager.addPost(req.user.id, req.body.myPost.trim(), categoryId, creation_time);
+        dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
         res.redirect(`/category/${categoryId}`);
     } else {
         categoryId = category.id;
-        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost.trim(), categoryId, creation_time);
+        let postSuccess = dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
         if (postSuccess)
             res.redirect(`/category/${categoryId}`);
         else
@@ -114,7 +114,6 @@ router.get('/myPosts', (req, res) => {
         postsListTitle: "Мои посты",
         postFail: req.query.postFail,
         categoryChosen: false,
-        userPostsChosen: true,
         sortTag: sortTag,
         user: req.user
     });

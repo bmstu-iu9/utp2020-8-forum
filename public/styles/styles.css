@@ -318,6 +318,18 @@ a {
     text-decoration: none;
 }
 
+.sortLinkArrow {
+    display: inline-block;
+}
+
+.chosenSortLinkAsc {
+    color: coral !important;
+}
+
+.chosenSortLink {
+    color: paleturquoise !important;
+}
+
 #message {
     position: absolute;
     width: 500px;
@@ -337,6 +349,7 @@ a {
     top: 0;
     left: 0;
     display: none;
+    z-index: 100;
 }
 
 .windowContent {

@@ -63,21 +63,26 @@
 
 
                 <div class="voteField">
-                    <form action="/vote/{{this.id}}/1" method="post" style="width: 100%;">
-                        <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
-                    </form>
-                    <form action="/vote/{{this.id}}/-1" method="post">
-                        <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
-                    </form>
-                    <div class="voteCounter">{{#if this.rating }}
-                        {{#gt this.rating 0 }}
-                            <span style="color: darkgreen   ">{{this.rating}}</span>
-                        {{else}}
-                            <span style="color: darkred">{{this.rating}}</span>
-                        {{/gt}}
+                    {{#eq ../user.username this.author_name}}
+                            <a class="profileName link colorDarkLink" onclick="editReply({{this.id}}, '{{this.text}}')">Edit</a>
+                            <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
                     {{else}}
-                        0
-                    {{/if}}</div>
+                        <form action="/vote/{{this.id}}/1" method="post" style="width: 100%;">
+                            <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
+                        </form>
+                        <form action="/vote/{{this.id}}/-1" method="post">
+                            <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
+                        </form>
+                        <div class="voteCounter">{{#if this.rating }}
+                            {{#gt this.rating 0 }}
+                                <span style="color: darkgreen   ">{{this.rating}}</span>
+                            {{else}}
+                                <span style="color: darkred">{{this.rating}}</span>
+                            {{/gt}}
+                        {{else}}
+                            0
+                        {{/if}}</div>
+                    {{/eq}}
                 </div>
 
 
