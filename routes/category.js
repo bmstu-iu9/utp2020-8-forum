@@ -44,7 +44,7 @@ router.get('/:categoryId(\\d+)', (req, res) => {
     let categoryId = req.params.categoryId.trim();
     let category = dbManager.getCategoryById(categoryId);
     if (category !== undefined) {
-        let sortTag = req.query.sortTag;
+        let sortTag = req.query.sortTag || "byTime";
         let posts = dbManager.getPostsByCategory(categoryId).reverse();
         posts = sortPosts(posts, sortTag);
         res.render('home', {
