@@ -65,10 +65,16 @@ router.get('/:categoryId(\\d+)', (req, res) => {
 
 router.post('/:categoryId(\\d+)', function (req, res) {
     let categoryId = req.params.categoryId;
-    let postSuccess = dbManager.addPost(req.user.id, req.body.myPost.trim(), categoryId);
-    if (postSuccess)
-        res.redirect(`/category/${categoryId}`)
-    else res.redirect(`/category/${categoryId}?postFail=true`)
+    let categories = dbManager.getCategories();
+    let originalUrl = req.originalUrl
+    let category = dbManager.getCategoryById(categoryId);
+    if (category !== undefined) {
+        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost, categoryId);
+        if (postSuccess)
+            res.redirect(originalUrl)
+        else res.redirect(`${originalUrl}?postFail=true`)
+
+    } else res.redirect(`${originalUrl}?postFail=true`)
 })
 
 router.post('/create', (req, res) => {

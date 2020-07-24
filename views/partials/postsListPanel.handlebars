@@ -46,13 +46,18 @@
                     src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
                     {{/if}}
                     alt="No avatar" height="100" width="100">
-                    <div class="profileName link colorDarkLink">
-                        {{#if this.author_name}}
-                            {{this.author_name}}
-                        {{else}}
-                            Удален
-                        {{/if}}
-                    </div>
+                    {{#if ../userPostsChosen}}
+                        <a class="profileName link colorDarkLink" onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
+                        <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
+                    {{else}}
+                        <div class="profileName link colorDarkLink">
+                            {{#if this.author_name}}
+                                {{this.author_name}}
+                            {{else}}
+                                Удален
+                            {{/if}}
+                        </div>
+                    {{/if}}
                 </div>
                 <a class="answerText link ColorTextDark" href="/post/{{this.id}}?from={{../currentPath}}
                 ">{{this.title}}</a>
@@ -136,4 +141,5 @@
         const sortLinkId = '{{sortTag}}';
         document.getElementById(sortLinkId).classList.add('chosenSortLink');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
+    }
 </script>
