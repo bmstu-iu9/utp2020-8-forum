@@ -36,43 +36,78 @@
             {{/is}}
                  class="sortLink">По последнему ответу <span class="sortLinkArrow"
                                                              id="byLastReplySortLink">&nbsp;</span></a></span></div>
-    <ul id="ulPosts">
-        {{#each posts}}
-            <li class="answer colorSection">
-                <div class="profile">
-                    <img {{#if this.author_name}}
-                    src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                    {{else}}
-                    src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
-                    {{/if}}
-                    alt="No avatar" height="100" width="100">
-                    <div class="profileName link colorDarkLink">
-                        {{#if this.author_name}}
-                            {{this.author_name}}
-                        {{else}}
-                            Удален
-                        {{/if}}
-                    </div>
-                </div>
-                <div class="textAndTime">
-                    <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                    <div class="timeLast">
-                        {{this.time_since_creation}}
-                    </div>
-                </div>
-                <div class="voteField">
-                    <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
-                                                                       class="replyImage vote colorDarkLink myButton colorSection"
-                                                                       src="/static/images/reply.png" alt="#"/></a>
-                    <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                </div>
-            </li>
-        {{/each}}
-    </ul>
 
     {{#if user}}
         {{#if categoryChosen}}
+            <ul id="ulPosts">
+                {{#each posts}}
+                    <li class="answer colorSection">
+                        <div class="profile">
+                            <img {{#if this.author_name}}
+                            src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                            {{else}}
+                            src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439b    c6ab108427ae/w480"
+                            {{/if}}
+                            alt="No avatar" height="100" width="100">
+                            <div class="profileName link colorDarkLink">
+                                {{#if this.author_name}}
+                                    {{this.author_name}}
+                                {{else}}
+                                    Удален
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="textAndTime">
+                            <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                            <div class="timeLast">
+                                {{this.time_since_creation}}
+                            </div>
+                        </div>
+                        <div class="voteField">
+                            <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
+                                                                               class="replyImage vote colorDarkLink myButton colorSection"
+                                                                               src="/static/images/reply.png" alt="#"/></a>
+                            <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+
             {{>newPost}}
+        {{else}}
+            <ul id="ulPosts" class="categoryNotChosen">
+                {{#each posts}}
+                    <li class="answer colorSection">
+                        <div class="profile">
+                            <img {{#if this.author_name}}
+                            src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                            {{else}}
+                            src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439b    c6ab108427ae/w480"
+                            {{/if}}
+                            alt="No avatar" height="100" width="100">
+                            <div class="profileName link colorDarkLink">
+                                {{#if this.author_name}}
+                                    {{this.author_name}}
+                                {{else}}
+                                    Удален
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="textAndTime">
+                            <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
+                            <div class="timeLast">
+                                {{this.time_since_creation}}
+                            </div>
+                        </div>
+                        <div class="voteField">
+                            <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
+                                                                               class="replyImage vote colorDarkLink myButton colorSection"
+                                                                               src="/static/images/reply.png" alt="#"/></a>
+                            <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
         {{/if}}
     {{else}}
         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
@@ -140,4 +175,5 @@
         const sortLinkId = '{{sortTag}}';
         document.getElementById(sortLinkId).classList.add('chosenSortLink');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
+    }
 </script>
