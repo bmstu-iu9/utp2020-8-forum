@@ -1,5 +1,4 @@
 const dbManager = require('../modules/db');
-const db = dbManager.init();
 const express = require('express'),
     router = express.Router();
 
@@ -22,8 +21,8 @@ const sortPosts = (posts, sortTag) => {
 }
 
 router.get('/all', (req, res) => {
-    let categories = dbManager.getCategories(db);
-    let posts = dbManager.getAllPosts(db);
+    let categories = dbManager.getCategories();
+    let posts = dbManager.getAllPosts();
     let sortTag = req.query.sortTag;
     posts = sortPosts(posts, sortTag);
     res.render('home', {
@@ -40,11 +39,11 @@ router.get('/all', (req, res) => {
 })
 
 router.get('/:categoryId(\\d+)', (req, res) => {
-    let categories = dbManager.getCategories(db);
-    let categoryId = req.params.categoryId;
+    let categories = dbManager.getCategories();
+    let categoryId = req.params.categoryId.trim();
     let sortTag = req.query.sortTag;
     if (categories.length >= categoryId) {
-        let posts = dbManager.getPostsByCategory(db, categoryId).reverse();
+        let posts = dbManager.getPostsByCategory(categoryId).reverse();
         posts = sortPosts(posts, sortTag);
         res.render('home', {
             layout: 'postsListViewLayout',
@@ -63,9 +62,9 @@ router.get('/:categoryId(\\d+)', (req, res) => {
 
 router.post('/:categoryId(\\d+)', function (req, res) {
     let categoryId = req.params.categoryId;
-    let categories = dbManager.getCategories(db);
+    let categories = dbManager.getCategories();
     if (categories.length >= categoryId) {
-        let postSuccess = dbManager.addPost(db, req.user.id, req.body.myPost.trim(), categoryId);
+        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost.trim(), categoryId);
         if (postSuccess)
             res.redirect(`/category/${categoryId}`)
         else res.redirect(`/category/${categoryId}?postFail=true`)
@@ -74,16 +73,16 @@ router.post('/:categoryId(\\d+)', function (req, res) {
 })
 
 router.post('/create', (req, res) => {
-    let category = dbManager.checkCategoryExists(db, req.body.category);
-    let categoryId = dbManager.getCategories(db).length;
+    let category = dbManager.checkCategoryExists(req.body.category.trim());
+    let categoryId = dbManager.getCategories().length;
     if (!category) {
-        dbManager.createCategory(db, req.body.category.trim());
+        dbManager.createCategory(req.body.category.trim());
         categoryId++;
-        dbManager.addPost(db, req.user.id, req.body.newPost.trim(), categoryId);
+        dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId);
         res.redirect(`/category/${categoryId}`);
     } else {
         categoryId = category.id;
-        let postSuccess = dbManager.addPost(db, req.user.id, req.body.newPost.trim(), categoryId);
+        let postSuccess = dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId);
         if (postSuccess)
             res.redirect(`/category/${categoryId}`);
         else
@@ -92,8 +91,8 @@ router.post('/create', (req, res) => {
 });
 
 router.get('/myPosts', (req, res) => {
-    let categories = dbManager.getCategories(db);
-    let posts = dbManager.getPostsByUser(db, req.user.id);
+    let categories = dbManager.getCategories();
+    let posts = dbManager.getPostsByUser(req.user.id);
     let sortTag = req.query.sortTag;
     posts = sortPosts(posts, sortTag);
     res.render('home', {
@@ -110,18 +109,18 @@ router.get('/myPosts', (req, res) => {
 });
 
 router.post('/delete', (req, res) => {
-    let category = dbManager.getPost(db, req.body.id).category_id;
-    dbManager.deletePost(db, req.body.id);
-    let posts = dbManager.getPostsByCategory(db, category);
+    let category = dbManager.getPost(req.body.id).category_id;
+    dbManager.deletePost(req.body.id);
+    let posts = dbManager.getPostsByCategory(category);
     if (posts.length === 0) {
-        dbManager.deleteCategory(db, category);
+        dbManager.deleteCategory(category);
     }
     res.status(200).send();
 });
 
 router.post('/edit', (req, res) => {
-    if (!dbManager.checkPostExists(db, trim(req.body.text), req.body.category)) {
-        dbManager.updatePost(db, trim(req.body.text), req.body.id);
+    if (!dbManager.checkPostExists(req.body.text.trim(), req.body.category)) {
+        dbManager.updatePost(req.body.text.trim(), req.body.id);
         res.status(200).send();
     } else {
         res.status(400).send();
