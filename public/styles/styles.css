@@ -208,6 +208,14 @@ a {
     width: 5%;
 }
 
+.editDeleteField {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    text-align: center;
+    width: 8%;
+}
+
 .vote {
     width: 75%;
 }
@@ -223,6 +231,7 @@ a {
 .postTitle {
     margin-top: 2%;
     max-width: 90%;
+    min-height: 10%;
     max-height: 20%;
 
     padding-left: 1%;
