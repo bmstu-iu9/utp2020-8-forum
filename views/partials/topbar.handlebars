@@ -67,15 +67,15 @@
     </div>
 
     <script>
-            {{#if message}}
-            if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
-                document.getElementById('signUpButton').click();
-                document.getElementById('signUpError').innerHTML = '{{message}}';
-            } else if ('{{message}}' === 'Wrong login or password'){
-                document.getElementById('logInButton').click();
-                document.getElementById('logInError').innerHTML = '{{message}}';
-            }
-            {{/if}}
+        {{#if message}}
+        if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
+            document.getElementById('signUpButton').click();
+            document.getElementById('signUpError').innerHTML = '{{message}}';
+        } else if ('{{message}}' === 'Wrong login or password'){
+            document.getElementById('logInButton').click();
+            document.getElementById('logInError').innerHTML = '{{message}}';
+        }
+        {{/if}}
 
         const list = document.getElementById('profileOptionsList');
 

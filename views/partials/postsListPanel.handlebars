@@ -10,108 +10,61 @@
 <div class="selectedTheme colorMain">
     <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
     <div class="colorTextLight">
-        <span><a
+        <span><a id='byTime'
             {{#is sortTag 'byTime' }}
-            href="?sortTag=byTimeAsc"
+                 href="?sortTag=byTimeAsc"
             {{else}}
                 {{#if sortTag }}
-            href="?sortTag=byTime"
+                 href="?sortTag=byTime"
                 {{else}}
-            href="?sortTag=byTimeAsc"
+                 href="?sortTag=byTimeAsc"
                 {{/if}}
             {{/is}}
-            class="sortLink">По времени</a></span>
-        <span><a
+                 class="sortLink">По времени <span class="sortLinkArrow" id="byTimeSortLink">&nbsp;</span></a></span>
+        <span><a id='byReplies'
             {{#is sortTag 'byReplies' }}
-            href="?sortTag=byRepliesAsc"
+                 href="?sortTag=byRepliesAsc"
             {{else}}
-            href="?sortTag=byReplies"
+                 href="?sortTag=byReplies"
             {{/is}}
-            class="sortLink">По ответам</a></span>
-        <span><a
+                 class="sortLink">По ответам <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
+        <span><a id="byLastReply"
             {{#is sortTag 'byLastReply' }}
-            href="?sortTag=byLastReplyAsc"
+                 href="?sortTag=byLastReplyAsc"
             {{else}}
-            href="?sortTag=byLastReply"
+                 href="?sortTag=byLastReply"
             {{/is}}
-            class="sortLink">По последнему ответу</a></span></div>
-
-    {{#if userPostsChosen}}
-        <ul id="ulPosts" class="categoryNotChosen">
-            {{#each posts}}
-                <li class="answer colorSection">
-                    <div class="profile">
-                        <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                             alt="No avatar" height="100" width="100">
-                        <a class="profileName link colorDarkLink" onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
-                        <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
+                 class="sortLink">По последнему ответу <span class="sortLinkArrow"
+                                                             id="byLastReplySortLink">&nbsp;</span></a></span></div>
+    <ul id="ulPosts">
+        {{#each posts}}
+            <li class="answer colorSection">
+                <div class="profile">
+                    <img {{#if this.author_name}}
+                    src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                    {{else}}
+                    src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
+                    {{/if}}
+                    alt="No avatar" height="100" width="100">
+                    <div class="profileName link colorDarkLink">
+                        {{#if this.author_name}}
+                            {{this.author_name}}
+                        {{else}}
+                            Удален
+                        {{/if}}
                     </div>
-                    <div class="textAndTime">
-                        <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                        <div class="timeLast">
-                            {{this.time_since_creation}}
-                        </div>
-                    </div>
-                    <div class="voteField">
-                        <a href="/post/{{this.id}}"><input type="image"
-                                                           class="replyImage vote colorDarkLink myButton colorSection"
-                                                           src="/static/images/reply.png" alt="#"/></a>
-                        <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
-    {{else}}
-        {{#if categoryChosen}}
-            <ul id="ulPosts">
-                {{#each posts}}
-                    <li class="answer colorSection">
-                        <div class="profile">
-                            <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                                 alt="No avatar" height="100" width="100">
-                            <div class="profileName link colorDarkLink">{{this.author_name}}</div>
-                        </div>
-                        <div class="textAndTime">
-                            <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                            <div class="timeLast">
-                                {{this.time_since_creation}}
-                            </div>
-                        </div>
-                        <div class="voteField">
-                            <a href="/post/{{this.id}}"><input type="image"
-                                                               class="replyImage vote colorDarkLink myButton colorSection"
-                                                               src="/static/images/reply.png" alt="#"/></a>
-                            <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                        </div>
-                    </li>
-                {{/each}}
-            </ul>
-        {{else}}
-            <ul style="max-height: 100px;" class="categoryNotChosen" id="ulPosts">
-                {{#each posts}}
-                    <li class="answer colorSection">
-                        <div class="profile">
-                            <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                                 alt="No avatar" height="100" width="100">
-                            <div class="profileName link colorDarkLink">{{this.author_name}}</div>
-                        </div>
-                        <div class="textAndTime">
-                            <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                            <div class="timeLast">
-                                {{this.time_since_creation}}
-                            </div>
-                        </div>
-                        <div class="voteField">
-                            <a href="/post/{{this.id}}"><input type="image"
-                                                               class="replyImage vote colorDarkLink myButton colorSection"
-                                                               src="/static/images/reply.png" alt="#"/></a>
-                            <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                        </div>
-                    </li>
-                {{/each}}
-            </ul>
-        {{/if}}
-    {{/if}}
+                </div>
+                <a class="answerText link ColorTextDark" href="/post/{{this.id}}?from={{../currentPath}}
+                ">{{this.title}}</a>
+                <div class="voteField">
+                    <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
+                                                                       class="replyImage vote colorDarkLink myButton colorSection"
+                                                                       src="/static/images/reply.png" alt="#"/></a>
+                    <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
 
     {{#if user}}
         {{#if categoryChosen}}
@@ -121,9 +74,9 @@
         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}
 </div>
-
 <script>
-    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'), box3 = document.getElementById('postCreation'), box4 = document.getElementById('postChange');
+    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'), box3 = document.getElementById('postCreation'),
+            box4 = document.getElementById('postChange');
     window.onclick = function (event) {
         if (event.target === box1) {
             box1.style.display = 'none';
@@ -135,11 +88,12 @@
             box4.style.display = 'none';
         }
     }
+
     const deletePost = (id) => {
         let post = {
             id: id
         };
-        fetch('/category/delete', {
+        fetch('/post/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -150,7 +104,7 @@
         });
     }
     const editPost = (id, category, text) => {
-        document.getElementById('postChange').style.display = 'block';
+        document.getElementById('postChange').style.display='block';
         document.getElementById('editPost').value = text;
         document.getElementById('sendEdition').onsubmit = async (e) => {
             e.preventDefault();
@@ -159,13 +113,13 @@
                 category: category,
                 text: document.getElementById('sendEdition').edition.value
             }
-            fetch('/category/edit', {
+            fetch('/post/edit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 body: JSON.stringify(post)
-            }).then((res) => {
+            }).then( (res) => {
                 if (res.ok) {
                     location.reload();
                 } else {
@@ -174,4 +128,12 @@
             });
         };
     }
+    if ('{{sortTag}}'.endsWith('Asc')) {
+        const sortLinkId = '{{sortTag}}'.replace('Asc', '')
+        document.getElementById(sortLinkId).classList.add('chosenSortLinkAsc');
+        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↑";
+    } else {
+        const sortLinkId = '{{sortTag}}';
+        document.getElementById(sortLinkId).classList.add('chosenSortLink');
+        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
 </script>

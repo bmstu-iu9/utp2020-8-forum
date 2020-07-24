@@ -37,7 +37,7 @@ const getAllPosts = () => {
     return posts;
 }
 const getPostsByCategory = categoryId => {
-    let posts = query("getPostsByCategory").all(categoryId);
+    let posts = query("getPostsByCategory").all(categoryId, categoryId);
     posts.forEach(p => {
         let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
@@ -49,23 +49,21 @@ const getPost = postId => query("getPost").get(postId)
 
 const getReply = replyId => query("getReply").get(replyId)
 
-const getReplies = postId => query("getReplies").all(postId)
+const getReplies = postId => query("getReplies").all(postId, postId)
 
 const getLastReply = postId => query("getLastReply").get(postId);
 
 const checkPostExists = (title, category_id) => query("checkPostExists").get(title, category_id) !== undefined
 
 const addNewPost = (author_id, title, category_id, creation_time) => {
-    if (!checkPostExists(title, category_id)) {
-        db.prepare(SQLrequests.addPost).run(author_id, title, category_id, creation_time);
-        return true
-    }
-    return false
+    if (checkPostExists(title, category_id))
+        return false
+    query("addPost").run(author_id, title, category_id, creation_time);
+    return true
 }
 
-const addReply = (author_id, reply, post_id, creation_time) => {
-    db.prepare(SQLrequests.addReply).run(author_id, reply, post_id, creation_time);
-}
+const addReply = (author_id, reply, post_id, creation_time) => query("addReply").run(author_id, reply, post_id, creation_time);
+
 const addVoteEntry = (user_id, reply_id, amount) => query("addVoteEntry").run(user_id, reply_id, amount)
 
 const inverseVoteAmount = id => query("inverseVoteAmount").run(id);
@@ -82,16 +80,14 @@ const getRepliesCount = () => query("getReplyCount").all()
 
 const deleteUser = user_id => query("deleteUser").run(user_id)
 
-const checkCategoryExists = (category) => {
-    return db.prepare(SQLrequests.checkCategoryExists).get(category);
-}
+const checkCategoryExists = category =>  query("checkCategoryExists").get(category);
 
-const createCategory = (category) => {
-    db.prepare(SQLrequests.createCategory).run(category);
-}
+const getCategoryById = id => query("getCategoryById").get(id);
 
-const getPostsByUser = (id) => {
-    let posts = db.prepare(SQLrequests.getPostsByUser).all(id);
+const createCategory = category => query("createCategory").run(category);
+
+const getPostsByUser = userId => {
+    let posts = query("getPostsByUser").all(userId, userId);
     posts.forEach(p => {
         let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
@@ -99,36 +95,15 @@ const getPostsByUser = (id) => {
     return posts;
 }
 
-const deleteVotesToReply = (replyId) => {
-    db.prepare(SQLrequests.deleteRepliesToPost).run(replyId);
-}
+const deletePost = postId => query("deletePost").run(postId);
 
-const deleteRepliesToPost = (postId) => {
-    let replies = getReplies(postId);
-    for (let value of replies) {
-        deleteVotesToReply(value.id);
-    }
-    db.prepare(SQLrequests.deleteRepliesToPost).run(postId);
-}
+const deleteCategory = categoryId => query("deleteCategory").run(categoryId);
 
-const deletePost = (postId) => {
-    deleteRepliesToPost(postId);
-    db.prepare(SQLrequests.deletePost).run(postId);
-}
+const updatePost = (text, postId) => query("updatePost").run(text, postId);
 
-const deleteCategory = (categoryId) => {
-    db.prepare(SQLrequests.deleteCategory).run(categoryId);
-}
+const deleteReply = replyId => query("deleteReply").run(replyId);
 
-const updatePost = (text, postId) => {
-    db.prepare(SQLrequests.updatePost).run(text, postId);
-}
-
-const modifiedTimes = (moment, postsOrReplies) => {
-    for(let i = 0; i < postsOrReplies.length; ++i)
-        postsOrReplies[i].time_since_creation = moment(postsOrReplies[i].creation_time).fromNow();
-    return postsOrReplies;
-}
+const updateReply = (text, replyId) => query("updateReply").run(text, replyId);
 
 exports.init = init;
 exports.migrate = migrate;
@@ -147,18 +122,15 @@ exports.findUser = findUser;
 exports.checkUserVoted = checkUserVoted;
 exports.addVoteEntry = addVoteEntry;
 exports.inverseVoteAmount = inverseVoteAmount;
+exports.deleteUser = deleteUser;
 exports.checkCategoryExists = checkCategoryExists;
+exports.getCategoryById = getCategoryById;
 exports.createCategory = createCategory;
 exports.checkUserExists = checkUserExists;
 exports.createUser = createUser;
 exports.getPostsByUser = getPostsByUser;
-exports.deleteVotesToReply = deleteVotesToReply;
-exports.deleteRepliesToPost = deleteRepliesToPost;
 exports.deletePost = deletePost;
 exports.deleteCategory = deleteCategory;
 exports.updatePost = updatePost;
-exports.modifiedTimes = modifiedTimes;
-
-exports.deleteUser = deleteUser;
-exports.checkUserExists = checkUserExists;
-exports.createUser = createUser;
+exports.deleteReply = deleteReply;
+exports.updateReply = updateReply;
