@@ -322,6 +322,7 @@ li {
     top: 0;
     left: 0;
     display: none;
+    z-index: 100;
 }
 
 .windowContent {
@@ -383,4 +384,18 @@ li {
 
 .hidden {
     display: none !important;
+}
+
+.postCreationBox {
+    max-width: 50%;
+    max-height: 50%;
+    text-align: center;
+    padding: 1% 1% 1% 1%;
+    border-radius: 1vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
 }

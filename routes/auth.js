@@ -3,7 +3,7 @@ const express = require('express'),
     router = express.Router();
 
 const passport = require('passport');
-const authModule = require('../modules/auth.js');
+const authModule = require('../modules/hash-password.js');
 
 router.post('/signup', (req, res) => {
     const {login, psw, pswConf} = req.body;

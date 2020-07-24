@@ -1,8 +1,9 @@
 'use strict'
 const passport = require('passport');
-const authModule = require('./auth.js');
 const LocalStrategy = require('passport-local').Strategy;
 const dbManager = require('./db.js');
+const authModule = require('./hash-password');
+
 
 passport.serializeUser((user, done) => {
     done(null, user.username);
@@ -22,6 +23,5 @@ passport.use(
         if (user !== undefined && user.password === authModule.getHashedPassword(password))
             return done(null, user);
         return done(null, false, req.flash('error', 'Wrong login or password'));
-
     })
 );

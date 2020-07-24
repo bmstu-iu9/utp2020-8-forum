@@ -1,4 +1,4 @@
-<div id="window" class="window">
+<div id="logInForm" class="window">
     <form class="windowContent colorMain" method="post" action="/signup">
         <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
         <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
@@ -10,13 +10,23 @@
     </form>
 </div>
 
-<div id="entry" class="window">
+<div id="signUpForm" class="window">
     <form class="windowContent colorMain" method="post" action="/login">
         <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
         <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
         <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Enter password" name="psw" required>
         <button type="submit" class="close colorDarkLink colorBackground">Log in</button>
         <div id="logInError" class="colorTextLight"></div>
+    </form>
+</div>
+
+<div id="postCreation" class="window">
+    <form class="postCreationBox colorMain" method="post" action="/category/create">
+        <div class="colorTextLight">Create post</div>
+        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Введите категорию" name="category" required>
+        <textarea placeholder="Создайте свой пост" name="newPost" required></textarea>
+        <input id="postAnswerButton" class="borderTop myButton colorDarkLink colorSection" type="image"
+               src="/static/images/send.png">
     </form>
 </div>
 
@@ -31,35 +41,32 @@
 
     {{#if user}}
         <div id="profileTopBar" class="headerUser">
+            <a class="link colorDarkLink colorTextLight"
+               onclick="document.getElementById('postCreation').style.display='block'">Create post</a>
             <a class="link colorDarkLink colorTextLight" id="showMenu"
                onclick="showProfileOptionsList()">{{user.username}}</a>
             {{>profileOptionsList}}
         </div>
     {{else}}
-        <a id="signUp" class="headerUser link colorDarkLink colorTextLight"
-           onclick="document.getElementById('window').style.display='block'">Sign Up</a>
-        <a id="logIn" class="headerUser link colorDarkLink colorTextLight"
-           onclick="document.getElementById('entry').style.display='block'">Log In</a>
+        <div class="headerUser">
+            <a id="logInButton" class="link colorDarkLink colorTextLight"
+               onclick="document.getElementById('signUpForm').style.display='block'">Log In</a>
+            <a id="signUpButton" class="link colorDarkLink colorTextLight"
+               onclick="document.getElementById('logInForm').style.display='block'">Sign Up</a>
+        </div>
     {{/if}}
 
     <script>
-            {{#if message}}
-            if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
-                document.getElementById('signUp').click();
-                document.getElementById('signUpError').innerHTML = '{{message}}';
-            } else {
-                document.getElementById('logIn').click();
-                document.getElementById('logInError').innerHTML = '{{message}}';
-            }
-            {{/if}}
-        let box1 = document.getElementById('window'), box2 = document.getElementById('entry');
-        window.onclick = function (event) {
-            if (event.target == box1) {
-                box1.style.display = 'none';
-            } else if (event.target == box2) {
-                box2.style.display = 'none';
-            }
+        {{#if message}}
+        if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
+            document.getElementById('signUpButton').click();
+            document.getElementById('signUpError').innerHTML = '{{message}}';
+        } else if ('{{message}}' === 'Wrong login or password'){
+            document.getElementById('logInButton').click();
+            document.getElementById('logInError').innerHTML = '{{message}}';
         }
+        {{/if}}
+
         const list = document.getElementById('profileOptionsList');
 
         const showProfileOptionsList = function () {
