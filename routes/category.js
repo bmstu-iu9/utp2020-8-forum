@@ -41,43 +41,41 @@ router.get('/all', (req, res) => {
 router.get('/:categoryId(\\d+)', (req, res) => {
     let categories = dbManager.getCategories();
     let categoryId = req.params.categoryId.trim();
-    let sortTag = req.query.sortTag;
-    if (categories.length >= categoryId) {
+    let category = dbManager.getCategoryById(categoryId);
+    if (category !== undefined) {
+        let sortTag = req.query.sortTag;
         let posts = dbManager.getPostsByCategory(categoryId).reverse();
         posts = sortPosts(posts, sortTag);
         res.render('home', {
             layout: 'postsListViewLayout',
             posts: posts,
             categories: categories,
-            postsListTitle: categories[categoryId - 1].name,
+            postsListTitle: category.name,
             postFail: req.query.postFail,
             categoryChosen: true,
             userPostsChosen: false,
             sortTag: sortTag,
             user: req.user
         });
-    } else
-        res.status(404).send('Нет такой категории');
+    } else {
+        res.status(404).send("Нет такой категории");
+    }
 })
 
 router.post('/:categoryId(\\d+)', function (req, res) {
     let categoryId = req.params.categoryId;
-    let categories = dbManager.getCategories();
-    if (categories.length >= categoryId) {
-        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost.trim(), categoryId);
-        if (postSuccess)
-            res.redirect(`/category/${categoryId}`)
-        else res.redirect(`/category/${categoryId}?postFail=true`)
-
-    } else res.redirect(`/category/${categoryId}?postFail=true`)
+    let postSuccess = dbManager.addPost(req.user.id, req.body.myPost.trim(), categoryId);
+    if (postSuccess)
+        res.redirect(`/category/${categoryId}`)
+    else res.redirect(`/category/${categoryId}?postFail=true`)
 })
 
 router.post('/create', (req, res) => {
     let category = dbManager.checkCategoryExists(req.body.category.trim());
-    let categoryId = dbManager.getCategories().length;
+    let categoryId;
     if (!category) {
         dbManager.createCategory(req.body.category.trim());
-        categoryId++;
+        categoryId = dbManager.checkCategoryExists(req.body.category.trim()).id;
         dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId);
         res.redirect(`/category/${categoryId}`);
     } else {
@@ -106,26 +104,6 @@ router.get('/myPosts', (req, res) => {
         sortTag: sortTag,
         user: req.user
     });
-});
-
-router.post('/delete', (req, res) => {
-    let category = dbManager.getPost(req.body.id).category_id;
-    dbManager.deletePost(req.body.id);
-    let posts = dbManager.getPostsByCategory(category);
-    if (posts.length === 0) {
-        dbManager.deleteCategory(category);
-    }
-    res.status(200).send();
-});
-
-router.post('/edit', (req, res) => {
-    if (!dbManager.checkPostExists(req.body.text.trim(), req.body.category)) {
-        dbManager.updatePost(req.body.text.trim(), req.body.id);
-        res.status(200).send();
-    } else {
-        res.status(400).send();
-    }
-
 });
 
 module.exports = router;

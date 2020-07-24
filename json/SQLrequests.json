@@ -80,6 +80,9 @@
   "checkCategoryExists": [
     "SELECT * from categories WHERE trim(name) = ?"
   ],
+  "getCategoryById": [
+    "SELECT * from categories WHERE id = ?"
+  ],
   "createCategory": [
     "INSERT INTO categories (name) VALUES (?)"
   ],
@@ -110,5 +113,11 @@
   ],
   "updatePost": [
     "UPDATE posts SET title = ? WHERE id = ?"
+  ],
+  "deleteReply": [
+    "DELETE FROM replies WHERE id = ?"
+  ],
+  "updateReply": [
+    "UPDATE replies SET text = ? WHERE id = ?"
   ]
 }

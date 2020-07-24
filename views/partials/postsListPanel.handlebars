@@ -69,7 +69,8 @@
     {{/if}}
 </div>
 <script>
-    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'), box3 = document.getElementById('postCreation'), box4 = document.getElementById('postChange');
+    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'), box3 = document.getElementById('postCreation'),
+            box4 = document.getElementById('postChange');
     window.onclick = function (event) {
         if (event.target === box1) {
             box1.style.display = 'none';
@@ -81,11 +82,12 @@
             box4.style.display = 'none';
         }
     }
+
     const deletePost = (id) => {
         let post = {
             id: id
         };
-        fetch('/category/delete', {
+        fetch('/post/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -105,7 +107,7 @@
                 category: category,
                 text: document.getElementById('sendEdition').edition.value
             }
-            fetch('/category/edit', {
+            fetch('/post/edit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
