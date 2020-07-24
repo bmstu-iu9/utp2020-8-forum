@@ -2,7 +2,6 @@ const dbManager = require('../modules/db');
 const express = require('express'),
     router = express.Router();
 
-
 const sortPosts = (posts, sortTag) => {
     switch (sortTag) {
         case 'byTimeAsc':
@@ -20,7 +19,7 @@ const sortPosts = (posts, sortTag) => {
     }
 }
 
-router.get('/all', (req, res) => {
+router.get('/all', function (req, res) {
     let categories = dbManager.getCategories();
     let posts = dbManager.getAllPosts();
     let sortTag = req.query.sortTag;
@@ -34,7 +33,8 @@ router.get('/all', (req, res) => {
         userPostsChosen: false,
         sortTag: sortTag,
         user: req.user,
-        message: req.flash('error')
+        message: req.flash('error'),
+        currentPath: req.originalUrl
     });
 })
 
@@ -55,7 +55,8 @@ router.get('/:categoryId(\\d+)', (req, res) => {
             categoryChosen: true,
             userPostsChosen: false,
             sortTag: sortTag,
-            user: req.user
+            user: req.user,
+            currentPath: req.originalUrl
         });
     } else {
         res.status(404).send("Нет такой категории");

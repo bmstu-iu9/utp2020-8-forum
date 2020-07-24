@@ -24,7 +24,7 @@ const migrate = () => {
     }
 }
 
-const query = queryName => db.prepare(SQLrequests[queryName].join(""));
+const query = queryName => db.prepare(SQLrequests[queryName].join(""))
 
 const getCategories = () => query("getCategories").all();
 

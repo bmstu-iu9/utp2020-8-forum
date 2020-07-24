@@ -8,18 +8,30 @@
 </div>
 
 <div class="selectedTheme colorMain">
-    <input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/back.png" height="40"
-           style="float: left; margin-top: 4.4vh" onclick="history.back();">
+    <a class="borderTop myButton colorDarkLink colorSection"
+       style="float: left; margin-top: 4.4vh" href="{{from}}"><img src="/static/images/back.png" height="40"
+                                                                   alt="Назад"></a>
     <h3 class="postTitle colorTextLight">{{post.title}}</h3>
     <ul id="ulReplies" style="max-height: 67%;">
         {{#each replies}}
             <li class="answer colorSection" id="reply_{{this.id}}">
-            <div class="profile">
-                <img src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                     alt="No avatar" height="100" width="100">
-                <div class="profileName link colorDarkLink" href="#">{{this.author_name}}</div>
-            </div>
-            <div class="answerText link ColorTextDark">{{this.text}}</div>
+                <div class="profile">
+                    <img
+                        {{#if this.author_name}}
+                        src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                        {{else}}
+                        src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
+                        {{/if}}
+                        alt="No avatar" height="100" width="100">
+                    <div class="profileName link colorDarkLink" href="#">
+                        {{#if this.author_name}}
+                            {{this.author_name}}
+                        {{else}}
+                            Удален
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="answerText link ColorTextDark">{{this.text}}</div>
 
             <div class="voteField">
                 {{#eq ../user.username this.author_name}}
@@ -32,15 +44,12 @@
                     <form action="/vote/{{this.id}}/-1" method="post">
                         <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
                     </form>
-                    <div class="voteCounter">
-                        {{#if this.rating }}
-                            {{#gt this.rating 0 }}
-                                <span style="color: darkgreen">{{this.rating}}</span>
-                            {{else}}
-                                <span style="color: darkred">{{this.rating}}</span>
-                            {{/gt}}
+                    <div class="voteCounter">{{#if this.rating }}
+                        {{#gt this.rating 0 }}
+                            <span style="color: darkgreen   ">{{this.rating}}</span>
                         {{else}}
                             0
+                        {{/gt}}
                         {{/if}}
                     </div>
                 {{/eq}}

@@ -199,6 +199,7 @@ li {
     margin-left: 1%;
     margin-top: 1%;
     overflow-y: auto;
+    white-space: pre-line;
 }
 
 .postTitle {
@@ -290,6 +291,18 @@ li {
     text-decoration: none;
 }
 
+.sortLinkArrow {
+    display: inline-block;
+}
+
+.chosenSortLinkAsc {
+    color: coral !important;
+}
+
+.chosenSortLink {
+    color: paleturquoise !important;
+}
+
 #message {
     position: absolute;
     width: 500px;
@@ -334,13 +347,11 @@ li {
     position: absolute;
     right: 0;
     top: 60px;
-    width: 200%;
+    width: 200px;
     padding: 10px 0;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-
-
 }
 
 #profileOptionsList a {

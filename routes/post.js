@@ -5,7 +5,9 @@ const express = require('express'),
 
 router.get('/:postId(\\d+)', function (req, res) {
     let postId = req.params.postId;
+    let from = req.query.from;
     let post = dbManager.getPost(postId)
+    console.log(from)
     if (post) {
         let categories = dbManager.getCategories();
         let replies = dbManager.getReplies(postId)
@@ -14,7 +16,8 @@ router.get('/:postId(\\d+)', function (req, res) {
             categories: categories,
             post: post,
             replies: replies,
-            user: req.user
+            user: req.user,
+            from: from
         });
     } else res.status(404).send('Нет такого поста')
 
@@ -22,8 +25,9 @@ router.get('/:postId(\\d+)', function (req, res) {
 
 router.post('/:postId(\\d+)', function (req, res) {
     let id = req.params.postId;
+    const originalUrl = req.originalUrl;
     dbManager.addReply(req.user.id, req.body.myAnswer, id);
-    res.redirect(`/post/${id}`)
+    res.redirect(originalUrl)
 })
 
 router.post('/delete', (req, res) => {

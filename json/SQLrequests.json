@@ -48,13 +48,13 @@
     "SELECT * FROM categories"
   ],
   "checkPostExists": [
-    "SELECT * FROM posts WHERE trim(title)=? AND category_id=?"
+    "SELECT * FROM posts WHERE title=? AND category_id=?"
   ],
   "addPost": [
-    "INSERT INTO posts (author_id, title, category_id) VALUES (?, ?, ?)"
+    "INSERT INTO posts (author_id, title, category_id) VALUES (?, trim(?), ?)"
   ],
   "addReply": [
-    "INSERT INTO replies (author_id, text, post_id) VALUES (?, ?, ?)"
+    "INSERT INTO replies (author_id, text, post_id) VALUES (?, trim(?), ?)"
   ],
   "addVoteEntry": [
     "INSERT INTO votes (user_id, reply_id, amount) VALUES (?, ?, ?)"

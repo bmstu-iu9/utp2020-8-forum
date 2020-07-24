@@ -3,7 +3,7 @@ const express = require('express'),
     router = express.Router();
 
 const passport = require('passport');
-const authModule = require('../modules/auth.js');
+const authModule = require('../modules/hash-password.js');
 
 router.post('/signup', (req, res) => {
     const {login, psw, pswConf} = req.body;
@@ -34,5 +34,20 @@ router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
 });
+
+router.get('/status', (req, res) => {
+    if (req.isAuthenticated())
+        res.send('you are logged in');
+    else
+        res.send('you are not log in');
+});
+
+
+router.get('/deleteProfile', (req, res) => {
+    let id = req.user.id;
+    req.logout()
+    dbManager.deleteUser(id)
+    res.redirect('/')
+})
 
 module.exports = router;
