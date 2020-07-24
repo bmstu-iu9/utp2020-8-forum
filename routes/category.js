@@ -30,7 +30,6 @@ router.get('/all', function (req, res) {
         categories: categories,
         postsListTitle: "Все посты",
         categoryChosen: false,
-        userPostsChosen: false,
         sortTag: sortTag,
         user: req.user,
         message: req.flash('error'),
@@ -53,7 +52,6 @@ router.get('/:categoryId(\\d+)', (req, res) => {
             postsListTitle: category.name,
             postFail: req.query.postFail,
             categoryChosen: true,
-            userPostsChosen: false,
             sortTag: sortTag,
             user: req.user,
             currentPath: req.originalUrl
@@ -107,7 +105,6 @@ router.get('/myPosts', (req, res) => {
         postsListTitle: "Мои посты",
         postFail: req.query.postFail,
         categoryChosen: false,
-        userPostsChosen: true,
         sortTag: sortTag,
         user: req.user
     });

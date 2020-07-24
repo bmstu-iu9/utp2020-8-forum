@@ -46,7 +46,7 @@
                     src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
                     {{/if}}
                     alt="No avatar" height="100" width="100">
-                    {{#if ../userPostsChosen}}
+                    {{#eq this.author_id ../user.id}}
                         <a class="profileName link colorDarkLink" onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
                         <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
                     {{else}}
@@ -57,7 +57,7 @@
                                 Удален
                             {{/if}}
                         </div>
-                    {{/if}}
+                    {{/eq}}
                 </div>
                 <a class="answerText link ColorTextDark" href="/post/{{this.id}}?from={{../currentPath}}
                 ">{{this.title}}</a>
