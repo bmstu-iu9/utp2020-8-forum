@@ -1,44 +1,5 @@
-<div id="logInForm" class="window">
-    <form class="windowContent colorMain" method="post" action="/signup">
-        <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
-        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
-        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Enter password" name="psw" required>
-        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Confirm password" name="pswConf"
-               required>
-        <button type="submit" class="close colorDarkLink colorBackground">Sign up</button>
-        <div id="signUpError" class="colorTextLight"></div>
-    </form>
-</div>
 
-<div id="signUpForm" class="window">
-    <form class="windowContent colorMain" method="post" action="/login">
-        <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
-        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
-        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Enter password" name="psw" required>
-        <button type="submit" class="close colorDarkLink colorBackground">Log in</button>
-        <div id="logInError" class="colorTextLight"></div>
-    </form>
-</div>
 
-<div id="postCreation" class="window">
-    <form class="postCreationBox colorMain" method="post" action="/category/create">
-        <div style="display: flex; flex-direction: column; justify-content: center;">
-            <div class="colorTextLight">Category</div>
-            <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Введите категорию" name="category"
-                   required>
-        </div>
-        <textarea placeholder="Создайте свой пост" name="newPost" id="myAnswer" required></textarea>
-        <div class="marginButton">
-            <input id="postAnswerButton" class="borderTop myButton colorDarkLink colorSection" type="image"
-                   src="/static/images/send.png">
-        </div>
-    </form>
-</div>
-{{#if postFail}}
-    <div id="message">
-        <p>Не удалось создать пост</p>
-    </div>
-{{/if}}
 <header id="topBar" class="bgLight">
     <a id='headerLogo' class="headerText colorMedium linkTextNoDecor hoverColorAccent left" href="/">Форум</a>
         {{#if user}}

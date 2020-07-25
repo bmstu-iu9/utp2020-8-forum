@@ -1,5 +1,13 @@
+{{#not user}}
+    {{>loginPanel}}
+    {{>signupPanel}}
+{{else}}
+    {{>postCreationPanel}}
+{{/not}}
 {{>head}}
 {{>topbar}}
+{{>message}}
+
 <div class="container relative" style="">
     <div id="categories" class="colorMain">
         <h2 style="border-bottom-style:solid;" class="colorTextLight">Категории</h2>
