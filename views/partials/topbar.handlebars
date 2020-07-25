@@ -34,35 +34,33 @@
         </div>
     </form>
 </div>
-
-<header id="topBar" class="colorHeader">
-
-    {{#if postFail}}
-        <div id="message">
-            <p>Не удалось создать пост</p>
-        </div>
-    {{/if}}
-
-    <div class="header">
-        <a class="headerLogo headerText link colorDarkLink colorTextLight" href="/">IU9-Forum</a>
-
+{{#if postFail}}
+    <div id="message">
+        <p>Не удалось создать пост</p>
+    </div>
+{{/if}}
+<header id="topBar" class="bgLight">
+    <a id='headerLogo' class="headerText colorMedium linkTextNoDecor hoverColorAccent left" href="/">Форум</a>
         {{#if user}}
-            <div id="profileTopBar" class="headerUser">
-                <a class="link colorDarkLink colorTextLight"
-                   onclick="document.getElementById('postCreation').style.display='block'">Create post</a>
-                <a class="link colorDarkLink colorTextLight" id="showMenu"
-                   onclick="showProfileOptionsList()">{{user.username}}</a>
-                {{>profileOptionsList}}
+            <div id="headerProfileBlock" class='right relative vertAlignItemsMid'>
+                <button class="bigBtn bgAccent hoverBgSpecial roundBorder" onclick="document.getElementById('postCreation').style.display='block'" >Создать пост</button>
+                <img src="https://api.adorable.io/avatars/128/{{user.name}}.png" class='roundImg smallAvatar inlineBlock' alt="">
+                <a id='showMenu' class="headerText colorMedium linkTextNoDecor hoverColorAccent" id="showMenu" onclick="showProfileOptionsList()">{{user.username}} ▼</a>
+                <ul id="profileOptionsList" class="noUlDecor menuList shadowed1 hidden">
+                    <li><a href="/category/myPosts" class="">Мои посты</a></li>
+                    <li><a href="/logout">Выйти</a></li>
+                    <li><a class="colorDanger" href="/deleteProfile">Удалить аккаунт</a></li>
+                </ul>
             </div>
         {{else}}
-            <div class="headerUser">
-                <a id="logInButton" class="link colorDarkLink colorTextLight"
-                   onclick="document.getElementById('signUpForm').style.display='block'">Log In</a>
-                <a id="signUpButton" class="link colorDarkLink colorTextLight"
-                   onclick="document.getElementById('logInForm').style.display='block'">Sign Up</a>
+            <div id="headerProfileBlock" class='right relative'>
+                <a id="signUpButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
+                   onclick="document.getElementById('logInForm').style.display='block'">Регистрация</a>
+                <a id=" logInButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
+                   onclick="document.getElementById('signUpForm').style.display='block'">Войти</a>
             </div>
         {{/if}}
-    </div>
+</header>
 
     <script>
             {{#if message}}
@@ -86,4 +84,3 @@
             list.classList.add('hidden');
         });
     </script>
-</header>
