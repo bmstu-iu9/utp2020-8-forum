@@ -36,132 +36,64 @@
             {{/is}}
                  class="sortLink">По последнему ответу <span class="sortLinkArrow"
                                                              id="byLastReplySortLink">&nbsp;</span></a></span></div>
+    <ul id="ulPosts">
+        {{#each posts}}
+            <li class="answer colorSection">
+                <div class="profile">
+                    <img {{#if this.author_name}}
+                    src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+                    {{else}}
+                    src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
+                    {{/if}}
+                    alt="No avatar" height="100" width="100">
+                    {{#eq this.author_id ../user.id}}
+                        <a class="profileName link colorDarkLink"
+                           onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
+                        <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
+                    {{else}}
+                        <div class="profileName link colorDarkLink">
+                            {{#if this.author_name}}
+                                {{this.author_name}}
+                            {{else}}
+                                Удален
+                            {{/if}}
+                        </div>
+                    {{/eq}}
+                </div>
+
+                <a class="textAndTime link" href="/post/{{this.id}}?from={{../currentPath}}">
+                    <span class="answerText  ColorTextDark">{{this.title}}</span>
+                    <div class="timeLast">
+                        {{this.time_since_creation}}
+                    </div>
+                </a>
+                <div class="voteField">
+                    <a href="/post/{{this.id}}?{{../currentPath}}"><input type="image"
+                                                                          class="replyImage vote colorDarkLink myButton colorSection"
+                                                                          src="/static/images/reply.png" alt="#"/></a>
+                    <div class="voteCounter colorMain colorTextLight">
+                        {{#if this.reply_count}}
+                            {{this.reply_count}}
+                        {{else}}
+                            0
+                        {{/if}}
+                    </div>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
 
     {{#if user}}
         {{#if categoryChosen}}
-            <ul id="ulPosts">
-                {{#each posts}}
-                    <li class="answer colorSection">
-                        <div class="profile">
-                            <img {{#if this.author_name}}
-                            src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                            {{else}}
-                            src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
-                            {{/if}}
-                            alt="No avatar" height="100" width="100">
-                            {{#eq this.author_id ../user.id}}
-                                <a class="profileName link colorDarkLink" onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
-                                <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
-                            {{else}}
-                                <div class="profileName link colorDarkLink">
-                                    {{#if this.author_name}}
-                                        {{this.author_name}}
-                                    {{else}}
-                                        Удален
-                                    {{/if}}
-                                </div>
-                            {{/eq}}
-                        </div>
-                        <div class="textAndTime">
-                            <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                            <div class="timeLast">
-                                {{this.time_since_creation}}
-                            </div>
-                        </div>
-                        <div class="voteField">
-                            <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
-                                                                               class="replyImage vote colorDarkLink myButton colorSection"
-                                                                               src="/static/images/reply.png" alt="#"/></a>
-                            <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                        </div>
-                    </li>
-                {{/each}}
-            </ul>
             {{>newPost}}
-        {{else}}
-            <ul id="ulPosts" class="categoryNotChosen">
-                {{#each posts}}
-                    <li class="answer colorSection">
-                        <div class="profile">
-                            <img {{#if this.author_name}}
-                            src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                            {{else}}
-                            src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439b    c6ab108427ae/w480"
-                            {{/if}}
-                            alt="No avatar" height="100" width="100">
-                            {{#eq this.author_id ../user.id}}
-                                <a class="profileName link colorDarkLink" onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
-                                <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
-                            {{else}}
-                                <div class="profileName link colorDarkLink">
-                                    {{#if this.author_name}}
-                                        {{this.author_name}}
-                                    {{else}}
-                                        Удален
-                                    {{/if}}
-                                </div>
-                            {{/eq}}
-                        </div>
-                        <div class="textAndTime">
-                            <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                            <div class="timeLast">
-                                {{this.time_since_creation}}
-                            </div>
-                        </div>
-                        <div class="voteField">
-                            <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
-                                                                               class="replyImage vote colorDarkLink myButton colorSection"
-                                                                               src="/static/images/reply.png" alt="#"/></a>
-                            <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                        </div>
-                    </li>
-                {{/each}}
-            </ul>
         {{/if}}
     {{else}}
-        <ul id="ulPosts">
-            {{#each posts}}
-                <li class="answer colorSection">
-                    <div class="profile">
-                        <img {{#if this.author_name}}
-                        src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                        {{else}}
-                        src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
-                        {{/if}}
-                        alt="No avatar" height="100" width="100">
-                        {{#eq this.author_id ../user.id}}
-                            <a class="profileName link colorDarkLink" onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
-                            <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
-                        {{else}}
-                            <div class="profileName link colorDarkLink">
-                                {{#if this.author_name}}
-                                    {{this.author_name}}
-                                {{else}}
-                                    Удален
-                                {{/if}}
-                            </div>
-                        {{/eq}}
-                    </div>
-                    <div class="textAndTime">
-                        <a class="answerText link ColorTextDark" href="/post/{{this.id}}">{{this.title}}</a>
-                        <div class="timeLast">
-                            {{this.time_since_creation}}
-                        </div>
-                    </div>
-                    <div class="voteField">
-                        <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
-                                                                           class="replyImage vote colorDarkLink myButton colorSection"
-                                                                           src="/static/images/reply.png" alt="#"/></a>
-                        <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}
 </div>
 <script>
-    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'), box3 = document.getElementById('postCreation'),
+    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
+            box3 = document.getElementById('postCreation'),
             box4 = document.getElementById('postChange');
     window.onclick = function (event) {
         if (event.target === box1) {
@@ -185,12 +117,12 @@
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(post)
-        }).then( () => {
+        }).then(() => {
             location.reload();
         });
     }
     const editPost = (id, category, text) => {
-        document.getElementById('postChange').style.display='block';
+        document.getElementById('postChange').style.display = 'block';
         document.getElementById('editPost').value = text;
         document.getElementById('sendEdition').onsubmit = async (e) => {
             e.preventDefault();
@@ -205,7 +137,7 @@
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 body: JSON.stringify(post)
-            }).then( (res) => {
+            }).then((res) => {
                 if (res.ok) {
                     location.reload();
                 } else {

@@ -16,10 +16,8 @@ li {
 }
 
 .headerUser {
-    display: flex;
-    flex-direction: row;
-    width: 20%;
-    justify-content: space-between;
+    float: right;
+    margin-right: 15px;
 }
 
 .header {
@@ -226,6 +224,8 @@ a {
     min-width: 80%;
     margin-left: 1%;
     margin-top: 1%;
+    overflow-y: auto;
+    white-space: pre-line;
 }
 
 .postTitle {
@@ -379,15 +379,19 @@ a {
     position: relative;
 }
 
+#profileTopBar > a {
+    margin: 0 10px;
+}
+
 #profileOptionsList {
     display: block;
     position: absolute;
     right: 0;
-    top: 60px;
-    width: 200%;
-    padding: 2%;
+    top: 40px;
+    width: 200px;
+    padding: 10px 0;
     background-color: white;
-    border-radius: 1vh;
+    border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -408,12 +412,14 @@ a {
 }
 
 #profileOptionsList a:hover {
-    background-color: #E1A487;
+    background-color: dodgerblue;
+    color: white !important;
 }
 
 #profileOptionsList a:active {
     background-color: lightcoral;
 }
+
 
 .hidden {
     display: none !important;

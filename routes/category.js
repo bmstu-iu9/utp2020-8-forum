@@ -41,6 +41,7 @@ router.get('/all', function (req, res) {
         });
     })
 
+
 router.get('/:categoryId(\\d+)', (req, res) => {
     let categories = dbManager.getCategories();
     let categoryId = req.params.categoryId.trim();
@@ -68,7 +69,7 @@ router.get('/:categoryId(\\d+)', (req, res) => {
 
 router.post('/:categoryId(\\d+)', function (req, res) {
     let categoryId = req.params.categoryId;
-    let categories = dbManager.getCategories();
+  //  let categories = dbManager.getCategories();
     let originalUrl = req.originalUrl
     let category = dbManager.getCategoryById(categoryId);
     let date = new Date();

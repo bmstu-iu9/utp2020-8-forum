@@ -43,6 +43,8 @@ router.post('/delete', (req, res) => {
     res.status(200).send();
 });
 
+
+
 router.post('/edit', (req, res) => {
     if (!dbManager.checkPostExists(req.body.text.trim(), req.body.category)) {
         dbManager.updatePost(req.body.text.trim(), req.body.id);
@@ -52,6 +54,5 @@ router.post('/edit', (req, res) => {
     }
 
 });
-
 
 module.exports = router;

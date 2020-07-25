@@ -103,13 +103,13 @@ const updatePost = (text, postId) => query("updatePost").run(text, postId);
 
 const deleteReply = replyId => query("deleteReply").run(replyId);
 
-const updateReply = (text, replyId) => query("updateReply").run(text, replyId);
-
 const modifiedTimes = (moment, postsOrReplies) => {
     for(let i = 0; i < postsOrReplies.length; ++i)
         postsOrReplies[i].time_since_creation = moment(postsOrReplies[i].creation_time).fromNow();
     return postsOrReplies;
 }
+
+const updateReply = (text, replyId) => query("updateReply").run(text, replyId);
 
 exports.init = init;
 exports.migrate = migrate;

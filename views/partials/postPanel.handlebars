@@ -8,12 +8,9 @@
 </div>
 
 <div class="selectedTheme colorMain">
-
     <a class="borderTop myButton colorDarkLink colorSection"
        style="float: left; margin-top: 4.4vh" href="{{from}}"><img src="/static/images/back.png" height="40"
                                                                    alt="Назад"></a>
-<!--    <input class="borderTop myButton colorDarkLink colorSection" type="image" src="/static/images/back.png" height="40"-->
-<!--           style="float: left; margin-top: 4.4vh" onclick="history.back();">-->
     <h3 class="postTitle colorTextLight">{{post.title}}</h3>
     <ul id="ulReplies" style="max-height: 54%;">
         {{#each replies}}
@@ -40,56 +37,27 @@
                         {{this.time_since_creation}}
                     </div>
                 </div>
-
-
-<!--                <div class="voteField">-->
-<!--                    {{#eq ../user.username this.author_name}}-->
-<!--                        <a class="profileName link colorDarkLink" onclick="editReply({{this.id}}, '{{this.text}}')">Edit</a>-->
-<!--                        <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>-->
-<!--                    {{else}}-->
-<!--                        <form action="/vote/{{this.id}}/1" method="post">-->
-<!--                            <input type="image" class="vote" src="/static/images/like.png" alt="#"/>-->
-<!--                        </form>-->
-<!--                        <form action="/vote/{{this.id}}/-1" method="post">-->
-<!--                            <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>-->
-<!--                        </form>-->
-<!--                        <div class="voteCounter">{{#if this.rating }}-->
-<!--                            {{#gt this.rating 0 }}-->
-<!--                                <span style="color: darkgreen   ">{{this.rating}}</span>-->
-<!--                            {{else}}-->
-<!--                                0-->
-<!--                            {{/gt}}-->
-<!--                        {{/if}}-->
-<!--                        </div>-->
-<!--                    {{/eq}}-->
-<!--                </div>-->
-
-
-
-                <div class="editDeleteField">
-                    {{#eq ../user.username this.author_name}}
-                            <a class="profileName link colorDarkLink" onclick="editReply({{this.id}}, '{{this.text}}')">Edit</a>
-                            <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
-                    {{else}}
-                        <form action="/vote/{{this.id}}/1" method="post" style="width: 100%;">
-                            <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
-                        </form>
-                        <form action="/vote/{{this.id}}/-1" method="post">
-                            <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
-                        </form>
-                        <div class="voteCounter">{{#if this.rating }}
-                            {{#gt this.rating 0 }}
-                                <span style="color: darkgreen   ">{{this.rating}}</span>
-                            {{else}}
-                                <span style="color: darkred">{{this.rating}}</span>
-                            {{/gt}}
+            <div class="voteField">
+                {{#eq ../user.username this.author_name}}
+                    <a class="profileName link colorDarkLink" onclick="editReply({{this.id}}, '{{this.text}}')">Edit</a>
+                    <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
+                {{else}}
+                    <form action="/vote/{{this.id}}/1" method="post">
+                        <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
+                    </form>
+                    <form action="/vote/{{this.id}}/-1" method="post">
+                        <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
+                    </form>
+                    <div class="voteCounter">{{#if this.rating }}
+                        {{#gt this.rating 0 }}
+                            <span style="color: darkgreen   ">{{this.rating}}</span>
                         {{else}}
                             0
-                        {{/if}}</div>
-                    {{/eq}}
-                </div>
-
-
+                        {{/gt}}
+                        {{/if}}
+                    </div>
+                {{/eq}}
+            </div>
             </li>
         {{/each}}
     </ul>
