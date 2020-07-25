@@ -65,6 +65,7 @@ const addNewPost = (author_id, title, category_id, creation_time) => {
 const addReply = (author_id, reply, post_id, creation_time) => query("addReply").run(author_id, reply, post_id, creation_time);
 
 const addVoteEntry = (user_id, reply_id, amount) => query("addVoteEntry").run(user_id, reply_id, amount)
+const deleteVoteEntry = (id) => query("deleteVoteEntry").run(id)
 
 const inverseVoteAmount = id => query("inverseVoteAmount").run(id);
 
@@ -127,6 +128,7 @@ exports.getRepliesCount = getRepliesCount;
 exports.findUser = findUser;
 exports.checkUserVoted = checkUserVoted;
 exports.addVoteEntry = addVoteEntry;
+exports.deleteVoteEntry = deleteVoteEntry;
 exports.inverseVoteAmount = inverseVoteAmount;
 exports.deleteUser = deleteUser;
 exports.checkCategoryExists = checkCategoryExists;
