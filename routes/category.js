@@ -25,7 +25,7 @@ const sortPosts = (posts, sortTag) => {
 router.get('/all', function (req, res) {
     let categories = dbManager.getCategories();
     let posts = dbManager.getAllPosts();
-    let sortTag = req.query.sortTag;
+    let sortTag = req.query.sortTag || 'byTime';
     posts = sortPosts(posts, sortTag);
     posts = dbManager.modifiedTimes(moment, posts);
     res.render('home', {
