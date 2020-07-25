@@ -6,13 +6,14 @@ const express = require('express'),
 router.post('/vote/:replyId(\\d+)/:amount', function (req, res) {
     let replyId = req.params.replyId;
     let amount = req.params.amount;
+    let from = req.query.from;
     let postId = dbManager.getReply(replyId).post_id;
     let userVoted = dbManager.checkUserVoted(req.user.id, replyId)
     if (userVoted && userVoted.amount * amount < 0)
         dbManager.inverseVoteAmount(userVoted.id)
     else if (!userVoted)
         dbManager.addVoteEntry(req.user.id, replyId, amount)
-    res.redirect(`/post/${postId}#reply_${replyId}`)
+    res.redirect(`/post/${postId}?from=${from}#reply_${replyId}`)
 })
 
 router.post('/delete', (req, res) => {
