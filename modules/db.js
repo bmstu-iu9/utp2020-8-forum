@@ -80,7 +80,7 @@ const getRepliesCount = () => query("getReplyCount").all()
 
 const deleteUser = user_id => query("deleteUser").run(user_id)
 
-const checkCategoryExists = category =>  query("checkCategoryExists").get(category);
+const checkCategoryExists = category => query("checkCategoryExists").get(category);
 
 const getCategoryById = id => query("getCategoryById").get(id);
 
@@ -104,7 +104,7 @@ const updatePost = (text, postId) => query("updatePost").run(text, postId);
 const deleteReply = replyId => query("deleteReply").run(replyId);
 
 const modifiedTimes = (moment, postsOrReplies) => {
-    for(let i = 0; i < postsOrReplies.length; ++i)
+    for (let i = 0; i < postsOrReplies.length; ++i)
         postsOrReplies[i].time_since_creation = moment(postsOrReplies[i].creation_time).fromNow();
     return postsOrReplies;
 }

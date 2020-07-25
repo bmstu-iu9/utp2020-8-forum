@@ -43,7 +43,7 @@ a {
 }
 
 .ulCategories {
-    max-height:90%;
+    max-height: 90%;
     overflow-y: auto;
     justify-content: center;
 }

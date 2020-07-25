@@ -24,7 +24,8 @@
     <form class="postCreationBox colorMain" method="post" action="/category/create">
         <div style="display: flex; flex-direction: column; justify-content: center;">
             <div class="colorTextLight">Category</div>
-            <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Введите категорию" name="category" required>
+            <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Введите категорию" name="category"
+                   required>
         </div>
         <textarea placeholder="Создайте свой пост" name="newPost" id="myAnswer" required></textarea>
         <div class="marginButton">
@@ -64,15 +65,15 @@
     </div>
 
     <script>
-        {{#if message}}
-        if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
-            document.getElementById('signUpButton').click();
-            document.getElementById('signUpError').innerHTML = '{{message}}';
-        } else if ('{{message}}' === 'Wrong login or password'){
-            document.getElementById('logInButton').click();
-            document.getElementById('logInError').innerHTML = '{{message}}';
-        }
-        {{/if}}
+            {{#if message}}
+            if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
+                document.getElementById('signUpButton').click();
+                document.getElementById('signUpError').innerHTML = '{{message}}';
+            } else if ('{{message}}' === 'Wrong login or password') {
+                document.getElementById('logInButton').click();
+                document.getElementById('logInError').innerHTML = '{{message}}';
+            }
+            {{/if}}
 
         const list = document.getElementById('profileOptionsList');
 

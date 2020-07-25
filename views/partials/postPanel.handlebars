@@ -44,10 +44,10 @@
                         <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
                     {{else}}
                         <form action="/vote/{{this.id}}/1?from={{../from}}" method="post">
-                            <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
+                        <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
                         </form>
                         <form action="/vote/{{this.id}}/-1?from={{../from}}" method="post">
-                            <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
+                        <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
                         </form>
                         <div class="voteCounter">{{#if this.rating }}
                             {{#gt this.rating 0 }}
