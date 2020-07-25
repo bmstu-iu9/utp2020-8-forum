@@ -2,19 +2,16 @@
 
 /* ГЛОБАЛЬНОЕ */
 
+
 body {
     background: #eaf7f8;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     margin: 0;
 }
 
 textarea {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
 }
-
-
-
-
 
 
 /* ПОЛОЖЕНИЕ */
@@ -44,8 +41,6 @@ textarea {
 .vertAlignItemsMid * {
     vertical-align: middle;
 }
-
-
 
 /* ЦВЕТА */
 
@@ -78,7 +73,7 @@ textarea {
 }
 
 .hoverColorAccent:hover {
-    color:  #66cc99;
+    color: #66cc99;
 }
 
 
@@ -96,9 +91,11 @@ textarea {
 .shadowed1 {
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
+
 .shadowed2 {
     box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
 }
+
 .roundBorder {
     border-radius: 4px;
 }
@@ -163,7 +160,6 @@ textarea {
 }
 
 
-
 /* КАРТИНКИ */
 
 .roundImg {
@@ -177,15 +173,19 @@ textarea {
 
 /* СПИСКИ */
 
-.noUlDecor {
+ul.noUlDecor {
     list-style-type: none;
 }
 
-.menuList {
+ul.noUlDefaultPadding {
+    padding-left: 0;
+}
+
+ul.menuList {
     display: block;
     padding: 10px 0;
-    border-radius: 10px;
     background: white;
+    list-style-type: none;
 
 }
 
@@ -222,7 +222,6 @@ textarea {
     transition: color .1s;
     cursor: pointer
 }
-
 
 
 /* ОСТАЛЬНОЕ */
@@ -272,12 +271,13 @@ textarea {
 
 #topBar {
     position: fixed;
+    top: 0;
     width: 100vw;
     box-sizing: border-box;
     line-height: 50px;
-    padding: 0px 50px;
+    padding: 0 50px;
+    z-index: 1;
 }
-
 
 
 #headerProfileBlock > * {
@@ -285,35 +285,16 @@ textarea {
 }
 
 
-
 #profileOptionsList {
     position: absolute;
-    top: 70px;
-    right: 0;
+    top: 60px;
+    right: -30px;
 }
 
-
-.liCategories {
-    margin-left: -10%;
-    margin-top: 1%;
-}
-
-.ulPosts {
-    min-height: 73%;
-    max-height: 73%;
-}
-
-
-#ulReplies, #ulPosts {
-    overflow-y: auto;
-    max-height: 63%;
-    padding-left: 0;
-}
 
 .ulCategories {
-    max-height: 90%;
+    max-height: 70vh;
     overflow-y: auto;
-    justify-content: center;
 }
 
 
@@ -392,9 +373,10 @@ textarea {
 }
 
 .container {
-    display: flex;
-    width: 100%;
-    height: 101%;
+    width: 100vw;
+    max-width: 100%;
+    margin-top: 100px;
+    box-sizing: border-box;
 }
 
 .link {
@@ -405,15 +387,16 @@ textarea {
 
 
 #categories {
-    width: 25%;
-    height: 90%;
+    width: 500px;
+    position: fixed;
     padding: 0 1% 0 1%;
-    margin: 1% 0 0 0;
     border-radius: 1vh;
+    top: 100px;
+    left: 30px;
 }
 
 .category {
-    width: 110%;
+    width: 100%;
     text-align: center;
     margin-bottom: 3%;
     border-radius: 0.5vh;
@@ -428,12 +411,12 @@ textarea {
 }
 
 .selectedTheme {
-    width: 69%;
-    height: 89.3%;
-    margin: 1% 0 0 2%;
-    padding: 0 1% 0.5% 1%;
-    border-radius: 1vh;
-    flex-direction: column;
+    width: 55%;
+    padding: 0 .5% 0.5% 1%;
+    position: absolute;
+    right: 150px;
+    top: 0;
+
 }
 
 .answer {

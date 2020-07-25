@@ -46,11 +46,7 @@
                 <button class="bigBtn bgAccent hoverBgSpecial roundBorder" onclick="document.getElementById('postCreation').style.display='block'" >Создать пост</button>
                 <img src="https://api.adorable.io/avatars/128/{{user.name}}.png" class='roundImg smallAvatar inlineBlock' alt="">
                 <a id='showMenu' class="headerText colorMedium linkTextNoDecor hoverColorAccent" id="showMenu" onclick="showProfileOptionsList()">{{user.username}} ▼</a>
-                <ul id="profileOptionsList" class="noUlDecor menuList shadowed1 hidden">
-                    <li><a href="/category/myPosts" class="">Мои посты</a></li>
-                    <li><a href="/logout">Выйти</a></li>
-                    <li><a class="colorDanger" href="/deleteProfile">Удалить аккаунт</a></li>
-                </ul>
+                {{>profileOptionsList}}
             </div>
         {{else}}
             <div id="headerProfileBlock" class='right relative'>
