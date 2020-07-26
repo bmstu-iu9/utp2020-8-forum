@@ -75,7 +75,7 @@ router.post('/:categoryId(\\d+)', function (req, res) {
     let date = new Date();
     let creation_time = date.toDateString() + " " + date.toTimeString();
     if (category !== undefined) {
-        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost, categoryId);
+        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost, categoryId, creation_time);
         if (postSuccess)
             res.redirect(originalUrl)
         else res.redirect(`${originalUrl}?postFail=true`)
