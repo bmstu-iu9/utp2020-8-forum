@@ -10,6 +10,7 @@
 <div class="selectedTheme colorMain">
     <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
     <div class="colorTextLight">
+        {{#if posts}}
         <span><a id='byTime'
             {{#is sortTag 'byTime' }}
                  href="?sortTag=byTimeAsc"
@@ -82,6 +83,10 @@
             </li>
         {{/each}}
     </ul>
+        {{else}}
+            <p class="colorTextLight">Нет постов.
+                    <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a> или удалите категорию</p>
+    {{/if}}
 
     {{#if user}}
         {{#if categoryChosen}}
