@@ -84,10 +84,14 @@
         {{/each}}
     </ul>
         {{else}}
-            {{#if categoryChosen}}
+            {{#if category}}
                 <p class="colorTextLight">Нет постов.
                     {{#if user}}
-                    <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a> или удалите категорию</p>
+                    <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a>
+                        или
+                        <form action="/category/delete/{{category}}" method="post">
+                            <input type="submit" value="удалите категорию">
+                        </form></p>
                     {{else}}
                         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
             {{/if}}
@@ -102,7 +106,7 @@
     {{/if}}
 
     {{#if user}}
-        {{#if categoryChosen}}
+        {{#if category}}
             {{>newPost}}
         {{/if}}
     {{else}}
