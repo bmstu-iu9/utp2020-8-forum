@@ -10,6 +10,7 @@
 <div class="selectedTheme colorMain">
     <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
     <div class="colorTextLight">
+        {{#if posts}}
         <span><a id='byTime'
             {{#is sortTag 'byTime' }}
                  href="?sortTag=byTimeAsc"
@@ -47,7 +48,8 @@
                     {{/if}}
                     alt="No avatar" height="100" width="100">
                     {{#eq this.author_id ../user.id}}
-                        <a class="profileName link colorDarkLink" onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
+                        <a class="profileName link colorDarkLink"
+                           onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
                         <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
                     {{else}}
                         <div class="profileName link colorDarkLink">
@@ -59,28 +61,61 @@
                         </div>
                     {{/eq}}
                 </div>
-                <a class="answerText link ColorTextDark" href="/post/{{this.id}}?from={{../currentPath}}
-                ">{{this.title}}</a>
+
+                <a class="textAndTime link" href="/post/{{this.id}}?from={{../currentPath}}">
+                <span class="answerText  ColorTextDark">{{this.title}}</span>
+                <div class="timeLast">
+                    {{this.time_since_creation}}
+                </div>
+                </a>
                 <div class="voteField">
-                    <a href="/post/{{this.id}}?{{currentPath}}"><input type="image"
-                                                                       class="replyImage vote colorDarkLink myButton colorSection"
-                                                                       src="/static/images/reply.png" alt="#"/></a>
-                    <div class="voteCounter colorMain colorTextLight">{{this.reply_count}}</div>
+                    <a href="/post/{{this.id}}?{{../currentPath}}"><input type="image"
+                                                                          class="replyImage vote colorDarkLink myButton colorSection"
+                                                                          src="/static/images/reply.png" alt="#"/></a>
+                    <div class="voteCounter colorMain colorTextLight">
+                        {{#if this.reply_count}}
+                            {{this.reply_count}}
+                        {{else}}
+                            0
+                        {{/if}}
+                    </div>
                 </div>
             </li>
         {{/each}}
     </ul>
+        {{else}}
+            {{#if category}}
+                <p class="colorTextLight">Нет постов.
+                    {{#if user}}
+                    <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a>
+                        или
+                        <form action="/category/delete/{{category}}" method="post">
+                            <input type="submit" value="удалите категорию">
+                        </form></p>
+                    {{else}}
+                        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+            {{/if}}
+            {{else}}
+                <p class="colorTextLight">Нет постов
+                    {{#if user}}
+                        <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a></p>
+                    {{else}}
+                        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+                    {{/if}}
+            {{/if}}
+    {{/if}}
 
     {{#if user}}
-        {{#if categoryChosen}}
+        {{#if category}}
             {{>newPost}}
         {{/if}}
     {{else}}
-        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+
     {{/if}}
 </div>
 <script>
-    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'), box3 = document.getElementById('postCreation'),
+    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
+            box3 = document.getElementById('postCreation'),
             box4 = document.getElementById('postChange');
     window.onclick = function (event) {
         if (event.target === box1) {
@@ -104,12 +139,12 @@
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(post)
-        }).then( () => {
+        }).then(() => {
             location.reload();
         });
     }
     const editPost = (id, category, text) => {
-        document.getElementById('postChange').style.display='block';
+        document.getElementById('postChange').style.display = 'block';
         document.getElementById('editPost').value = text;
         document.getElementById('sendEdition').onsubmit = async (e) => {
             e.preventDefault();
@@ -124,7 +159,7 @@
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 body: JSON.stringify(post)
-            }).then( (res) => {
+            }).then((res) => {
                 if (res.ok) {
                     location.reload();
                 } else {

@@ -1,7 +1,7 @@
 const dbManager = require('../modules/db');
 const express = require('express'),
     router = express.Router();
-
+const moment = require('moment');
 
 router.get('/:postId(\\d+)', function (req, res) {
     let postId = req.params.postId;
@@ -11,6 +11,7 @@ router.get('/:postId(\\d+)', function (req, res) {
     if (post) {
         let categories = dbManager.getCategories();
         let replies = dbManager.getReplies(postId)
+        replies = dbManager.modifiedTimes(moment, replies);
         res.render('home', {
             layout: 'postViewLayout',
             categories: categories,
@@ -25,20 +26,21 @@ router.get('/:postId(\\d+)', function (req, res) {
 
 router.post('/:postId(\\d+)', function (req, res) {
     let id = req.params.postId;
+    let date = new Date();
+    let creation_time = date.toDateString() + " " + date.toTimeString();
     const originalUrl = req.originalUrl;
-    dbManager.addReply(req.user.id, req.body.myAnswer, id);
+    dbManager.addReply(req.user.id, req.body.myAnswer, id, creation_time);
     res.redirect(originalUrl)
 })
 
 router.post('/delete', (req, res) => {
-    let category = dbManager.getPost(req.body.id).category_id;
     dbManager.deletePost(req.body.id);
-    let posts = dbManager.getPostsByCategory(category);
-    if (posts.length === 0) {
-        dbManager.deleteCategory(category);
-    }
-    res.status(200).send();
+    if (posts.length === 0)
+        res.redirect('/category/${category_id}')
+    else
+        res.status(200).send();
 });
+
 
 router.post('/edit', (req, res) => {
     if (!dbManager.checkPostExists(req.body.text.trim(), req.body.category)) {
@@ -49,6 +51,5 @@ router.post('/edit', (req, res) => {
     }
 
 });
-
 
 module.exports = router;

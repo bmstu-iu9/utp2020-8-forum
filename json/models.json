@@ -1,6 +1,27 @@
 {
   "models": [
     {
+      "tablename": "replies",
+      "columns": [
+        "id",
+        "author_id",
+        "post_id",
+        "text",
+        "creation_time",
+        "FOREIGN KEY(author_id)",
+        "FOREIGN KEY(post_id)"
+      ],
+      "tags": [
+        "INTEGER PRIMARY KEY",
+        "INTEGER",
+        "INTEGER",
+        "TEXT NOT NULL",
+        "TEXT",
+        "REFERENCES users(id) ON DELETE SET DEFAULT ",
+        "REFERENCES posts(id) ON DELETE CASCADE"
+      ]
+    },
+    {
       "tablename": "votes",
       "columns": [
         "id",
@@ -20,31 +41,13 @@
       ]
     },
     {
-      "tablename": "replies",
-      "columns": [
-        "id",
-        "author_id",
-        "post_id",
-        "text",
-        "FOREIGN KEY(author_id)",
-        "FOREIGN KEY(post_id)"
-      ],
-      "tags": [
-        "INTEGER PRIMARY KEY",
-        "INTEGER DEFAULT NULL",
-        "INTEGER",
-        "TEXT NOT NULL",
-        "REFERENCES users(id) ON DELETE SET DEFAULT ",
-        "REFERENCES posts(id) ON DELETE CASCADE"
-      ]
-    },
-    {
       "tablename": "posts",
       "columns": [
         "id",
         "author_id",
         "title",
         "category_id",
+        "creation_time",
         "FOREIGN KEY(author_id)",
         "FOREIGN KEY(category_id)"
       ],
@@ -53,6 +56,7 @@
         "INTEGER DEFAULT NULL",
         "TEXT DEFAULT \"NO TITLE\" NOT NULL",
         "INTEGER",
+        "TEXT",
         "REFERENCES users(id) ON DELETE SET DEFAULT",
         "REFERENCES categories(id) ON DELETE CASCADE"
       ]
