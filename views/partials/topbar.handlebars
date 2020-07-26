@@ -1,4 +1,4 @@
-<div id="logInForm" class="window">
+<div id="signUpForm" class="window">
     <form class="windowContent colorMain" method="post" action="/signup">
         <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
         <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
@@ -10,7 +10,7 @@
     </form>
 </div>
 
-<div id="signUpForm" class="window">
+<div id="logInForm" class="window">
     <form class="windowContent colorMain" method="post" action="/login">
         <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
         <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
@@ -57,9 +57,9 @@
         {{else}}
             <div class="headerUser">
                 <a id="logInButton" class="link colorDarkLink colorTextLight"
-                   onclick="document.getElementById('signUpForm').style.display='block'">Log In</a>
+                   onclick="document.getElementById('logInForm').style.display='block'">Log In</a>
                 <a id="signUpButton" class="link colorDarkLink colorTextLight"
-                   onclick="document.getElementById('logInForm').style.display='block'">Sign Up</a>
+                   onclick="document.getElementById('signUpForm').style.display='block'">Sign Up</a>
             </div>
         {{/if}}
     </div>
