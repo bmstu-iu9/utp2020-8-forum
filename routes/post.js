@@ -34,7 +34,6 @@ router.post('/:postId(\\d+)', function (req, res) {
 })
 
 router.post('/delete', (req, res) => {
-    let categoryId = dbManager.getPost(req.body.id).category_id;
     dbManager.deletePost(req.body.id);
     if (posts.length === 0)
         res.redirect('/categort/${category_id}')

@@ -84,8 +84,21 @@
         {{/each}}
     </ul>
         {{else}}
-            <p class="colorTextLight">Нет постов.
+            {{#if categoryChosen}}
+                <p class="colorTextLight">Нет постов.
+                    {{#if user}}
                     <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a> или удалите категорию</p>
+                    {{else}}
+                        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+            {{/if}}
+            {{else}}
+                <p class="colorTextLight">Нет постов
+                    {{#if user}}
+                        <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a></p>
+                    {{else}}
+                        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+                    {{/if}}
+            {{/if}}
     {{/if}}
 
     {{#if user}}
@@ -93,7 +106,7 @@
             {{>newPost}}
         {{/if}}
     {{else}}
-        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+
     {{/if}}
 </div>
 <script>
