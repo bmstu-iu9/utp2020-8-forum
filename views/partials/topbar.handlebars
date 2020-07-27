@@ -3,7 +3,7 @@
         {{#if user}}
             <div id="headerProfileBlock" class='right relative vertAlignItemsMid'>
                 <button class="bigBtn bgAccent hoverBgSpecial roundBorder" onclick="document.getElementById('postCreation').style.display='block'" >Создать пост</button>
-                <img src="https://api.adorable.io/avatars/128/{{user.name}}.png" class='roundImg smallAvatar inlineBlock' alt="">
+                <img src="https://api.adorable.io/avatars/128/{{user.username}}.png" class='roundImg smallAvatar inlineBlock' alt="">
                 <a id='showMenu' class="headerText colorMedium linkTextNoDecor hoverColorAccent" id="showMenu" onclick="showProfileOptionsList()">{{user.username}} ▼</a>
                 {{>profileOptionsList}}
             </div>
