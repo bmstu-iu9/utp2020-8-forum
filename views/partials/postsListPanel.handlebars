@@ -1,6 +1,6 @@
 <div class="selectedTheme colorMain">
-    <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
-    <div class="colorTextLight">
+    <h2 class="categoryHeader colorTextDark">{{postsListTitle}}</h2>
+    <div class="colorTextDark">
         <span><a id='byTime'
             {{#is sortTag 'byTime' }}
                  href="?sortTag=byTimeAsc"
@@ -62,7 +62,7 @@
                     <a href="/post/{{this.id}}?{{../currentPath}}"><input type="image"
                                                                           class="replyImage vote colorDarkLink myButton colorSection"
                                                                           src="/static/images/reply.png" alt="#"/></a>
-                    <div class="voteCounter colorMain colorTextLight">
+                    <div class="voteCounter colorMain colorTextDark">
                         {{#if this.reply_count}}
                             {{this.reply_count}}
                         {{else}}
@@ -79,7 +79,7 @@
             {{>newPost}}
         {{/if}}
     {{else}}
-        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+        <p class="colorTextDark">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}
 </div>
 <script>
