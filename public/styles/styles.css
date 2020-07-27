@@ -2,11 +2,16 @@
 
 /* ГЛОБАЛЬНОЕ */
 
-
+html{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
 body {
     background: #eaf7f8;
     font-family: 'Roboto', sans-serif;
     margin: 0;
+    padding: 0;
 }
 
 textarea {
@@ -514,17 +519,6 @@ ul.menuList {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-}
-
-#myAnswer {
-    padding: 12px;
-    margin-left: 1%;
-    margin-right: 1%;
-    resize: none;
-    width: 90%;
-    height: 100%;
-    font-size: 14pt;
-    border-radius: 1vh;
 }
 
 #answerForm {
