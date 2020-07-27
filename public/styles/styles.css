@@ -2,11 +2,12 @@
 
 /* ГЛОБАЛЬНОЕ */
 
-html{
+html {
     margin: 0;
     padding: 0;
     height: 100vh;
 }
+
 body {
     background: #eaf7f8;
     font-family: 'Roboto', sans-serif;
@@ -233,12 +234,12 @@ ul.menuList {
 /* ________ */
 
 
-
 #composeReplyBtn {
     position: fixed;
     right: 80px;
     bottom: 100px;
 }
+
 #replyForm {
     position: fixed;
     right: 280px;
@@ -248,10 +249,8 @@ ul.menuList {
 }
 
 
-
 #replyFormHeader {
     padding: 8px 11px;
-
     text-align: right;
 
 }

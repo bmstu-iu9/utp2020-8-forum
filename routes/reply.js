@@ -14,8 +14,7 @@ router.post('/vote/:replyId(\\d+)/:amount', function (req, res) {
             dbManager.inverseVoteAmount(userVoted.id)
         else
             dbManager.deleteVoteEntry(userVoted.id)
-    }
-    else
+    } else
         dbManager.addVoteEntry(req.user.id, replyId, amount)
     res.redirect(`/post/${postId}?from=${from}#reply_${replyId}`)
 })
