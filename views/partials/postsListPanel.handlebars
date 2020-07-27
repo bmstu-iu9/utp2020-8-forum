@@ -1,6 +1,7 @@
 <div class="selectedTheme colorMain">
     <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
     <div class="colorTextLight">
+        {{#if posts}}
         <span><a id='byTime'
             {{#is sortTag 'byTime' }}
                  href="?sortTag=byTimeAsc"
@@ -73,13 +74,34 @@
             </li>
         {{/each}}
     </ul>
+        {{else}}
+            {{#if category}}
+                <p class="colorTextLight">Нет постов.
+                    {{#if user}}
+                    <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a>
+                        или
+                        <form action="/category/delete/{{category}}" method="post">
+                            <input type="submit" value="удалите категорию">
+                        </form></p>
+                    {{else}}
+                        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+            {{/if}}
+            {{else}}
+                <p class="colorTextLight">Нет постов
+                    {{#if user}}
+                        <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a></p>
+                    {{else}}
+                        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+                    {{/if}}
+            {{/if}}
+    {{/if}}
 
     {{#if user}}
-        {{#if categoryChosen}}
+        {{#if category}}
             {{>newPost}}
         {{/if}}
     {{else}}
-        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+
     {{/if}}
 </div>
 <script>

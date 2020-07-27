@@ -117,6 +117,9 @@
   "deleteReply": [
     "DELETE FROM replies WHERE id = ?"
   ],
+  "deleteVoteEntry": [
+    "DELETE FROM votes WHERE id = ?"
+  ],
   "updateReply": [
     "UPDATE replies SET text = ? WHERE id = ?"
   ]

@@ -36,12 +36,21 @@
                            onclick="editReply({{this.id}}, '{{this.text}}')">Edit</a>
                         <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
                     {{else}}
-                        <form action="/vote/{{this.id}}/1?from={{../from}}" method="post">
-                        <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
-                        </form>
-                        <form action="/vote/{{this.id}}/-1?from={{../from}}" method="post">
-                        <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
-                        </form>
+                        {{#if ../user}}
+                            <form action="/vote/{{this.id}}/1?from={{../from}}" method="post">
+                            <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
+                            </form>
+                            <form action="/vote/{{this.id}}/-1?from={{../from}}" method="post">
+                            <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
+                            </form>
+                        {{else}}
+                            <input type="image" class="vote" src="/static/images/like.png" alt="#" onclick="document.getElementById('signUpForm').style.display='block'">
+                            <input type="image" class="vote" src="/static/images/dislike.png" onclick="document.getElementById('signUpForm').style.display='block'">
+                        {{/if}}
+
+
+
+
                         <div class="voteCounter">{{#if this.rating }}
                             {{#gt this.rating 0 }}
                                 <span style="color: darkgreen">{{this.rating}}</span>
