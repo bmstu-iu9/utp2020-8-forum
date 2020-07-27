@@ -120,8 +120,8 @@ textarea {
 }
 
 .roundBtn {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 100%;
     text-align: center;
     position: relative;
@@ -133,9 +133,9 @@ textarea {
 .roundBtn > input {
     position: absolute;
     width: 45%;
-    top: 11px;
+    top: 25%;
     z-index: 1;
-    left: 12px;
+    left: 28%;
 }
 
 .roundBtn > input:focus {
@@ -228,10 +228,21 @@ ul.menuList {
 /* ________ */
 
 
+
+#composeReplyBtn {
+    position: fixed;
+    right: 80px;
+    bottom: 100px;
+}
 #replyForm {
+    position: fixed;
+    right: 280px;
+    bottom: 50px;
     width: 800px;
     padding: 0 10px 25px 25px;
 }
+
+
 
 #replyFormHeader {
     padding: 8px 11px;

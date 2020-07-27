@@ -1,0 +1,25 @@
+<form id="replyForm" class="roundBorder shadowed2 bgLight hidden" method="post" action="">
+    <div id="replyFormHeader"><div id="hideReplyFormBtn" class="hideIcon inlineBlock" ></div></div>
+    <textarea placeholder="Ваш ответ" name="myAnswer" class="textInput inlineBlock roundBorder" required></textarea>
+    <div id="replyBtn" class="roundBtn bgAccent hoverBgSpecial inlineBlock shadowed1"><input type="image" src="/static/images/icons/right-arrow.svg"></div>
+</form>
+
+
+<div id="composeReplyBtn" class="roundBtn bgAccent hoverBgSpecial shadowed1"><input type="image" src="/static/images/icons/edit.svg"></div>
+
+
+<script>
+    let hideBtn = document.querySelector('#hideReplyFormBtn')
+    let composeBtn = document.querySelector('#composeReplyBtn')
+    let form = document.querySelector('#replyForm')
+
+    composeBtn.onclick = () => {
+        form.classList.remove('hidden')
+        composeBtn.classList.add('hidden')
+
+    }
+    hideBtn.onclick = () => {
+        form.classList.add('hidden')
+        composeBtn.classList.remove('hidden')
+    }
+</script>

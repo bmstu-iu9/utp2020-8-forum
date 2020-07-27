@@ -67,11 +67,14 @@
         {{/each}}
     </ul>
     {{#if user}}
-        {{>newAnswer}}
     {{else}}
         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы ответить</p>
     {{/if}}
 </div>
+{{#if user}}
+{{>replyForm}}
+{{/if}}
+
 
 <script>
     let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
