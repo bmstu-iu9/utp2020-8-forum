@@ -79,7 +79,7 @@
         {{#if category}}
         <p class="colorTextLight">Нет постов.
             {{#if user}}
-                <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a>
+                <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a>
                 или
                 <form action="/category/delete/{{category}}" method="post">
                     <input type="submit" value="удалите категорию">
@@ -91,7 +91,7 @@
         {{else}}
         <p class="colorTextLight">Нет постов
             {{#if user}}
-                <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a>
+                <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a>
             </p>
             {{else}}
                 <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>

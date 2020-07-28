@@ -6,9 +6,9 @@
         <form method="post" action="/category/create" class="mbItems">
             <input type="text" placeholder="Категория" name="category" class="textInput roundBorder"
                    required>
-            <input type="text" class="textInput block roundBorder" placeholder="Заголовок"
+            <input name="newPost" id="myAnswer" type="text" class="textInput block roundBorder" placeholder="Заголовок"
                    required>
-            <textarea name="newPost" id="myAnswer" cols=75 rows="10" placeholder='Текст поста'
+            <textarea cols=75 rows="10" placeholder='Текст поста'
                       class="textInput roundBorder" required></textarea>
             <div class="formErrorText colorDanger"></div>
             <input type="submit" value="Создать"
