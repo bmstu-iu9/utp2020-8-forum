@@ -13,7 +13,20 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    color: #111;
 }
+
+h3 {
+    margin: 0;
+}
+form {
+    margin: 0;
+}
+
+select {
+    cursor: pointer;
+}
+
 
 textarea {
     font-family: 'Roboto', sans-serif;
@@ -39,6 +52,10 @@ textarea {
     position: relative;
 }
 
+.block {
+    display: block;
+}
+
 .inlineBlock {
     display: inline-block;
 }
@@ -47,6 +64,15 @@ textarea {
 .vertAlignItemsMid * {
     vertical-align: middle;
 }
+
+.mbItems > * {
+    margin-bottom: 10px;
+}
+
+.mbItems:last-child {
+    margin-bottom: 0
+}
+
 
 /* ЦВЕТА */
 
@@ -75,7 +101,7 @@ textarea {
 }
 
 .colorDarker {
-    color: dimgray;
+    color: #777;
 }
 
 .hoverColorAccent:hover {
@@ -106,6 +132,12 @@ textarea {
     border-radius: 4px;
 }
 
+/* Текст */
+
+.textCenter {
+    text-align: center;
+}
+
 
 /* КНОПКИ */
 
@@ -123,6 +155,7 @@ textarea {
 
 .accentBtn:focus, .bigBtn:focus {
     outline: none;
+    background: #26A69A;
 }
 
 .roundBtn {
@@ -148,12 +181,10 @@ textarea {
     outline: none;
 }
 
-/* ПОЛЯ ВВОДА ТЕКСТА */
-
+/* ИНПУТЫ */
 
 .textInput {
-    border-width: 2px;
-    border-color: #e2e2e2;
+    border: 2px solid #e2e2de;
     background: #e2e2e2;
     transition-property: border-color, background;
     transition: .1s;
@@ -163,6 +194,12 @@ textarea {
     outline: none;
     border-color: #66cc99;
     background: white;
+}
+
+.select {
+    border: none;
+    background: #e5e5e5;
+    padding: 10px;
 }
 
 
@@ -229,6 +266,20 @@ ul.menuList {
     cursor: pointer
 }
 
+/* ПОПАПЫ */
+
+.popup {
+    position: fixed;
+}
+
+.popup>header {
+    border-bottom: 2px solid #66cc99;
+    padding: 15px;
+}
+
+.popup>.popupBody {
+    padding: 20px 20px 10px 20px;
+}
 
 /* ОСТАЛЬНОЕ */
 /* ________ */
@@ -306,6 +357,14 @@ ul.menuList {
     right: -30px;
 }
 
+#newPostPopup textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#postTitleInput {
+    width: 270px;
+}
 
 .ulCategories {
     max-height: 70vh;
