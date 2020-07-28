@@ -131,6 +131,7 @@
     }
     const editPost = (id, category, text) => {
         document.getElementById('editPost').value = text;
+        document.getElementById('editPost').focus()
         document.getElementById('sendEdition').onsubmit = async (e) => {
             e.preventDefault();
             let post = {

@@ -108,6 +108,7 @@
     }
     const editReply = (id, text) => {
         document.getElementById('editReply').value = text;
+        document.getElementById('editReply').focus();
         document.getElementById('sendReply').onsubmit = async (e) => {
             e.preventDefault();
             let post = {
