@@ -4,7 +4,7 @@
 
 
 body {
-    background: #eaf7f8;
+    background: #c3dde0;
     font-family: 'Roboto', sans-serif;
     margin: 0;
 }
@@ -330,7 +330,11 @@ ul.menuList {
 }
 
 .colorMain {
-    background: #eaf7f8;
+    background: #c3dde0;
+}
+
+.colorSectionCategory {
+    background: #d5ebed;
 }
 
 .colorSection {
@@ -343,7 +347,7 @@ ul.menuList {
 }
 
 .colorDarkLink:hover {
-    background-color: #E1A487;
+    background-color: #66cc99;
     cursor: pointer;
 }
 
@@ -387,16 +391,15 @@ ul.menuList {
 
 
 #categories {
-    width: 500px;
+    width: 18vw;
     position: fixed;
-    padding: 0 1% 0 1%;
     border-radius: 1vh;
     top: 100px;
     left: 30px;
 }
 
 .category {
-    width: 100%;
+    width: 85%;
     text-align: center;
     margin-bottom: 3%;
     border-radius: 0.5vh;
@@ -416,7 +419,18 @@ ul.menuList {
     position: absolute;
     right: 150px;
     top: 0;
+}
 
+.makeCategory {
+    background: #66cc99;
+    color: white;
+    margin-left: 3vw;
+    padding: 2vh 1vw;
+    border-radius: 1vh;
+}
+
+.makeCategory:hover {
+    color: black;
 }
 
 .answer {
@@ -556,11 +570,11 @@ ul.menuList {
 }
 
 .sortLink:visited {
-    color: white;
+    color: #333333;
 }
 
 .sortLink:hover {
-    color: #E1A487;
+    color: #66cc99;
 }
 
 .sortLink {
@@ -575,11 +589,11 @@ ul.menuList {
 }
 
 .chosenSortLinkAsc {
-    color: coral !important;
+    color: #66cc99 !important;
 }
 
 .chosenSortLink {
-    color: paleturquoise !important;
+    color: #66cc99 !important;
 }
 
 #message {
