@@ -40,7 +40,7 @@
                         alt="No avatar" height="100" width="100">
                         {{#eq this.author_id ../user.id}}
                             <a class="profileName link colorDarkLink"
-                               onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
+                               onclick="showPopup('editPostPopup'); editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
                             <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
                         {{else}}
                             <div class="profileName link colorDarkLink">
@@ -138,7 +138,6 @@
         });
     }
     const editPost = (id, category, text) => {
-        document.getElementById('postChange').style.display = 'block';
         document.getElementById('editPost').value = text;
         document.getElementById('sendEdition').onsubmit = async (e) => {
             e.preventDefault();

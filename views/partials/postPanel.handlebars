@@ -31,7 +31,7 @@
                 <div class="voteField">
                     {{#eq ../user.username this.author_name}}
                         <a class="profileName link colorDarkLink"
-                           onclick="editReply({{this.id}}, '{{this.text}}')">Edit</a>
+                           onclick="showPopup('editReplyPopup'); editReply({{this.id}}, '{{this.text}}')">Edit</a>
                         <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
                     {{else}}
                         {{#if ../user}}
@@ -107,7 +107,6 @@
         });
     }
     const editReply = (id, text) => {
-        document.getElementById('replyChange').style.display = 'block';
         document.getElementById('editReply').value = text;
         document.getElementById('sendReply').onsubmit = async (e) => {
             e.preventDefault();

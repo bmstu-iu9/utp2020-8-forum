@@ -48,7 +48,9 @@
         popups.forEach(p => p.classList.add('hidden'))
         popUpContainer.classList.add('hidden');
     }
-
+    const showProfileOptionsList = function () {
+        list.classList.toggle('hidden');
+    };
     document.addEventListener("click", function (e) {
         if (e.target.closest("#showMenu"))
             return
