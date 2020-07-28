@@ -1,13 +1,15 @@
-<div id="popUpContainer" class="hidden" onclick="hidePopups()">{{#not user}}
+<div id="popUpContainer" class="hidden" onclick="hidePopups()">
+    {{#not user}}
     {{>loginPanel}}
     {{>signupPanel}}
 {{else}}
-    {{>postCreationPanel}}
+    {{>createPostPanel}}
+    {{>editReplyPanel}}
+
 {{/not}} </div>
 {{>head}}
 {{>topbar}}
 {{>message}}
-{{>editReplyPanel}}
 
 <div class="container relative">
     <div id="categories" class="colorMain">
