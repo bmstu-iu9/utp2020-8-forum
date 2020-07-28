@@ -94,13 +94,13 @@ textarea {
 }
 
 .colorLight {
-    color: #c4c4c4;
+    color: #828282;
 }
+
 
 .colorMedium {
-    color: #919191;
+    color: #6f6f6f;
 }
-
 .colorDarker {
     color: #777;
 }
@@ -204,6 +204,7 @@ textarea {
     background: #e5e5e5;
     padding: 10px;
 }
+
 
 
 /* КАРТИНКИ */
@@ -340,7 +341,6 @@ ul.menuList {
     overflow-y: auto;
     padding: 15px;
     font-size: .9rem;
-
 }
 
 
@@ -390,6 +390,16 @@ ul.menuList {
 
 #editPostPopup .textInput {
     width: 80%;
+}
+
+
+#editReplyPopup {
+    width: min-content;
+
+}
+#editReplyPopup textarea {
+    min-width: 300px;
+    min-height: 100px;
 }
 .ulCategories {
     max-height: 70vh;
