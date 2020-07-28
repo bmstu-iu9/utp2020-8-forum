@@ -1,9 +1,9 @@
-{{#not user}}
+<div id="popUpContainer" class="hidden" onclick="hidePopups()">{{#not user}}
     {{>loginPanel}}
     {{>signupPanel}}
 {{else}}
     {{>postCreationPanel}}
-{{/not}}
+{{/not}} </div>
 {{>head}}
 {{>topbar}}
 {{>message}}

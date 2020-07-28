@@ -14,9 +14,9 @@
     {{else}}
         <div id="headerProfileBlock" class='right relative'>
             <a id="signUpButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
-               onclick="document.getElementById('signUpForm').style.display='block'">Регистрация</a>
+               onclick=showPopup('signupPopup')>Регистрация</a>
             <a id=" logInButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
-               onclick="document.getElementById('logInForm').style.display='block'">Войти</a>
+               onclick=showPopup('loginPopup')>Войти</a>
         </div>
     {{/if}}
 </header>
@@ -27,16 +27,28 @@
             document.getElementById('signUpButton').click();
             document.getElementById('signUpError').innerHTML = '{{message}}';
         } else if ('{{message}}' === 'Wrong login or password') {
-            document.getElementById('logInButton').click();
-            document.getElementById('logInError').innerHTML = '{{message}}';
+            document.getElementById('loginBtn"').click();
+            document.getElementById('loginErrorText').innerHTML = '{{message}}';
         }
         {{/if}}
 
-    const list = document.getElementById('profileOptionsList');
 
-    const showProfileOptionsList = function () {
-        list.classList.toggle('hidden');
-    };
+
+    const list = document.getElementById('profileOptionsList');
+    const popUpContainer = document.getElementById('popUpContainer');
+    const popups = document.querySelectorAll('.popup')
+    popups.forEach(p => p.onclick = event => event.stopPropagation())
+
+
+    const showPopup = (id) => {
+        document.getElementById(id).classList.remove('hidden');
+        popUpContainer.classList.remove('hidden');
+    }
+    const hidePopups = () => {
+        popups.forEach(p => p.classList.add('hidden'))
+        popUpContainer.classList.add('hidden');
+    }
+
     document.addEventListener("click", function (e) {
         if (e.target.closest("#showMenu"))
             return

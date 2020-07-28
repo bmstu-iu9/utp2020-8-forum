@@ -19,6 +19,7 @@ body {
 h3 {
     margin: 0;
 }
+
 form {
     margin: 0;
 }
@@ -188,6 +189,8 @@ textarea {
     background: #e2e2e2;
     transition-property: border-color, background;
     transition: .1s;
+    font-size: 1rem;
+    padding: 5px;
 }
 
 .textInput:focus {
@@ -267,17 +270,26 @@ ul.menuList {
 }
 
 /* ПОПАПЫ */
-
-.popup {
+#popUpContainer {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5);
 }
 
-.popup>header {
+.popup {
+}
+
+.popup > header {
     border-bottom: 2px solid #66cc99;
     padding: 15px;
 }
 
-.popup>.popupBody {
+.popup > .popupBody {
     padding: 20px 20px 10px 20px;
 }
 
@@ -364,6 +376,11 @@ ul.menuList {
 
 #postTitleInput {
     width: 270px;
+}
+
+#loginPopup {
+    margin: 10% auto;
+    width: 300px;
 }
 
 .ulCategories {
@@ -663,7 +680,6 @@ ul.menuList {
     position: absolute;
     top: 0;
     left: 0;
-    display: none;
     z-index: 100;
 }
 

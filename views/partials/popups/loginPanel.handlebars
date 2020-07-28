@@ -1,9 +1,15 @@
-<div id="logInForm" class="window">
-    <form class="windowContent colorMain" method="post" action="/login">
-        <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
-        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
-        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Enter password" name="psw" required>
-        <button type="submit" class="close colorDarkLink colorBackground">Log in</button>
-        <div id="logInError" class="colorTextLight"></div>
-    </form>
-</div>
+
+    <div id="loginPopup" class="popup bgLight roundBorder shadowed1 hidden">
+        <header>
+            <h3>Вход</h3>
+        </header>
+        <div class="popupBody ">
+            <form method="post" action="/login" class="textCenter mbItems">
+                <input type="text" class="textInput block roundBorder" placeholder="Логин" name="login" required
+                       autofocus>
+                <input type="text" class="textInput block roundBorder" placeholder="Пароль" name="psw" required>
+                <div id="loginErrorText" class="colorDanger"></div>
+                <input type="submit" value="Войти" id=loginBtn" class="bigBtn hoverBgSpecial bgAccent roundBorder">
+            </form>
+        </div>
+    </div>
