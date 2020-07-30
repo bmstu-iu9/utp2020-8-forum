@@ -55,16 +55,17 @@ const getLastReply = postId => query("getLastReply").get(postId);
 
 const checkPostExists = (title, category_id) => query("checkPostExists").get(title, category_id) !== undefined
 
-const addNewPost = (author_id, title, category_id) => {
+const addNewPost = (author_id, title, category_id, creation_time) => {
     if (checkPostExists(title, category_id))
         return false
-    query("addPost").run(author_id, title, category_id);
+    query("addPost").run(author_id, title, category_id, creation_time);
     return true
 }
 
-const addReply = (author_id, reply, post_id) => query("addReply").run(author_id, reply, post_id);
+const addReply = (author_id, reply, post_id, creation_time) => query("addReply").run(author_id, reply, post_id, creation_time);
 
 const addVoteEntry = (user_id, reply_id, amount) => query("addVoteEntry").run(user_id, reply_id, amount)
+const deleteVoteEntry = (id) => query("deleteVoteEntry").run(id)
 
 const inverseVoteAmount = id => query("inverseVoteAmount").run(id);
 
@@ -80,6 +81,38 @@ const getRepliesCount = () => query("getReplyCount").all()
 
 const deleteUser = user_id => query("deleteUser").run(user_id)
 
+const checkCategoryExists = category => query("checkCategoryExists").get(category);
+
+const getCategoryById = id => query("getCategoryById").get(id);
+
+const createCategory = category => query("createCategory").run(category);
+
+const getPostsByUser = userId => {
+    let posts = query("getPostsByUser").all(userId, userId);
+    posts.forEach(p => {
+        let lastReply = getLastReply(p.id);
+        p.last_reply = (lastReply ? lastReply : {"id": 0})
+    })
+    return posts;
+}
+
+const deletePost = postId => query("deletePost").run(postId);
+
+const deleteCategory = categoryId => query("deleteCategory").run(categoryId);
+
+const updatePost = (text, postId) => query("updatePost").run(text, postId);
+
+const deleteReply = replyId => query("deleteReply").run(replyId);
+
+const modifiedTimes = (moment, postsOrReplies) => {
+    for (let i = 0; i < postsOrReplies.length; ++i)
+        postsOrReplies[i].time_since_creation = moment(postsOrReplies[i].creation_time).fromNow();
+    return postsOrReplies;
+}
+
+const updateReply = (text, replyId) => query("updateReply").run(text, replyId);
+
+exports.init = init;
 exports.migrate = migrate;
 exports.getAllPosts = getAllPosts;
 exports.getPost = getPost;
@@ -95,7 +128,18 @@ exports.getRepliesCount = getRepliesCount;
 exports.findUser = findUser;
 exports.checkUserVoted = checkUserVoted;
 exports.addVoteEntry = addVoteEntry;
+exports.deleteVoteEntry = deleteVoteEntry;
 exports.inverseVoteAmount = inverseVoteAmount;
 exports.deleteUser = deleteUser;
+exports.checkCategoryExists = checkCategoryExists;
+exports.getCategoryById = getCategoryById;
+exports.createCategory = createCategory;
 exports.checkUserExists = checkUserExists;
 exports.createUser = createUser;
+exports.getPostsByUser = getPostsByUser;
+exports.deletePost = deletePost;
+exports.deleteCategory = deleteCategory;
+exports.updatePost = updatePost;
+exports.deleteReply = deleteReply;
+exports.updateReply = updateReply;
+exports.modifiedTimes = modifiedTimes;

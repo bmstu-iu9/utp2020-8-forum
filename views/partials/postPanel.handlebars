@@ -1,9 +1,18 @@
+<div id="replyChange" class="window">
+    <form id="sendReply" class="postCreationBox colorMain">
+        <div class="colorTextLight">Edit post</div>
+        <textarea name="replyEdition" id="editReply" required></textarea>
+        <input type="submit" class="borderTop myButton colorDarkLink colorSection" type="image"
+               src="/static/images/send.png">
+    </form>
+</div>
+
 <div class="selectedTheme colorMain">
     <a class="borderTop myButton colorDarkLink colorSection"
        style="float: left; margin-top: 4.4vh" href="{{from}}"><img src="/static/images/back.png" height="40"
                                                                    alt="Назад"></a>
     <h3 class="postTitle colorTextLight">{{post.title}}</h3>
-    <ul id="ulReplies" style="max-height: 67%;">
+    <ul id="ulReplies" style="max-height: 54%;">
         {{#each replies}}
             <li class="answer colorSection" id="reply_{{this.id}}">
                 <div class="profile">
@@ -22,24 +31,44 @@
                         {{/if}}
                     </div>
                 </div>
-                <div class="answerText link ColorTextDark">{{this.text}}</div>
-
+                <div class="textAndTime">
+                    <div class="answerText link ColorTextDark">{{this.text}}</div>
+                    <div class="timeLast">
+                        {{this.time_since_creation}}
+                    </div>
+                </div>
                 <div class="voteField">
-                    <form action="/vote/{{this.id}}/1" method="post">
-                        <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
-                    </form>
-                    <form action="/vote/{{this.id}}/-1" method="post">
-                        <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
-                    </form>
-                    <div class="voteCounter">{{#if this.rating }}
-                        {{#gt this.rating 0 }}
-                            <span style="color: darkgreen   ">{{this.rating}}</span>
-                        {{else}}
-                            <span style="color: darkred">{{this.rating}}</span>
-                        {{/gt}}
+                    {{#eq ../user.username this.author_name}}
+                        <a class="profileName link colorDarkLink"
+                           onclick="editReply({{this.id}}, '{{this.text}}')">Edit</a>
+                        <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
                     {{else}}
-                        0
-                    {{/if}}</div>
+                        {{#if ../user}}
+                            <form action="/vote/{{this.id}}/1?from={{../from}}" method="post">
+                            <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
+                            </form>
+                            <form action="/vote/{{this.id}}/-1?from={{../from}}" method="post">
+                            <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
+                            </form>
+                        {{else}}
+                            <input type="image" class="vote" src="/static/images/like.png" alt="#" onclick="document.getElementById('signUpForm').style.display='block'">
+                            <input type="image" class="vote" src="/static/images/dislike.png" onclick="document.getElementById('signUpForm').style.display='block'">
+                        {{/if}}
+
+
+
+
+                        <div class="voteCounter">{{#if this.rating }}
+                            {{#gt this.rating 0 }}
+                                <span style="color: darkgreen">{{this.rating}}</span>
+                            {{else}}
+                                <span style="color: darkred">{{this.rating}}</span>
+                            {{/gt}}
+                        {{else}}
+                            0
+                        {{/if}}
+                        </div>
+                    {{/eq}}
                 </div>
             </li>
         {{/each}}
@@ -49,5 +78,56 @@
     {{else}}
         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы ответить</p>
     {{/if}}
-
 </div>
+
+<script>
+    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
+            box3 = document.getElementById('postCreation'),
+            box4 = document.getElementById('replyChange');
+    window.onclick = function (event) {
+        if (event.target === box1) {
+            box1.style.display = 'none';
+        } else if (event.target === box2) {
+            box2.style.display = 'none';
+        } else if (event.target === box3) {
+            box3.style.display = 'none';
+        } else if (event.target === box4) {
+            box4.style.display = 'none';
+        }
+    }
+
+    const deleteReply = (id) => {
+        let post = {
+            id: id
+        };
+        fetch('/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(post)
+        }).then(() => {
+            location.reload();
+        });
+    }
+    const editReply = (id, text) => {
+        document.getElementById('replyChange').style.display = 'block';
+        document.getElementById('editReply').value = text;
+        document.getElementById('sendReply').onsubmit = async (e) => {
+            e.preventDefault();
+            let post = {
+                id: id,
+                text: document.getElementById('sendReply').replyEdition.value
+            }
+            fetch('/edit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(post)
+            }).then(() => {
+                location.reload();
+            });
+        };
+    }
+</script>
