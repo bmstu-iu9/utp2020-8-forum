@@ -92,11 +92,12 @@ textarea {
 .colorWhite {
     color: white;
 }
-
+.colorAccent {
+    color: #66cc99;
+}
 .colorLight {
     color: #828282;
 }
-
 
 .colorMedium {
     color: #6f6f6f;
@@ -116,6 +117,14 @@ textarea {
 
 .hoverBgSpecial:hover {
     background: #5cd6b5;
+}
+
+.hoverColorSpecial:hover {
+    color: #5cd6b5;
+}
+
+.visitedColor:visited {
+    color: #5cd6b5;
 }
 
 
@@ -515,9 +524,8 @@ ul.menuList {
     text-decoration: none;
 }
 
-.selectedTheme {
+#selectedTheme {
     width: 55%;
-    padding: 0 .5% 0.5% 1%;
     position: absolute;
     right: 150px;
     top: 0;
@@ -638,11 +646,11 @@ ul.menuList {
 }
 
 .sortLink:visited {
-    color: white;
+   
 }
 
 .sortLink:hover {
-    color: #E1A487;
+    
 }
 
 .sortLink {

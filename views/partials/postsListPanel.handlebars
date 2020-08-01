@@ -1,6 +1,5 @@
-<div class="selectedTheme colorMain">
-    <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
-<div class="colorTextLight">
+<div id="selectedTheme">
+<div>
     {{#if posts}}
         <span><a id='byTime'
             {{#is sortTag 'byTime' }}
@@ -12,25 +11,26 @@
                  href="?sortTag=byTimeAsc"
                 {{/if}}
             {{/is}}
-                 class="sortLink">По времени <span class="sortLinkArrow" id="byTimeSortLink">&nbsp;</span></a></span>
+                 class="colorDarker hoverColorAccent sortLink">По времени <span class="sortLinkArrow" id="byTimeSortLink">&nbsp;</span></a></span>
         <span><a id='byReplies'
             {{#is sortTag 'byReplies' }}
                  href="?sortTag=byRepliesAsc"
             {{else}}
                  href="?sortTag=byReplies"
             {{/is}}
-                 class="sortLink">По ответам <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
+                 class="colorDarker hoverColorAccent sortLink">По ответам <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
         <span><a id="byLastReply"
             {{#is sortTag 'byLastReply' }}
                  href="?sortTag=byLastReplyAsc"
             {{else}}
                  href="?sortTag=byLastReply"
             {{/is}}
-                 class="sortLink">По последнему ответу <span class="sortLinkArrow"
-                                                             id="byLastReplySortLink">&nbsp;</span></a></span></div>
-        <ul id="ulPosts" class="noUlDefaultPadding noUlDecor">
+                 class=" colorDarker hoverColorAccent sortLink">По последнему ответу <span class="sortLinkArrow"
+                                                             id="byLastReplySortLink">&nbsp;</span></a></span>
+                                                             </div>
+        <ul id="ulPosts" class="noUlDefaultPadding noUlDecor bgLight roundBorder">
             {{#each posts}}
-                <li class="answer colorSection">
+                <li class="answer">
                     <div class="profile">
                         <img {{#if this.author_name}}
                         src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
@@ -98,7 +98,7 @@
             {{/if}}
         {{/if}}
     {{/if}}
-</div>
+</div> 
 <script>
     let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
             box3 = document.getElementById('postCreation'),
@@ -156,11 +156,13 @@
     }
     if ('{{sortTag}}'.endsWith('Asc')) {
         const sortLinkId = '{{sortTag}}'.replace('Asc', '')
-        document.getElementById(sortLinkId).classList.add('chosenSortLinkAsc');
+        document.getElementById(sortLinkId).classList.add('visitedColor');
+        document.getElementById(sortLinkId).classList.remove('colorDarker');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↑";
     } else {
         const sortLinkId = '{{sortTag}}';
-        document.getElementById(sortLinkId).classList.add('chosenSortLink');
+        document.getElementById(sortLinkId).classList.add('visitedColor');
+        document.getElementById(sortLinkId).classList.remove('colorDarker');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
     }
 </script>
