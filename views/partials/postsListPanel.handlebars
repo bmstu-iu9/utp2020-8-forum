@@ -1,37 +1,67 @@
 <div id="selectedTheme">
-<div>
-    {{#if posts}}
-        <span><a id='byTime'
-            {{#is sortTag 'byTime' }}
-                 href="?sortTag=byTimeAsc"
+    <div>
+        {{#if posts}}
+        <span><a id='byTime' {{#is sortTag 'byTime' }} href="?sortTag=byTimeAsc" {{else}} {{#if sortTag }}
+                href="?sortTag=byTime" {{else}} href="?sortTag=byTimeAsc" {{/if}} {{/is}}
+                class="colorDarker hoverColorAccent sortLink">По времени <span class="sortLinkArrow"
+                    id="byTimeSortLink">&nbsp;</span></a></span>
+        <span><a id='byReplies' {{#is sortTag 'byReplies' }} href="?sortTag=byRepliesAsc" {{else}}
+                href="?sortTag=byReplies" {{/is}} class="colorDarker hoverColorAccent sortLink">По ответам <span
+                    class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
+        <span><a id="byLastReply" {{#is sortTag 'byLastReply' }} href="?sortTag=byLastReplyAsc" {{else}}
+                href="?sortTag=byLastReply" {{/is}} class=" colorDarker hoverColorAccent sortLink">По последнему ответу
+                <span class="sortLinkArrow" id="byLastReplySortLink">&nbsp;</span></a></span>
+    </div>
+    <ul id="ulPosts" class="noUlDefaultPadding noUlDecor bgLight roundBorder">
+        {{#each posts}}
+        <li class="relative"> <a href="/post/{{this.id}}?from={{../currentPath}}">
+                <header>
+                    <h3 class="left">
+                        {{this.title}}
+                    </h3>
+                    <div class="right vertAlignItemsMid">
+                        <img src="/static/images/icons/chat.svg" alt="" class="inlineBlock" style="width: 15px;">
+                        {{#if this.reply_count}}
+                        {{this.reply_count}}
+                        {{else}}
+                        0
+                        {{/if}}</div>
+                    <div class="clearFix"></div>
+                </header>
+                <div class="postMain">
+                    <p class="colorMedium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ...</p>
+                </div>
+            </a>
+
+            <footer class="vertAlignItemsMid">
+                <div class="left">
+                    <img {{#if this.author_name}} src="https://api.adorable.io/avatars/128/{{this.author_name}}.png"
+                        {{else}}
+                        src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
+                        {{/if}} class='roundImg smallAvatar inlineBlock' alt="">
+                    <div class="inlineBlock colorDarker">{{#if this.author_name}}
+                        <span class="colorAccent">{{this.author_name}}</span>
+                        {{else}}
+                        <span class="colorDarker">Удален</span>
+                        {{/if}} создал {{this.time_since_creation}}
+                    </div>
+                </div>
+                {{#eq this.author_id ../user.id}}
+                <div class="right">
+                    <a onclick="showMenu('postActionsList{{this.id}}'); event.stopImmediatePropagation()">...</a>
+                </div>
+                <div class="clearFix"></div>
+            </footer>
+            <ul id="postActionsList{{this.id}}" class="postActionsList menuList roundBorder shadowed1 hidden">
+                <li><a
+                        onclick="showPopup('editPostPopup'); editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Редактировать</a>
+                </li>
+                <li><a class="colorTextDanger" onclick="deletePost({{this.id}})">Удалить</a></li>
+            </ul>
             {{else}}
-                {{#if sortTag }}
-                 href="?sortTag=byTime"
-                {{else}}
-                 href="?sortTag=byTimeAsc"
-                {{/if}}
-            {{/is}}
-                 class="colorDarker hoverColorAccent sortLink">По времени <span class="sortLinkArrow" id="byTimeSortLink">&nbsp;</span></a></span>
-        <span><a id='byReplies'
-            {{#is sortTag 'byReplies' }}
-                 href="?sortTag=byRepliesAsc"
-            {{else}}
-                 href="?sortTag=byReplies"
-            {{/is}}
-                 class="colorDarker hoverColorAccent sortLink">По ответам <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
-        <span><a id="byLastReply"
-            {{#is sortTag 'byLastReply' }}
-                 href="?sortTag=byLastReplyAsc"
-            {{else}}
-                 href="?sortTag=byLastReply"
-            {{/is}}
-                 class=" colorDarker hoverColorAccent sortLink">По последнему ответу <span class="sortLinkArrow"
-                                                             id="byLastReplySortLink">&nbsp;</span></a></span>
-                                                             </div>
-        <ul id="ulPosts" class="noUlDefaultPadding noUlDecor bgLight roundBorder">
-            {{#each posts}}
-                <li class="answer">
-                    <div class="profile">
+            <div class="clearFix"></div>
+            {{/eq}}
+            {{!-- <div class="profile">
                         <img {{#if this.author_name}}
                         src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
                         {{else}}
@@ -71,38 +101,38 @@
                                 0
                             {{/if}}
                         </div>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
+                    </div> --}}
+        </li>
+        {{/each}}
+    </ul>
     {{else}}
-        {{#if category}}
-        <p class="colorTextLight">Нет постов.
-            {{#if user}}
-                <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a>
-                или
-                <form action="/category/delete/{{category}}" method="post">
-                    <input type="submit" value="удалите категорию">
-                </form>
-                </p>
-            {{else}}
-                <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
-            {{/if}}
-        {{else}}
-        <p class="colorTextLight">Нет постов
-            {{#if user}}
-                <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a>
-            </p>
-            {{else}}
-                <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
-            {{/if}}
-        {{/if}}
+    {{#if category}}
+    <p class="colorTextLight">Нет постов.
+        {{#if user}}
+        <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a>
+        или
+    <form action="/category/delete/{{category}}" method="post">
+        <input type="submit" value="удалите категорию">
+    </form>
+    </p>
+    {{else}}
+    <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}
-</div> 
+    {{else}}
+    <p class="colorTextLight">Нет постов
+        {{#if user}}
+        <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a>
+    </p>
+    {{else}}
+    <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+    {{/if}}
+    {{/if}}
+    {{/if}}
+</div>
 <script>
     let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
-            box3 = document.getElementById('postCreation'),
-            box4 = document.getElementById('postChange');
+        box3 = document.getElementById('postCreation'),
+        box4 = document.getElementById('postChange');
     window.onclick = function (event) {
         if (event.target === box1) {
             box1.style.display = 'none';
@@ -164,5 +194,14 @@
         document.getElementById(sortLinkId).classList.add('visitedColor');
         document.getElementById(sortLinkId).classList.remove('colorDarker');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
+    }
+    const menus = document.querySelectorAll('.menuList')
+
+    document.addEventListener("click", function (e) {
+        list.classList.add('hidden');
+        menus.forEach(m => m.classList.add('hidden'))
+    });
+    const showMenu = id => {
+        document.getElementById(id).classList.remove('hidden');
     }
 </script>

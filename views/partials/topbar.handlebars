@@ -8,7 +8,7 @@
             <img src="https://api.adorable.io/avatars/128/{{user.username}}.png"
                  class='roundImg smallAvatar inlineBlock' alt="">
             <a id='showMenu' class="headerText colorMedium linkTextNoDecor hoverColorAccent" id="showMenu"
-               onclick="showProfileOptionsList()">{{user.username}} ▼</a>
+               onclick="showProfileOptionsList(); event.stopPropagation()">{{user.username}} ▼</a>
             {{>profileOptionsList}}
         </div>
     {{else}}
@@ -51,9 +51,6 @@
     const showProfileOptionsList = function () {
         list.classList.toggle('hidden');
     };
-    document.addEventListener("click", function (e) {
-        if (e.target.closest("#showMenu"))
-            return
-        list.classList.add('hidden');
-    });
+
+    
 </script>
