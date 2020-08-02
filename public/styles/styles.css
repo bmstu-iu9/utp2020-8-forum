@@ -104,8 +104,8 @@ textarea {
 .colorMedium {
     color: #6f6f6f;
 }
-.colorDarker {
-    color: #777;
+.colorDark {
+    color: rgb(32, 32, 32);
 }
 
 .hoverColorAccent:hover {

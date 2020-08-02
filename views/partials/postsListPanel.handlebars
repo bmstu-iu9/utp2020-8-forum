@@ -3,13 +3,13 @@
         {{#if posts}}
         <span><a id='byTime' {{#is sortTag 'byTime' }} href="?sortTag=byTimeAsc" {{else}} {{#if sortTag }}
                 href="?sortTag=byTime" {{else}} href="?sortTag=byTimeAsc" {{/if}} {{/is}}
-                class="colorDarker hoverColorAccent sortLink">По времени <span class="sortLinkArrow"
+                class="colorMedium hoverColorAccent sortLink">По времени <span class="sortLinkArrow"
                     id="byTimeSortLink">&nbsp;</span></a></span>
         <span><a id='byReplies' {{#is sortTag 'byReplies' }} href="?sortTag=byRepliesAsc" {{else}}
-                href="?sortTag=byReplies" {{/is}} class="colorDarker hoverColorAccent sortLink">По ответам <span
+                href="?sortTag=byReplies" {{/is}} class="colorMedium hoverColorAccent sortLink">По ответам <span
                     class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
         <span><a id="byLastReply" {{#is sortTag 'byLastReply' }} href="?sortTag=byLastReplyAsc" {{else}}
-                href="?sortTag=byLastReply" {{/is}} class=" colorDarker hoverColorAccent sortLink">По последнему ответу
+                href="?sortTag=byLastReply" {{/is}} class=" colorMedium hoverColorAccent sortLink">По последнему ответу
                 <span class="sortLinkArrow" id="byLastReplySortLink">&nbsp;</span></a></span>
     </div>
     <ul id="ulPosts" class="noUlDefaultPadding noUlDecor bgLight roundBorder">
@@ -17,7 +17,7 @@
         <li class="relative"> 
             <a href="/post/{{this.id}}?from={{../currentPath}}">
                 <header>
-                    <h3 class="left">
+                    <h3 class="left colorDark">
                         {{this.title}}
                     </h3>
                     <div class="right vertAlignItemsMid">
@@ -40,7 +40,7 @@
                         {{else}}
                         src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
                         {{/if}} class='roundImg smallAvatar inlineBlock' alt="">
-                    <div class="inlineBlock colorDarker">{{#if this.author_name}}
+                    <div class="inlineBlock colorMedium">{{#if this.author_name}}
                         <span class="colorAccent">{{this.author_name}}</span>
                         {{else}}
                         <span class="colorDarker">Удален</span>
@@ -192,12 +192,12 @@
     if ('{{sortTag}}'.endsWith('Asc')) {
         const sortLinkId = '{{sortTag}}'.replace('Asc', '')
         document.getElementById(sortLinkId).classList.add('visitedColor');
-        document.getElementById(sortLinkId).classList.remove('colorDarker');
+        document.getElementById(sortLinkId).classList.remove('colorMedium');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↑";
     } else {
         const sortLinkId = '{{sortTag}}';
         document.getElementById(sortLinkId).classList.add('visitedColor');
-        document.getElementById(sortLinkId).classList.remove('colorDarker');
+        document.getElementById(sortLinkId).classList.remove('colorMedium');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
     }
     const menus = document.querySelectorAll('.menuList')
