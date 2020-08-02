@@ -14,7 +14,8 @@
     </div>
     <ul id="ulPosts" class="noUlDefaultPadding noUlDecor bgLight roundBorder">
         {{#each posts}}
-        <li class="relative"> <a href="/post/{{this.id}}?from={{../currentPath}}">
+        <li class="relative"> 
+            <a href="/post/{{this.id}}?from={{../currentPath}}">
                 <header>
                     <h3 class="left">
                         {{this.title}}
@@ -48,7 +49,11 @@
                 </div>
                 {{#eq this.author_id ../user.id}}
                 <div class="right">
-                    <a onclick="showMenu('postActionsList{{this.id}}'); event.stopImmediatePropagation()">...</a>
+                    <a onclick="showMenu('postActionsList{{this.id}}'); event.stopImmediatePropagation()" >
+                        <img src="/static/images/icons/more.svg" style="width: 15px; padding: 5px" alt="">
+
+                        </a>
+                        &nbsp;
                 </div>
                 <div class="clearFix"></div>
             </footer>

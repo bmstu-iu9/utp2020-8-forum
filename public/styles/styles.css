@@ -447,7 +447,7 @@ ul.menuList {
     
 }
 
-#ulPosts > li > footer >img {
+#ulPosts > li > footer > .left > img {
     margin-right: 10px;
 }
 .ulCategories {
