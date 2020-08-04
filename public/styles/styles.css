@@ -186,7 +186,6 @@ ul.menuList {
     padding: 10px 0;
     background: white;
     list-style-type: none;
-
 }
 
 .menuList > li {
@@ -334,7 +333,7 @@ ul.menuList {
 }
 
 .colorSectionCategory {
-    background: #d5ebed;
+    background: #c3dde0;;
 }
 
 .colorSection {
@@ -399,17 +398,15 @@ ul.menuList {
 }
 
 .category {
-    width: 85%;
-    text-align: center;
-    margin-bottom: 3%;
-    border-radius: 0.5vh;
-
+    width: 80%;
+    text-align: left;
+    padding-left: 1vw;
 }
 
 .category-link {
-    line-height: 350%;
+    line-height: 200%;
     display: block;
-    font-size: 15pt;
+    font-size: 13pt;
     text-decoration: none;
 }
 
@@ -421,12 +418,9 @@ ul.menuList {
     top: 0;
 }
 
-.makeCategory {
+#makeCategory {
     background: #66cc99;
-}
-
-.makeCategory:hover {
-    color: black;
+    margin-left: 0.9vw;
 }
 
 .answer {
@@ -574,6 +568,7 @@ ul.menuList {
 }
 
 .sortLink {
+    color: #333333;
     font-size: 12pt;
     margin-left: 1%;
     margin-right: 1%;
