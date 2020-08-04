@@ -1,13 +1,14 @@
 <div id="selectedTheme">
     <div>
         {{#if posts}}
-        <span><a id='byTime' {{#is sortTag 'byTime' }} href="?sortTag=byTimeAsc" {{else}} {{#if sortTag }}
-                href="?sortTag=byTime" {{else}} href="?sortTag=byTimeAsc" {{/if}} {{/is}}
+        <span><a id='byTime' {{#is sortTag 'byTime' }} href="?sortTag=byTimeAsc" {{else}} 
+                href="?sortTag=byTime" {{/is}}
                 class="colorMedium hoverColorAccent sortLink">По времени <span class="sortLinkArrow"
                     id="byTimeSortLink">&nbsp;</span></a></span>
         <span><a id='byReplies' {{#is sortTag 'byReplies' }} href="?sortTag=byRepliesAsc" {{else}}
-                href="?sortTag=byReplies" {{/is}} class="colorMedium hoverColorAccent sortLink">По ответам <span
-                    class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
+                href="?sortTag=byReplies" {{/is}} 
+                class="colorMedium hoverColorAccent sortLink">По ответам 
+                <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
         <span><a id="byLastReply" {{#is sortTag 'byLastReply' }} href="?sortTag=byLastReplyAsc" {{else}}
                 href="?sortTag=byLastReply" {{/is}} class=" colorMedium hoverColorAccent sortLink">По последнему ответу
                 <span class="sortLinkArrow" id="byLastReplySortLink">&nbsp;</span></a></span>
@@ -192,12 +193,10 @@
     if ('{{sortTag}}'.endsWith('Asc')) {
         const sortLinkId = '{{sortTag}}'.replace('Asc', '')
         document.getElementById(sortLinkId).classList.add('visitedColor');
-        document.getElementById(sortLinkId).classList.remove('colorMedium');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↑";
     } else {
         const sortLinkId = '{{sortTag}}';
         document.getElementById(sortLinkId).classList.add('visitedColor');
-        document.getElementById(sortLinkId).classList.remove('colorMedium');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
     }
     const menus = document.querySelectorAll('.menuList')

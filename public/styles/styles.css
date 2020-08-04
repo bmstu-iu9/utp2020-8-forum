@@ -125,7 +125,7 @@ textarea {
     color: #5cd6b5;
 }
 
-.visitedColor:visited {
+.visitedColor:visited, .visitedColor:visited {
     color: #5cd6b5;
 }
 
