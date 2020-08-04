@@ -1,9 +1,9 @@
 <ul class="ulCategories" style="position: relative;">
     <button onclick="showNewCategory()">Создать категорию</button>
-    <div id="newCategory" method="POST" class="hidden">
-        <input type="text" name="newCategoryName">
+    <form id="newCategory" method="POST" action="/category/create" class="hidden">
+        <input type="text" name="newCategoryName" required>
         <input type="submit">
-    </div>
+    </form>
     {{#each categories}}
         <li class="liCategories category colorSection colorDarkLink">
             <a class="category-link colorTextDark"

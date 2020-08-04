@@ -83,6 +83,15 @@ router.post('/:categoryId(\\d+)', function (req, res) {
     } else res.redirect(`${originalUrl}?postFail=true`)
 })
 
+router.post('/create', (req, res) => {
+    let category = dbManager.checkCategoryExists(req.body.newCategoryName.trim());
+    if (!category) {
+        dbManager.createCategory(req.body.newCategoryName.trim());
+        let categoryId = dbManager.checkCategoryExists(req.body.newCategoryName.trim()).id;
+        res.redirect(`/category/${categoryId}`);
+    }
+    res.redirect(`/`);
+});
 
 router.post('/delete/:categoryId(\\d+)', (req, res) => {
     let categoryId = req.params.categoryId;
