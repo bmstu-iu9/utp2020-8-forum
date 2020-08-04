@@ -86,7 +86,9 @@ textarea {
 .bgAccent {
     background: #66cc99;
 }
-
+.bgDanger {
+    background-color: darkred;
+}
 .colorDanger {
     color: darkred !important;
 }

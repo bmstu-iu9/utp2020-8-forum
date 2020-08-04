@@ -1,13 +1,11 @@
 <div id="selectedTheme">
     <div>
         {{#if posts}}
-        <span><a id='byTime' {{#is sortTag 'byTime' }} href="?sortTag=byTimeAsc" {{else}} 
-                href="?sortTag=byTime" {{/is}}
+        <span><a id='byTime' {{#is sortTag 'byTime' }} href="?sortTag=byTimeAsc" {{else}} href="?sortTag=byTime" {{/is}}
                 class="colorMedium hoverColorAccent sortLink">По времени <span class="sortLinkArrow"
                     id="byTimeSortLink">&nbsp;</span></a></span>
         <span><a id='byReplies' {{#is sortTag 'byReplies' }} href="?sortTag=byRepliesAsc" {{else}}
-                href="?sortTag=byReplies" {{/is}} 
-                class="colorMedium hoverColorAccent sortLink">По ответам 
+                href="?sortTag=byReplies" {{/is}} class="colorMedium hoverColorAccent sortLink">По ответам
                 <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
         <span><a id="byLastReply" {{#is sortTag 'byLastReply' }} href="?sortTag=byLastReplyAsc" {{else}}
                 href="?sortTag=byLastReply" {{/is}} class=" colorMedium hoverColorAccent sortLink">По последнему ответу
@@ -15,7 +13,7 @@
     </div>
     <ul id="ulPosts" class="noUlDefaultPadding noUlDecor bgLight roundBorder">
         {{#each posts}}
-        <li class="relative"> 
+        <li class="relative">
             <a href="/post/{{this.id}}?from={{../currentPath}}">
                 <header>
                     <h3 class="left colorDark">
@@ -50,11 +48,11 @@
                 </div>
                 {{#eq this.author_id ../user.id}}
                 <div class="right">
-                    <a onclick="showMenu('postActionsList{{this.id}}'); event.stopImmediatePropagation()" >
+                    <a onclick="showMenu('postActionsList{{this.id}}'); event.stopImmediatePropagation()">
                         <img src="/static/images/icons/more.svg" style="width: 15px; padding: 5px" alt="">
 
-                        </a>
-                        &nbsp;
+                    </a>
+                    &nbsp;
                 </div>
                 <div class="clearFix"></div>
             </footer>
@@ -67,70 +65,28 @@
             {{else}}
             <div class="clearFix"></div>
             {{/eq}}
-            {{!-- <div class="profile">
-                        <img {{#if this.author_name}}
-                        src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                        {{else}}
-                        src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
-                        {{/if}}
-                        alt="No avatar" height="100" width="100">
-                        {{#eq this.author_id ../user.id}}
-                            <a class="profileName link colorDarkLink"
-                               onclick="showPopup('editPostPopup'); editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
-                            <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
-                        {{else}}
-                            <div class="profileName link colorDarkLink">
-                                {{#if this.author_name}}
-                                    {{this.author_name}}
-                                {{else}}
-                                    Удален
-                                {{/if}}
-                            </div>
-                        {{/eq}}
-                    </div>
-
-                    <a class="textAndTime link" href="/post/{{this.id}}?from={{../currentPath}}">
-                    <span class="answerText  ColorTextDark">{{this.title}}</span>
-                    <div class="timeLast">
-                        {{this.time_since_creation}}
-                    </div>
-                    </a>
-                    <div class="voteField">
-                        <a href="/post/{{this.id}}?{{../currentPath}}"><input type="image"
-                                                                              class="replyImage vote colorDarkLink myButton colorSection"
-                                                                              src="/static/images/reply.png"
-                                                                              alt="#"/></a>
-                        <div class="voteCounter colorMain colorTextLight">
-                            {{#if this.reply_count}}
-                                {{this.reply_count}}
-                            {{else}}
-                                0
-                            {{/if}}
-                        </div>
-                    </div> --}}
         </li>
         {{/each}}
     </ul>
     {{else}}
     {{#if category}}
-    <p class="colorTextLight">Нет постов.
+    <div class="colorMedium">Нет постов.
         {{#if user}}
-        <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a>
-        или
-    <form action="/category/delete/{{category}}" method="post">
-        <input type="submit" value="удалите категорию">
-    </form>
-    </p>
+        <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a> или
+        <form action="/category/delete/{{category}}" method="post" class="inlineBlock">
+            <input type="submit" value="удалите категорию" class="bigBtn bgDanger roundBorder hoverBgSpecial">
+        </form>
+    </div>
     {{else}}
-    <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+    <p class="colorMedium">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}
     {{else}}
-    <p class="colorTextLight">Нет постов
+    <p class="colorMedium">Нет постов.
         {{#if user}}
         <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a>
     </p>
     {{else}}
-    <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+    <p class="colorMedium">Войдите или зарегистрируйтесь, чтобы создать пост</p>
     {{/if}}
     {{/if}}
     {{/if}}
