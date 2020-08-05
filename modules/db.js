@@ -58,8 +58,7 @@ const checkPostExists = (title, category_id) => query("checkPostExists").get(tit
 const addNewPost = (author_id, title, category_id, creation_time) => {
     if (checkPostExists(title, category_id))
         return false
-    query("addPost").run(author_id, title, category_id, creation_time);
-    return true
+    return query("addPost").run(author_id, title, category_id, creation_time);
 }
 
 const addReply = (author_id, reply, post_id, creation_time) => query("addReply").run(author_id, reply, post_id, creation_time);
