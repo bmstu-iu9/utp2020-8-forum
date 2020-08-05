@@ -25,18 +25,17 @@ router.get('/:postId(\\d+)', function (req, res) {
 })
 
 router.post('/create', (req, res) => {
-    let category = dbManager.checkCategoryExists(req.body.category.trim());
-    let categoryId;
+    let categoryName = req.body.category.trim();
+    let category = dbManager.checkCategoryExists(categoryName);
     let date = new Date();
     let creation_time = date.toDateString() + " " + date.toTimeString();
     if (!category) {
-        dbManager.createCategory(req.body.category.trim());
-        categoryId = dbManager.checkCategoryExists(req.body.category.trim()).id;
+        let result = dbManager.createCategory(categoryName);
+        categoryId = result.lastInsertRowid;
         dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
         res.redirect(`/category/${categoryId}`);
     } else {
-        categoryId = category.id;
-        let postSuccess = dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
+        let postSuccess = dbManager.addPost(req.user.id, req.body.newPost.trim(), category.id, creation_time);
         if (postSuccess)
             res.redirect(`/category/${categoryId}`);
         else
