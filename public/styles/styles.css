@@ -417,8 +417,7 @@ ul.menuList {
 }
 #editReplyPopup textarea {
     min-width: 300px;
-    min-height: 10
-    0px;
+    min-height: 10 0px;
 }
 
 
@@ -436,6 +435,12 @@ ul.menuList {
 
 #ulPosts > li > a > header {
     padding: 25px 30px 0 30px;
+}
+
+#ulPosts > li > a > header > h3 {
+    background: red;
+    max-width: 90%;
+    overflow: hidden;
 }
 
 #ulPosts > li > a > .postMain {
@@ -459,6 +464,12 @@ ul.menuList {
 
 .clearFix {
     clear: both;
+}
+
+.firstReplyPreviewText {
+    line-height: 20px; 
+    max-height: 40px; 
+    overflow: hidden;
 }
 
 .replyImage {
