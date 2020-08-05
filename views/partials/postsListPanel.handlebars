@@ -29,7 +29,13 @@
                     <div class="clearFix"></div>
                 </header>
                 <div class="postMain">
-                    <p class="colorMedium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ...</p>
+                    <p class="colorMedium">
+                        {{#if this.first_reply}}
+                        {{this.first_reply.text}}
+                        {{else}}
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ...
+                        {{/if}}
+                        </p>
                 </div>
             </a>
 
