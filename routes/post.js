@@ -36,10 +36,10 @@ router.post('/create', (req, res) => {
     }
     else
         categoryId = category.id
-    let result = dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
+    let result = dbManager.addPost(req.user.id, req.body.postTitle.trim(), categoryId, creation_time);
     let postId = result.lastInsertRowid;
     if (result) {
-        dbManager.addReply(req.user.id, req.body.newPost.trim(), postId, creation_time)
+        dbManager.addReply(req.user.id, req.body.postText.trim(), postId, creation_time)
         res.redirect(`/post/${result.lastInsertRowid}`);
     }
     else
