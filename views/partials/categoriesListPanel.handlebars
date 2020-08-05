@@ -1,4 +1,10 @@
-<ul class="ulCategories noUlDecor noUlDefaultPadding">
+
+<ul class="ulCategories noUlDecor noUlDefaultPadding" style="position: relative;">
+    <button onclick="showNewCategory()">Создать категорию</button>
+    <form id="newCategory" method="POST" action="/category/create" class="hidden">
+        <input type="text" name="newCategoryName" required>
+        <input type="submit">
+    </form>
     {{#each categories}}
         <li class="category colorSection colorDarkLink">
             <a class="category-link colorTextDark"
@@ -6,3 +12,7 @@
         </li>
     {{/each}}
 </ul>
+
+<script>
+    const showNewCategory = () => document.getElementById('newCategory').classList.toggle('hidden')
+</script>

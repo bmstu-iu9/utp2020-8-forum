@@ -84,23 +84,13 @@ router.post('/:categoryId(\\d+)', function (req, res) {
 })
 
 router.post('/create', (req, res) => {
-    let category = dbManager.checkCategoryExists(req.body.category.trim());
-    let categoryId;
-    let date = new Date();
-    let creation_time = date.toDateString() + " " + date.toTimeString();
+    let category = dbManager.checkCategoryExists(req.body.newCategoryName.trim());
     if (!category) {
-        dbManager.createCategory(req.body.category.trim());
-        categoryId = dbManager.checkCategoryExists(req.body.category.trim()).id;
-        dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
+        dbManager.createCategory(req.body.newCategoryName.trim());
+        let categoryId = dbManager.checkCategoryExists(req.body.newCategoryName.trim()).id;
         res.redirect(`/category/${categoryId}`);
-    } else {
-        categoryId = category.id;
-        let postSuccess = dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
-        if (postSuccess)
-            res.redirect(`/category/${categoryId}`);
-        else
-            res.redirect(`/category/${categoryId}?postFail=true`);
     }
+    res.redirect(`/`);
 });
 
 router.post('/delete/:categoryId(\\d+)', (req, res) => {
