@@ -411,8 +411,8 @@ ul.menuList {
 }
 
 .selectedTheme {
-    width: 55%;
-    padding: 0 .5% 0.5% 1%;
+    width: 65%;
+    padding: 0 0.5% 0.5% 1%;
     position: absolute;
     right: 150px;
     top: 0;
@@ -428,10 +428,8 @@ ul.menuList {
     flex-direction: row;
     justify-content: space-between;
     width: 98%;
-    margin-bottom: 1%;
+    margin-bottom: 0.5%;
     padding: 1% 1% 1% 1%;
-    border-radius: 1vh;
-
 }
 
 .categoryNotChosen {
@@ -632,7 +630,6 @@ ul.menuList {
     resize: none;
     text-align: center;
     padding: 1% 1% 1% 1%;
-    border-radius: 1vh;
     position: absolute;
     top: 0;
     right: 0;
