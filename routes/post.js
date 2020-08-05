@@ -40,7 +40,7 @@ router.post('/create', (req, res) => {
     let postId = result.lastInsertRowid;
     if (result) {
         dbManager.addReply(req.user.id, req.body.postText.trim(), postId, creation_time)
-        res.redirect(`/post/${result.lastInsertRowid}`);
+        res.redirect(`/post/${result.lastInsertRowid}?from=/category/${categoryId}`);
     }
     else
         res.redirect(`/category/${categoryId}?postFail=true`);
