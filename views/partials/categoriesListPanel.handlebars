@@ -1,9 +1,9 @@
 <div id="categories">
-    <button onclick="showNewCategory()" id="makeCategory" class="bigBtn bgAccent hoverBgSpecial roundBorder">
+    <button onclick="showDropdown('newCategory')" id="newCategoryBtn" class="bigBtn bgAccent hoverBgSpecial roundBorder">
         Создать категорию ▼
     </button>
     <ul class="noUlDecor noUlDefaultPadding relative">
-        <div id="mouseLeaveDivnewCategory" class="mouseLeaveDiv hidden relative">
+        <div id="dropdownAreanewCategory" class="dropdownArea hidden relative">
             <form id="newCategory" method="POST" action="/category/create" class="popup hidden bgWhite roundBorder shadowed1">
                 <div class="popupBody mbItems">
                     <input type="text" name="newCategoryName" class="textInput roundBorder" placeholder="Имя категории"
@@ -26,17 +26,3 @@
         {{/each}}
     </ul>
 </div>
-
-<script>
-
-
-    document.getElementById('mouseLeaveDivnewCategory').onmouseleave = () => {
-        document.getElementById('mouseLeaveDivnewCategory').classList.toggle('hidden')
-        document.getElementById('newCategory').classList.toggle('hidden')
-        document.getElementById('makeCategory').blur()
-    }
-    const showNewCategory = (event) => {
-        document.getElementById('newCategory').classList.toggle('hidden')
-        document.getElementById('mouseLeaveDivnewCategory').classList.toggle('hidden')
-    }
-</script>

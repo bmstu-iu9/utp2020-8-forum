@@ -8,7 +8,7 @@
             <img src="https://api.adorable.io/avatars/128/{{user.username}}.png"
                  class='roundImg smallAvatar inlineBlock' alt="">
             <a id='showMenu' class="headerText colorMedium linkTextNoDecor hoverColorAccent" id="showMenu"
-               onclick="showProfileOptionsList(); event.stopPropagation()">{{user.username}} ▼</a>
+               onclick="showDropdown('profileOptionsList')">{{user.username}} ▼</a>
             {{>profileOptionsList}}
         </div>
     {{else}}
@@ -33,12 +33,9 @@
         {{/if}}
 
 
-    
-    const list = document.getElementById('profileOptionsList');
     const popUpContainer = document.getElementById('popUpContainer');
     const popups = document.querySelectorAll('.popup')
     popups.forEach(p => p.onclick = event => event.stopPropagation())
-
 
     const showPopup = (id) => {
         document.getElementById(id).classList.remove('hidden');
@@ -48,9 +45,4 @@
         popups.forEach(p => p.classList.add('hidden'))
         popUpContainer.classList.add('hidden');
     }
-    const showProfileOptionsList = function () {
-        list.classList.toggle('hidden');
-    };
-
-    
 </script>

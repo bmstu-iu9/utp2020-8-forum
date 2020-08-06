@@ -386,16 +386,30 @@ ul.menuList {
 
 #profileOptionsList {
     position: absolute;
-    top: 60px;
-    right: -30px;
+    top: 0;
+    right: 30px;
+}
+
+#dropdownAreaprofileOptionsList {
+    width: 300px;
+    height: 300px;
+    left: 30px;
 }
 
 .postActionsList {
     position: absolute;
-    right: 0;
-    bottom: -50px;
-    
+    right: 30px;
+    bottom: 60px;
 }
+
+.dropdownAreapostActionsList {
+    width: 200px;
+    height: 200px;
+    right: -60px;
+    top: 70px;
+    z-index: 1;
+}
+
 
 #newPostPopup textarea {
     resize: vertical;
@@ -565,7 +579,9 @@ ul.menuList {
     transition-duration: 0.2s;
 }
 
-
+.dropdownArea {
+    position: absolute; 
+}
 #categories {
     width: 18vw;
     position: fixed;
@@ -581,8 +597,8 @@ ul.menuList {
     left: 50px;
 }
 
-#mouseLeaveDivnewCategory {
-    position: absolute; 
+#dropdownAreanewCategory {
+    
     top:-150px;
     left: -50px;
     width: 400px; 
@@ -613,7 +629,7 @@ ul.menuList {
     top: 0;
 }
 
-#makeCategory {
+#newCategoryBtn {
     margin-left: 0.9vw;
 }
 
