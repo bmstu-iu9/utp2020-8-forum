@@ -1,11 +1,12 @@
-<ul class="ulCategories" style="position: relative;">
+
+<ul class="ulCategories noUlDecor noUlDefaultPadding" style="position: relative;">
     <button onclick="showNewCategory()">Создать категорию</button>
     <form id="newCategory" method="POST" action="/category/create" class="hidden">
         <input type="text" name="newCategoryName" required>
         <input type="submit">
     </form>
     {{#each categories}}
-        <li class="liCategories category colorSection colorDarkLink">
+        <li class="category colorSection colorDarkLink">
             <a class="category-link colorTextDark"
                href="/category/{{this.id}}">{{this.name}}</a>
         </li>

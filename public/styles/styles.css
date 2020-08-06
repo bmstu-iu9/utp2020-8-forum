@@ -1,61 +1,474 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/* ГЛОБАЛЬНОЕ */
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
 body {
-    margin: 0 auto;
-    width: 80vw;
-    max-height: 100vh;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14pt;
+    background: #eaf7f8;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #111;
 }
 
-li {
-    list-style-type: none; /* Убираем маркеры */
+h3 {
+    margin: 0;
 }
 
-.liCategories {
-    margin-left: -10%;
-    margin-top: 1%;
+form {
+    margin: 0;
 }
 
-.headerUser {
+select, a {
+    cursor: pointer;
+}
+
+
+textarea {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+
+/* ПОЛОЖЕНИЕ */
+
+.hidden {
+    display: none !important;
+}
+
+
+.left {
+    float: left;
+}
+
+.right {
     float: right;
-    margin-right: 15px;
 }
 
-.header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.relative {
+    position: relative;
+}
+
+.block {
+    display: block;
+}
+
+.inlineBlock {
+    display: inline-block;
 }
 
 
-.ulPosts {
-    min-height: 73%;
-    max-height: 73%;
+.vertAlignItemsMid * {
+    vertical-align: middle;
 }
 
-a {
+.mbItems > * {
+    margin-bottom: 10px;
+}
+
+.mbItems:last-child {
+    margin-bottom: 0
+}
+
+
+/* ЦВЕТА */
+
+.bgLight {
+    background-color: white;
+}
+
+.bgAccent {
+    background: #66cc99;
+}
+.bgDanger {
+    background-color: darkred;
+}
+.colorDanger {
+    color: darkred !important;
+}
+
+.colorWhite {
     color: white;
 }
+.colorAccent {
+    color: #66cc99;
+}
+.colorLight {
+    color: #828282;
+}
 
-#ulReplies, #ulPosts {
-    overflow-y: auto;
-    max-height: 63%;
+.colorMedium {
+    color: #6f6f6f;
+}
+.colorDark {
+    color: rgb(32, 32, 32);
+}
+
+.hoverColorAccent:hover {
+    color: #66cc99;
+}
+
+
+.hoverBgAccent:hover {
+    background: #66cc99;
+}
+
+.hoverBgSpecial:hover {
+    background: #5cd6b5;
+}
+
+.hoverColorSpecial:hover {
+    color: #5cd6b5;
+}
+
+.visitedColor:visited, .visitedColor:visited {
+    color: #5cd6b5;
+}
+
+
+/* ВНЕШНОСТЬ */
+
+.shadowed1 {
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.shadowed2 {
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+}
+
+.roundBorder {
+    border-radius: 4px;
+}
+
+/* Текст */
+
+.textCenter {
+    text-align: center;
+}
+
+
+/* КНОПКИ */
+
+
+.bigBtn {
+    padding: 10px 18px;
+    margin: 0;
+    border: none;
+    font-size: 1rem;
+    color: white;
+    transition: background-color .1s;
+    cursor: pointer;
+}
+
+
+.accentBtn:focus, .bigBtn:focus {
+    outline: none;
+    background: #26A69A;
+}
+
+.roundBtn {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: background-color .1s;
+}
+
+
+.roundBtn > input {
+    position: absolute;
+    width: 45%;
+    top: 25%;
+    z-index: 1;
+    left: 28%;
+}
+
+.roundBtn > input:focus {
+    outline: none;
+}
+
+/* ИНПУТЫ */
+
+.textInput {
+    border: 2px solid #dee0e2;
+    background: #dee0e2;
+    transition-property: border-color, background;
+    transition: .1s;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.textInput:focus {
+    outline: none;
+    border-color: #66cc99;
+    background: white;
+}
+
+.select {
+    border: none;
+    background: #e5e5e5;
+    padding: 10px;
+}
+
+
+
+/* КАРТИНКИ */
+
+.roundImg {
+    border-radius: 100%;
+}
+
+.smallAvatar {
+    width: 35px;
+}
+
+
+/* СПИСКИ */
+
+ul.noUlDecor {
+    list-style-type: none;
+}
+
+ul.noUlDefaultPadding {
     padding-left: 0;
 }
 
-.ulCategories {
-    max-height: 90%;
-    overflow-y: auto;
-    justify-content: center;
+ul.menuList {
+    display: block;
+    padding: 10px 0;
+    background: white;
+    list-style-type: none;
+    cursor: pointer;
+    z-index: 1;
+
 }
+
+.menuList > li {
+    line-height: 2;
+    font-size: .9rem;
+}
+
+.menuList a {
+    display: block;
+    color: dimgray;
+    text-decoration: none;
+    max-width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    transition: .2s;
+    transition-property: background-color, color;
+}
+
+.menuList a:hover {
+    background-color: #66cc99;
+    color: white !important;
+}
+
+.menuList a:active {
+    background-color: lightcoral;
+}
+
+
+/* ССЫЛКИ */
+
+.linkTextNoDecor {
+    text-decoration: none;
+    transition: color .1s;
+    cursor: pointer
+}
+
+/* ПОПАПЫ */
+#popUpContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.popup {
+    margin: 200px auto;
+    width: min-content;
+}
+
+.popup > header {
+    border-bottom: 2px solid #66cc99;
+    padding: 15px;
+}
+
+.popup > .popupBody {
+    padding: 20px 30px 15px 20px;
+}
+
+
+/* ОСТАЛЬНОЕ */
+/* ________ */
+
+
+#composeReplyBtn {
+    position: fixed;
+    right: 80px;
+    bottom: 100px;
+}
+
+#replyForm {
+    position: fixed;
+    right: 280px;
+    bottom: 50px;
+    width: 800px;
+    padding: 0 10px 25px 25px;
+}
+
+
+#replyFormHeader {
+    padding: 8px 11px;
+    text-align: right;
+
+}
+
+.hideIcon {
+    width: 10px;
+    height: 2px;
+    border: 8px solid white;
+    background: gray;
+    cursor: pointer;
+    transition: background-color .1s;
+}
+
+.hideIcon:hover {
+    background: #4d4d00;
+}
+
+#replyForm textarea {
+    width: 85%;
+    min-height: 100px;
+    resize: vertical;
+    overflow-y: auto;
+    padding: 15px;
+    font-size: .9rem;
+}
+
+
+#replyform .roundBtn {
+    margin-left: 30px;
+}
+
 
 #topBar {
-    line-height: 200%;
-    height: 5%;
-    padding: 0.7% 1% 0 1%;
-    background: #343338;
-    border-radius: 0 0 1vh 1vh;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    box-sizing: border-box;
+    line-height: 50px;
+    padding: 0 50px;
+    z-index: 1;
 }
 
+
+#headerProfileBlock > * {
+    margin: 0 10px;
+}
+
+
+#profileOptionsList {
+    position: absolute;
+    top: 60px;
+    right: -30px;
+}
+
+.postActionsList {
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    
+}
+
+#newPostPopup textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#loginPopup {
+    width: 300px;
+}
+
+#editPostPopup {
+    width: 400px;
+}
+
+#editPostPopup .textInput {
+    width: 80%;
+}
+
+
+#editReplyPopup {
+    width: min-content;
+
+}
+#editReplyPopup textarea {
+    min-width: 300px;
+    min-height: 10 0px;
+}
+
+
+#ulPosts > li {
+    border-bottom: 5px solid #eaf7f8;
+}
+
+#ulPosts > li > a {
+    text-decoration: none;
+     display: block;
+     width: 100%;
+     height: 100%;
+     color: black;
+}
+
+#ulPosts > li > a > header {
+    padding: 25px 30px 0 30px;
+}
+
+#ulPosts > li > a > header > h3 {
+    max-width: 90%;
+    overflow: hidden;
+}
+
+#ulPosts > li > a > .postMain {
+    padding: 0 30px;
+}
+
+#ulPosts > li > footer {
+    line-height: 40px;
+    padding: 0 30px;
+    margin-bottom: 20px;
+}
+
+#ulPosts > li > footer > .left > img {
+    margin-right: 10px;
+}
+.ulCategories {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.clearFix {
+    clear: both;
+}
+
+.firstReplyPreviewText {
+    line-height: 20px; 
+    max-height: 40px; 
+    overflow: hidden;
+}
 
 .replyImage {
     max-width: 70%;
@@ -132,9 +545,10 @@ a {
 }
 
 .container {
-    display: flex;
-    width: 100%;
-    height: 101%;
+    width: 100vw;
+    max-width: 100%;
+    margin-top: 100px;
+    box-sizing: border-box;
 }
 
 .link {
@@ -145,15 +559,16 @@ a {
 
 
 #categories {
-    width: 25%;
-    height: 90%;
+    width: 500px;
+    position: fixed;
     padding: 0 1% 0 1%;
-    margin: 1% 0 0 0;
     border-radius: 1vh;
+    top: 100px;
+    left: 30px;
 }
 
 .category {
-    width: 110%;
+    width: 100%;
     text-align: center;
     margin-bottom: 3%;
     border-radius: 0.5vh;
@@ -167,13 +582,12 @@ a {
     text-decoration: none;
 }
 
-.selectedTheme {
-    width: 69%;
-    height: 89.3%;
-    margin: 1% 0 0 2%;
-    padding: 0 1% 0.5% 1%;
-    border-radius: 1vh;
-    flex-direction: column;
+#selectedTheme {
+    width:45%;
+    position: absolute;
+    right: 400px;
+    top: 0;
+
 }
 
 .answer {
@@ -204,14 +618,6 @@ a {
     justify-content: end;
     text-align: center;
     width: 5%;
-}
-
-.editDeleteField {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    text-align: center;
-    width: 8%;
 }
 
 .vote {
@@ -262,26 +668,11 @@ a {
     justify-content: space-around;
 }
 
-#myAnswer {
-    padding: 12px;
-    margin-left: 1%;
-    margin-right: 1%;
-    resize: none;
-    width: 90%;
-    height: 100%;
-    font-size: 14pt;
-    border-radius: 1vh;
-}
-
 #answerForm {
     display: flex;
     flex-direction: row;
     width: 90%;
     height: 60%;
-}
-
-#postAnswerButton {
-    height: 60px;
 }
 
 #makeDark {
@@ -312,19 +703,13 @@ a {
     display: block;
 }
 
-.sortLink:visited {
-    color: white;
-}
-
-.sortLink:hover {
-    color: #E1A487;
-}
 
 .sortLink {
     font-size: 12pt;
     margin-left: 1%;
     margin-right: 1%;
     text-decoration: none;
+
 }
 
 .sortLinkArrow {
@@ -348,81 +733,6 @@ a {
 
     right: 0;
     bottom: 0;
-}
-
-.window {
-    background: rgba(87, 78, 63, 0.5);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-    z-index: 100;
-}
-
-.windowContent {
-    max-width: 15%;
-    max-height: 25%;
-    text-align: center;
-    padding: 1% 1% 1% 1%;
-    border-radius: 1vh;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-}
-
-#profileTopBar {
-    position: relative;
-}
-
-#profileTopBar > a {
-    margin: 0 10px;
-}
-
-#profileOptionsList {
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 40px;
-    width: 200px;
-    padding: 10px 0;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-}
-
-#profileOptionsList a {
-    color: black;
-    text-decoration: none;
-    max-width: 100%;
-    height: 100%;
-    padding: 0 15px;
-    display: block;
-    transition: .2s;
-    transition-property: background-color, color;
-}
-
-#profileOptionsList > li {
-    font-size: 1rem;
-    line-height: 2;
-}
-
-#profileOptionsList a:hover {
-    background-color: dodgerblue;
-    color: white !important;
-}
-
-#profileOptionsList a:active {
-    background-color: lightcoral;
-}
-
-
-.hidden {
-    display: none !important;
 }
 
 .postCreationBox {

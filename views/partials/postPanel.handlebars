@@ -1,13 +1,4 @@
-<div id="replyChange" class="window">
-    <form id="sendReply" class="postCreationBox colorMain">
-        <div class="colorTextLight">Edit post</div>
-        <textarea name="replyEdition" id="editReply" required></textarea>
-        <input type="submit" class="borderTop myButton colorDarkLink colorSection" type="image"
-               src="/static/images/send.png">
-    </form>
-</div>
-
-<div class="selectedTheme colorMain">
+<div id="selectedTheme" class="colorMain">
     <a class="borderTop myButton colorDarkLink colorSection"
        style="float: left; margin-top: 4.4vh" href="{{from}}"><img src="/static/images/back.png" height="40"
                                                                    alt="Назад"></a>
@@ -40,7 +31,7 @@
                 <div class="voteField">
                     {{#eq ../user.username this.author_name}}
                         <a class="profileName link colorDarkLink"
-                           onclick="editReply({{this.id}}, '{{this.text}}')">Edit</a>
+                           onclick="showPopup('editReplyPopup'); editReply({{this.id}}, '{{this.text}}')">Edit</a>
                         <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
                     {{else}}
                         {{#if ../user}}
@@ -51,8 +42,10 @@
                             <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
                             </form>
                         {{else}}
-                            <input type="image" class="vote" src="/static/images/like.png" alt="#" onclick="document.getElementById('signUpForm').style.display='block'">
-                            <input type="image" class="vote" src="/static/images/dislike.png" onclick="document.getElementById('signUpForm').style.display='block'">
+                            <input type="image" class="vote" src="/static/images/like.png" alt="#"
+                                   onclick="document.getElementById('signUpForm').style.display='block'">
+                            <input type="image" class="vote" src="/static/images/dislike.png"
+                                   onclick="document.getElementById('signUpForm').style.display='block'">
                         {{/if}}
 
 
@@ -74,11 +67,14 @@
         {{/each}}
     </ul>
     {{#if user}}
-        {{>newAnswer}}
     {{else}}
         <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы ответить</p>
     {{/if}}
 </div>
+{{#if user}}
+    {{>replyForm}}
+{{/if}}
+
 
 <script>
     let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
@@ -111,8 +107,8 @@
         });
     }
     const editReply = (id, text) => {
-        document.getElementById('replyChange').style.display = 'block';
         document.getElementById('editReply').value = text;
+        document.getElementById('editReply').focus();
         document.getElementById('sendReply').onsubmit = async (e) => {
             e.preventDefault();
             let post = {

@@ -1,122 +1,106 @@
-<div id="postChange" class="window">
-    <form id="sendEdition" class="postCreationBox colorMain">
-        <div class="colorTextLight">Edit post</div>
-        <textarea name="edition" id="editPost" required></textarea>
-        <input type="submit" class="borderTop myButton colorDarkLink colorSection" type="image"
-               src="/static/images/send.png">
-    </form>
-</div>
-
-<div class="selectedTheme colorMain">
-    <h2 class="categoryHeader colorTextLight">{{postsListTitle}}</h2>
-    <div class="colorTextLight">
+<div id="selectedTheme">
+    <div>
         {{#if posts}}
-        <span><a id='byTime'
-            {{#is sortTag 'byTime' }}
-                 href="?sortTag=byTimeAsc"
-            {{else}}
-                {{#if sortTag }}
-                 href="?sortTag=byTime"
-                {{else}}
-                 href="?sortTag=byTimeAsc"
-                {{/if}}
-            {{/is}}
-                 class="sortLink">По времени <span class="sortLinkArrow" id="byTimeSortLink">&nbsp;</span></a></span>
-        <span><a id='byReplies'
-            {{#is sortTag 'byReplies' }}
-                 href="?sortTag=byRepliesAsc"
-            {{else}}
-                 href="?sortTag=byReplies"
-            {{/is}}
-                 class="sortLink">По ответам <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
-        <span><a id="byLastReply"
-            {{#is sortTag 'byLastReply' }}
-                 href="?sortTag=byLastReplyAsc"
-            {{else}}
-                 href="?sortTag=byLastReply"
-            {{/is}}
-                 class="sortLink">По последнему ответу <span class="sortLinkArrow"
-                                                             id="byLastReplySortLink">&nbsp;</span></a></span></div>
-    <ul id="ulPosts">
+        <span><a id='byTime' {{#is sortTag 'byTime' }} href="?sortTag=byTimeAsc" {{else}} href="?sortTag=byTime" {{/is}}
+                class="colorMedium hoverColorAccent sortLink">По времени <span class="sortLinkArrow"
+                    id="byTimeSortLink">&nbsp;</span></a></span>
+        <span><a id='byReplies' {{#is sortTag 'byReplies' }} href="?sortTag=byRepliesAsc" {{else}}
+                href="?sortTag=byReplies" {{/is}} class="colorMedium hoverColorAccent sortLink">По ответам
+                <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
+        <span><a id="byLastReply" {{#is sortTag 'byLastReply' }} href="?sortTag=byLastReplyAsc" {{else}}
+                href="?sortTag=byLastReply" {{/is}} class=" colorMedium hoverColorAccent sortLink">По последнему ответу
+                <span class="sortLinkArrow" id="byLastReplySortLink">&nbsp;</span></a></span>
+    </div>
+    <ul id="ulPosts" class="noUlDefaultPadding noUlDecor bgLight roundBorder">
         {{#each posts}}
-            <li class="answer colorSection">
-                <div class="profile">
-                    <img {{#if this.author_name}}
-                    src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                    {{else}}
-                    src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
-                    {{/if}}
-                    alt="No avatar" height="100" width="100">
-                    {{#eq this.author_id ../user.id}}
-                        <a class="profileName link colorDarkLink"
-                           onclick="editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Edit</a>
-                        <a class="profileName link colorDarkLink" onclick="deletePost({{this.id}})">Delete</a>
-                    {{else}}
-                        <div class="profileName link colorDarkLink">
-                            {{#if this.author_name}}
-                                {{this.author_name}}
-                            {{else}}
-                                Удален
-                            {{/if}}
-                        </div>
-                    {{/eq}}
-                </div>
-
-                <a class="textAndTime link" href="/post/{{this.id}}?from={{../currentPath}}">
-                <span class="answerText  ColorTextDark">{{this.title}}</span>
-                <div class="timeLast">
-                    {{this.time_since_creation}}
-                </div>
-                </a>
-                <div class="voteField">
-                    <a href="/post/{{this.id}}?{{../currentPath}}"><input type="image"
-                                                                          class="replyImage vote colorDarkLink myButton colorSection"
-                                                                          src="/static/images/reply.png" alt="#"/></a>
-                    <div class="voteCounter colorMain colorTextLight">
+        <li class="relative">
+            <a href="/post/{{this.id}}?from={{../currentPath}}">
+                <header>
+                    <h3 class="left colorDark">
+                        {{this.title}}
+                    </h3>
+                    <div class="right vertAlignItemsMid">
+                        <img src="/static/images/icons/chat.svg" alt="" class="inlineBlock" style="width: 15px;">
                         {{#if this.reply_count}}
-                            {{this.reply_count}}
+                        {{this.reply_count}}
                         {{else}}
-                            0
+                        0
+                        {{/if}}</div>
+                    <div class="clearFix"></div>
+                </header>
+                <div class="postMain">
+                    <p class="firstReplyPreviewText colorMedium">
+                        {{#if this.first_reply}}
+                        {{this.first_reply.text}}
+                        {{else}}
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ...
                         {{/if}}
+                        </p>
+                </div>
+            </a>
+
+            <footer class="vertAlignItemsMid">
+                <div class="left">
+                    <img {{#if this.author_name}} src="https://api.adorable.io/avatars/128/{{this.author_name}}.png"
+                        {{else}}
+                        src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
+                        {{/if}} class='roundImg smallAvatar inlineBlock' alt="">
+                    <div class="inlineBlock colorMedium">{{#if this.author_name}}
+                        <span class="colorAccent">{{this.author_name}}</span>
+                        {{else}}
+                        <span class="colorDarker">Удален</span>
+                        {{/if}} создал {{this.time_since_creation}}
                     </div>
                 </div>
-            </li>
+                {{#eq this.author_id ../user.id}}
+                <div class="right">
+                    <a onclick="showMenu('postActionsList{{this.id}}'); event.stopImmediatePropagation()">
+                        <img src="/static/images/icons/more.svg" style="width: 15px; padding: 5px" alt="">
+
+                    </a>
+                    &nbsp;
+                </div>
+                <div class="clearFix"></div>
+            </footer>
+            <ul id="postActionsList{{this.id}}" class="postActionsList menuList roundBorder shadowed1 hidden">
+                <li><a
+                        onclick="showPopup('editPostPopup'); editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Редактировать</a>
+                </li>
+                <li><a class="colorTextDanger" onclick="deletePost({{this.id}})">Удалить</a></li>
+            </ul>
+            {{else}}
+            <div class="clearFix"></div>
+            {{/eq}}
+        </li>
         {{/each}}
     </ul>
-        {{else}}
-            {{#if category}}
-                <p class="colorTextLight">Нет постов.
-                    {{#if user}}
-                    <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a>
-                        или
-                        <form action="/category/delete/{{category}}" method="post">
-                            <input type="submit" value="удалите категорию">
-                        </form></p>
-                    {{else}}
-                        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
-            {{/if}}
-            {{else}}
-                <p class="colorTextLight">Нет постов
-                    {{#if user}}
-                        <a onclick="document.getElementById('postCreation').style.display='block'" href="#">Создайте пост</a></p>
-                    {{else}}
-                        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы создать пост</p>
-                    {{/if}}
-            {{/if}}
-    {{/if}}
-
-    {{#if user}}
-        {{#if category}}
-            {{>newPost}}
-        {{/if}}
     {{else}}
-
+    {{#if category}}
+    <div class="colorMedium">Нет постов.
+        {{#if user}}
+        <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a> или
+        <form action="/category/delete/{{category}}" method="post" class="inlineBlock">
+            <input type="submit" value="удалите категорию" class="bigBtn bgDanger roundBorder hoverBgSpecial">
+        </form>
+    </div>
+    {{else}}
+    <p class="colorMedium">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+    {{/if}}
+    {{else}}
+    <p class="colorMedium">Нет постов.
+        {{#if user}}
+        <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a>
+    </p>
+    {{else}}
+    <p class="colorMedium">Войдите или зарегистрируйтесь, чтобы создать пост</p>
+    {{/if}}
+    {{/if}}
     {{/if}}
 </div>
 <script>
     let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
-            box3 = document.getElementById('postCreation'),
-            box4 = document.getElementById('postChange');
+        box3 = document.getElementById('postCreation'),
+        box4 = document.getElementById('postChange');
     window.onclick = function (event) {
         if (event.target === box1) {
             box1.style.display = 'none';
@@ -144,8 +128,8 @@
         });
     }
     const editPost = (id, category, text) => {
-        document.getElementById('postChange').style.display = 'block';
         document.getElementById('editPost').value = text;
+        document.getElementById('editPost').focus()
         document.getElementById('sendEdition').onsubmit = async (e) => {
             e.preventDefault();
             let post = {
@@ -170,11 +154,20 @@
     }
     if ('{{sortTag}}'.endsWith('Asc')) {
         const sortLinkId = '{{sortTag}}'.replace('Asc', '')
-        document.getElementById(sortLinkId).classList.add('chosenSortLinkAsc');
+        document.getElementById(sortLinkId).classList.add('visitedColor');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↑";
     } else {
         const sortLinkId = '{{sortTag}}';
-        document.getElementById(sortLinkId).classList.add('chosenSortLink');
+        document.getElementById(sortLinkId).classList.add('visitedColor');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
+    }
+    const menus = document.querySelectorAll('.menuList')
+
+    document.addEventListener("click", function (e) {
+        list.classList.add('hidden');
+        menus.forEach(m => m.classList.add('hidden'))
+    });
+    const showMenu = id => {
+        document.getElementById(id).classList.remove('hidden');
     }
 </script>
