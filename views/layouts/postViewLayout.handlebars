@@ -1,8 +1,8 @@
 {{#not user}}
-    {{>loginPanel}}
-    {{>signupPanel}}
+{{>loginPanel}}
+{{>signupPanel}}
 {{else}}
-    {{>postCreationPanel}}
+{{>postCreationPanel}}
 {{/not}}
 {{>head}}
 {{>topbar}}
@@ -10,13 +10,8 @@
 {{>editReplyPanel}}
 
 <div class="container relative">
-    <div id="categories" class="colorMain">
-        <button id="makeCategory" class="bigBtn bgAccent hoverBgSpecial roundBorder">
-            Создать категорию
-        </button>
-        <h2 class="colorTextDark">Категории</h2>
-        {{>categoriesListPanel}}
-    </div>
+
+    {{>categoriesListPanel}}
 
     {{>postPanel}}
 </div>

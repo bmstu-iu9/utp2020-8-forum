@@ -44,7 +44,7 @@ textarea {
 
 /* ЦВЕТА */
 
-.bgLight {
+.bgWhite {
     background-color: white;
 }
 
@@ -68,14 +68,17 @@ textarea {
     color: #919191;
 }
 
-.colorDarker {
-    color: dimgray;
+.colorDark {
+    color: rgb(32, 32, 32);
 }
 
 .hoverColorAccent:hover {
     color: #66cc99;
 }
 
+.hoverBgWhite:hover {
+    background: #fff;
+}
 
 .hoverBgAccent:hover {
     background: #66cc99;
@@ -397,13 +400,15 @@ ul.menuList {
     left: 30px;
 }
 
-.category {
+
+#categories > ul > li {
     width: 80%;
     text-align: left;
     padding-left: 1vw;
 }
 
-.category-link {
+
+#categories > ul > li > a {
     line-height: 200%;
     display: block;
     font-size: 13pt;

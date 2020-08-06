@@ -1,11 +1,16 @@
-<ul class="ulCategories noUlDecor noUlDefaultPadding">
-    <h3 style="background: white; margin-bottom: 0" class="category colorTextDark category-link">
-        Все
-    </h3>
-    {{#each categories}}
-        <li class="category colorSectionCategory colorDarkLink">
-            <a class="category-link colorTextDark"
-               href="/category/{{this.id}}">{{this.name}}</a>
+<div id="categories" class="colorMain">
+    <button id="makeCategory" class="bigBtn bgAccent hoverBgSpecial roundBorder">
+        Создать категорию
+    </button>
+    <h2 class="colorTextDark">Категории</h2>
+    <ul class="noUlDecor noUlDefaultPadding">
+        <li class="roundBorder">
+            <a class="colorDark hoverColorAccent" href="/category/all">Все</a>
         </li>
-    {{/each}}
-</ul>
+        {{#each categories}}
+        <li class="roundBorder">
+            <a class="colorDark hoverColorAccent" href="/category/{{this.id}}">{{this.name}}</a>
+        </li>
+        {{/each}}
+    </ul>
+</div>
