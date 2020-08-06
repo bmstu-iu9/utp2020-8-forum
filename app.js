@@ -1,5 +1,5 @@
 const express = require('express')
-const exphbs  = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const hbshelpers = require('handlebars-helpers')
 const multihelpers = hbshelpers()
 const session = require('express-session')
@@ -11,7 +11,7 @@ const path = require('path')
 const flash = require('connect-flash')
 const app = express()
 
-const hbs=exphbs.create({
+const hbs = exphbs.create({
     partialsDir: [
         './views/partials',
         './views/partials/popups'

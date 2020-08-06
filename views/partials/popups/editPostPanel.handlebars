@@ -1,8 +1,13 @@
-<div id="postChange" class="window">
-    <form id="sendEdition" class="postCreationBox colorMain">
-        <div class="colorTextLight">Edit post</div>
-        <textarea name="edition" id="editPost" required></textarea>
-        <input type="submit" class="borderTop myButton colorDarkLink colorSection" type="image"
-               src="/static/images/send.png">
-    </form>
+<div id="editPostPopup" class="popup bgWhite hidden roundBorder shadowed1">
+    <header>
+        <h3 class="colorDark">Редактировать</h3>
+        </header>
+    <div class="popupBody">
+        <form id="sendEdition" class="mbItems">
+            <label for="editPost" class="block">Заголовок:</label>
+            <input type="text" class="textInput roundBorder block editPostPopupFocus" name="edition" id="editPost" autofocus>
+            <input type="submit" value="Сохранить" class="bigBtn roundBorder shadowed1 bgAccent block hoverBgAccent"
+                   src="/static/images/send.png">
+        </form>
+    </div>
 </div>

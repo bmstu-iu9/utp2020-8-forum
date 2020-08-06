@@ -1,9 +1,14 @@
-<div id="signUpForm" class="window">
-    <form class="windowContent colorMain" method="post" action="/login">
-        <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
-        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
-        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Enter password" name="psw" required>
-        <button type="submit" class="close colorDarkLink colorBackground">Log in</button>
-        <div id="logInError" class="colorTextLight"></div>
-    </form>
+<div id="signupPopup" class="popup bgWhite roundBorder shadowed1 hidden">
+    <header>
+        <h3 class="colorDark">Регистрация</h3>
+    </header>
+    <div class="popupBody ">
+        <form method="post" action="/signup" class="textCenter mbItems">
+            <input type="text" class="textInput block roundBorder" id="loginPopupFocus" placeholder="Логин" name="login" required>
+            <input type="password" class="textInput block roundBorder" placeholder="Пароль" name="psw" required>
+            <input type="password" class="textInput block roundBorder" placeholder="Повторите пароль" name="pswConf" required>
+            <div id="loginErrorText" class="colorDanger"></div>
+            <input type="submit" value="Зарегистрироваться" class="bigBtn hoverBgSpecial bgAccent roundBorder">
+        </form>
+    </div>
 </div>

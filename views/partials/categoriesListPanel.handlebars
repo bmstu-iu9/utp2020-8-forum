@@ -1,5 +1,5 @@
-<div id="categories" class="colorMain">
-    <button id="makeCategory" class="bigBtn bgAccent hoverBgSpecial roundBorder">
+<div id="categories">
+    <button onclick="showNewCategory()" id="makeCategory" class="bigBtn bgAccent hoverBgSpecial roundBorder" >
         Создать категорию
     </button>
     <h2 class="colorTextDark">Категории</h2>
@@ -15,3 +15,7 @@
         {{/each}}
     </ul>
 </div>
+
+<script>
+    const showNewCategory = () => document.getElementById('newCategory').classList.toggle('hidden')
+</script>

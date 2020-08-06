@@ -1,43 +1,56 @@
-
-
 <header id="topBar" class="bgWhite">
     <a id='headerLogo' class="headerText colorMedium linkTextNoDecor hoverColorAccent left" href="/">Форум</a>
-        {{#if user}}
-            <div id="headerProfileBlock" class='right relative vertAlignItemsMid'>
-                <button class="bigBtn bgAccent hoverBgSpecial roundBorder" onclick="document.getElementById('postCreation').style.display='block'" >Создать пост</button>
-                <img src="https://api.adorable.io/avatars/128/{{user.name}}.png" class='roundImg smallAvatar inlineBlock' alt="">
-                <a id='showMenu' class="headerText colorMedium linkTextNoDecor hoverColorAccent" id="showMenu" onclick="showProfileOptionsList()">{{user.username}} ▼</a>
-                {{>profileOptionsList}}
-            </div>
-        {{else}}
-            <div id="headerProfileBlock" class='right relative'>
-                <a id="signUpButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
-                   onclick="document.getElementById('logInForm').style.display='block'">Регистрация</a>
-                <a id="logInButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
-                   onclick="document.getElementById('signUpForm').style.display='block'">Войти</a>
-            </div>
-        {{/if}}
+    {{#if user}}
+        <div id="headerProfileBlock" class='right relative vertAlignItemsMid'>
+            <button class="bigBtn bgAccent hoverBgSpecial roundBorder"
+                    onclick="showPopup('createPostPopup')">Создать пост
+            </button>
+            <img src="https://api.adorable.io/avatars/128/{{user.username}}.png"
+                 class='roundImg smallAvatar inlineBlock' alt="">
+            <a id='showMenu' class="headerText colorMedium linkTextNoDecor hoverColorAccent" id="showMenu"
+               onclick="showProfileOptionsList(); event.stopPropagation()">{{user.username}} ▼</a>
+            {{>profileOptionsList}}
+        </div>
+    {{else}}
+        <div id="headerProfileBlock" class='right relative'>
+            <a id="signUpButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
+               onclick=showPopup('signupPopup')>Регистрация</a>
+            <a id=" logInButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
+               onclick=showPopup('loginPopup')>Войти</a>
+        </div>
+    {{/if}}
 </header>
 
-    <script>
-            {{#if message}}
-            if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
-                document.getElementById('signUpButton').click();
-                document.getElementById('signUpError').innerHTML = '{{message}}';
-            } else if ('{{message}}' === 'Wrong login or password') {
-                document.getElementById('logInButton').click();
-                document.getElementById('logInError').innerHTML = '{{message}}';
-            }
-            {{/if}}
+<script>
+        {{#if message}}
+        if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
+            document.getElementById('signUpButton').click();
+            document.getElementById('signUpError').innerHTML = '{{message}}';
+        } else if ('{{message}}' === 'Wrong login or password') {
+            document.getElementById('loginBtn"').click();
+            document.getElementById('loginErrorText').innerHTML = '{{message}}';
+        }
+        {{/if}}
 
-        const list = document.getElementById('profileOptionsList');
 
-        const showProfileOptionsList = function () {
-            list.classList.toggle('hidden');
-        };
-        document.addEventListener("click", function (e) {
-            if (e.target.closest("#showMenu"))
-                return
-            list.classList.add('hidden');
-        });
-    </script>
+    
+    const list = document.getElementById('profileOptionsList');
+    const popUpContainer = document.getElementById('popUpContainer');
+    const popups = document.querySelectorAll('.popup')
+    popups.forEach(p => p.onclick = event => event.stopPropagation())
+
+
+    const showPopup = (id) => {
+        document.getElementById(id).classList.remove('hidden');
+        popUpContainer.classList.remove('hidden');
+    }
+    const hidePopups = () => {
+        popups.forEach(p => p.classList.add('hidden'))
+        popUpContainer.classList.add('hidden');
+    }
+    const showProfileOptionsList = function () {
+        list.classList.toggle('hidden');
+    };
+
+    
+</script>

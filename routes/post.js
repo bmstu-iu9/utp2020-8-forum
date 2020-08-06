@@ -25,6 +25,28 @@ router.get('/:postId(\\d+)', function (req, res) {
 
 })
 
+router.post('/create', (req, res) => {
+    let categoryName = req.body.category.trim();
+    let category = dbManager.checkCategoryExists(categoryName);
+    let date = new Date();
+    let creation_time = date.toDateString() + " " + date.toTimeString();
+    let categoryId;
+    if (!category) {
+        let result = dbManager.createCategory(categoryName);
+        categoryId = result.lastInsertRowid;
+    }
+    else
+        categoryId = category.id
+    let result = dbManager.addPost(req.user.id, req.body.postTitle.trim(), categoryId, creation_time);
+    let postId = result.lastInsertRowid;
+    if (result) {
+        dbManager.addReply(req.user.id, req.body.postText.trim(), postId, creation_time)
+        res.redirect(`/post/${result.lastInsertRowid}?from=/category/${categoryId}`);
+    }
+    else
+        res.redirect(`/category/${categoryId}?postFail=true`);
+});
+
 router.post('/:postId(\\d+)', function (req, res) {
     let id = req.params.postId;
     let date = new Date();
@@ -35,13 +57,11 @@ router.post('/:postId(\\d+)', function (req, res) {
 })
 
 router.post('/delete', (req, res) => {
-    let category = dbManager.getPost(req.body.id).category_id;
     dbManager.deletePost(req.body.id);
-    let posts = dbManager.getPostsByCategory(category);
-    if (posts.length === 0) {
-        dbManager.deleteCategory(category);
-    }
-    res.status(200).send();
+    if (posts.length === 0)
+        res.redirect('/category/${category_id}')
+    else
+        res.status(200).send();
 });
 
 

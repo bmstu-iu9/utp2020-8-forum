@@ -35,9 +35,13 @@
     "LEFT JOIN (SELECT reply_id, sum(amount) as rating FROM votes GROUP BY reply_id) x ON replies.id=x.reply_id ",
     "WHERE replies.author_id IS NULL AND post_id=?"
   ],
+  "getFirstReply": [
+    "SELECT * FROM replies where post_id=? ORDER BY id ASC LIMIT 1;"
+  ],
   "getLastReply": [
     "SELECT * FROM replies where post_id=? ORDER BY id DESC LIMIT 1;"
   ],
+  
   "getPost": [
     "SELECT * FROM posts WHERE id=?"
   ],
@@ -116,6 +120,9 @@
   ],
   "deleteReply": [
     "DELETE FROM replies WHERE id = ?"
+  ],
+  "deleteVoteEntry": [
+    "DELETE FROM votes WHERE id = ?"
   ],
   "updateReply": [
     "UPDATE replies SET text = ? WHERE id = ?"

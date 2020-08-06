@@ -33,6 +33,7 @@ const getAllPosts = () => {
     posts.forEach(p => {
         let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
+        p.first_reply = getFirstReply(p.id);
     })
     return posts;
 }
@@ -41,6 +42,7 @@ const getPostsByCategory = categoryId => {
     posts.forEach(p => {
         let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
+        p.first_reply = getFirstReply(p.id);
     })
     return posts;
 }
@@ -51,6 +53,8 @@ const getReply = replyId => query("getReply").get(replyId)
 
 const getReplies = postId => query("getReplies").all(postId, postId)
 
+const getFirstReply = postId => query("getFirstReply").get(postId);
+
 const getLastReply = postId => query("getLastReply").get(postId);
 
 const checkPostExists = (title, category_id) => query("checkPostExists").get(title, category_id) !== undefined
@@ -58,13 +62,13 @@ const checkPostExists = (title, category_id) => query("checkPostExists").get(tit
 const addNewPost = (author_id, title, category_id, creation_time) => {
     if (checkPostExists(title, category_id))
         return false
-    query("addPost").run(author_id, title, category_id, creation_time);
-    return true
+    return query("addPost").run(author_id, title, category_id, creation_time);
 }
 
 const addReply = (author_id, reply, post_id, creation_time) => query("addReply").run(author_id, reply, post_id, creation_time);
 
 const addVoteEntry = (user_id, reply_id, amount) => query("addVoteEntry").run(user_id, reply_id, amount)
+const deleteVoteEntry = (id) => query("deleteVoteEntry").run(id)
 
 const inverseVoteAmount = id => query("inverseVoteAmount").run(id);
 
@@ -117,6 +121,7 @@ exports.getAllPosts = getAllPosts;
 exports.getPost = getPost;
 exports.getReply = getReply;
 exports.getReplies = getReplies;
+exports.getFirstReply = getFirstReply;
 exports.getLastReply = getLastReply;
 exports.getPostsByCategory = getPostsByCategory;
 exports.getCategories = getCategories;
@@ -127,6 +132,7 @@ exports.getRepliesCount = getRepliesCount;
 exports.findUser = findUser;
 exports.checkUserVoted = checkUserVoted;
 exports.addVoteEntry = addVoteEntry;
+exports.deleteVoteEntry = deleteVoteEntry;
 exports.inverseVoteAmount = inverseVoteAmount;
 exports.deleteUser = deleteUser;
 exports.checkCategoryExists = checkCategoryExists;

@@ -1,0 +1,18 @@
+<div id="createPostPopup" class="popup hidden bgWhite roundBorder shadowed1">
+    <header>
+        <h3 class="colorDark">Новый пост</h3>
+    </header>
+    <div class="popupBody">
+        <form method="post" action="/post/create" class="mbItems">
+            <input type="text" placeholder="Категория" name="category" class="textInput roundBorder" id="createPostPopupFocus"
+                   required>
+            <input name="postTitle" id="myAnswer" type="text" class="textInput block roundBorder" placeholder="Заголовок"
+                   autocomplete="off" required >
+            <textarea cols=75 rows="10" placeholder='Текст поста' name="postText"
+                      autocomplete="off" class="textInput roundBorder" required></textarea>
+            <div class="formErrorText colorDanger"></div>
+            <input type="submit" value="Создать"
+                   class="bigBtn hoverBgSpecial bgAccent roundBorder">
+        </form>
+    </div>
+</div>
