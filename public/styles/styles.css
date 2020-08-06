@@ -438,7 +438,6 @@ ul.menuList {
 }
 
 #ulPosts > li > a > header > h3 {
-    background: red;
     max-width: 90%;
     overflow: hidden;
 }
@@ -451,7 +450,6 @@ ul.menuList {
     line-height: 40px;
     padding: 0 30px;
     margin-bottom: 20px;
-    
 }
 
 #ulPosts > li > footer > .left > img {
