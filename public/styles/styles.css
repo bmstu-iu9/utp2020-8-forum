@@ -198,8 +198,8 @@ textarea {
 /* ИНПУТЫ */
 
 .textInput {
-    border: 2px solid #e2e2de;
-    background: #e2e2e2;
+    border: 2px solid #dee0e2;
+    background: #dee0e2;
     transition-property: border-color, background;
     transition: .1s;
     font-size: 1rem;
