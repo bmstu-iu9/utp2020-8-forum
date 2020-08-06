@@ -57,7 +57,7 @@ router.get('/:categoryId(\\d+)', (req, res) => {
             categories: categories,
             category: category,
             postFail: req.query.postFail,
-            category: categoryId,
+            category: category,
             sortTag: sortTag,
             user: req.user,
             currentPath: req.originalUrl
