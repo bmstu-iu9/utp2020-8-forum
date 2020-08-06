@@ -25,23 +25,25 @@ router.get('/:postId(\\d+)', function (req, res) {
 })
 
 router.post('/create', (req, res) => {
-    let category = dbManager.checkCategoryExists(req.body.category.trim());
-    let categoryId;
+    let categoryName = req.body.category.trim();
+    let category = dbManager.checkCategoryExists(categoryName);
     let date = new Date();
     let creation_time = date.toDateString() + " " + date.toTimeString();
+    let categoryId;
     if (!category) {
-        dbManager.createCategory(req.body.category.trim());
-        categoryId = dbManager.checkCategoryExists(req.body.category.trim()).id;
-        dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
-        res.redirect(`/category/${categoryId}`);
-    } else {
-        categoryId = category.id;
-        let postSuccess = dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
-        if (postSuccess)
-            res.redirect(`/category/${categoryId}`);
-        else
-            res.redirect(`/category/${categoryId}?postFail=true`);
+        let result = dbManager.createCategory(categoryName);
+        categoryId = result.lastInsertRowid;
     }
+    else
+        categoryId = category.id
+    let result = dbManager.addPost(req.user.id, req.body.postTitle.trim(), categoryId, creation_time);
+    let postId = result.lastInsertRowid;
+    if (result) {
+        dbManager.addReply(req.user.id, req.body.postText.trim(), postId, creation_time)
+        res.redirect(`/post/${result.lastInsertRowid}?from=/category/${categoryId}`);
+    }
+    else
+        res.redirect(`/category/${categoryId}?postFail=true`);
 });
 
 router.post('/:postId(\\d+)', function (req, res) {
