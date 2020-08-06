@@ -4,12 +4,13 @@
     </button>
     <h2 class="colorTextDark">Категории</h2>
     <ul class="noUlDecor noUlDefaultPadding">
-        <li class="roundBorder">
-            <a class="colorDark hoverColorAccent" href="/category/all">Все</a>
+        <li class="roundBorder {{#not category}} bgWhite {{/not}}">
+            <a class="colorDark hoverColorAccent " href="/category/all">Все</a>
         </li>
         {{#each categories}}
-        <li class="roundBorder">
-            <a class="colorDark hoverColorAccent" href="/category/{{this.id}}">{{this.name}}</a>
+        <li class="roundBorder {{#eq ../category.id this.id}} bgWhite {{/eq}}">
+            <a class="{{#eq ../category.id this.id}} colorDark {{else}} colorMedium {{/eq}}hoverColorAccent"
+                href="/category/{{this.id}}">{{this.name}}</a>
         </li>
         {{/each}}
     </ul>

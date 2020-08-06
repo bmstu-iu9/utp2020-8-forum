@@ -405,6 +405,7 @@ ul.menuList {
     width: 80%;
     text-align: left;
     padding-left: 1vw;
+    
 }
 
 
@@ -413,6 +414,7 @@ ul.menuList {
     display: block;
     font-size: 13pt;
     text-decoration: none;
+    transition: color .1s;
 }
 
 .selectedTheme {
