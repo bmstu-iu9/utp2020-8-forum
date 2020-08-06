@@ -574,6 +574,21 @@ ul.menuList {
     left: 30px;
 }
 
+#newCategory {
+    position: absolute;
+    margin: 0;
+    top: 140px;
+    left: 50px;
+}
+
+#mouseLeaveDivnewCategory {
+    position: absolute; 
+    top:-150px;
+    left: -50px;
+    width: 400px; 
+    height: 400px;
+}
+
 
 #categories > ul > li {
     width: 80%;
@@ -599,7 +614,6 @@ ul.menuList {
 }
 
 #makeCategory {
-    background: #66cc99;
     margin-left: 0.9vw;
 }
 

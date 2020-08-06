@@ -1,9 +1,20 @@
 <div id="categories">
-    <button onclick="showNewCategory()" id="makeCategory" class="bigBtn bgAccent hoverBgSpecial roundBorder" >
-        Создать категорию
+    <button onclick="showNewCategory()" id="makeCategory" class="bigBtn bgAccent hoverBgSpecial roundBorder">
+        Создать категорию ▼
     </button>
-    <h2 class="colorTextDark">Категории</h2>
-    <ul class="noUlDecor noUlDefaultPadding">
+    <ul class="noUlDecor noUlDefaultPadding relative">
+        <div id="mouseLeaveDivnewCategory" class="mouseLeaveDiv hidden relative">
+            <form id="newCategory" method="POST" action="/category/create" class="popup hidden bgWhite roundBorder shadowed1">
+                <div class="popupBody mbItems">
+                    <input type="text" name="newCategoryName" class="textInput roundBorder" placeholder="Имя категории"
+                        required autocomplete="off">
+                    <div class="formErrorText colorDanger"></div>
+                    <input type="submit" value="Создать" class="bigBtn hoverBgSpecial bgAccent roundBorder">
+                </div>
+            </form>
+        </div>
+        <h2 class="colorTextDark">Категории</h2>
+
         <li class="roundBorder {{#not category}} bgWhite {{/not}}">
             <a class="colorDark hoverColorAccent " href="/category/all">Все</a>
         </li>
@@ -17,5 +28,15 @@
 </div>
 
 <script>
-    const showNewCategory = () => document.getElementById('newCategory').classList.toggle('hidden')
+
+
+    document.getElementById('mouseLeaveDivnewCategory').onmouseleave = () => {
+        document.getElementById('mouseLeaveDivnewCategory').classList.toggle('hidden')
+        document.getElementById('newCategory').classList.toggle('hidden')
+        document.getElementById('makeCategory').blur()
+    }
+    const showNewCategory = (event) => {
+        document.getElementById('newCategory').classList.toggle('hidden')
+        document.getElementById('mouseLeaveDivnewCategory').classList.toggle('hidden')
+    }
 </script>
