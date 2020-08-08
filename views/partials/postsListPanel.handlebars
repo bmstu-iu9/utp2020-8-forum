@@ -11,7 +11,7 @@
                 href="?sortTag=byLastReply" {{/is}} class=" colorMedium hoverColorAccent sortLink">По последнему ответу
                 <span class="sortLinkArrow" id="byLastReplySortLink">&nbsp;</span></a></span>
     </div>
-    <ul id="ulPosts" class="noUlDefaultPadding noUlDecor bgLight roundBorder">
+    <ul id="ulPosts" class="noUlDefaultPadding noUlDecor bgWhite roundBorder">
         {{#each posts}}
         <li class="relative">
             <a href="/post/{{this.id}}?from={{../currentPath}}">
@@ -35,7 +35,7 @@
                         {{else}}
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ...
                         {{/if}}
-                        </p>
+                    </p>
                 </div>
             </a>
 
@@ -53,21 +53,24 @@
                     </div>
                 </div>
                 {{#eq this.author_id ../user.id}}
-                <div class="right">
-                    <a onclick="showMenu('postActionsList{{this.id}}'); event.stopImmediatePropagation()">
-                        <img src="/static/images/icons/more.svg" style="width: 15px; padding: 5px" alt="">
 
+                <div class="right">
+                    <a onclick="showDropdown('postActionsList{{this.id}}');">
+                        <img src="/static/images/icons/more.svg" style="width: 15px; padding: 5px" alt="">
                     </a>
                     &nbsp;
                 </div>
                 <div class="clearFix"></div>
             </footer>
-            <ul id="postActionsList{{this.id}}" class="postActionsList menuList roundBorder shadowed1 hidden">
-                <li><a
-                        onclick="showPopup('editPostPopup'); editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Редактировать</a>
-                </li>
-                <li><a class="colorTextDanger" onclick="deletePost({{this.id}})">Удалить</a></li>
-            </ul>
+            <div id="dropdownAreapostActionsList{{this.id}}" class="dropdownArea dropdownAreapostActionsList hidden relative">
+                <ul id="postActionsList{{this.id}}" class="postActionsList menuList roundBorder shadowed1 hidden">
+                    <li>
+                        <a
+                            onclick="showPopup('editPostPopup'); editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Редактировать</a>
+                    </li>
+                    <li><a class="colorTextDanger" onclick="deletePost({{this.id}})">Удалить</a></li>
+                </ul>
+            </div>
             {{else}}
             <div class="clearFix"></div>
             {{/eq}}
@@ -161,7 +164,7 @@
         document.getElementById(sortLinkId).classList.add('visitedColor');
         document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
     }
-    const menus = document.querySelectorAll('.menuList')
+    /* const menus = document.querySelectorAll('.menuList')
 
     document.addEventListener("click", function (e) {
         list.classList.add('hidden');
@@ -169,5 +172,18 @@
     });
     const showMenu = id => {
         document.getElementById(id).classList.remove('hidden');
+    } */
+    const dropdownAreas = document.querySelectorAll('.dropdownArea')
+
+    dropdownAreas.forEach(a => {
+        a.onmouseleave = () => {
+            a.classList.toggle('hidden')
+            document.getElementById(a.id.replace('dropdownArea', '')).classList.toggle('hidden')
+            document.getElementById(a.id.replace('dropdownArea', '') + 'Btn').blur()
+        }
+    })
+    const showDropdown = id => {
+        document.getElementById(id).classList.toggle('hidden')
+        document.getElementById('dropdownArea' + id).classList.toggle('hidden')
     }
 </script>

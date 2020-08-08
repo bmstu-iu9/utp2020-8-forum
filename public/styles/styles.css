@@ -79,7 +79,7 @@ textarea {
 
 /* ЦВЕТА */
 
-.bgLight {
+.bgWhite {
     background-color: white;
 }
 
@@ -106,14 +106,18 @@ textarea {
 .colorMedium {
     color: #6f6f6f;
 }
+
 .colorDark {
     color: rgb(32, 32, 32);
-}
 
+}
 .hoverColorAccent:hover {
     color: #66cc99;
 }
 
+.hoverBgWhite:hover {
+    background: #fff;
+}
 
 .hoverBgAccent:hover {
     background: #66cc99;
@@ -382,16 +386,30 @@ ul.menuList {
 
 #profileOptionsList {
     position: absolute;
-    top: 60px;
-    right: -30px;
+    top: 0;
+    right: 30px;
+}
+
+#dropdownAreaprofileOptionsList {
+    width: 300px;
+    height: 300px;
+    left: 30px;
 }
 
 .postActionsList {
     position: absolute;
-    right: 0;
-    bottom: -50px;
-    
+    right: 30px;
+    bottom: 60px;
 }
+
+.dropdownAreapostActionsList {
+    width: 200px;
+    height: 200px;
+    right: -60px;
+    top: 70px;
+    z-index: 1;
+}
+
 
 #newPostPopup textarea {
     resize: vertical;
@@ -502,11 +520,15 @@ ul.menuList {
 }
 
 .colorMain {
-    background: #343338;
+    background: #c3dde0;
+}
+
+.colorSectionCategory {
+    background: #c3dde0;;
 }
 
 .colorSection {
-    background: #CBC9D0;
+    background: white;
 }
 
 .colorDarkLink {
@@ -515,7 +537,7 @@ ul.menuList {
 }
 
 .colorDarkLink:hover {
-    background-color: #E1A487;
+    background-color: #66cc99;
     cursor: pointer;
 }
 
@@ -557,29 +579,47 @@ ul.menuList {
     transition-duration: 0.2s;
 }
 
-
+.dropdownArea {
+    position: absolute; 
+}
 #categories {
-    width: 500px;
+    width: 18vw;
     position: fixed;
-    padding: 0 1% 0 1%;
     border-radius: 1vh;
     top: 100px;
-    left: 30px;
+    left: 120px;
 }
 
-.category {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 3%;
-    border-radius: 0.5vh;
-
+#newCategory {
+    position: absolute;
+    margin: 0;
+    top: 140px;
+    left: 50px;
 }
 
-.category-link {
-    line-height: 350%;
+#dropdownAreanewCategory {
+    
+    top:-150px;
+    left: -50px;
+    width: 400px; 
+    height: 400px;
+}
+
+
+#categories > ul > li {
+    width: 80%;
+    text-align: left;
+    padding-left: 1vw;
+    
+}
+
+
+#categories > ul > li > a {
+    line-height: 200%;
     display: block;
-    font-size: 15pt;
+    font-size: 13pt;
     text-decoration: none;
+    transition: color .1s;
 }
 
 #selectedTheme {
@@ -587,7 +627,10 @@ ul.menuList {
     position: absolute;
     right: 400px;
     top: 0;
+}
 
+#newCategoryBtn {
+    margin-left: 0.9vw;
 }
 
 .answer {
@@ -595,10 +638,8 @@ ul.menuList {
     flex-direction: row;
     justify-content: space-between;
     width: 98%;
-    margin-bottom: 1%;
+    margin-bottom: 0.5%;
     padding: 1% 1% 1% 1%;
-    border-radius: 1vh;
-
 }
 
 .categoryNotChosen {
@@ -705,6 +746,7 @@ ul.menuList {
 
 
 .sortLink {
+    color: #333333;
     font-size: 12pt;
     margin-left: 1%;
     margin-right: 1%;
@@ -717,11 +759,11 @@ ul.menuList {
 }
 
 .chosenSortLinkAsc {
-    color: coral !important;
+    color: #66cc99 !important;
 }
 
 .chosenSortLink {
-    color: paleturquoise !important;
+    color: #66cc99 !important;
 }
 
 #message {
@@ -744,7 +786,6 @@ ul.menuList {
     resize: none;
     text-align: center;
     padding: 1% 1% 1% 1%;
-    border-radius: 1vh;
     position: absolute;
     top: 0;
     right: 0;

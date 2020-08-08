@@ -1,8 +1,8 @@
-<div id="selectedTheme" class="colorMain">
+<div id="selectedTheme">
     <a class="borderTop myButton colorDarkLink colorSection"
-       style="float: left; margin-top: 4.4vh" href="{{from}}"><img src="/static/images/back.png" height="40"
+       style="float: left; margin-top: 4.4vh; margin-left: -3vw" href="{{from}}"><img src="/static/images/back.png" height="40"
                                                                    alt="Назад"></a>
-    <h3 class="postTitle colorTextLight">{{post.title}}</h3>
+    <h3 class="postTitle colorTextDark">{{post.title}}</h3>
     <ul id="ulReplies" style="max-height: 54%;">
         {{#each replies}}
             <li class="answer colorSection" id="reply_{{this.id}}">
@@ -68,7 +68,7 @@
     </ul>
     {{#if user}}
     {{else}}
-        <p class="colorTextLight">Войдите или зарегистрируйтесь, чтобы ответить</p>
+        <p class="colorTextDark">Войдите или зарегистрируйтесь, чтобы ответить</p>
     {{/if}}
 </div>
 {{#if user}}
