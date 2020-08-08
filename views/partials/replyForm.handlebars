@@ -11,19 +11,3 @@
 <div id="composeReplyBtn" class="roundBtn bgAccent hoverBgSpecial shadowed1"><input type="image"
                                                                                     src="/static/images/icons/edit.svg">
 </div>
-
-<script>
-    let hideBtn = document.querySelector('#hideReplyFormBtn')
-    let composeBtn = document.querySelector('#composeReplyBtn')
-    let form = document.querySelector('#replyForm')
-
-    composeBtn.onclick = () => {
-        form.classList.remove('hidden')
-        composeBtn.classList.add('hidden')
-
-    }
-    hideBtn.onclick = () => {
-        form.classList.add('hidden')
-        composeBtn.classList.remove('hidden')
-    }
-</script>
