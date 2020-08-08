@@ -38,6 +38,14 @@ textarea {
 
 /* ПОЛОЖЕНИЕ */
 
+.liPadding {
+    padding: 2% 2% 2% 2%;
+}
+
+.liMargin {
+    margin: 0 0 2% 0;
+}
+
 .hidden {
     display: none !important;
 }
@@ -83,8 +91,12 @@ textarea {
     background-color: white;
 }
 
+.colorHoverButton:hover {
+    background: #ffffff;
+}
+
 .bgAccent {
-    background: #66cc99;
+    background: rgb(102, 204, 153);
 }
 .bgDanger {
     background-color: darkred;
@@ -96,6 +108,13 @@ textarea {
 .colorWhite {
     color: white;
 }
+
+.colorButton {
+    background-color: #66cc99;
+    color: #66cc99;
+    fill: #66cc99;
+}
+
 .colorAccent {
     color: #66cc99;
 }
@@ -154,6 +173,10 @@ textarea {
 
 .textCenter {
     text-align: center;
+}
+
+.widthRegulate {
+    width: 95%;
 }
 
 
@@ -243,6 +266,10 @@ ul.noUlDecor {
 
 ul.noUlDefaultPadding {
     padding-left: 0;
+}
+
+ul.noMarginTop {
+    margin-top: 1%;
 }
 
 ul.menuList {
@@ -435,7 +462,7 @@ ul.menuList {
 }
 #editReplyPopup textarea {
     min-width: 300px;
-    min-height: 10 0px;
+    min-height: 100px;
 }
 
 
@@ -473,6 +500,40 @@ ul.menuList {
 #ulPosts > li > footer > .left > img {
     margin-right: 10px;
 }
+
+
+#ulReplies > li {
+    border-bottom: 5px solid #eaf7f8;
+}
+
+#ulPeplies > li > a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: black;
+}
+
+#ulPeplies > li > .postMain {
+    padding: 0 30px;
+}
+
+.noMarginTop {
+    margin-top: 0;
+}
+
+#ulPeplies > li > footer {
+    line-height: 40px;
+    padding: 0 30px;
+    margin-bottom: 20px;
+}
+
+#ulPeplies > li > footer > .left > img {
+    margin-right: 10px;
+}
+
+
+
 .ulCategories {
     max-height: 70vh;
     overflow-y: auto;
@@ -662,7 +723,9 @@ ul.menuList {
 }
 
 .vote {
-    width: 75%;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 25%;
 }
 
 .answerText {
@@ -676,15 +739,18 @@ ul.menuList {
 }
 
 .postTitle {
-    margin-top: 2%;
-    max-width: 90%;
-    min-height: 10%;
-    max-height: 20%;
+    margin-top: 5%;
+    padding: 2% 2% 2% 2%;
+}
 
-    padding-left: 1%;
-    border-left-style: solid;
-    border-width: 1px;
-    overflow-y: auto;
+.marginButton {
+    position: fixed;
+    margin-top: 2.7%;
+    margin-left: -3%;
+}
+
+.textTitle {
+    width: 95%;
 }
 
 .profile {
@@ -702,12 +768,6 @@ ul.menuList {
     height: 29%;
 }
 
-.marginButton {
-    margin-left: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
 
 #answerForm {
     display: flex;

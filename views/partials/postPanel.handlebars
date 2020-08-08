@@ -1,71 +1,116 @@
 <div id="selectedTheme">
-    <a class="borderTop myButton colorDarkLink colorSection"
-       style="float: left; margin-top: 4.4vh; margin-left: -3vw" href="{{from}}"><img src="/static/images/back.png" height="40"
+    <div>
+    {{#if replies}}
+        <span><a id='byTime' {{#is sortTag 'byTime' }} href="?sortTag=byTimeAsc" {{else}} href="?sortTag=byTime" {{/is}}
+                 class="colorMedium hoverColorAccent sortLink">По времени <span class="sortLinkArrow"
+                                                                                id="byTimeSortLink">&nbsp;</span></a></span>
+        <span><a id='byReplies' {{#is sortTag 'byReplies' }} href="?sortTag=byRepliesAsc" {{else}}
+                 href="?sortTag=byReplies" {{/is}} class="colorMedium hoverColorAccent sortLink">По ответам
+                <span class="sortLinkArrow" id="byRepliesSortLink">&nbsp;</span></a></span>
+        <span><a id="byLastReply" {{#is sortTag 'byLastReply' }} href="?sortTag=byLastReplyAsc" {{else}}
+                 href="?sortTag=byLastReply" {{/is}} class=" colorMedium hoverColorAccent sortLink">По последнему ответу
+                <span class="sortLinkArrow" id="byLastReplySortLink">&nbsp;</span></a></span>
+    </div>
+
+
+    <a class="left marginButton colorHoverButton" href="{{from}}"><img src="/static/images/back.svg" height="40"
                                                                    alt="Назад"></a>
-    <h3 class="postTitle colorTextDark">{{post.title}}</h3>
-    <ul id="ulReplies" style="max-height: 54%;">
+
+    <div class="bgWhite roundBorder postTitle">
+        <h3 class="textTitle left">
+            {{post.title}}
+        </h3>
+        <div class="right vertAlignItemsMid">
+            <img src="/static/images/icons/chat.svg" alt="" class="inlineBlock" style="width: 15px;">
+            {{#if post.reply_count}}
+                {{post.reply_count}}
+            {{else}}
+                0
+            {{/if}}</div>
+        <div class="clearFix"></div>
+
+    </div>
+    <div class="clearFix"></div>
+
+    <ul id="ulReplies" class="noMarginTop noUlDefaultPadding noUlDecor bgWhite roundBorder">
         {{#each replies}}
-            <li class="answer colorSection" id="reply_{{this.id}}">
-                <div class="profile">
-                    <img
-                        {{#if this.author_name}}
-                        src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
-                        {{else}}
-                        src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
-                        {{/if}}
-                        alt="No avatar" height="100" width="100">
-                    <div class="profileName link colorDarkLink" href="#">
-                        {{#if this.author_name}}
-                            {{this.author_name}}
-                        {{else}}
-                            Удален
-                        {{/if}}
+            <li class="relative liPadding" id="reply_{{this.id}}">
+
+                <div class="postMain">
+                    <div class="left widthRegulate">
+                        <p class="noMarginTop colorMedium">
+                            {{this.text}}
+                        </p>
                     </div>
-                </div>
-                <div class="textAndTime">
-                    <div class="answerText link ColorTextDark">{{this.text}}</div>
-                    <div class="timeLast">
-                        {{this.time_since_creation}}
-                    </div>
-                </div>
-                <div class="voteField">
-                    {{#eq ../user.username this.author_name}}
-                        <a class="profileName link colorDarkLink"
-                           onclick="showPopup('editReplyPopup'); editReply({{this.id}}, '{{this.text}}')">Edit</a>
-                        <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
-                    {{else}}
-                        {{#if ../user}}
-                            <form action="/vote/{{this.id}}/1?from={{../from}}" method="post">
-                            <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
-                            </form>
-                            <form action="/vote/{{this.id}}/-1?from={{../from}}" method="post">
-                            <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
-                            </form>
+
+                    <div class="right   voteField">
+                        {{#eq ../user.username this.author_name}}
                         {{else}}
-                            <input type="image" class="vote" src="/static/images/like.png" alt="#"
-                                   onclick="document.getElementById('signUpForm').style.display='block'">
-                            <input type="image" class="vote" src="/static/images/dislike.png"
-                                   onclick="document.getElementById('signUpForm').style.display='block'">
-                        {{/if}}
+                            {{#if ../user}}
+                                <form action="/vote/{{this.id}}/1?from={{../from}}" method="post">
+                                <input type="image" class="vote" src="/static/images/like.svg" alt="#"/>
+                                </form>
+                                <form action="/vote/{{this.id}}/-1?from={{../from}}" method="post">
+                                <input type="image" class="vote" src="/static/images/dislike.svg" alt="#"/>
+                                </form>
+                            {{/if}}
 
-
-
-
-                        <div class="voteCounter">{{#if this.rating }}
-                            {{#gt this.rating 0 }}
-                                <span style="color: darkgreen">{{this.rating}}</span>
+                            <div class="voteCounter">{{#if this.rating }}
+                                {{#gt this.rating 0 }}
+                                    <span style="color: darkgreen">{{this.rating}}</span>
+                                {{else}}
+                                    <span style="color: darkred">{{this.rating}}</span>
+                                {{/gt}}
                             {{else}}
-                                <span style="color: darkred">{{this.rating}}</span>
-                            {{/gt}}
-                        {{else}}
-                            0
-                        {{/if}}
-                        </div>
-                    {{/eq}}
+                                0
+                            {{/if}}
+                            </div>
+                        {{/eq}}
+                    </div>
                 </div>
+
+                <footer class="vertAlignItemsMid">
+                    <div class="left">
+                        <img {{#if this.author_name}} src="https://api.adorable.io/avatars/128/{{this.author_name}}.png"
+                        {{else}}
+                                                      src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
+                        {{/if}} class='roundImg smallAvatar inlineBlock' alt="">
+                        <div class="inlineBlock colorMedium">{{#if this.author_name}}
+                            <span class="colorAccent">{{this.author_name}}</span>
+                        {{else}}
+                            <span class="colorDarker">Удален</span>
+                        {{/if}} ответил {{this.time_since_creation}}
+                        </div>
+                    </div>
+                    {{#eq this.author_id ../user.id}}
+
+                    <div class="right">
+                        <a onclick="showDropdown('postActionsList{{this.id}}');">
+                            <img src="/static/images/icons/more.svg" style="width: 15px; padding: 5px" alt="">
+                        </a>
+                        &nbsp;
+                    </div>
+                    <div class="clearFix"></div>
+                </footer>
+                    <div id="dropdownArea postActionsList{{this.id}}" class="dropdownArea dropdownArea postActionsList hidden relative">
+                        <ul id="postActionsList{{this.id}}" class="postActionsList menuList roundBorder shadowed1 hidden">
+                            <li>
+                                <a
+                                        onclick="showPopup('editPostPopup'); editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Редактировать</a>
+                            </li>
+                            <li><a class="colorTextDanger" onclick="deletePost({{this.id}})">Удалить</a></li>
+                        </ul>
+                    </div>
+                {{else}}
+                    <div class="clearFix"></div>
+                {{/eq}}
             </li>
+
+
+
         {{/each}}
     </ul>
+    {{/if}}
     {{#if user}}
     {{else}}
         <p class="colorTextDark">Войдите или зарегистрируйтесь, чтобы ответить</p>
@@ -125,5 +170,37 @@
                 location.reload();
             });
         };
+    }
+    if ('{{sortTag}}'.endsWith('Asc')) {
+        const sortLinkId = '{{sortTag}}'.replace('Asc', '')
+        document.getElementById(sortLinkId).classList.add('visitedColor');
+        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↑";
+    } else {
+        const sortLinkId = '{{sortTag}}';
+        document.getElementById(sortLinkId).classList.add('visitedColor');
+        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
+    }
+    /* const menus = document.querySelectorAll('.menuList')
+
+    document.addEventListener("click", function (e) {
+        list.classList.add('hidden');
+        menus.forEach(m => m.classList.add('hidden'))
+    });
+    const showMenu = id => {
+        document.getElementById(id).classList.remove('hidden');
+    } */
+    const dropdownAreas = document.querySelectorAll('.dropdownArea')
+
+    dropdownAreas.forEach(a => {
+        a.onmouseleave = () => {
+            a.classList.toggle('hidden')
+            document.getElementById(a.id.replace('dropdownArea', '')).classList.toggle('hidden')
+            document.getElementById(a.id.replace('dropdownArea', '') + 'Btn').blur()
+        }
+    })
+    const showDropdown = id => {
+
+        document.getElementById(id).classList.toggle('hidden')
+        document.getElementById('dropdownArea' + id).classList.toggle('hidden')
     }
 </script>
