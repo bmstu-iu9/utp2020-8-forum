@@ -65,21 +65,6 @@ router.get('/:categoryId(\\d+)', (req, res) => {
     }
 })
 
-router.post('/:categoryId(\\d+)', function (req, res) {
-    let categoryId = req.params.categoryId;
-    let originalUrl = req.originalUrl
-    let category = dbManager.getCategoryById(categoryId);
-    let date = new Date();
-    let creation_time = date.toDateString() + " " + date.toTimeString();
-    if (category !== undefined) {
-        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost, categoryId, creation_time);
-        if (postSuccess)
-            res.redirect(originalUrl)
-        else res.redirect(`${originalUrl}?postFail=true`)
-
-    } else res.redirect(`${originalUrl}?postFail=true`)
-})
-
 router.post('/create', (req, res) => {
     let category = dbManager.checkCategoryExists(req.body.newCategoryName.trim());
     if (!category) {
