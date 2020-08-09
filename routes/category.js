@@ -112,9 +112,9 @@ router.get('/myPosts', (req, res) => {
         layout: 'postsListViewLayout',
         posts: posts,
         categories: categories,
+        category: {id:0, name:'Мои посты'},
         postsListTitle: "Мои посты",
         postFail: req.query.postFail,
-        category: null,
         sortTag: sortTag,
         user: req.user
     });
