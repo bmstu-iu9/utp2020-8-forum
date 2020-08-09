@@ -43,7 +43,7 @@
   ],
   
   "getPost": [
-    "SELECT posts.id,  posts.author_id, x.reply_count,  posts.title,  posts.category_id, posts.creation_time, ",
+    "SELECT posts.id,  posts.author_id, x.reply_count, posts.title, posts.category_id, posts.creation_time, ",
     "users.username as author_name, categories.name as category_name FROM posts ",
     "INNER JOIN users ON users.id=posts.author_id ",
     "INNER JOIN categories on posts.category_id=categories.id ",
