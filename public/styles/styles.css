@@ -748,6 +748,11 @@ ul.menuList {
     padding: 2% 2% 2% 2%;
 }
 
+.postTitle > h3 {
+    max-width: 90%;
+    overflow: hidden;
+}
+
 .returnButton {
     display: block;
     background: #ffffff;
