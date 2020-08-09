@@ -177,6 +177,10 @@ textarea {
 
 .widthRegulate {
     width: 95%;
+    line-height: 20px; 
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 
@@ -571,6 +575,8 @@ ul.menuList {
     line-height: 20px; 
     max-height: 40px; 
     overflow: hidden;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 .replyImage {
