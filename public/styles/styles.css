@@ -39,7 +39,7 @@ textarea {
 /* ПОЛОЖЕНИЕ */
 
 .liPadding {
-    padding: 2% 2% 2% 2%;
+    padding: 25px;
 }
 
 .liMargin {
@@ -750,10 +750,11 @@ ul.menuList {
     justify-content: end;
     text-align: center;
     width: 5%;
+    max-height: 30px;
 }
 
 .vote {
-    width: 50%;
+    width: 20px;
     margin-left: 25%;
     margin-bottom: 25%;
 }
