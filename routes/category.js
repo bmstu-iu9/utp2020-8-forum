@@ -106,7 +106,7 @@ router.post('/delete/:categoryId(\\d+)', (req, res) => {
 router.get('/myPosts', (req, res) => {
     let categories = dbManager.getCategories();
     let posts = dbManager.getPostsByUser(req.user.id);
-    let sortTag = req.query.sortTag;
+    let sortTag = req.query.sortTag || "byTime";
     posts = sortPosts(posts, sortTag);
     res.render('home', {
         layout: 'postsListViewLayout',
