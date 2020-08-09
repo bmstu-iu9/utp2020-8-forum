@@ -92,7 +92,7 @@ textarea {
 }
 
 .colorHoverButton:hover {
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.5);
+    box-shadow: 0 0 6px 2px rgba(0,0,0,0.1);
 }
 
 .bgAccent {
@@ -751,11 +751,11 @@ ul.menuList {
 .returnButton {
     display: block;
     background: #ffffff;
-    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     padding: 0.3% 0.3% 0.3% 0.3%;
     position: fixed;
     margin-top: 2.4%;
     margin-left: -4%;
+    transition: box-shadow .1s;
 }
 
 .textTitle {
