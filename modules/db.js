@@ -47,7 +47,7 @@ const getPostsByCategory = categoryId => {
     return posts;
 }
 
-const getPost = postId => query("getPost").get(postId)
+const getPost = postId => query("getPost").get(postId, postId)
 
 const getReply = replyId => query("getReply").get(replyId)
 

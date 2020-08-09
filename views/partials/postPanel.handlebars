@@ -1,69 +1,98 @@
 <div id="selectedTheme">
-    <a class="borderTop myButton colorDarkLink colorSection"
-       style="float: left; margin-top: 4.4vh; margin-left: -3vw" href="{{from}}"><img src="/static/images/back.png" height="40"
+    <a class="left returnButton colorHoverButton roundBorder shadowed1" href="{{from}}"><img src="/static/images/back.svg" height="40"
                                                                    alt="Назад"></a>
-    <h3 class="postTitle colorTextDark">{{post.title}}</h3>
-    <ul id="ulReplies" style="max-height: 54%;">
+
+    <div class="bgWhite roundBorder postTitle">
+        <h3 class="textTitle left">
+            {{post.title}}
+        </h3>
+        <div class="right vertAlignItemsMid">
+            <img src="/static/images/icons/chat.svg" alt="" class="inlineBlock" style="width: 15px;">
+            {{#if post.reply_count}}
+                {{post.reply_count}}
+            {{else}}
+                0
+            {{/if}}</div>
+        <div class="clearFix"></div>
+
+    </div>
+    <div class="clearFix"></div>
+
+    <ul id="ulReplies" class="noMarginTop noUlDefaultPadding noUlDecor bgWhite roundBorder">
         {{#each replies}}
-            <li class="answer colorSection" id="reply_{{this.id}}">
-                <div class="profile">
-                    <img
-                        {{#if this.author_name}}
-                        src="https://postal.ninja/assets/images/48981817022dda35bf548590be816d60-logo-100x100.png"
+            <li class="relative liPadding" id="reply_{{this.id}}">
+
+                <div class="postMain">
+                    <div class="right voteField">
+                        {{#eq ../user.username this.author_name}}
                         {{else}}
-                        src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
-                        {{/if}}
-                        alt="No avatar" height="100" width="100">
-                    <div class="profileName link colorDarkLink" href="#">
-                        {{#if this.author_name}}
-                            {{this.author_name}}
-                        {{else}}
-                            Удален
-                        {{/if}}
-                    </div>
-                </div>
-                <div class="textAndTime">
-                    <div class="answerText link ColorTextDark">{{this.text}}</div>
-                    <div class="timeLast">
-                        {{this.time_since_creation}}
-                    </div>
-                </div>
-                <div class="voteField">
-                    {{#eq ../user.username this.author_name}}
-                        <a class="profileName link colorDarkLink"
-                           onclick="showPopup('editReplyPopup'); editReply({{this.id}}, '{{this.text}}')">Edit</a>
-                        <a class="profileName link colorDarkLink" onclick="deleteReply({{this.id}})">Delete</a>
-                    {{else}}
-                        {{#if ../user}}
-                            <form action="/vote/{{this.id}}/1?from={{../from}}" method="post">
-                            <input type="image" class="vote" src="/static/images/like.png" alt="#"/>
-                            </form>
-                            <form action="/vote/{{this.id}}/-1?from={{../from}}" method="post">
-                            <input type="image" class="vote" src="/static/images/dislike.png" alt="#"/>
-                            </form>
-                        {{else}}
-                            <input type="image" class="vote" src="/static/images/like.png" alt="#"
-                                   onclick="document.getElementById('signUpForm').style.display='block'">
-                            <input type="image" class="vote" src="/static/images/dislike.png"
-                                   onclick="document.getElementById('signUpForm').style.display='block'">
-                        {{/if}}
+                            {{#if ../user}}
+                                <form action="/vote/{{this.id}}/1?from={{../from}}" method="post">
+                                <input type="image" class="vote" src="/static/images/like.svg" alt="#"/>
+                                </form>
+                                <form action="/vote/{{this.id}}/-1?from={{../from}}" method="post">
+                                <input type="image" class="vote" src="/static/images/dislike.svg" alt="#"/>
+                                </form>
+                            {{/if}}
+                        {{/eq}}
 
-
-
-
-                        <div class="voteCounter">{{#if this.rating }}
-                            {{#gt this.rating 0 }}
-                                <span style="color: darkgreen">{{this.rating}}</span>
+                            <div class="voteCounter">{{#if this.rating }}
+                                {{#gt this.rating 0 }}
+                                    <span style="color: darkgreen">{{this.rating}}</span>
+                                {{else}}
+                                    <span style="color: darkred">{{this.rating}}</span>
+                                {{/gt}}
                             {{else}}
-                                <span style="color: darkred">{{this.rating}}</span>
-                            {{/gt}}
-                        {{else}}
-                            0
-                        {{/if}}
-                        </div>
-                    {{/eq}}
+                                0
+                            {{/if}}
+                            </div>
+                    </div>
+
+                    <div class="left widthRegulate">
+                        <p class="noMarginTop colorMedium">
+                            {{this.text}}
+                        </p>
+                    </div>
                 </div>
+                <div class="clearFix"></div>
+                <footer>
+                    <div class="left">
+                        <img {{#if this.author_name}} src="https://api.adorable.io/avatars/128/{{this.author_name}}.png"
+                        {{else}}
+                                                      src="https://avatars.mds.yandex.net/get-znatoki/1368855/2a0000016cc1fb6175fa439bc6ab108427ae/w480"
+                        {{/if}} class='roundImg smallAvatar inlineBlock' alt="">
+                        <div class="inlineBlock colorMedium">{{#if this.author_name}}
+                            <span class="colorAccent">{{this.author_name}}</span>
+                        {{else}}
+                            <span class="colorDarker">Удален</span>
+                        {{/if}} ответил {{this.time_since_creation}}
+                        </div>
+                    </div>
+                    {{#eq this.author_id ../user.id}}
+
+                    <div class="right">
+                        <a onclick="showDropdown('replyActionsList{{this.id}}');">
+                            <img src="/static/images/icons/more.svg" style="width: 15px; padding: 5px;" alt="">
+                        </a>
+                        &nbsp;
+                    </div>
+                    <div class="clearFix"></div>
+                </footer>
+                    <div id="dropdownAreareplyActionsList{{this.id}}" class="dropdownArea dropdownAreareplyActionsList hidden relative">
+                        <ul id="replyActionsList{{this.id}}" class="replyActionsList menuList roundBorder shadowed1 hidden">
+                            <li>
+                                <a onclick="showPopup('editReplyPopup'); editReply({{this.id}}, '{{this.text}}')">Редактировать</a>
+                            </li>
+                            <li><a class="colorTextDanger" onclick="deletePost({{../post.id}}); ">Удалить</a></li>
+                        </ul>
+                    </div>
+                {{else}}
+                    <div class="clearFix"></div>
+                {{/eq}}
             </li>
+
+
+
         {{/each}}
     </ul>
     {{#if user}}

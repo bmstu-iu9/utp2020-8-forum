@@ -10,12 +10,13 @@ router.get('/:postId(\\d+)', function (req, res) {
     console.log(from)
     if (post) {
         let categories = dbManager.getCategories();
+        let category = dbManager.getCategoryById(post.category_id)
         let replies = dbManager.getReplies(postId)
         replies = dbManager.modifiedTimes(moment, replies);
         res.render('home', {
             layout: 'postViewLayout',
             categories: categories,
-            category: dbManager.getCategoryById(post.category_id),
+            category: category,
             post: post,
             replies: replies,
             user: req.user,
