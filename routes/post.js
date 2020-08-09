@@ -15,7 +15,7 @@ router.get('/:postId(\\d+)', function (req, res) {
         res.render('home', {
             layout: 'postViewLayout',
             categories: categories,
-            category: {id: 0, name: 'Все'},
+            category: dbManager.getCategoryById(post.category_id),
             post: post,
             replies: replies,
             user: req.user,
