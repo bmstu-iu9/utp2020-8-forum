@@ -4,15 +4,18 @@
     </header>
     <div class="popupBody">
         <form method="post" action="/post/create" class="mbItems">
-            <input type="text" placeholder="Категория" name="category" class="textInput roundBorder" id="createPostPopupFocus"
-                   required>
-            <input name="postTitle" id="myAnswer" type="text" class="textInput block roundBorder" placeholder="Заголовок"
-                   autocomplete="off" required >
-            <textarea cols=75 rows="10" placeholder='Текст поста' name="postText"
-                      autocomplete="off" class="textInput roundBorder" required></textarea>
+            <select name="category" class="textInput roundBorder colorMedium">
+                <option selected disabled>Выберите категорию</option>
+                {{#each categories}}
+                <option value="{{this.name}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+            <input name="postTitle" id="myAnswer" type="text" size=50 maxlength="82" class="textInput block roundBorder"
+                placeholder="Заголовок" autocomplete="off" required>
+            <textarea cols=75 rows="10" placeholder='Текст поста' name="postText" autocomplete="off"
+            maxlength="8192" class="textInput roundBorder" required></textarea>
             <div class="formErrorText colorDanger"></div>
-            <input type="submit" value="Создать"
-                   class="bigBtn hoverBgSpecial bgAccent roundBorder">
+            <input type="submit" value="Создать" class="bigBtn hoverBgSpecial bgAccent roundBorder">
         </form>
     </div>
 </div>

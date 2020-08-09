@@ -95,6 +95,7 @@ const getPostsByUser = userId => {
     posts.forEach(p => {
         let lastReply = getLastReply(p.id);
         p.last_reply = (lastReply ? lastReply : {"id": 0})
+        p.first_reply = getFirstReply(p.id);
     })
     return posts;
 }

@@ -2,7 +2,7 @@
     <a class="left returnButton colorHoverButton roundBorder shadowed1" href="{{from}}"><img src="/static/images/back.svg" height="40"
                                                                    alt="Назад"></a>
 
-    <div class="bgWhite roundBorder postTitle">
+    <div class="bgWhite roundBorder postTitle" style="margin-top: 35px;">
         <h3 class="textTitle left">
             {{post.title}}
         </h3>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="clearFix"></div>
-                <footer>
+                <footer  class="vertAlignItemsMid">
                     <div class="left">
                         <img {{#if this.author_name}} src="https://api.adorable.io/avatars/128/{{this.author_name}}.png"
                         {{else}}
@@ -83,7 +83,7 @@
                             <li>
                                 <a onclick="showPopup('editReplyPopup'); editReply({{this.id}}, '{{this.text}}')">Редактировать</a>
                             </li>
-                            <li><a class="colorTextDanger" onclick="deletePost({{../post.id}}); ">Удалить</a></li>
+                            <li><a class="colorTextDanger" onclick="deleteReply({{this.id}}); ">Удалить</a></li>
                         </ul>
                     </div>
                 {{else}}

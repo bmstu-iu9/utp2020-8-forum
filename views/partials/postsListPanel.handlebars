@@ -81,7 +81,7 @@
     <div class="colorMedium">Нет постов.
         {{#if user}}
         <a onclick="showPopup('createPostPopup')" href="#">Создайте пост</a> или
-        <form action="/category/delete/{{category}}" method="post" class="inlineBlock">
+        <form action="/category/delete/{{category.id}}" method="post" class="inlineBlock">
             <input type="submit" value="удалите категорию" class="bigBtn bgDanger roundBorder hoverBgSpecial">
         </form>
     </div>
