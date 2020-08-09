@@ -32,8 +32,6 @@ router.get('/all', function (req, res) {
         layout: 'postsListViewLayout',
         posts: posts,
         categories: categories,
-        postsListTitle: "Все посты",
-        category: null,
         sortTag: sortTag,
         user: req.user,
         message: req.flash('error'),
@@ -69,7 +67,6 @@ router.get('/:categoryId(\\d+)', (req, res) => {
 
 router.post('/:categoryId(\\d+)', function (req, res) {
     let categoryId = req.params.categoryId;
-    //  let categories = dbManager.getCategories();
     let originalUrl = req.originalUrl
     let category = dbManager.getCategoryById(categoryId);
     let date = new Date();
@@ -113,8 +110,6 @@ router.get('/myPosts', (req, res) => {
         layout: 'postsListViewLayout',
         posts: posts,
         categories: categories,
-        category: {id:0, name:'Мои посты'},
-        postsListTitle: "Мои посты",
         postFail: req.query.postFail,
         sortTag: sortTag,
         user: req.user,
