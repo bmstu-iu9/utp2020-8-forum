@@ -23,7 +23,7 @@
             <li class="relative liPadding" id="reply_{{this.id}}">
 
                 <div class="postMain">
-                    <div class="right   voteField">
+                    <div class="right voteField">
                         {{#eq ../user.username this.author_name}}
                         {{else}}
                             {{#if ../user}}
@@ -71,19 +71,19 @@
                     {{#eq this.author_id ../user.id}}
 
                     <div class="right">
-                        <a onclick="showDropdown('postActionsList{{this.id}}');">
+                        <a onclick="showDropdown('replyActionsList{{this.id}}');">
                             <img src="/static/images/icons/more.svg" style="width: 15px; padding: 5px" alt="">
                         </a>
                         &nbsp;
                     </div>
                     <div class="clearFix"></div>
                 </footer>
-                    <div id="dropdownArea postActionsList{{this.id}}" class="dropdownArea postActionsList hidden relative">
-                        <ul id="showDropdown{{this.id}}" class="postActionsList menuList roundBorder shadowed1 hidden">
+                    <div id="dropdownAreareplyActionsList{{this.id}}" class="dropdownArea dropdownAreareplyActionsList hidden relative">
+                        <ul id="replyActionsList{{this.id}}" class="replyActionsList menuList roundBorder shadowed1 hidden">
                             <li>
-                                <a onclick="showPopup('editReplyPopup'); editReply({{this.id}}, {{this.category_id}}, '{{this.title}}')">Редактировать</a>
+                                <a onclick="showPopup('editReplyPopup'); editReply({{this.id}}, '{{this.text}}')">Редактировать</a>
                             </li>
-                            <li><a class="colorTextDanger" onclick="deleteReply({{this.id}})">Удалить</a></li>
+                            <li><a class="colorTextDanger" onclick="deletePost({{../post.id}}); ">Удалить</a></li>
                         </ul>
                     </div>
                 {{else}}

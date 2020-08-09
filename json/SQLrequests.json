@@ -48,7 +48,12 @@
     "INNER JOIN users ON users.id=posts.author_id ",
     "INNER JOIN categories on posts.category_id=categories.id ",
     "LEFT JOIN (SELECT replies.post_id, COUNT(*) as reply_count FROM replies GROUP BY replies.post_id) x ON x.post_id=posts.id ",
-    "WHERE posts.id=? "
+    "WHERE posts.id=?",
+    "UNION SELECT posts.id, posts.author_id, x.reply_count,  posts.title,  posts.category_id, posts.creation_time, ",
+    "NULL as author_name, categories.name as category_name FROM posts ",
+    "INNER JOIN categories on posts.category_id=categories.id ",
+    "LEFT JOIN (SELECT replies.post_id, COUNT(*) as reply_count FROM replies GROUP BY replies.post_id) x ON x.post_id=posts.id ",
+    "WHERE posts.author_id IS NULL AND posts.id=?"
   ],
   "getReply": [
     "SELECT * FROM replies WHERE id=?"
