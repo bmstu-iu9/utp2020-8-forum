@@ -509,6 +509,8 @@ ul.menuList {
 #ulPosts > li > a > header > h3 {
     max-width: 90%;
     overflow: hidden;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 #ulPosts > li > a > .postMain {
@@ -676,7 +678,7 @@ ul.menuList {
 
 .postTitle {
     margin-top: 5%;
-    padding: 2% 2% 2% 2%;
+    padding: 30px 30px 0 25px;
 }
 
 .postTitle > h3 {
