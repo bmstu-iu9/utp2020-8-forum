@@ -117,7 +117,8 @@ router.get('/myPosts', (req, res) => {
         postsListTitle: "Мои посты",
         postFail: req.query.postFail,
         sortTag: sortTag,
-        user: req.user
+        user: req.user,
+        currentPath: req.originalUrl
     });
 });
 
