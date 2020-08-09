@@ -521,7 +521,8 @@ ul.menuList {
     margin-bottom: 20px;
 }
 
-#ulPosts > li > footer > .left > img {
+#ulPosts > li > footer > .left > img,
+#ulReplies > li > footer > .left > img {
     margin-right: 10px;
 }
 
