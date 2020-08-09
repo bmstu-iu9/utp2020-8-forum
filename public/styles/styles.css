@@ -38,6 +38,14 @@ textarea {
 
 /* ПОЛОЖЕНИЕ */
 
+.liPadding {
+    padding: 25px;
+}
+
+.liMargin {
+    margin: 0 0 2% 0;
+}
+
 .hidden {
     display: none !important;
 }
@@ -83,8 +91,12 @@ textarea {
     background-color: white;
 }
 
+.colorHoverButton:hover {
+    box-shadow: 0 0 6px 2px rgba(0,0,0,0.1);
+}
+
 .bgAccent {
-    background: #66cc99;
+    background: rgb(102, 204, 153);
 }
 .bgDanger {
     background-color: darkred;
@@ -96,6 +108,13 @@ textarea {
 .colorWhite {
     color: white;
 }
+
+.colorButton {
+    background-color: #66cc99;
+    color: #66cc99;
+    fill: #66cc99;
+}
+
 .colorAccent {
     color: #66cc99;
 }
@@ -154,6 +173,14 @@ textarea {
 
 .textCenter {
     text-align: center;
+}
+
+.widthRegulate {
+    width: 95%;
+    line-height: 20px; 
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 
@@ -245,6 +272,10 @@ ul.noUlDefaultPadding {
     padding-left: 0;
 }
 
+ul.noMarginTop {
+    margin-top: 1%;
+}
+
 ul.menuList {
     display: block;
     padding: 10px 0;
@@ -321,7 +352,7 @@ ul.menuList {
 
 #composeReplyBtn {
     position: fixed;
-    right: 80px;
+    right: 300px;
     bottom: 100px;
 }
 
@@ -402,12 +433,31 @@ ul.menuList {
     bottom: 60px;
 }
 
+
 .dropdownAreapostActionsList {
     width: 200px;
     height: 200px;
     right: -60px;
     top: 70px;
     z-index: 1;
+}
+
+.dropdownAreareplyActionsList {
+    width: 200px;
+    height: 130px;
+    right: -60px;
+    bottom:-70px;
+    z-index: 1;
+}
+.replyActionsList {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+
+}
+
+#ulReplies >li:first-child .replyActionsList > li:last-child {
+    display: none;
 }
 
 
@@ -433,9 +483,10 @@ ul.menuList {
     width: min-content;
 
 }
+
 #editReplyPopup textarea {
     min-width: 300px;
-    min-height: 10 0px;
+    min-height: 100px;
 }
 
 
@@ -473,6 +524,44 @@ ul.menuList {
 #ulPosts > li > footer > .left > img {
     margin-right: 10px;
 }
+
+
+#ulReplies > li {
+    border-bottom: 5px solid #eaf7f8;
+}
+
+#ulReplies > li:first-child {
+    margin-top: -2%;
+}
+
+#ulPeplies > li > a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: black;
+}
+
+#ulPeplies > li > .postMain {
+    padding: 0 30px;
+}
+
+.noMarginTop {
+    margin-top: 0;
+}
+
+#ulPeplies > li > footer {
+    line-height: 40px;
+    padding: 0 30px;
+    margin-bottom: 20px;
+}
+
+#ulPeplies > li > footer > .left > img {
+    margin-right: 10px;
+}
+
+
+
 .ulCategories {
     max-height: 70vh;
     overflow-y: auto;
@@ -486,6 +575,8 @@ ul.menuList {
     line-height: 20px; 
     max-height: 40px; 
     overflow: hidden;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 .replyImage {
@@ -537,7 +628,7 @@ ul.menuList {
 }
 
 .colorDarkLink:hover {
-    background-color: #66cc99;
+    background-color: rgb(102, 204, 153);
     cursor: pointer;
 }
 
@@ -659,10 +750,13 @@ ul.menuList {
     justify-content: end;
     text-align: center;
     width: 5%;
+    max-height: 30px;
 }
 
 .vote {
-    width: 75%;
+    width: 20px;
+    margin-left: 25%;
+    margin-bottom: 25%;
 }
 
 .answerText {
@@ -676,15 +770,27 @@ ul.menuList {
 }
 
 .postTitle {
-    margin-top: 2%;
-    max-width: 90%;
-    min-height: 10%;
-    max-height: 20%;
+    margin-top: 5%;
+    padding: 2% 2% 2% 2%;
+}
 
-    padding-left: 1%;
-    border-left-style: solid;
-    border-width: 1px;
-    overflow-y: auto;
+.postTitle > h3 {
+    max-width: 90%;
+    overflow: hidden;
+}
+
+.returnButton {
+    display: block;
+    background: #ffffff;
+    padding: 0.3% 0.3% 0.3% 0.3%;
+    position: fixed;
+    margin-top: 2.4%;
+    margin-left: -4%;
+    transition: box-shadow .1s;
+}
+
+.textTitle {
+    width: 95%;
 }
 
 .profile {
@@ -702,12 +808,6 @@ ul.menuList {
     height: 29%;
 }
 
-.marginButton {
-    margin-left: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
 
 #answerForm {
     display: flex;
