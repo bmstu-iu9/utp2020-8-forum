@@ -580,26 +580,13 @@ ul.menuList {
     white-space: normal;
 }
 
-.replyImage {
-    max-width: 70%;
-    margin-left: 4%;
-    margin-bottom: 10%;
-    border-top-left-radius: 0;
-}
-
-.categoryHeader {
-    margin-left: 1%;
-}
-
-.myAvatar {
-    margin-left: 1%;
-}
-
 .colorTextDanger {
     color: darkred !important;
 }
 
-
+.colorTextDark {
+    color: #333333;
+}
 
 .container {
     width: 100vw;
@@ -661,7 +648,6 @@ ul.menuList {
     width:45%;
     position: absolute;
     right: 400px;
-    top: 0;
 }
 
 #newCategoryBtn {
