@@ -460,6 +460,7 @@ ul.menuList {
     width: min-content;
 
 }
+
 #editReplyPopup textarea {
     min-width: 300px;
     min-height: 100px;
@@ -504,6 +505,10 @@ ul.menuList {
 
 #ulReplies > li {
     border-bottom: 5px solid #eaf7f8;
+}
+
+#ulReplies > li:first-child {
+    margin-top: -2%;
 }
 
 #ulPeplies > li > a {
@@ -598,7 +603,7 @@ ul.menuList {
 }
 
 .colorDarkLink:hover {
-    background-color: #66cc99;
+    background-color: rgb(102, 204, 153);
     cursor: pointer;
 }
 

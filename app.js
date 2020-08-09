@@ -14,7 +14,8 @@ const app = express()
 const hbs = exphbs.create({
     partialsDir: [
         './views/partials',
-        './views/partials/popups'
+        './views/partials/popups',
+        './views/partials/scripts'
     ]
 })
 const PORT = process.env.PORT || 8080

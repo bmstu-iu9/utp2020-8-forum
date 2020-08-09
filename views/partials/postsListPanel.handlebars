@@ -33,7 +33,6 @@
                         {{#if this.first_reply}}
                         {{this.first_reply.text}}
                         {{else}}
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ...
                         {{/if}}
                     </p>
                 </div>
@@ -100,90 +99,3 @@
     {{/if}}
     {{/if}}
 </div>
-<script>
-    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
-        box3 = document.getElementById('postCreation'),
-        box4 = document.getElementById('postChange');
-    window.onclick = function (event) {
-        if (event.target === box1) {
-            box1.style.display = 'none';
-        } else if (event.target === box2) {
-            box2.style.display = 'none';
-        } else if (event.target === box3) {
-            box3.style.display = 'none';
-        } else if (event.target === box4) {
-            box4.style.display = 'none';
-        }
-    }
-
-    const deletePost = (id) => {
-        let post = {
-            id: id
-        };
-        fetch('/post/delete', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(post)
-        }).then(() => {
-            location.reload();
-        });
-    }
-    const editPost = (id, category, text) => {
-        document.getElementById('editPost').value = text;
-        document.getElementById('editPost').focus()
-        document.getElementById('sendEdition').onsubmit = async (e) => {
-            e.preventDefault();
-            let post = {
-                id: id,
-                category: category,
-                text: document.getElementById('sendEdition').edition.value
-            }
-            fetch('/post/edit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(post)
-            }).then((res) => {
-                if (res.ok) {
-                    location.reload();
-                } else {
-                    location.href = '/category/myPosts?postFail=true`';
-                }
-            });
-        };
-    }
-    if ('{{sortTag}}'.endsWith('Asc')) {
-        const sortLinkId = '{{sortTag}}'.replace('Asc', '')
-        document.getElementById(sortLinkId).classList.add('visitedColor');
-        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↑";
-    } else {
-        const sortLinkId = '{{sortTag}}';
-        document.getElementById(sortLinkId).classList.add('visitedColor');
-        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
-    }
-    /* const menus = document.querySelectorAll('.menuList')
-
-    document.addEventListener("click", function (e) {
-        list.classList.add('hidden');
-        menus.forEach(m => m.classList.add('hidden'))
-    });
-    const showMenu = id => {
-        document.getElementById(id).classList.remove('hidden');
-    } */
-    const dropdownAreas = document.querySelectorAll('.dropdownArea')
-
-    dropdownAreas.forEach(a => {
-        a.onmouseleave = () => {
-            a.classList.toggle('hidden')
-            document.getElementById(a.id.replace('dropdownArea', '')).classList.toggle('hidden')
-            document.getElementById(a.id.replace('dropdownArea', '') + 'Btn').blur()
-        }
-    })
-    const showDropdown = id => {
-        document.getElementById(id).classList.toggle('hidden')
-        document.getElementById('dropdownArea' + id).classList.toggle('hidden')
-    }
-</script>

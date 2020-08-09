@@ -78,13 +78,12 @@
                     </div>
                     <div class="clearFix"></div>
                 </footer>
-                    <div id="dropdownArea postActionsList{{this.id}}" class="dropdownArea dropdownArea postActionsList hidden relative">
-                        <ul id="postActionsList{{this.id}}" class="postActionsList menuList roundBorder shadowed1 hidden">
+                    <div id="dropdownArea postActionsList{{this.id}}" class="dropdownArea postActionsList hidden relative">
+                        <ul id="showDropdown{{this.id}}" class="postActionsList menuList roundBorder shadowed1 hidden">
                             <li>
-                                <a
-                                        onclick="showPopup('editPostPopup'); editPost({{this.id}}, {{this.category_id}}, '{{this.title}}')">Редактировать</a>
+                                <a onclick="showPopup('editReplyPopup'); editReply({{this.id}}, {{this.category_id}}, '{{this.title}}')">Редактировать</a>
                             </li>
-                            <li><a class="colorTextDanger" onclick="deletePost({{this.id}})">Удалить</a></li>
+                            <li><a class="colorTextDanger" onclick="deleteReply({{this.id}})">Удалить</a></li>
                         </ul>
                     </div>
                 {{else}}
@@ -104,88 +103,3 @@
 {{#if user}}
     {{>replyForm}}
 {{/if}}
-
-
-<script>
-    let box1 = document.getElementById('logInForm'), box2 = document.getElementById('signUpForm'),
-            box3 = document.getElementById('postCreation'),
-            box4 = document.getElementById('replyChange');
-    window.onclick = function (event) {
-        if (event.target === box1) {
-            box1.style.display = 'none';
-        } else if (event.target === box2) {
-            box2.style.display = 'none';
-        } else if (event.target === box3) {
-            box3.style.display = 'none';
-        } else if (event.target === box4) {
-            box4.style.display = 'none';
-        }
-    }
-
-    const deleteReply = (id) => {
-        let post = {
-            id: id
-        };
-        fetch('/delete', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(post)
-        }).then(() => {
-            location.reload();
-        });
-    }
-    const editReply = (id, text) => {
-        document.getElementById('editReply').value = text;
-        document.getElementById('editReply').focus();
-        document.getElementById('sendReply').onsubmit = async (e) => {
-            e.preventDefault();
-            let post = {
-                id: id,
-                text: document.getElementById('sendReply').replyEdition.value
-            }
-            fetch('/edit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(post)
-            }).then(() => {
-                location.reload();
-            });
-        };
-    }
-    if ('{{sortTag}}'.endsWith('Asc')) {
-        const sortLinkId = '{{sortTag}}'.replace('Asc', '')
-        document.getElementById(sortLinkId).classList.add('visitedColor');
-        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↑";
-    } else {
-        const sortLinkId = '{{sortTag}}';
-        document.getElementById(sortLinkId).classList.add('visitedColor');
-        document.getElementById(sortLinkId + 'SortLink').innerHTML = "↓";
-    }
-    /* const menus = document.querySelectorAll('.menuList')
-
-    document.addEventListener("click", function (e) {
-        list.classList.add('hidden');
-        menus.forEach(m => m.classList.add('hidden'))
-    });
-    const showMenu = id => {
-        document.getElementById(id).classList.remove('hidden');
-    } */
-    const dropdownAreas = document.querySelectorAll('.dropdownArea')
-
-    dropdownAreas.forEach(a => {
-        a.onmouseleave = () => {
-            a.classList.toggle('hidden')
-            document.getElementById(a.id.replace('dropdownArea', '')).classList.toggle('hidden')
-            document.getElementById(a.id.replace('dropdownArea', '') + 'Btn').blur()
-        }
-    })
-    const showDropdown = id => {
-
-        document.getElementById(id).classList.toggle('hidden')
-        document.getElementById('dropdownArea' + id).classList.toggle('hidden')
-    }
-</script>
