@@ -423,7 +423,7 @@ ul.menuList {
     left: 30px;
 }
 
-.postActionsList, .replyActionsList {
+.postActionsList {
     position: absolute;
     right: 30px;
     bottom: 60px;
@@ -440,11 +440,20 @@ ul.menuList {
 
 .dropdownAreareplyActionsList {
     width: 200px;
-    height: 200px;
+    height: 130px;
     right: -60px;
-    bottom:-110px;
-
+    bottom:-70px;
     z-index: 1;
+}
+.replyActionsList {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+
+}
+
+#ulReplies >li:first-child .replyActionsList > li:last-child {
+    display: none;
 }
 
 
