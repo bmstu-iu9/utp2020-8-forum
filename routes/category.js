@@ -2,6 +2,7 @@ const dbManager = require('../modules/db');
 const express = require('express'),
     router = express.Router();
 const moment = require('moment');
+moment.locale('ru');
 
 const sortPosts = (posts, sortTag) => {
     switch (sortTag) {

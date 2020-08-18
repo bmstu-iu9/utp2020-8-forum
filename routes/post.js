@@ -2,6 +2,7 @@ const dbManager = require('../modules/db');
 const express = require('express'),
     router = express.Router();
 const moment = require('moment');
+moment.locale('ru');
 
 router.get('/:postId(\\d+)', function (req, res) {
     let postId = req.params.postId;
