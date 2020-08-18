@@ -10,11 +10,13 @@ router.get('/:postId(\\d+)', function (req, res) {
     console.log(from)
     if (post) {
         let categories = dbManager.getCategories();
+        let category = dbManager.getCategoryById(post.category_id)
         let replies = dbManager.getReplies(postId)
         replies = dbManager.modifiedTimes(moment, replies);
         res.render('home', {
             layout: 'postViewLayout',
             categories: categories,
+            category: category,
             post: post,
             replies: replies,
             user: req.user,
@@ -23,6 +25,28 @@ router.get('/:postId(\\d+)', function (req, res) {
     } else res.status(404).send('Нет такого поста')
 
 })
+
+router.post('/create', (req, res) => {
+    let categoryName = req.body.category.trim();
+    let category = dbManager.checkCategoryExists(categoryName);
+    let date = new Date();
+    let creation_time = date.toDateString() + " " + date.toTimeString();
+    let categoryId;
+    if (!category) {
+        let result = dbManager.createCategory(categoryName);
+        categoryId = result.lastInsertRowid;
+    }
+    else
+        categoryId = category.id
+    let result = dbManager.addPost(req.user.id, req.body.postTitle.trim(), categoryId, creation_time);
+    let postId = result.lastInsertRowid;
+    if (result) {
+        dbManager.addReply(req.user.id, req.body.postText.trim(), postId, creation_time)
+        res.redirect(`/post/${result.lastInsertRowid}?from=/category/${categoryId}`);
+    }
+    else
+        res.redirect(`/category/${categoryId}?postFail=true`);
+});
 
 router.post('/:postId(\\d+)', function (req, res) {
     let id = req.params.postId;

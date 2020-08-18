@@ -1,5 +1,5 @@
 const express = require('express')
-const hbs = require('express-handlebars')
+const exphbs = require('express-handlebars');
 const hbshelpers = require('handlebars-helpers')
 const multihelpers = hbshelpers()
 const session = require('express-session')
@@ -10,6 +10,14 @@ const logger = require('./modules/logger')
 const path = require('path')
 const flash = require('connect-flash')
 const app = express()
+
+const hbs = exphbs.create({
+    partialsDir: [
+        './views/partials',
+        './views/partials/popups',
+        './views/partials/scripts'
+    ]
+})
 const PORT = process.env.PORT || 8080
 
 app.use(logger); // Показывает в консоли запросы к серверу и время запроса
@@ -45,7 +53,7 @@ app.use('/post', postRoutes)
 app.use('/', authRoutes)
 app.use('/', replyRoutes)
 
-app.engine('handlebars', hbs())
+app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
 
 

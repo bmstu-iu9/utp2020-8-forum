@@ -1,0 +1,21 @@
+<div id="createPostPopup" class="popup hidden bgWhite roundBorder shadowed1">
+    <header>
+        <h3 class="colorDark">Новый пост</h3>
+    </header>
+    <div class="popupBody">
+        <form method="post" action="/post/create" class="mbItems">
+            <select name="category" class="textInput roundBorder colorMedium">
+                <option selected disabled>Выберите категорию</option>
+                {{#each categories}}
+                <option value="{{this.name}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+            <input name="postTitle" id="myAnswer" type="text" size=50 maxlength="82" class="textInput block roundBorder"
+                placeholder="Заголовок" autocomplete="off" required>
+            <textarea cols=75 rows="10" placeholder='Текст поста' name="postText" autocomplete="off"
+            maxlength="8192" class="textInput roundBorder" required></textarea>
+            <div class="formErrorText colorDanger"></div>
+            <input type="submit" value="Создать" class="bigBtn hoverBgSpecial bgAccent roundBorder">
+        </form>
+    </div>
+</div>

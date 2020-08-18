@@ -1,89 +1,23 @@
-<div id="signUpForm" class="window">
-    <form class="windowContent colorMain" method="post" action="/signup">
-        <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
-        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
-        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Enter password" name="psw" required>
-        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Confirm password" name="pswConf"
-               required>
-        <button type="submit" class="close colorDarkLink colorBackground">Sign up</button>
-        <div id="signUpError" class="colorTextLight"></div>
-    </form>
-</div>
-
-<div id="logInForm" class="window">
-    <form class="windowContent colorMain" method="post" action="/login">
-        <div style="margin-bottom: 1%; margin-top: 1%" class="colorTextLight">Your account</div>
-        <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Login" name="login" required>
-        <input style="margin-top: 5%; font-size: 14pt" type="password" placeholder="Enter password" name="psw" required>
-        <button type="submit" class="close colorDarkLink colorBackground">Log in</button>
-        <div id="logInError" class="colorTextLight"></div>
-    </form>
-</div>
-
-<div id="postCreation" class="window">
-    <form class="postCreationBox colorMain" method="post" action="/category/create">
-        <div style="display: flex; flex-direction: column; justify-content: center;">
-            <div class="colorTextLight">Category</div>
-            <input style="margin-top: 5%; font-size: 14pt" type="text" placeholder="Введите категорию" name="category"
-                   required>
+<header id="topBar" class="bgWhite">
+    <a id='headerLogo' class="headerText colorMedium linkTextNoDecor hoverColorAccent left" href="/">Форум</a>
+    {{#if user}}
+        <div id="headerProfileBlock" class='right relative vertAlignItemsMid'>
+            <button class="bigBtn bgAccent hoverBgSpecial roundBorder"
+                    onclick="showPopup('createPostPopup')">Создать пост
+            </button>
+            <img src="https://api.adorable.io/avatars/128/{{user.username}}.png"
+                 class='roundImg smallAvatar inlineBlock' alt="">
+            <a id='showMenu' class="headerText colorMedium linkTextNoDecor hoverColorAccent" id="showMenu"
+               onclick="showDropdown('profileOptionsList')">{{user.username}} ▼</a>
+            {{>profileOptionsList}}
         </div>
-        <textarea placeholder="Создайте свой пост" name="newPost" id="myAnswer" required></textarea>
-        <div class="marginButton">
-            <input id="postAnswerButton" class="borderTop myButton colorDarkLink colorSection" type="image"
-                   src="/static/images/send.png">
-        </div>
-    </form>
-</div>
-
-<header id="topBar" class="colorHeader">
-
-    {{#if postFail}}
-        <div id="message">
-            <p>Не удалось создать пост</p>
+    {{else}}
+        <div id="headerProfileBlock" class='right relative'>
+            <a id="signUpButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
+               onclick=showPopup('signupPopup')>Регистрация</a>
+            <a id=" logInButton" class="headerText colorMedium linkTextNoDecor hoverColorAccent"
+               onclick=showPopup('loginPopup')>Войти</a>
         </div>
     {{/if}}
-
-    <div class="header">
-        <a class="headerLogo headerText link colorDarkLink colorTextLight" href="/">IU9-Forum</a>
-
-        {{#if user}}
-            <div id="profileTopBar" class="headerUser">
-                <a class="link colorDarkLink colorTextLight"
-                   onclick="document.getElementById('postCreation').style.display='block'">Create post</a>
-                <a class="link colorDarkLink colorTextLight" id="showMenu"
-                   onclick="showProfileOptionsList()">{{user.username}}</a>
-                {{>profileOptionsList}}
-            </div>
-        {{else}}
-            <div class="headerUser">
-                <a id="logInButton" class="link colorDarkLink colorTextLight"
-                   onclick="document.getElementById('logInForm').style.display='block'">Log In</a>
-                <a id="signUpButton" class="link colorDarkLink colorTextLight"
-                   onclick="document.getElementById('signUpForm').style.display='block'">Sign Up</a>
-            </div>
-        {{/if}}
-    </div>
-
-    <script>
-            {{#if message}}
-            if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
-                document.getElementById('signUpButton').click();
-                document.getElementById('signUpError').innerHTML = '{{message}}';
-            } else if ('{{message}}' === 'Wrong login or password') {
-                document.getElementById('logInButton').click();
-                document.getElementById('logInError').innerHTML = '{{message}}';
-            }
-            {{/if}}
-
-        const list = document.getElementById('profileOptionsList');
-
-        const showProfileOptionsList = function () {
-            list.classList.toggle('hidden');
-        };
-        document.addEventListener("click", function (e) {
-            if (e.target.closest("#showMenu"))
-                return
-            list.classList.add('hidden');
-        });
-    </script>
 </header>
+

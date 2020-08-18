@@ -32,8 +32,6 @@ router.get('/all', function (req, res) {
         layout: 'postsListViewLayout',
         posts: posts,
         categories: categories,
-        postsListTitle: "Все посты",
-        category: null,
         sortTag: sortTag,
         user: req.user,
         message: req.flash('error'),
@@ -55,9 +53,9 @@ router.get('/:categoryId(\\d+)', (req, res) => {
             layout: 'postsListViewLayout',
             posts: posts,
             categories: categories,
-            postsListTitle: category.name,
+            category: category,
             postFail: req.query.postFail,
-            category: categoryId,
+            category: category,
             sortTag: sortTag,
             user: req.user,
             currentPath: req.originalUrl
@@ -67,40 +65,14 @@ router.get('/:categoryId(\\d+)', (req, res) => {
     }
 })
 
-router.post('/:categoryId(\\d+)', function (req, res) {
-    let categoryId = req.params.categoryId;
-    //  let categories = dbManager.getCategories();
-    let originalUrl = req.originalUrl
-    let category = dbManager.getCategoryById(categoryId);
-    let date = new Date();
-    let creation_time = date.toDateString() + " " + date.toTimeString();
-    if (category !== undefined) {
-        let postSuccess = dbManager.addPost(req.user.id, req.body.myPost, categoryId, creation_time);
-        if (postSuccess)
-            res.redirect(originalUrl)
-        else res.redirect(`${originalUrl}?postFail=true`)
-
-    } else res.redirect(`${originalUrl}?postFail=true`)
-})
-
 router.post('/create', (req, res) => {
-    let category = dbManager.checkCategoryExists(req.body.category.trim());
-    let categoryId;
-    let date = new Date();
-    let creation_time = date.toDateString() + " " + date.toTimeString();
+    let category = dbManager.checkCategoryExists(req.body.newCategoryName.trim());
     if (!category) {
-        dbManager.createCategory(req.body.category.trim());
-        categoryId = dbManager.checkCategoryExists(req.body.category.trim()).id;
-        dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
+        dbManager.createCategory(req.body.newCategoryName.trim());
+        let categoryId = dbManager.checkCategoryExists(req.body.newCategoryName.trim()).id;
         res.redirect(`/category/${categoryId}`);
-    } else {
-        categoryId = category.id;
-        let postSuccess = dbManager.addPost(req.user.id, req.body.newPost.trim(), categoryId, creation_time);
-        if (postSuccess)
-            res.redirect(`/category/${categoryId}`);
-        else
-            res.redirect(`/category/${categoryId}?postFail=true`);
     }
+    res.redirect(`/`);
 });
 
 router.post('/delete/:categoryId(\\d+)', (req, res) => {
@@ -116,17 +88,17 @@ router.post('/delete/:categoryId(\\d+)', (req, res) => {
 router.get('/myPosts', (req, res) => {
     let categories = dbManager.getCategories();
     let posts = dbManager.getPostsByUser(req.user.id);
-    let sortTag = req.query.sortTag;
+    let sortTag = req.query.sortTag || "byTime";
     posts = sortPosts(posts, sortTag);
+    posts = dbManager.modifiedTimes(moment, posts);
     res.render('home', {
         layout: 'postsListViewLayout',
         posts: posts,
         categories: categories,
-        postsListTitle: "Мои посты",
         postFail: req.query.postFail,
-        category: null,
         sortTag: sortTag,
-        user: req.user
+        user: req.user,
+        currentPath: req.originalUrl
     });
 });
 

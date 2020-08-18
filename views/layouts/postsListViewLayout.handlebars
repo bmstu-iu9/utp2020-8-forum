@@ -1,11 +1,20 @@
+<div id="popUpContainer" class="hidden" onclick="hidePopups()">{{#not user}}
+    {{>loginPanel}}
+    {{>signupPanel}}
+{{else}}
+    {{>createPostPanel}}
+    {{>editPostPanel}}
+{{/not}}
+</div>
 {{>head}}
 {{>topbar}}
-<div class="container">
-    <div id="categories" class="colorMain">
-        <h2 style="border-bottom-style:solid;" class="colorTextLight">Категории</h2>
-        {{>categoriesListPanel}}
-    </div>
+{{>message}}
 
+<div class="container relative" style="">
+
+    {{>categoriesListPanel}}
     {{>postsListPanel}}
-
 </div>
+
+{{>postsListScript}}
+<script src="/static/scripts/script.js"></script>
