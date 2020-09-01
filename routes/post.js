@@ -4,11 +4,12 @@ const express = require('express'),
 const moment = require('moment');
 moment.locale('ru');
 
+let jsonParser = express.json();
+
 router.get('/:postId(\\d+)', function (req, res) {
     let postId = req.params.postId;
     let from = req.query.from;
     let post = dbManager.getPost(postId)
-    console.log(from)
     if (post) {
         let categories = dbManager.getCategories();
         let category = dbManager.getCategoryById(post.category_id)
@@ -43,10 +44,13 @@ router.post('/create', (req, res) => {
     let postId = result.lastInsertRowid;
     if (result) {
         dbManager.addReply(req.user.id, req.body.postText.trim(), postId, creation_time)
-        res.redirect(`/post/${result.lastInsertRowid}?from=/category/${categoryId}`);
+        let url = `/post/${result.lastInsertRowid}?from=/category/${categoryId}`;
+        res.json(url);
+        //res.redirect(`/post/${result.lastInsertRowid}?from=/category/${categoryId}`);
     }
-    else
-        res.redirect(`/category/${categoryId}?postFail=true`);
+    else{
+        res.json('already exists');
+    }
 });
 
 router.post('/:postId(\\d+)', function (req, res) {
