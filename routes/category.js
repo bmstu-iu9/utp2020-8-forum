@@ -71,8 +71,8 @@ router.post('/create', (req, res) => {
         dbManager.createCategory(req.body.newCategoryName.trim());
         let categoryId = dbManager.checkCategoryExists(req.body.newCategoryName.trim()).id;
         res.redirect(`/category/${categoryId}`);
-    }
-    res.redirect(`/`);
+    } else
+    	res.redirect(`/`);
 });
 
 router.post('/delete/:categoryId(\\d+)', (req, res) => {
