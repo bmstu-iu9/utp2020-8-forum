@@ -54,6 +54,7 @@
         if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
             document.getElementById('signUpButton').click();
             document.getElementById('signUpError').innerHTML = '{{message}}';
+            console.log(111)
         } else if ('{{message}}' === 'Wrong login or password') {
             document.getElementById('loginBtn"').click();
             document.getElementById('loginErrorText').innerHTML = '{{message}}';
