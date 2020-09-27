@@ -50,11 +50,12 @@
     
     {{#if message}}
         if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
-            document.getElementById('signUpButton').click();
-            document.getElementById('signUpError').innerHTML = '{{message}}';
+            showPopup('signupPopup')
+            document.getElementById('signUpError').innerHTML = 'Пароли не совпадают';
         } else if ('{{message}}' === 'Wrong login or password') {
-            document.getElementById('loginBtn"').click();
-            document.getElementById('loginErrorText').innerHTML = '{{message}}';
+          //  document.getElementById('logInButton"').click();
+          showPopup('loginPopup')
+            document.getElementById('loginErrorText').innerHTML = 'Неправильный пароль или логин';
         }
         {{/if}}
 </script>
