@@ -356,6 +356,10 @@ ul.menuList {
     bottom: 100px;
 }
 
+#replyBtn > input {
+    margin: -15px 0 0 -15px;
+}
+
 #replyForm {
     position: fixed;
     right: 280px;
@@ -731,3 +735,4 @@ ul.menuList {
     right: 0;
     bottom: 0;
 }
+

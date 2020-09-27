@@ -2,6 +2,7 @@ const dbManager = require('../modules/db');
 const express = require('express'),
     router = express.Router();
 const moment = require('moment');
+moment.locale('ru');
 
 const sortPosts = (posts, sortTag) => {
     switch (sortTag) {
@@ -55,7 +56,6 @@ router.get('/:categoryId(\\d+)', (req, res) => {
             categories: categories,
             category: category,
             postFail: req.query.postFail,
-            category: category,
             sortTag: sortTag,
             user: req.user,
             currentPath: req.originalUrl
@@ -71,8 +71,8 @@ router.post('/create', (req, res) => {
         dbManager.createCategory(req.body.newCategoryName.trim());
         let categoryId = dbManager.checkCategoryExists(req.body.newCategoryName.trim()).id;
         res.redirect(`/category/${categoryId}`);
-    }
-    res.redirect(`/`);
+    } else
+    	res.redirect(`/`);
 });
 
 router.post('/delete/:categoryId(\\d+)', (req, res) => {

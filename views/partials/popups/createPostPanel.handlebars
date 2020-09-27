@@ -1,21 +1,54 @@
 <div id="createPostPopup" class="popup hidden bgWhite roundBorder shadowed1">
     <header>
         <h3 class="colorDark">Новый пост</h3>
+	<div id="formErrorText" class="errorMessage"></div>
     </header>
     <div class="popupBody">
-        <form method="post" action="/post/create" class="mbItems">
+        <form method="post" action="/post/create" class="mbItems" name="createPost">
             <select name="category" class="textInput roundBorder colorMedium">
                 <option selected disabled>Выберите категорию</option>
                 {{#each categories}}
                 <option value="{{this.name}}">{{this.name}}</option>
                 {{/each}}
             </select>
+            <div class="formErrorText colorDanger" id="formError"></div>
             <input name="postTitle" id="myAnswer" type="text" size=50 maxlength="82" class="textInput block roundBorder"
                 placeholder="Заголовок" autocomplete="off" required>
             <textarea cols=75 rows="10" placeholder='Текст поста' name="postText" autocomplete="off"
             maxlength="8192" class="textInput roundBorder" required></textarea>
-            <div class="formErrorText colorDanger"></div>
-            <input type="submit" value="Создать" class="bigBtn hoverBgSpecial bgAccent roundBorder">
+            <input type="submit" value="Создать" class="bigBtn hoverBgSpercial bgAccent roundBorder">
         </form>
     </div>
 </div>
+<script>
+    if (document.forms[0] && window.FormData) {
+        var form = document.forms['createPost'];
+
+        form.addEventListener('submit', (e) =>{
+            e.preventDefault();
+
+            let title = form.elements['postTitle'].value;
+            let category = form.elements['category'].value;
+            let post = form.elements['postText'].value;
+
+            let formData = JSON.stringify({category: category, postText: post, postTitle: title});
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/post/create', true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+
+            xhr.onload = function(){
+                if(this.status == 200) {
+                    let url = JSON.parse(this.responseText);
+                    if(url != 'already exists') {
+                        window.location = url;
+                    } else{
+                        document.getElementById('formErrorText').innerHTML = '<p>Такой пост уже существует!</p>'
+                    }
+                }
+            }
+
+            xhr.send(formData);
+        })
+    }
+</script>

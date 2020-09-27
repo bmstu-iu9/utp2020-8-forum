@@ -110,7 +110,7 @@ const deleteReply = replyId => query("deleteReply").run(replyId);
 
 const modifiedTimes = (moment, postsOrReplies) => {
     for (let i = 0; i < postsOrReplies.length; ++i)
-        postsOrReplies[i].time_since_creation = moment(postsOrReplies[i].creation_time).fromNow();
+        postsOrReplies[i].time_since_creation = moment(new Date(postsOrReplies[i].creation_time)).fromNow();
     return postsOrReplies;
 }
 

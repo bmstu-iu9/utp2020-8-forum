@@ -36,15 +36,15 @@
     }
     let hideBtn = document.querySelector('#hideReplyFormBtn')
     let composeBtn = document.querySelector('#composeReplyBtn')
-    let form = document.querySelector('#replyForm')
+    let replyForm = document.querySelector('#replyForm')
 
     composeBtn.onclick = () => {
-        form.classList.remove('hidden')
+        replyForm.classList.remove('hidden')
         composeBtn.classList.add('hidden')
 
     }
     hideBtn.onclick = () => {
-        form.classList.add('hidden')
+        replyForm.classList.add('hidden')
         composeBtn.classList.remove('hidden')
     }
 
