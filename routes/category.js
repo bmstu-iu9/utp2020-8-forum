@@ -66,21 +66,31 @@ router.get('/:categoryId(\\d+)', (req, res) => {
 })
 
 router.post('/create', (req, res) => {
-    let category = dbManager.checkCategoryExists(req.body.newCategoryName.trim());
-    if (!category) {
-        dbManager.createCategory(req.body.newCategoryName.trim());
-        let categoryId = dbManager.checkCategoryExists(req.body.newCategoryName.trim()).id;
-        res.redirect(`/category/${categoryId}`);
-    } else
-    	res.redirect(`/`);
+    if (req.user) {
+        let category = dbManager.checkCategoryExists(req.body.newCategoryName.trim());
+        if (!category) {
+            dbManager.createCategory(req.body.newCategoryName.trim());
+            let categoryId = dbManager.checkCategoryExists(req.body.newCategoryName.trim()).id;
+            res.redirect(`/category/${categoryId}`);
+        } else
+            res.redirect(`/`);
+    } else {
+        req.flash('error', 'not auth action')
+        res.redirect("/")
+    }
 });
 
 router.post('/delete/:categoryId(\\d+)', (req, res) => {
-    let categoryId = req.params.categoryId;
-    let category = dbManager.getCategoryById(categoryId)
-    if (category) {
-        dbManager.deleteCategory(categoryId)
-        res.redirect('/')
+    if (req.user) {
+        let categoryId = req.params.categoryId;
+        let category = dbManager.getCategoryById(categoryId)
+        if (category) {
+            dbManager.deleteCategory(categoryId)
+            res.redirect('/')
+        }
+    } else {
+        req.flash('error', 'not auth action')
+        res.redirect("/")
     }
 
 })

@@ -47,4 +47,19 @@
         replyForm.classList.add('hidden')
         composeBtn.classList.remove('hidden')
     }
+    {{#if message}}
+        if ('{{message}}' === 'Passwords do not match') {
+            showPopup('signupPopup')
+            document.getElementById('signUpError').innerHTML = 'Пароли не совпадают';
+        } else if ('{{message}}' === 'User exists') {
+          showPopup('signupPopup')
+            document.getElementById('signUpError').innerHTML = 'Пользователь существует';
+        } else if ('{{message}}' === 'Wrong login or password') {
+          showPopup('loginPopup')
+            document.getElementById('loginErrorText').innerHTML = 'Неправильный пароль или логин';
+        } else if ('{{message}}' === 'not auth action' ) {
+            showPopup('loginPopup')
+            document.getElementById('loginErrorText').innerHTML = 'Сначала войдите';
+        }
+        {{/if}}
 </script>

@@ -6,7 +6,7 @@ const passport = require('passport');
 const authModule = require('../modules/hash-password.js');
 
 router.post('/signup', (req, res) => {
-    const {login, psw, pswConf} = req.body;
+    const { login, psw, pswConf } = req.body;
     if (psw === pswConf) {
         if (dbManager.checkUserExists(login)) {
             req.flash('error', 'User exists');
@@ -44,10 +44,16 @@ router.get('/status', (req, res) => {
 
 
 router.get('/deleteProfile', (req, res) => {
-    let id = req.user.id;
-    req.logout()
-    dbManager.deleteUser(id)
-    res.redirect('/')
+    if (req.user) {
+        let id = req.user.id;
+        req.logout()
+        dbManager.deleteUser(id)
+        res.redirect('/')
+    }
+    else {
+        req.flash('error', 'not auth action')
+        res.redirect("/")
+    }
 })
 
 module.exports = router;

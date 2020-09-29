@@ -49,14 +49,16 @@
     }
     
     {{#if message}}
-        if ('{{message}}' === 'User exists' || '{{message}}' === 'Passwords do not match') {
+        if ('{{message}}' === 'Passwords do not match') {
             showPopup('signupPopup')
             document.getElementById('signUpError').innerHTML = 'Пароли не совпадают';
+        } else if ('{{message}}' === 'User exists') {
+          showPopup('signupPopup')
+            document.getElementById('signUpError').innerHTML = 'Пользователь существует';
         } else if ('{{message}}' === 'Wrong login or password') {
-          //  document.getElementById('logInButton"').click();
           showPopup('loginPopup')
             document.getElementById('loginErrorText').innerHTML = 'Неправильный пароль или логин';
-        } else if ('{{message}}' === 'not auth tried to create post') {
+        } else if ('{{message}}' === 'not auth action' ) {
             showPopup('loginPopup')
             document.getElementById('loginErrorText').innerHTML = 'Сначала войдите';
         }
