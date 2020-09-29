@@ -29,54 +29,77 @@ router.get('/:postId(\\d+)', function (req, res) {
 })
 
 router.post('/create', (req, res) => {
-    let categoryName = req.body.category.trim();
-    let category = dbManager.checkCategoryExists(categoryName);
-    let date = new Date();
-    let creation_time = date.toDateString() + " " + date.toTimeString();
-    let categoryId;
-    if (!category) {
-        let result = dbManager.createCategory(categoryName);
-        categoryId = result.lastInsertRowid;
+    if (req.user) {
+        let categoryName = req.body.category.trim();
+        let category = dbManager.checkCategoryExists(categoryName);
+        let date = new Date();
+        let creation_time = date.toDateString() + " " + date.toTimeString();
+        let categoryId;
+        if (!category) {
+            let result = dbManager.createCategory(categoryName);
+            categoryId = result.lastInsertRowid;
+        }
+        else
+            categoryId = category.id
+        let result = dbManager.addPost(req.user.id, req.body.postTitle.trim(), categoryId, creation_time);
+        let postId = result.lastInsertRowid;
+        if (result) {
+            dbManager.addReply(req.user.id, req.body.postText.trim(), postId, creation_time)
+            let url = `/post/${result.lastInsertRowid}?from=/category/${categoryId}`;
+            res.json(url);
+            //res.redirect(`/post/${result.lastInsertRowid}?from=/category/${categoryId}`);
+        }
+        else {
+            res.json('already exists');
+        }
+    } else {
+        req.flash('error', 'not auth action')
+        res.json("/")
     }
-    else
-        categoryId = category.id
-    let result = dbManager.addPost(req.user.id, req.body.postTitle.trim(), categoryId, creation_time);
-    let postId = result.lastInsertRowid;
-    if (result) {
-        dbManager.addReply(req.user.id, req.body.postText.trim(), postId, creation_time)
-        let url = `/post/${result.lastInsertRowid}?from=/category/${categoryId}`;
-        res.json(url);
-        //res.redirect(`/post/${result.lastInsertRowid}?from=/category/${categoryId}`);
-    }
-    else{
-        res.json('already exists');
-    }
+
 });
 
 router.post('/:postId(\\d+)', function (req, res) {
     let id = req.params.postId;
-    let date = new Date();
-    let creation_time = date.toDateString() + " " + date.toTimeString();
-    const originalUrl = req.originalUrl;
-    dbManager.addReply(req.user.id, req.body.myAnswer, id, creation_time);
-    res.redirect(originalUrl)
+    if (req.user) {
+        let date = new Date();
+        let creation_time = date.toDateString() + " " + date.toTimeString();
+        const originalUrl = req.originalUrl;
+        dbManager.addReply(req.user.id, req.body.myAnswer, id, creation_time);
+        res.redirect(originalUrl)
+    }
+    else {
+        req.flash('error', 'not auth action')
+        res.redirect(`/`)
+    }
 })
 
 router.post('/delete', (req, res) => {
-    dbManager.deletePost(req.body.id);
-    if (posts.length === 0)
-        res.redirect('/category/${category_id}')
-    else
-        res.status(200).send();
+    if (req.user) {
+        dbManager.deletePost(req.body.id);
+        if (posts.length === 0)
+            res.redirect(`/category/${category_id}`)
+        else
+            res.status(200).send();
+    }
+    else {
+       // req.flash('error', 'not auth action')
+        res.redirect(`/`)
+    }
 });
 
 
 router.post('/edit', (req, res) => {
-    if (!dbManager.checkPostExists(req.body.text.trim(), req.body.category)) {
-        dbManager.updatePost(req.body.text.trim(), req.body.id);
-        res.status(200).send();
+    if (req.user) {
+        if (!dbManager.checkPostExists(req.body.text.trim(), req.body.category)) {
+            dbManager.updatePost(req.body.text.trim(), req.body.id);
+            res.status(200).send();
+        } else {
+            res.status(400).send();
+        }
     } else {
-        res.status(400).send();
+       // req.flash('error', 'not auth action')
+        res.redirect(`/`)
     }
 
 });
