@@ -17,6 +17,7 @@
             <textarea cols=75 rows="10" placeholder='Текст поста' name="postText" autocomplete="off"
             maxlength="8192" class="textInput roundBorder" required></textarea>
             <input type="submit" value="Создать" class="bigBtn hoverBgSpercial bgAccent roundBorder">
+            <p id="createPostErrorText"></p>
         </form>
     </div>
 </div>
@@ -42,9 +43,9 @@
                     let url = JSON.parse(this.responseText);
                     if(url != 'already exists') {
                         window.location = url;
-                    } else{
+                    } else if (url != 'already exists') {
                         document.getElementById('formErrorText').innerHTML = '<p>Такой пост уже существует!</p>'
-                    }
+                    } 
                 }
             }
 

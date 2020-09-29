@@ -29,6 +29,7 @@ router.get('/:postId(\\d+)', function (req, res) {
 })
 
 router.post('/create', (req, res) => {
+    if (req.user) {
     let categoryName = req.body.category.trim();
     let category = dbManager.checkCategoryExists(categoryName);
     let date = new Date();
@@ -51,6 +52,12 @@ router.post('/create', (req, res) => {
     else{
         res.json('already exists');
     }
+} else {
+    console.log('user exists')
+    req.flash('error', 'not auth tried to create post')
+    res.json("/")
+}
+
 });
 
 router.post('/:postId(\\d+)', function (req, res) {

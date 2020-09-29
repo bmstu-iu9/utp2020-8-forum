@@ -56,6 +56,9 @@
           //  document.getElementById('logInButton"').click();
           showPopup('loginPopup')
             document.getElementById('loginErrorText').innerHTML = 'Неправильный пароль или логин';
+        } else if ('{{message}}' === 'not auth tried to create post') {
+            showPopup('loginPopup')
+            document.getElementById('loginErrorText').innerHTML = 'Сначала войдите';
         }
         {{/if}}
 </script>
