@@ -1,7 +1,7 @@
 # Simple Forum
 ### Участники
 * [Азметов Данила](https://github.com/Ohstapit) (Капитан)
-* [Кузовчиков Максим](https://github.com/Ohstapit)
+* [Кузовчиков Максим](https://github.com/kuZzzzia)
 * [Барашков Георгий](https://github.com/Barashkov-GO)
 * [Сербин Денис](https://github.com/DionisSerbin)
 * [Максудов Максуд](https://github.com/Maxud-M)
